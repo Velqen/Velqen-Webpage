@@ -33,3 +33,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: data.message || 'Error sending to Flask API' }, { status: 500 })
   }
 }
+
