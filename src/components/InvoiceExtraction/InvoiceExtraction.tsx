@@ -48,7 +48,7 @@ const InvoiceExtraction = () => {
         Invoice Extraction
       </h1>
 
-      {/* Upload area (always visible) */}
+      {/* Upload area (always visible)*/}
       <div
         className="border-dashed border-2 border-gray-400 rounded-lg p-6 text-center cursor-pointer hover:border-blue-500 transition"
         onClick={() => fileInputRef.current?.click()}
