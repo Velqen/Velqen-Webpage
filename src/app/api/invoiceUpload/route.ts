@@ -11,7 +11,6 @@ export async function POST(req: NextRequest) {
   // Convert File to Buffer
   const arrayBuffer = await file.arrayBuffer()
   const buffer = Buffer.from(arrayBuffer)
-    console.log('🔧 ENV INVOICE_EXTRACTION_BACKEND:', process.env.INVOICE_EXTRACTION_BACKEND);
 
   // Send the file directly to the Flask API
   const invoiceExtraction = process.env.INVOICE_EXTRACTION_BACKEND; // ✅ new line
