@@ -25,6 +25,7 @@ const ChatBot = () => {
         setResponse("Error: " + (data.error || "Unknown"));
       }
     } catch (err) {
+      console.error(err);
       setResponse("Error: Could not reach API.");
     } finally {
       setIsLoading(false);
