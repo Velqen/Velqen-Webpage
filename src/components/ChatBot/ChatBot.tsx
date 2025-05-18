@@ -1,61 +1,115 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+
+type Message = {
+  sender: "user" | "bot";
+  text: string;
+};
 
 const ChatBot = () => {
   const [input, setInput] = useState("");
-  const [response, setResponse] = useState("");
+  const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!input.trim()) return;
+
+    setMessages((prev) => [...prev, { sender: "user", text: input }]);
     setIsLoading(true);
+    const userInput = input;
+    setInput("");
 
     try {
       const res = await fetch("/api/chatBot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_input: input }),
+        body: JSON.stringify({ user_input: userInput }),
       });
+
       const data = await res.json();
 
-      if (res.ok) {
-        setResponse(data.response);
-      } else {
-        setResponse("Error: " + (data.error || "Unknown"));
-      }
+      setMessages((prev) => [
+        ...prev,
+        {
+          sender: "bot",
+          text: res.ok ? data.response : `Error: ${data.error || "Unknown"}`,
+        },
+      ]);
     } catch (err) {
       console.error(err);
-      setResponse("Error: Could not reach API.");
+      setMessages((prev) => [
+        ...prev,
+        { sender: "bot", text: "Error: Could not reach API." },
+      ]);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="w-full mx-auto h-[80vh] flex flex-col bg-white rounded-xl shadow-lg border border-gray-200">
+      {/* Chat Area */}
+      <div className="flex-1 p-4 space-y-3 overflow-y-auto bg-gray-50">
+        {messages.map((msg, index) => (
+          <div
+            key={index}
+            className={`flex ${
+              msg.sender === "user" ? "justify-end" : "justify-start"
+            }`}
+          >
+            <div
+              className={`px-4 py-2 rounded-2xl text-sm max-w-xs break-words ${
+                msg.sender === "user"
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-200 text-gray-800"
+              }`}
+            >
+              {msg.text}
+            </div>
+          </div>
+        ))}
+
+        {isLoading && (
+          <div className="flex justify-start">
+            <div className="px-4 py-2 rounded-2xl bg-gray-200 text-gray-600 text-sm max-w-xs animate-pulse">
+              Bennett is typing…
+            </div>
+          </div>
+        )}
+
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* Input Form */}
+      <form
+        onSubmit={handleSubmit}
+        className="p-4 flex gap-2 border-t bg-white"
+      >
         <input
           type="text"
-          placeholder="Type your message…"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          style={{ padding: "8px", width: "80%" }}
+          placeholder="Type your message..."
+          className="flex-1 px-4 py-2 border rounded-full text-sm outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
           type="submit"
           disabled={isLoading}
-          style={{ marginLeft: "8px", padding: "8px" }}
+          className="px-4 py-2 bg-blue-600 text-white rounded-full text-sm hover:bg-blue-700 disabled:opacity-50"
         >
-          {isLoading ? "Sending…" : "Send"}
+          {isLoading ? "…" : "Send"}
         </button>
       </form>
-
-      {response && (
-        <div style={{ marginTop: "16px" }}>
-          <strong>Bennett:</strong> {response}
-        </div>
-      )}
     </div>
   );
 };

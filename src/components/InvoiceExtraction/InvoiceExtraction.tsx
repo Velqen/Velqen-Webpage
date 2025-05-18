@@ -43,7 +43,7 @@ const InvoiceExtraction = () => {
   };
 
   return isSmallDevice ? (
-    <div className="p-6 w-[100%] mx-auto">
+    <div className="py-6 w-[100%] mx-auto">
       <h1 className="text-2xl font-bold mb-6 text-center">
         Invoice Extraction
       </h1>
@@ -116,14 +116,14 @@ const InvoiceExtraction = () => {
       )}
     </div>
   ) : (
-    <div className="p-6 w-[80%] mx-auto">
+    <div className="py-6 w-full mx-auto">
       <h1 className="text-2xl font-bold mb-6 text-center">
         Invoice Extraction
       </h1>
 
       {/* Upload area (always visible) */}
       <div
-        className="border-dashed border-2 border-gray-400 rounded-lg p-6 text-center cursor-pointer hover:border-blue-500 transition mb-6"
+        className="h-[400px] flex items-center justify-center border-dashed border-2 border-gray-400 rounded-lg p-6 cursor-pointer hover:border-blue-500 transition mb-6"
         onClick={() => fileInputRef.current?.click()}
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
