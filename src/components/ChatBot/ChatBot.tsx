@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 
 const ChatBot = () => {
@@ -11,7 +12,7 @@ const ChatBot = () => {
     setIsLoading(true);
 
     try {
-      const res = await fetch("/api/chatbot", {
+      const res = await fetch("/api/chatBot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_input: input }),
