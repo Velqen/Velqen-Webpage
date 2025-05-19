@@ -11,7 +11,6 @@ const ChatBot = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
@@ -25,27 +24,6 @@ const ChatBot = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
-
-  // Improved focus handling
-  useEffect(() => {
-    const handleFocus = () => {
-      // Small delay to ensure DOM is updated before scrolling
-      setTimeout(() => {
-        scrollToBottom();
-      }, 100);
-    };
-
-    const inputElement = inputRef.current;
-    if (inputElement) {
-      inputElement.addEventListener("focus", handleFocus);
-    }
-
-    return () => {
-      if (inputElement) {
-        inputElement.removeEventListener("focus", handleFocus);
-      }
-    };
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -86,7 +64,7 @@ const ChatBot = () => {
   return (
     <div className="w-full mx-auto h-[600px] lg:h-[80vh] flex flex-col rounded-xl shadow-lg border border-gray-200">
       {/* Chat Area */}
-      <div className="flex-1 p-4 space-y-3 overflow-y-auto">
+      <div className="flex-1 p-4 space-y-3 overflow-y-auto ">
         {messages.map((msg, index) => (
           <div
             key={index}
@@ -117,13 +95,9 @@ const ChatBot = () => {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Form - Fixed to bottom when keyboard is visible */}
-      <form
-        onSubmit={handleSubmit}
-        className="p-4 flex gap-2 border-t sticky bottom-0 bg-white"
-      >
+      {/* Input Form */}
+      <form onSubmit={handleSubmit} className="p-4 flex gap-2 border-t">
         <input
-          ref={inputRef}
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -133,7 +107,7 @@ const ChatBot = () => {
         <button
           type="submit"
           disabled={isLoading}
-          className="px-4 py-2 bennett-gradient-bg bennett-gradient-bg-hover text-white rounded-full text-base disabled:opacity-50"
+          className="px-4 py-2 bennett-gradient-bg bennett-gradient-bg-hover text-white rounded-full text-base  disabled:opacity-50"
         >
           {isLoading ? "…" : "Send"}
         </button>
