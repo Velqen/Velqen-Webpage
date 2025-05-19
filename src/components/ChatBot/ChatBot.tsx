@@ -57,9 +57,9 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="w-full mx-auto h-[80vh] flex flex-col bg-white rounded-xl shadow-lg border border-gray-200">
+    <div className="w-full mx-auto h-[80vh] flex flex-col rounded-xl shadow-lg border border-gray-200">
       {/* Chat Area */}
-      <div className="flex-1 p-4 space-y-3 overflow-y-auto bg-gray-50">
+      <div className="flex-1 p-4 space-y-3 overflow-y-auto ">
         {messages.map((msg, index) => (
           <div
             key={index}
@@ -70,7 +70,7 @@ const ChatBot = () => {
             <div
               className={`px-4 py-2 rounded-2xl text-sm max-w-xs break-words ${
                 msg.sender === "user"
-                  ? "bg-blue-600 text-white"
+                  ? "bennett-gradient-bg text-white"
                   : "bg-gray-200 text-gray-800"
               }`}
             >
@@ -91,21 +91,18 @@ const ChatBot = () => {
       </div>
 
       {/* Input Form */}
-      <form
-        onSubmit={handleSubmit}
-        className="p-4 flex gap-2 border-t bg-white"
-      >
+      <form onSubmit={handleSubmit} className="p-4 flex gap-2 border-t">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type your message..."
-          className="flex-1 px-4 py-2 border rounded-full text-sm outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 px-4 py-2 border rounded-full text-sm outline-none focus:ring-2 focus:ring-bennett-orange"
         />
         <button
           type="submit"
           disabled={isLoading}
-          className="px-4 py-2 bg-blue-600 text-white rounded-full text-sm hover:bg-blue-700 disabled:opacity-50"
+          className="px-4 py-2 bennett-gradient-bg text-white rounded-full text-sm hover:bg-blue-700 disabled:opacity-50"
         >
           {isLoading ? "…" : "Send"}
         </button>

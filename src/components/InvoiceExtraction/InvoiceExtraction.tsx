@@ -50,7 +50,7 @@ const InvoiceExtraction = () => {
 
       {/* Upload area (always visible)*/}
       <div
-        className="border-dashed border-2 border-gray-400 rounded-lg p-6 text-center cursor-pointer hover:border-blue-500 transition"
+        className="border-dashed border-2 border-gray-400 rounded-lg p-6 text-center cursor-pointer hover:border-bennett-orange transition"
         onClick={() => fileInputRef.current?.click()}
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
@@ -123,7 +123,7 @@ const InvoiceExtraction = () => {
 
       {/* Upload area (always visible) */}
       <div
-        className="h-[400px] flex items-center justify-center border-dashed border-2 border-gray-400 rounded-lg p-6 cursor-pointer hover:border-blue-500 transition mb-6"
+        className="h-[400px] flex items-center justify-center border-dashed border-2 border-gray-400 rounded-lg p-6 cursor-pointer hover:border-bennett-orange transition mb-6"
         onClick={() => fileInputRef.current?.click()}
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
@@ -136,7 +136,7 @@ const InvoiceExtraction = () => {
           ) : (
             <>
               Drag & drop your invoice PDF here or{" "}
-              <span className="text-blue-600 underline">browse</span>
+              <span className="bennett-gradient-text underline">browse</span>
             </>
           )}
         </p>
@@ -160,7 +160,7 @@ const InvoiceExtraction = () => {
               title="PDF Preview"
             />
             <button
-              className="mt-4 w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition"
+              className="mt-4 w-full py-3 bennett-gradient-bg hover:bg-blue-700 text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition"
               onClick={handleUpload}
               disabled={!selectedFile}
             >

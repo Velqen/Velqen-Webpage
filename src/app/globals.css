@@ -1,16 +1,33 @@
 @import "tailwindcss";
 
 :root {
+  /* --background: #0b0430; */
   --background: #ffffff;
   --foreground: #171717;
+  --bennett-gradient: linear-gradient(90deg, #ff7e5f, #feb47b);
+  --bennett-orange: #ff7e5f;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-bennett-orange: var(--bennett-orange);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+
+.bennett-gradient-text {
+  background: var(--bennett-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bennett-gradient-bg {
+  background: var(--bennett-gradient);
+}
+
 
 body {
   background: var(--background);
