@@ -101,6 +101,7 @@ const ChatBot = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onBlur={scrollToBottom}
           placeholder="Type your message..."
           className="flex-1 px-4 py-2 border rounded-full text-base outline-none focus:ring-2 focus:ring-bennett-orange"
         />
