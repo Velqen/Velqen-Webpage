@@ -51,7 +51,7 @@ const InvoiceExtraction = () => {
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
       >
-        <p className="text-gray-600">
+        <p className="text-gray-600 text-base">
           {selectedFile ? (
             <>
               📄 <strong>{selectedFile.name}</strong> selected
@@ -95,15 +95,15 @@ const InvoiceExtraction = () => {
           <div className="flex-1">
             {result ? (
               <div className="p-4 bg-gray-100 rounded shadow h-full overflow-auto">
-                <h2 className="text-lg font-semibold mb-2">
+                <h2 className="text-base font-semibold mb-2">
                   Extraction Result:
                 </h2>
-                <pre className="whitespace-pre-wrap text-sm">
+                <pre className="whitespace-pre-wrap text-base">
                   {JSON.stringify(result, null, 2)}
                 </pre>
               </div>
             ) : (
-              <div className="p-4 border rounded text-gray-500 text-sm italic">
+              <div className="p-4 border rounded text-gray-500 text-base italic">
                 Extraction result will appear here.
               </div>
             )}
@@ -152,7 +152,7 @@ const InvoiceExtraction = () => {
               title="PDF Preview"
             />
             <button
-              className="mt-4 w-full py-3 bennett-gradient-bg bennett-gradient-bg-hover text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition"
+              className="mt-4 w-full py-3 bennett-gradient-bg bennett-gradient-bg-hover text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition text-xl"
               onClick={handleUpload}
               disabled={!selectedFile}
             >
@@ -164,15 +164,15 @@ const InvoiceExtraction = () => {
           <div className="flex-1">
             {result ? (
               <div className="p-4 bg-gray-100 rounded shadow h-full overflow-auto">
-                <h2 className="text-lg font-semibold mb-2">
+                <h2 className="text-xl font-semibold mb-2">
                   Extraction Result:
                 </h2>
-                <pre className="whitespace-pre-wrap text-sm">
+                <pre className="whitespace-pre-wrap text-xl">
                   {JSON.stringify(result, null, 2)}
                 </pre>
               </div>
             ) : (
-              <div className="p-4 border h-full rounded text-gray-500 text-sm italic">
+              <div className="p-4 border h-full rounded text-gray-500 text-xl italic">
                 Extraction result will appear here.
               </div>
             )}
