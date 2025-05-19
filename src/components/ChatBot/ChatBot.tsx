@@ -13,7 +13,12 @@ const ChatBot = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.parentElement?.scrollTo({
+        top: messagesEndRef.current.parentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    }
   };
 
   useEffect(() => {
@@ -68,7 +73,7 @@ const ChatBot = () => {
             }`}
           >
             <div
-              className={`px-4 py-2 rounded-2xl text-sm max-w-xs break-words ${
+              className={`px-4 py-2 rounded-2xl text-base max-w-xs break-words ${
                 msg.sender === "user"
                   ? "bennett-gradient-bg text-white"
                   : "bg-gray-200 text-gray-800"
@@ -81,7 +86,7 @@ const ChatBot = () => {
 
         {isLoading && (
           <div className="flex justify-start">
-            <div className="px-4 py-2 rounded-2xl bg-gray-200 text-gray-600 text-sm max-w-xs animate-pulse">
+            <div className="px-4 py-2 rounded-2xl bg-gray-200 text-gray-600 text-base max-w-xs animate-pulse">
               Bennett is typing…
             </div>
           </div>
@@ -97,12 +102,12 @@ const ChatBot = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type your message..."
-          className="flex-1 px-4 py-2 border rounded-full text-sm outline-none focus:ring-2 focus:ring-bennett-orange"
+          className="flex-1 px-4 py-2 border rounded-full text-base outline-none focus:ring-2 focus:ring-bennett-orange"
         />
         <button
           type="submit"
           disabled={isLoading}
-          className="px-4 py-2 bennett-gradient-bg bennett-gradient-bg-hover text-white rounded-full text-sm  disabled:opacity-50"
+          className="px-4 py-2 bennett-gradient-bg bennett-gradient-bg-hover text-white rounded-full text-base  disabled:opacity-50"
         >
           {isLoading ? "…" : "Send"}
         </button>
