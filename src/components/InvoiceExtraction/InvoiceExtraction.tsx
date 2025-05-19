@@ -87,7 +87,7 @@ const InvoiceExtraction = () => {
               title="PDF Preview"
             />
             <button
-              className="mt-4 w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition"
+              className="mt-4 w-full py-3 bennett-gradient-bg bennett-gradient-bg-hover text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition"
               onClick={handleUpload}
               disabled={!selectedFile}
             >
@@ -160,7 +160,7 @@ const InvoiceExtraction = () => {
               title="PDF Preview"
             />
             <button
-              className="mt-4 w-full py-3 bennett-gradient-bg hover:bg-blue-700 text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition"
+              className="mt-4 w-full py-3 bennett-gradient-bg bennett-gradient-bg-hover text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition"
               onClick={handleUpload}
               disabled={!selectedFile}
             >

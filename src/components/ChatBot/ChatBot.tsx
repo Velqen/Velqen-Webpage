@@ -102,7 +102,7 @@ const ChatBot = () => {
         <button
           type="submit"
           disabled={isLoading}
-          className="px-4 py-2 bennett-gradient-bg text-white rounded-full text-sm hover:bg-blue-700 disabled:opacity-50"
+          className="px-4 py-2 bennett-gradient-bg bennett-gradient-bg-hover text-white rounded-full text-sm  disabled:opacity-50"
         >
           {isLoading ? "…" : "Send"}
         </button>
