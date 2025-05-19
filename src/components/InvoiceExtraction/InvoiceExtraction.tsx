@@ -44,10 +44,6 @@ const InvoiceExtraction = () => {
 
   return isSmallDevice ? (
     <div className="py-6 w-[100%] mx-auto">
-      <h1 className="text-2xl font-bold mb-6 text-center">
-        Invoice Extraction
-      </h1>
-
       {/* Upload area (always visible)*/}
       <div
         className="border-dashed border-2 border-gray-400 rounded-lg p-6 text-center cursor-pointer hover:border-bennett-orange transition"
@@ -117,10 +113,6 @@ const InvoiceExtraction = () => {
     </div>
   ) : (
     <div className="py-6 w-full mx-auto">
-      <h1 className="text-2xl font-bold mb-6 text-center">
-        Invoice Extraction
-      </h1>
-
       {/* Upload area (always visible) */}
       <div
         className="h-[400px] flex items-center justify-center border-dashed border-2 border-gray-400 rounded-lg p-6 cursor-pointer hover:border-bennett-orange transition mb-6"
@@ -151,7 +143,7 @@ const InvoiceExtraction = () => {
 
       {/* ✅ Minimal change: add this condition */}
       {selectedFile && (
-        <div className="flex flex-col lg:flex-row gap-6">
+        <div className="flex flex-col xl:flex-row gap-6">
           {/* Left side: Preview & Upload */}
           <div className="flex-1">
             <iframe
