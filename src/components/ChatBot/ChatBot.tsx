@@ -62,7 +62,7 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="w-full mx-auto h-[80vh] flex flex-col rounded-xl shadow-lg border border-gray-200">
+    <div className="w-full mx-auto h-[600px] lg:h-[80vh] flex flex-col rounded-xl shadow-lg border border-gray-200">
       {/* Chat Area */}
       <div className="flex-1 p-4 space-y-3 overflow-y-auto ">
         {messages.map((msg, index) => (
