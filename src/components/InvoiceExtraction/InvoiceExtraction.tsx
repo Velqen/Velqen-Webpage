@@ -51,7 +51,7 @@ const InvoiceExtraction = () => {
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
       >
-        <p className="text-gray-600 text-base">
+        <p className="text-bennett-gray text-base">
           {selectedFile ? (
             <>
               📄 <strong>{selectedFile.name}</strong> selected
@@ -59,7 +59,7 @@ const InvoiceExtraction = () => {
           ) : (
             <>
               Drag & drop your invoice PDF here or{" "}
-              <span className="text-blue-600 underline">browse</span>
+              <span className="bennett-gradient-text underline">browse</span>
             </>
           )}
         </p>
@@ -103,7 +103,7 @@ const InvoiceExtraction = () => {
                 </pre>
               </div>
             ) : (
-              <div className="p-4 border rounded text-gray-500 text-base italic">
+              <div className="p-4 border rounded text-bennett-gray text-base italic">
                 Extraction result will appear here.
               </div>
             )}
@@ -120,7 +120,7 @@ const InvoiceExtraction = () => {
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
       >
-        <p className="text-gray-600">
+        <p className="text-bennett-gray">
           {selectedFile ? (
             <>
               📄 <strong>{selectedFile.name}</strong> selected
@@ -172,7 +172,7 @@ const InvoiceExtraction = () => {
                 </pre>
               </div>
             ) : (
-              <div className="p-4 border h-full rounded text-gray-500 text-xl italic">
+              <div className="p-4 border h-full rounded text-bennett-gray text-xl italic">
                 Extraction result will appear here.
               </div>
             )}

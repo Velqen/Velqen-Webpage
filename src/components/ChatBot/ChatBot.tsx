@@ -74,9 +74,7 @@ const ChatBot = () => {
           >
             <div
               className={`px-4 py-2 rounded-2xl text-base max-w-xs break-words ${
-                msg.sender === "user"
-                  ? "bennett-gradient-bg text-white"
-                  : " text-gray-800"
+                msg.sender === "user" ? "bennett-gradient-bg text-white" : ""
               }`}
             >
               {msg.text}
@@ -86,7 +84,7 @@ const ChatBot = () => {
 
         {isLoading && (
           <div className="flex justify-start">
-            <div className="px-4 py-2 rounded-2xl  text-gray-600 text-base max-w-xs animate-pulse">
+            <div className="px-4 py-2 rounded-2xl  text-bennett-gray text-base max-w-xs animate-pulse">
               Bennett is typing…
             </div>
           </div>

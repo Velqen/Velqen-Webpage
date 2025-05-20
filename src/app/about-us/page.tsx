@@ -22,7 +22,7 @@ const Page = () => {
             Bennett
           </h1>
         </div>
-        <div className="flex flex-col max-w-[600px] text-lg leading-relaxed text-gray-700 mt-12 space-y-8">
+        <div className="flex flex-col max-w-[600px] text-lg leading-relaxed text-bennett-gray mt-12 space-y-8">
           <p>
             Bennett is an AI assistant that handles your accounting chores,
             freeing you to focus on what truly matters.

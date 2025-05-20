@@ -7,12 +7,14 @@
   --bennett-gradient: linear-gradient(90deg, #f75229, #fa974b);
   --bennett-gradient-hover: linear-gradient(90deg, #f12711, #e09900);
   --bennett-orange: #ff7e5f;
+  --bennett-gray: #4b4b4b;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-bennett-orange: var(--bennett-orange);
+  --color-bennett-gray: var(--bennett-gray);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

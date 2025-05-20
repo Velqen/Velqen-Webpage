@@ -21,7 +21,7 @@ const NavBar = () => {
     <nav className="fixed top-0 left-0 w-full z-500 p-4">
       <div className="flex justify-between items-center">
         {/* Site Name */}
-        <div className="font-bold text-2xl text-gray-800">Bennett</div>
+        <div className="font-bold text-2xl">Bennett</div>
 
         {/* Hamburger Button */}
         <button
@@ -73,9 +73,7 @@ const NavBar = () => {
     <nav className="fixed top-0 left-0 z-500 flex w-full justify-center">
       <div className="w-[80%] flex items-center justify-between py-4">
         {/* Left: Site name */}
-        <div className="flex-1 text-left font-bold text-2xl text-gray-800">
-          Bennett
-        </div>
+        <div className="flex-1 text-left font-bold text-2xl ">Bennett</div>
         {/* Center: Home link */}
         <div className="flex justify-center bg-gray-50 p-3 text-lg rounded-md shadow-sm border border-gray-100 gap-8">
           <Link href="/" className="bennett-gradient-text">
