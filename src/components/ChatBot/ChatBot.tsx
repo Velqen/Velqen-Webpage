@@ -75,8 +75,10 @@ const ChatBot = () => {
   // Handle input focus
   const handleFocus = () => {
     if (isSmallDevice) {
-      originalPositionRef.current = window.scrollY;
-      setIsInputFocused(true);
+      setTimeout(() => {
+        originalPositionRef.current = window.scrollY;
+        setIsInputFocused(true);
+      }, 200); // waits 200ms before running this block
     }
   };
 
