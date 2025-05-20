@@ -62,7 +62,7 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="w-full mx-auto h-[600px] lg:h-[80vh] flex flex-col rounded-xl shadow-lg border border-gray-200">
+    <div className="w-full  bg-white mx-auto h-[600px] lg:h-[80vh] flex flex-col rounded-xl shadow-lg border border-gray-200">
       {/* Chat Area */}
       <div className="flex-1 p-4 space-y-3 overflow-y-auto ">
         {messages.map((msg, index) => (
@@ -76,7 +76,7 @@ const ChatBot = () => {
               className={`px-4 py-2 rounded-2xl text-base max-w-xs break-words ${
                 msg.sender === "user"
                   ? "bennett-gradient-bg text-white"
-                  : "bg-gray-200 text-gray-800"
+                  : " text-gray-800"
               }`}
             >
               {msg.text}
@@ -86,7 +86,7 @@ const ChatBot = () => {
 
         {isLoading && (
           <div className="flex justify-start">
-            <div className="px-4 py-2 rounded-2xl bg-gray-200 text-gray-600 text-base max-w-xs animate-pulse">
+            <div className="px-4 py-2 rounded-2xl  text-gray-600 text-base max-w-xs animate-pulse">
               Bennett is typing…
             </div>
           </div>

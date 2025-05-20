@@ -2,10 +2,10 @@
 
 :root {
   /* --background: #0b0430; */
-  --background: #ffffff;
+  --background: #f5f5ec;
   --foreground: #171717;
-  --bennett-gradient: linear-gradient(90deg, #ff7e5f, #feb47b);
-  --bennett-gradient-hover: linear-gradient(90deg, #f12711, #f5af19);
+  --bennett-gradient: linear-gradient(90deg, #f75229, #fa974b);
+  --bennett-gradient-hover: linear-gradient(90deg, #f12711, #e09900);
   --bennett-orange: #ff7e5f;
 }
 

@@ -1,14 +1,17 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { IBM_Plex_Sans, Merriweather } from "next/font/google"; // import Merriweather
 import "./globals.css";
+import NavBar from "./NavBar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const ibmPlexSans = IBM_Plex_Sans({
+  variable: "--font-ibm-plex-sans",
   subsets: ["latin"],
+  weight: ["400", "700"], // <-- Add this line
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const merriweather = Merriweather({
+  variable: "--font-merriweather",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 export const metadata = {
@@ -27,9 +30,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${ibmPlexSans.variable} ${merriweather.variable} antialiased`}
       >
-        {children}
+        <main className="font-(family-name:--font-ibm-plex-sans)">
+          <NavBar />
+          {children}
+        </main>
       </body>
     </html>
   );

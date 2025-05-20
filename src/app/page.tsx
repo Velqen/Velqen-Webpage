@@ -23,7 +23,7 @@ export default function Home() {
       </div>
     </div>
   ) : (
-    <div className="min-h-screen w-full flex flex-col justify-center items-center pt-16">
+    <div className="min-h-screen w-full flex flex-col justify-center items-center pt-28">
       <div className="flex flex-col justify-center items-center max-w-[1200px] w-[80%]">
         <h2 className="text-4xl py-10 bennett-gradient-text">
           Chat with Bennett
