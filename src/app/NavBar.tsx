@@ -18,7 +18,7 @@ const NavBar = () => {
   }, [open]);
 
   return isSmallDevice ? (
-    <nav className="fixed top-0 left-0 w-full z-500 p-4">
+    <nav className=" w-full z-500 p-4">
       <div className="flex justify-between items-center">
         {/* Site Name */}
         <div className="font-bold text-2xl">Bennett</div>
@@ -70,7 +70,7 @@ const NavBar = () => {
       )}
     </nav>
   ) : (
-    <nav className="fixed top-0 left-0 z-500 flex w-full justify-center">
+    <nav className="z-500 flex w-full justify-center">
       <div className="w-[80%] flex items-center justify-between py-4">
         {/* Left: Site name */}
         <div className="flex-1 text-left font-bold text-2xl ">Bennett</div>
