@@ -1,34 +1,44 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
-  const formData = await req.formData()
-  const file = formData.get('file') as File
+  try {
+    const formData = await req.formData()
+    const file = formData.get('file') as File
 
-  if (!file) {
-    return NextResponse.json({ error: 'No file uploaded' }, { status: 400 })
-  }
+    if (!file) {
+      return NextResponse.json({ error: 'No file uploaded' }, { status: 400 })
+    }
 
-  // Convert File to Buffer
-  const arrayBuffer = await file.arrayBuffer()
-  const buffer = Buffer.from(arrayBuffer)
+    const arrayBuffer = await file.arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
 
-  // Send the file directly to the Flask API
-  const invoiceExtraction = process.env.INVOICE_EXTRACTION_BACKEND; // ✅ new line
-  const response = await fetch(`${invoiceExtraction}/process-invoice`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/pdf', // Adjust based on your server's expectations
-    },
-    body: buffer, // Send the fileBuffer directly to the Flask server
-  })
+    const invoiceExtraction = process.env.INVOICE_EXTRACTION_BACKEND;
+    const response = await fetch(`${invoiceExtraction}/process-invoice`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/pdf',
+      },
+      body: buffer,
+    })
 
-  const data = await response.json()
+    let data = null;
 
-  // Check if the file was processed successfully
-  if (response.ok) {
-    return NextResponse.json({ message: 'Upload successful', data })
-  } else {
-    return NextResponse.json({ error: data.message || 'Error sending to Flask API' }, { status: 500 })
+    try {
+      data = await response.json(); // ✅ safely try to parse JSON
+    } catch (err) {
+      console.error('Failed to parse JSON from Flask:', err);
+    }
+
+    if (response.ok && data) {
+      return NextResponse.json({ message: 'Upload successful', data });
+    } else {
+      return NextResponse.json(
+        { error: data?.message || 'Flask server error or invalid response' },
+        { status: 500 }
+      );
+    }
+  } catch (err) {
+    console.error('API Route Error:', err);
+    return NextResponse.json({ error: 'Unexpected server error' }, { status: 500 });
   }
 }
-
