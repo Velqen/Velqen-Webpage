@@ -6,6 +6,7 @@ const InvoiceExtraction = () => {
   const { isSmallDevice } = useDeviceSize();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | undefined>();
+  const [isUploading, setIsUploading] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [result, setResult] = useState<any>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -28,22 +29,30 @@ const InvoiceExtraction = () => {
   };
 
   const handleUpload = async () => {
-    if (!selectedFile) return;
+    if (!selectedFile || isUploading) return; // ✅ Prevent double upload
 
-    const formData = new FormData();
-    formData.append("file", selectedFile);
+    setIsUploading(true); // ✅ Start upload
 
-    const res = await fetch("/api/invoiceUpload", {
-      method: "POST",
-      body: formData,
-    });
+    try {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
 
-    const data = await res.json();
-    setResult(data.data);
+      const res = await fetch("/api/invoiceUpload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      setResult(data.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsUploading(false); // ✅ End upload
+    }
   };
 
   return isSmallDevice ? (
-    <div className="py-6 w-[100%] mx-auto">
+    <div className="py-6 w-[100%] mx-auto pb-32">
       {/* Upload area (always visible)*/}
       <div
         className="border-dashed border-2 border-gray-400 rounded-lg p-6 text-center cursor-pointer hover:border-bennett-orange transition"
@@ -66,7 +75,7 @@ const InvoiceExtraction = () => {
         <input
           ref={fileInputRef}
           type="file"
-          accept="application/pdf"
+          accept="application/pdf,image/*"
           onChange={handleFileChange}
           className="hidden"
         />
@@ -85,9 +94,9 @@ const InvoiceExtraction = () => {
             <button
               className="mt-4 w-full py-3 bennett-gradient-bg bennett-gradient-bg-hover text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition"
               onClick={handleUpload}
-              disabled={!selectedFile}
+              disabled={!selectedFile || isUploading}
             >
-              📤 Upload & Process
+              {isUploading ? "Uploading..." : "📤 Upload & Process"}
             </button>
           </div>
 
@@ -115,7 +124,9 @@ const InvoiceExtraction = () => {
     <div className="py-6 w-full mx-auto">
       {/* Upload area (always visible) */}
       <div
-        className="h-[400px] flex items-center justify-center border-dashed border-2 border-gray-400 rounded-lg p-6 cursor-pointer hover:border-bennett-orange transition mb-6"
+        className={`${
+          selectedFile ? "h-[200px]" : "h-[500px]" // ✅ Height changes conditionally
+        } flex items-center justify-center border-dashed border-2 border-gray-400 rounded-lg p-6 cursor-pointer hover:border-bennett-orange transition mb-6`}
         onClick={() => fileInputRef.current?.click()}
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
@@ -135,7 +146,7 @@ const InvoiceExtraction = () => {
         <input
           ref={fileInputRef}
           type="file"
-          accept="application/pdf"
+          accept="application/pdf,image/*"
           onChange={handleFileChange}
           className="hidden"
         />
@@ -154,9 +165,9 @@ const InvoiceExtraction = () => {
             <button
               className="mt-4 w-full py-3 bennett-gradient-bg bennett-gradient-bg-hover text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition text-xl"
               onClick={handleUpload}
-              disabled={!selectedFile}
+              disabled={!selectedFile || isUploading}
             >
-              📤 Upload & Process
+              {isUploading ? "Uploading..." : "📤 Upload & Process"}
             </button>
           </div>
 

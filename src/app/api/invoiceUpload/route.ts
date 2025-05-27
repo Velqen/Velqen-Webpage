@@ -2,6 +2,15 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
   try {
+    const invoiceExtraction = process.env.INVOICE_EXTRACTION_BACKEND;
+
+    // ✅ Step 1: Wake the Flask server
+    try {
+      await fetch(`${invoiceExtraction}/ping`);
+      await new Promise(res => setTimeout(res, 3000)); // wait 3 seconds
+    } catch (e) {
+      console.warn("Flask wake-up failed:", e);
+    }
     const formData = await req.formData()
     const file = formData.get('file') as File
 
@@ -12,7 +21,7 @@ export async function POST(req: NextRequest) {
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
 
-    const invoiceExtraction = process.env.INVOICE_EXTRACTION_BACKEND;
+
     const response = await fetch(`${invoiceExtraction}/process-invoice`, {
       method: 'POST',
       headers: {
