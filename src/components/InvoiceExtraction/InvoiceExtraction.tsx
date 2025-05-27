@@ -167,7 +167,7 @@ const InvoiceExtraction = () => {
                 <h2 className="text-xl font-semibold mb-2">
                   Extraction Result:
                 </h2>
-                <pre className="whitespace-pre-wrap text-xl">
+                <pre className="whitespace-pre-wrap text-base">
                   {JSON.stringify(result, null, 2)}
                 </pre>
               </div>
