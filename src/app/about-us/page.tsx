@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
+import aboutUsText from "@/data/aboutUsText";
 
 const Page = () => {
   const { isSmallDevice } = useDeviceSize();
@@ -22,19 +23,13 @@ const Page = () => {
             className="absolute top-32 left-1/2 transform -translate-x-1/2 bennett-gradient-text text-7xl whitespace-nowrap
                         overflow-visible"
           >
-            Bennett
+            {aboutUsText.title}
           </h1>
         </div>
         <div className="flex flex-col max-w-[600px] text-lg leading-relaxed text-bennett-gray mt-12 space-y-8">
-          <p>
-            Bennett is an AI assistant that handles your accounting chores,
-            freeing you to focus on what truly matters.
-          </p>
-          <p>
-            Just as AI was originally created to bridge the gap between humans
-            and countless tasks, Bennett’s mission is to make finance and
-            accounting accessible and effortless for everyone.
-          </p>
+          {aboutUsText.description.map((text, idx) => (
+            <p key={idx}>{text}</p> // line changed to dynamically render
+          ))}
         </div>
       </div>
     </div>
@@ -53,19 +48,13 @@ const Page = () => {
             className="absolute top-32 left-1/2 transform -translate-x-1/2 bennett-gradient-text text-9xl whitespace-nowrap
                        overflow-visible"
           >
-            Bennett
+            {aboutUsText.title}
           </h1>
         </div>
         <div className="flex flex-col max-w-[600px] text-lg leading-relaxed text-bennett-gray mt-12 space-y-8">
-          <p>
-            Bennett is an AI assistant that handles your accounting chores,
-            freeing you to focus on what truly matters.
-          </p>
-          <p>
-            Just as AI was originally created to bridge the gap between humans
-            and countless tasks, Bennett’s mission is to make finance and
-            accounting accessible and effortless for everyone.
-          </p>
+          {aboutUsText.description.map((text, idx) => (
+            <p key={idx}>{text}</p> // line changed to dynamically render
+          ))}
         </div>
       </div>
     </div>
