@@ -1,4 +1,8 @@
 "use client";
+// ✅ Line changed
+import dynamic from "next/dynamic"; // ✅ Add this at the top
+
+const ReactJson = dynamic(() => import("react-json-view"), { ssr: false }); // ✅ This disables SSR
 
 import React, { useState, useRef } from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
@@ -107,9 +111,14 @@ const InvoiceExtraction = () => {
                 <h2 className="text-base font-semibold mb-2">
                   Extraction Result:
                 </h2>
-                <pre className="whitespace-pre-wrap text-base">
-                  {JSON.stringify(result, null, 2)}
-                </pre>
+                <ReactJson
+                  src={result}
+                  collapsed={1}
+                  enableClipboard={true}
+                  displayDataTypes={false}
+                  name={false}
+                  style={{ fontSize: "0.85rem", wordBreak: "break-word" }}
+                />
               </div>
             ) : (
               <div className="p-4 border rounded text-bennett-gray text-base italic">
@@ -174,13 +183,18 @@ const InvoiceExtraction = () => {
           {/* Right side: Results */}
           <div className="flex-1">
             {result ? (
-              <div className="p-4 bg-gray-100 rounded shadow h-full overflow-auto">
+              <div className="p-4 bg-gray-100 rounded shadow h-full overflow-x-auto">
                 <h2 className="text-xl font-semibold mb-2">
                   Extraction Result:
                 </h2>
-                <pre className="whitespace-pre-wrap text-base">
-                  {JSON.stringify(result, null, 2)}
-                </pre>
+                <ReactJson
+                  src={result}
+                  collapsed={1}
+                  enableClipboard={true}
+                  displayDataTypes={false}
+                  name={false}
+                  style={{ fontSize: "0.9rem", wordBreak: "break-word" }}
+                />
               </div>
             ) : (
               <div className="p-4 border h-full rounded text-bennett-gray text-xl italic">
