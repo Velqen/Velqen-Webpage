@@ -1,0 +1,159 @@
+"use client";
+
+import { useState, ChangeEvent } from "react";
+
+export default function TransactionClassification() {
+  const [file, setFile] = useState<File | null>(null);
+  const [status, setStatus] = useState<string>("");
+
+  // Added for preview:
+  const [previewHeaders, setPreviewHeaders] = useState<string[]>([]); // Added
+  const [previewRows, setPreviewRows] = useState<string[][]>([]); // Added
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile && selectedFile.type === "text/csv") {
+      setFile(selectedFile);
+      setStatus("");
+      // Clear previous preview when a new file is selected:
+      setPreviewHeaders([]); // Added
+      setPreviewRows([]); // Added
+    } else {
+      setFile(null);
+      setStatus("Please select a valid CSV file.");
+      setPreviewHeaders([]); // Added
+      setPreviewRows([]); // Added
+    }
+  };
+
+  const handleUpload = async () => {
+    if (!file) {
+      setStatus("Please select a CSV file.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    setStatus("Uploading and classifying...");
+
+    try {
+      const response = await fetch("api/transactionUpload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to classify transactions.");
+      }
+
+      // Fetch blob from response
+      const blob = await response.blob();
+      // Create a download link as before
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "classified_transactions.csv");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      // Added: parse blob text for preview
+      const text = await blob.text(); // Added
+      const lines = text.split("\n").filter((line) => line.trim() !== ""); // Added
+      if (lines.length > 0) {
+        // Added
+        const headers = lines[0].split(","); // Added
+        const rawRows = lines.slice(1, 6).map((line) => line.split(",")); // Added (first 5 rows)
+        setPreviewHeaders(headers); // Added
+        setPreviewRows(rawRows); // Added
+      } // Added
+
+      setStatus("Classification complete. Preview below or download file."); // Modified message to mention preview
+    } catch (error: any) {
+      setStatus(`Error: ${error.message}`);
+      // Clear preview on error
+      setPreviewHeaders([]); // Added
+      setPreviewRows([]); // Added
+    }
+  };
+
+  return (
+    <div className="p-6 border rounded-lg max-w-md mx-auto mt-10 shadow-lg bg-white">
+      <h2 className="text-2xl font-semibold mb-4 text-center">
+        Upload Your CSV for Classification
+      </h2>
+      <p className="mb-4 text-gray-600 text-center">
+        Please upload a CSV file that <strong>at least</strong> contains these
+        two fields:
+        <br />
+        <code>description</code> and <code>amount</code>.
+      </p>
+      <p className="mb-6 text-gray-600 text-center">
+        The file will be categorised into <strong>five categories</strong>:
+        <br />
+        <em>Food & Drink, Income, Shopping, Transportation, Utilities</em>
+      </p>
+
+      <input
+        type="file"
+        accept=".csv"
+        onChange={handleFileChange}
+        className="mb-5 block w-full border border-bennett-orange rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+
+      <button
+        onClick={handleUpload}
+        className="w-full bennett-gradient-bg bennett-gradient-bg-hover text-white py-3 rounded disabled:opacity-50 transition"
+        disabled={!file}
+      >
+        Upload & Classify
+      </button>
+
+      {status && (
+        <p className="mt-4 text-center text-sm text-gray-700">{status}</p>
+      )}
+
+      {/* Added: Preview Table */}
+      {previewHeaders.length > 0 && previewRows.length > 0 && (
+        <div className="mt-6 overflow-x-auto">
+          <table className="min-w-full border-collapse">
+            <thead>
+              <tr className="bg-gray-100">
+                {previewHeaders.map((header, idx) => (
+                  <th
+                    key={idx}
+                    className="px-3 py-2 text-left text-sm font-medium text-gray-700 border border-gray-200"
+                  >
+                    {header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {previewRows.map((row, rowIdx) => (
+                <tr
+                  key={rowIdx}
+                  className={rowIdx % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                >
+                  {row.map((cell, cellIdx) => (
+                    <td
+                      key={cellIdx}
+                      className="px-3 py-2 text-sm text-gray-800 border border-gray-200"
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="mt-2 text-xs text-gray-500 text-center">
+            Showing first {previewRows.length} rows
+          </p>
+        </div>
+      )}
+      {/* End Preview Table */}
+    </div>
+  );
+}
