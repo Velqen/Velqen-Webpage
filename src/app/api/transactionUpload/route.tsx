@@ -44,10 +44,12 @@ export async function POST(req: NextRequest) {
           'attachment; filename="classified_transactions.csv"',
       },
     });
-  } catch (err: any) {
-    return NextResponse.json(
-      { error: err.message || "Server error" },
-      { status: 500 }
-    );
+  } catch (err: unknown) {
+    // Changed from 'any' to 'unknown'
+    let errorMessage = "Server error";
+    if (err instanceof Error) {
+      errorMessage = err.message;
+    }
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

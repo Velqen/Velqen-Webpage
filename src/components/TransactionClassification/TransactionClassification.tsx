@@ -70,8 +70,12 @@ export default function TransactionClassification() {
       } // Added
 
       setStatus("Classification complete. Preview below or download file."); // Modified message to mention preview
-    } catch (error: any) {
-      setStatus(`Error: ${error.message}`);
+    } catch (error: unknown) {
+      let message = "Unknown error";
+      if (error instanceof Error) {
+        message = error.message;
+      }
+      setStatus(`Error: ${message}`);
       // Clear preview on error
       setPreviewHeaders([]); // Added
       setPreviewRows([]); // Added
