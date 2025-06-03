@@ -83,7 +83,7 @@ export default function TransactionClassification() {
   };
 
   return (
-    <div className="p-6 border rounded-lg max-w-md mx-auto mt-10 shadow-lg bg-white">
+    <div className="w-full p-6 border rounded-lg mx-auto mt-10 shadow-lg bg-white">
       <h2 className="text-2xl font-semibold mb-4 text-center">
         Upload Your CSV for Classification
       </h2>
