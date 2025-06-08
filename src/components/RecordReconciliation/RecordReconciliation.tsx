@@ -10,10 +10,9 @@ type MatchedPair = {
 
 type ReconciliationResult = {
   matched: MatchedPair[];
-  unmatched_bank: Record<string, any>[];
-  unmatched_ledger: Record<string, any>[];
+  unmatched_bank: Record<string, unknown>[];
+  unmatched_ledger: Record<string, unknown>[];
 };
-
 function FileInput({
   label,
   file,
