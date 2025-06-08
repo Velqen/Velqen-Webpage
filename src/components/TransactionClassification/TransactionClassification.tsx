@@ -83,81 +83,83 @@ export default function TransactionClassification() {
   };
 
   return (
-    <div className="w-full p-6 border rounded-lg mx-auto mt-10 shadow-lg bg-white">
-      <h2 className="text-2xl font-semibold mb-4 text-center">
-        Upload Your CSV for Classification
-      </h2>
-      <p className="mb-4 text-gray-600 text-center">
-        Please upload a CSV file that <strong>at least</strong> contains these
-        two fields:
-        <br />
-        <code>description</code> and <code>amount</code>.
-      </p>
-      <p className="mb-6 text-gray-600 text-center">
-        The file will be categorised into <strong>five categories</strong>:
-        <br />
-        <em>Food & Drink, Income, Shopping, Transportation, Utilities</em>
-      </p>
+    <div className="flex flex-col md:flex-row gap-8 mt-10 w-full mx-auto">
+      {/* Left Text Section */}
+      <div className="md:w-1/3">
+        <h2 className="text-2xl font-semibold mb-4">
+          Upload Your CSV for Classification
+        </h2>
+        <p className="mb-4 text-gray-600">
+          Please upload a CSV file that <strong>at least</strong> contains these
+          two fields:
+          <br />
+          <code>description, merchant_name</code> and <code>amount</code>.
+        </p>
+        <p className="text-gray-600">
+          The file will be categorised into <strong>five categories</strong>:
+          <br />
+          <em>Food & Drink, Income, Shopping, Transportation, Utilities</em>
+        </p>
+      </div>
 
-      <input
-        type="file"
-        accept=".csv"
-        onChange={handleFileChange}
-        className="mb-5 block w-full border border-bennett-orange rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-      />
+      {/* Right Upload Box */}
+      <div className="md:w-2/3 max-w-7xl p-6 border rounded-lg shadow-lg bg-white">
+        <input
+          type="file"
+          accept=".csv"
+          onChange={handleFileChange}
+          className="mb-5 block w-full border border-bennett-orange rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
 
-      <button
-        onClick={handleUpload}
-        className="w-full bennett-gradient-bg bennett-gradient-bg-hover text-white py-3 rounded disabled:opacity-50 transition"
-        disabled={!file}
-      >
-        Upload & Classify
-      </button>
+        <button
+          onClick={handleUpload}
+          className="w-full bennett-gradient-bg bennett-gradient-bg-hover text-white py-3 rounded disabled:opacity-50 transition"
+          disabled={!file}
+        >
+          Upload & Classify
+        </button>
 
-      {status && (
-        <p className="mt-4 text-center text-sm text-gray-700">{status}</p>
-      )}
+        {status && <p className="mt-4 text-sm text-gray-700">{status}</p>}
 
-      {/* Added: Preview Table */}
-      {previewHeaders.length > 0 && previewRows.length > 0 && (
-        <div className="mt-6 overflow-x-auto">
-          <table className="min-w-full border-collapse">
-            <thead>
-              <tr className="bg-gray-100">
-                {previewHeaders.map((header, idx) => (
-                  <th
-                    key={idx}
-                    className="px-3 py-2 text-left text-sm font-medium text-gray-700 border border-gray-200"
-                  >
-                    {header}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {previewRows.map((row, rowIdx) => (
-                <tr
-                  key={rowIdx}
-                  className={rowIdx % 2 === 0 ? "bg-white" : "bg-gray-50"}
-                >
-                  {row.map((cell, cellIdx) => (
-                    <td
-                      key={cellIdx}
-                      className="px-3 py-2 text-sm text-gray-800 border border-gray-200"
+        {previewHeaders.length > 0 && previewRows.length > 0 && (
+          <div className="mt-6 overflow-x-auto">
+            <table className="min-w-full border-collapse">
+              <thead>
+                <tr className="bg-gray-100">
+                  {previewHeaders.map((header, idx) => (
+                    <th
+                      key={idx}
+                      className="px-3 py-2 text-left text-sm font-medium text-gray-700 border border-gray-200"
                     >
-                      {cell}
-                    </td>
+                      {header}
+                    </th>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <p className="mt-2 text-xs text-gray-500 text-center">
-            Showing first {previewRows.length} rows
-          </p>
-        </div>
-      )}
-      {/* End Preview Table */}
+              </thead>
+              <tbody>
+                {previewRows.map((row, rowIdx) => (
+                  <tr
+                    key={rowIdx}
+                    className={rowIdx % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                  >
+                    {row.map((cell, cellIdx) => (
+                      <td
+                        key={cellIdx}
+                        className="px-3 py-2 text-sm text-gray-800 border border-gray-200"
+                      >
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="mt-2 text-xs text-gray-500 text-center">
+              Showing first {previewRows.length} rows
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
