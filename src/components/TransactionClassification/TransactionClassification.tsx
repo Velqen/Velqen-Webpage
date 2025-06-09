@@ -90,15 +90,24 @@ export default function TransactionClassification() {
           Upload Your CSV for Classification
         </h2>
         <p className="mb-4 text-gray-600">
-          Please upload a CSV file that <strong>at least</strong> contains these
-          two fields:
-          <br />
-          <code>description, merchant_name</code> and <code>amount</code>.
+          Please upload a CSV file containing at least the following fields:
+        </p>
+        <ul className="mb-4 text-gray-600 list-disc list-inside">
+          <li>
+            <code>description</code>
+          </li>
+          <li>
+            <code>merchant_name</code>
+          </li>
+          <li>
+            <code>amount</code>
+          </li>
+        </ul>
+        <p className="text-gray-600">
+          Transactions will be automatically categorised into five groups:
         </p>
         <p className="text-gray-600">
-          The file will be categorised into <strong>five categories</strong>:
-          <br />
-          <em>Food & Drink, Income, Shopping, Transportation, Utilities</em>
+          Food & Drink, Income, Shopping, Transportation, Utilities
         </p>
       </div>
 
