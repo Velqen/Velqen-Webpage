@@ -16,7 +16,8 @@ const merriweather = Merriweather({
 
 export const metadata = {
   title: "Bennett AI",
-  description: "AI assitant for Finance and Accounting",
+  description:
+    "Free AI tool for invoice extraction, transaction classification, and record reconciliation",
   icons: {
     icon: "/Bennett_AI_logo.jpg", // 🔁 This is your custom favicon
   },
