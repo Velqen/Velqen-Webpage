@@ -31,17 +31,17 @@ const NavBar = () => {
         >
           <div className="space-y-1">
             <span
-              className={`block h-0.5 w-6 bg-gray-800 transition-transform duration-300 ${
+              className={`block h-0.5 w-6 bg-black transition-transform duration-300 ${
                 open ? "rotate-45 translate-y-1.5" : ""
               }`}
             ></span>
             <span
-              className={`block h-0.5 w-6 bg-gray-800 transition-opacity duration-300 ${
+              className={`block h-0.5 w-6 bg-black transition-opacity duration-300 ${
                 open ? "opacity-0" : "opacity-100"
               }`}
             ></span>
             <span
-              className={`block h-0.5 w-6 bg-gray-800 transition-transform duration-300 ${
+              className={`block h-0.5 w-6 bg-black transition-transform duration-300 ${
                 open ? "-rotate-45 -translate-y-1.5" : ""
               }`}
             ></span>
@@ -51,7 +51,7 @@ const NavBar = () => {
 
       {/* Dropdown menu below navbar */}
       {open && (
-        <div className="absolute top-full left-0 w-[calc(100vw-3rem)] h-[calc(100vh-7rem)] bg-[rgba(128,128,128,0.08)] backdrop-blur-md flex flex-col items-center gap-6 py-6 z-40 mx-[1.5rem] my-[1.5rem] rounded-lg">
+        <div className="absolute top-full left-0 w-[calc(100vw-3rem)] h-[calc(100vh-7rem)] bg-[rgba(241,241,241,0.85)] backdrop-blur-md flex flex-col items-center gap-6 py-6 z-40 mx-[1.5rem] my-[1.5rem] rounded-lg">
           <Link
             href="/"
             onClick={() => setOpen(false)}
@@ -75,7 +75,7 @@ const NavBar = () => {
         {/* Left: Site name */}
         <div className="flex-1 text-left font-bold text-2xl ">Bennett</div>
         {/* Center: Home link */}
-        <div className="flex justify-center bg-gray-50 p-3 text-lg rounded-md shadow-sm border border-gray-100 gap-8">
+        <div className="flex justify-center bg-white p-3 text-lg rounded-md shadow-sm border border-bennett-light-gray gap-8">
           <Link href="/" className="bennett-gradient-text">
             Home
           </Link>
