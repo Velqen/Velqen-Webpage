@@ -71,7 +71,7 @@ const GlideLink = () => {
           />
           <div className="p-6">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
-              AI Transaction Reconciliation
+              AI Record Reconciliation
             </h3>
             <p className="text-bennett-gray">(Click Here)</p>
           </div>

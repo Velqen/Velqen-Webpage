@@ -117,7 +117,7 @@ export default function TransactionClassification() {
           type="file"
           accept=".csv"
           onChange={handleFileChange}
-          className="mb-5 block w-full border border-bennett-orange rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="mb-5 block w-full border border-bennett-gray rounded-md p-3 hover:border-bennett-orange"
         />
 
         <button
@@ -138,7 +138,7 @@ export default function TransactionClassification() {
                   {previewHeaders.map((header, idx) => (
                     <th
                       key={idx}
-                      className="px-3 py-2 text-left text-sm font-medium text-gray-700 border border-gray-200"
+                      className="px-3 py-2 text-left text-sm font-medium text-bennett-gray border border-bennett-light-gray"
                     >
                       {header}
                     </th>
@@ -154,7 +154,7 @@ export default function TransactionClassification() {
                     {row.map((cell, cellIdx) => (
                       <td
                         key={cellIdx}
-                        className="px-3 py-2 text-sm text-gray-800 border border-gray-200"
+                        className="px-3 py-2 text-sm text-bennett-gray border border-bennett-light-gray"
                       >
                         {cell}
                       </td>
@@ -163,7 +163,7 @@ export default function TransactionClassification() {
                 ))}
               </tbody>
             </table>
-            <p className="mt-2 text-xs text-gray-500 text-center">
+            <p className="mt-2 text-xs text-bennett-gray text-center">
               Showing first {previewRows.length} rows
             </p>
           </div>
