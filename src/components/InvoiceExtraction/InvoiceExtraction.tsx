@@ -56,7 +56,7 @@ const InvoiceExtraction = () => {
   };
 
   return isSmallDevice ? (
-    <div className="py-6 w-[100%] mx-auto">
+    <div className="w-[100%] mx-auto">
       {/* Upload area (always visible)*/}
       <div
         className="border-dashed border-2 border-gray-400 rounded-lg p-6 text-center cursor-pointer hover:border-bennett-orange transition"

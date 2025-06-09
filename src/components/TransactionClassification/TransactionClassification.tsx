@@ -83,7 +83,7 @@ export default function TransactionClassification() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-8 mt-10 w-full mx-auto">
+    <div className="flex flex-col md:flex-row gap-8 w-full mx-auto">
       {/* Left Text Section */}
       <div className="md:w-1/3">
         <h2 className="text-2xl font-semibold mb-4">
