@@ -11,14 +11,14 @@ export default function Home() {
   const { isSmallDevice } = useDeviceSize();
 
   return isSmallDevice ? (
-    <div className="min-h-screen w-full flex flex-col justify-center items-center pt-16">
+    <div className="min-h-screen w-full flex flex-col justify-center items-center pt-24">
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-4xl py-4 bennett-gradient-text">
           Pick Your AI Tool
         </h1>
         <GlideLink />
       </div>
-      <div className="flex flex-col justify-center items-center w-[100%]">
+      <div className="flex flex-col justify-center items-center w-[100%] pt-32">
         <h2 className="text-4xl py-10 bennett-gradient-text">
           Chat with Bennett
         </h2>
