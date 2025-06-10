@@ -1,6 +1,5 @@
 "use client";
 
-import ChatBot from "@/components/ChatBot/ChatBot";
 import GlideLink from "@/components/GlideLink/GlideLink";
 import InvoiceExtraction from "@/components/InvoiceExtraction/InvoiceExtraction";
 import RecordReconciliation from "@/components/RecordReconciliation/RecordReconciliation";
@@ -27,7 +26,7 @@ export default function Home() {
           Transaction Classification
         </h1>
         <p className="text-center text-xl text-bennett-gray pb-10">
-          Understand where your money's going using AI.
+          Understand where your money&#39;s going using AI.
         </p>
         <TransactionClassification />
       </div>
@@ -73,7 +72,7 @@ export default function Home() {
           Transaction Classification
         </h1>
         <p className="text-center text-2xl text-bennett-gray pb-14">
-          Understand where your money's going using AI.
+          Understand where your money&#39;s going using AI.
         </p>
         <TransactionClassification />
       </div>
