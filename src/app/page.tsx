@@ -18,16 +18,10 @@ export default function Home() {
         </h1>
         <GlideLink />
       </div>
-      <div className="flex flex-col justify-center items-center w-[100%] pt-32">
-        <h2 className="text-4xl py-10 bennett-gradient-text">
-          Chat with Bennett
-        </h2>
 
-        <ChatBot />
-      </div>
       <div
         id="transaction-classification"
-        className="w-[80%] flex flex-col justify-center items-center pt-32"
+        className="w-[90%] flex flex-col justify-center items-center pt-32"
       >
         <h1 className="text-4xl py-4 bennett-gradient-text text-center">
           Transaction Classification
@@ -40,7 +34,7 @@ export default function Home() {
       </div>
       <div
         id="invoice-extraction"
-        className="w-[80%] flex flex-col justify-center items-center pt-32"
+        className="w-[90%] flex flex-col justify-center items-center pt-32"
       >
         <h1 className="text-4xl py-4 bennett-gradient-text text-center">
           Invoice Extraction
@@ -52,7 +46,7 @@ export default function Home() {
       </div>
       <div
         id="record-reconciliation"
-        className="w-[80%] flex flex-col justify-center items-center pt-32"
+        className="w-[90%] flex flex-col justify-center items-center pt-32"
       >
         <h1 className="text-4xl py-4 bennett-gradient-text text-center">
           Record Reconciliation
@@ -72,12 +66,7 @@ export default function Home() {
         </h1>
         <GlideLink />
       </div>
-      <div className="flex flex-col justify-center items-center max-w-[1200px] w-[80%]  pt-52">
-        <h2 className="text-7xl py-10 bennett-gradient-text">
-          Chat with Bennett
-        </h2>
-        <ChatBot />
-      </div>
+
       <div
         id="transaction-classification"
         className="w-[80%] flex flex-col justify-center items-center pt-52"

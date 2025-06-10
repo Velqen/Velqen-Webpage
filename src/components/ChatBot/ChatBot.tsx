@@ -12,7 +12,6 @@ const ChatBot = () => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isInputFocused, setIsInputFocused] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const originalPositionRef = useRef<number | null>(null);
 
@@ -100,11 +99,11 @@ const ChatBot = () => {
       {/* Wrapper with 80% width & full height column */}
       <div
         className={`${
-          isSmallDevice ? "w-full" : "w-[70%] "
-        }flex flex-col h-full`}
+          isSmallDevice ? "w-full" : "w-[60%]"
+        } flex flex-col h-full`}
       >
         {/* Chat Area */}
-        <div className="flex-1 p-4 space-y-3 overflow-y-auto">
+        <div className="flex-1 p-4 space-y-3 overflow-y-auto min-h-0">
           {messages.map((msg, index) => (
             <div
               key={index}
@@ -137,9 +136,7 @@ const ChatBot = () => {
         <form
           onSubmit={handleSubmit}
           className={`${
-            isSmallDevice && isInputFocused
-              ? "fixed bottom-0 left-0 right-0 z-50"
-              : ""
+            isSmallDevice ? "fixed bottom-0 left-0 right-0 z-50" : ""
           } p-4 flex gap-2`}
         >
           <input

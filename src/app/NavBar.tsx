@@ -60,6 +60,20 @@ const NavBar = () => {
             Home
           </Link>
           <Link
+            href="/ai-chatbot"
+            onClick={() => setOpen(false)}
+            className="bennett-gradient-text text-xl"
+          >
+            AI Chat
+          </Link>
+          <Link
+            href="/blog"
+            onClick={() => setOpen(false)}
+            className="bennett-gradient-text text-xl"
+          >
+            Blog
+          </Link>
+          <Link
             href="/about-us"
             onClick={() => setOpen(false)}
             className="bennett-gradient-text text-xl"
@@ -78,6 +92,12 @@ const NavBar = () => {
         <div className="flex justify-center bg-white p-3 text-lg rounded-md shadow-sm border border-bennett-light-gray gap-8">
           <Link href="/" className="bennett-gradient-text">
             Home
+          </Link>
+          <Link href="/ai-chatbot" className="bennett-gradient-text">
+            AI Chat
+          </Link>
+          <Link href="/blog" className="bennett-gradient-text">
+            Blog
           </Link>
           <Link href="/about-us" className="bennett-gradient-text">
             About Us

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import aboutUsText from "@/data/aboutUsText";
 
-const Page = () => {
+const AboutUs = () => {
   const { isSmallDevice } = useDeviceSize();
 
   return isSmallDevice ? (
@@ -61,4 +61,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default AboutUs;
