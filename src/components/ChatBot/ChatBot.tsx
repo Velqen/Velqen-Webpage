@@ -13,7 +13,6 @@ const ChatBot = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const originalPositionRef = useRef<number | null>(null);
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
@@ -36,13 +35,6 @@ const ChatBot = () => {
     setIsLoading(true);
     const userInput = input;
     setInput("");
-
-    // Restore position after sending on small devices
-    if (isSmallDevice && originalPositionRef.current !== null) {
-      setTimeout(() => {
-        window.scrollTo(0, originalPositionRef.current || 0);
-      }, 100);
-    }
 
     try {
       const res = await fetch("/api/chatBot", {

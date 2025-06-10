@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import blogPosts from "@/data/blogPosts";
 import Image from "next/image";
-import { BlogPost } from "@/types/blog";
 
 type Props = {
   params: { slug: string };

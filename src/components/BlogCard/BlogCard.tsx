@@ -14,7 +14,7 @@ const BlogCard = ({ post }: { post: BlogPost }) => {
           src={post.image}
           alt={post.title}
           fill
-          className="object-cover transition-opacity duration-300 hover:opacity-90"
+          className="object-cover transition-transform duration-300 hover:scale-105"
         />
       </div>
 

@@ -32,7 +32,7 @@ const GlideLink = () => {
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
               AI Transaction Classification
             </h3>
-            <p className="text-bennett-gray">(Click Here)</p>
+            <p className="text-bennett-gray">👉 Click to Try</p>
           </div>
         </div>
 
@@ -53,7 +53,7 @@ const GlideLink = () => {
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
               OCR Invoice Extraction
             </h3>
-            <p className="text-bennett-gray">(Click Here)</p>
+            <p className="text-bennett-gray">👉 Click to Try</p>
           </div>
         </div>
 
@@ -73,7 +73,7 @@ const GlideLink = () => {
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
               AI Record Reconciliation
             </h3>
-            <p className="text-bennett-gray">(Click Here)</p>
+            <p className="text-bennett-gray">👉 Click to Try</p>
           </div>
         </div>
       </div>

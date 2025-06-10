@@ -27,8 +27,7 @@ export default function Home() {
           Transaction Classification
         </h1>
         <p className="text-center text-xl text-bennett-gray pb-10">
-          Classify your bank transactions automatically using AI for a faster,
-          smarter, and stress-free workflow.
+          Understand where your money's going using AI.
         </p>
         <TransactionClassification />
       </div>
@@ -40,7 +39,7 @@ export default function Home() {
           Invoice Extraction
         </h1>
         <p className="text-center text-xl text-bennett-gray pb-10">
-          Use AI to pull key details from invoices without manual effort.
+          Use AI to pull key details from invoices.
         </p>
         <InvoiceExtraction />
       </div>
@@ -52,8 +51,7 @@ export default function Home() {
           Record Reconciliation
         </h1>
         <p className="text-center text-xl text-bennett-gray pb-10">
-          Reconcile your financial records with AI for quicker, simpler
-          matching.
+          Spot missed payments or duplicate charges automatically with AI.
         </p>
         <RecordReconciliation />
       </div>
@@ -75,8 +73,7 @@ export default function Home() {
           Transaction Classification
         </h1>
         <p className="text-center text-2xl text-bennett-gray pb-14">
-          Classify your bank transactions automatically using AI for a faster,
-          smarter, and stress-free workflow.
+          Understand where your money's going using AI.
         </p>
         <TransactionClassification />
       </div>
@@ -88,7 +85,7 @@ export default function Home() {
           Invoice Extraction
         </h1>
         <p className="text-center text-2xl text-bennett-gray pb-14">
-          Use AI to pull key details from invoices without manual effort.
+          Use AI to pull key details from invoices.
         </p>
         <InvoiceExtraction />
       </div>
@@ -100,8 +97,7 @@ export default function Home() {
           Record Reconciliation
         </h1>
         <p className="text-center text-2xl text-bennett-gray pb-14">
-          Reconcile your financial records with AI for quicker, simpler
-          matching.
+          Spot missed payments or duplicate charges automatically with AI.
         </p>
         <RecordReconciliation />
       </div>
