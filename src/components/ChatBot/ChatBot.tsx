@@ -73,86 +73,91 @@ const ChatBot = () => {
   };
 
   // Handle input focus
-  const handleFocus = () => {
-    if (isSmallDevice) {
-      originalPositionRef.current = window.scrollY;
-      setIsInputFocused(true);
-    }
-  };
+  // const handleFocus = () => {
+  //   if (isSmallDevice) {
+  //     originalPositionRef.current = window.scrollY;
+  //     setIsInputFocused(true);
+  //   }
+  // };
 
   // Handle input blur
-  const handleBlur = () => {
-    if (isSmallDevice) {
-      setTimeout(() => {
-        setIsInputFocused(false);
-        if (originalPositionRef.current !== null) {
-          window.scrollTo(0, originalPositionRef.current);
-        }
-        scrollToBottom();
-      }, 100);
-    } else {
-      scrollToBottom();
-    }
-  };
+  // const handleBlur = () => {
+  //   if (isSmallDevice) {
+  //     setTimeout(() => {
+  //       setIsInputFocused(false);
+  //       if (originalPositionRef.current !== null) {
+  //         window.scrollTo(0, originalPositionRef.current);
+  //       }
+  //       scrollToBottom();
+  //     }, 100);
+  //   } else {
+  //     scrollToBottom();
+  //   }
+  // };
 
   return (
-    <div className="w-full bg-white mx-auto h-[600px] lg:h-[80vh] flex flex-col rounded-xl shadow-lg border border-gray-200">
-      {/* Chat Area */}
-      <div className="flex-1 p-4 space-y-3 overflow-y-auto">
-        {messages.map((msg, index) => (
-          <div
-            key={index}
-            className={`flex ${
-              msg.sender === "user" ? "justify-end" : "justify-start"
-            }`}
-          >
+    <div className="fixed inset-0 flex justify-center z-50 pt-24">
+      {/* Wrapper with 80% width & full height column */}
+      <div
+        className={`${
+          isSmallDevice ? "w-full" : "w-[70%] "
+        }flex flex-col h-full`}
+      >
+        {/* Chat Area */}
+        <div className="flex-1 p-4 space-y-3 overflow-y-auto">
+          {messages.map((msg, index) => (
             <div
-              className={`px-4 py-2 rounded-2xl text-base max-w-xs break-words ${
-                msg.sender === "user" ? "bennett-gradient-bg text-white" : ""
+              key={index}
+              className={`flex ${
+                msg.sender === "user" ? "justify-end" : "justify-start"
               }`}
             >
-              {msg.text}
+              <div
+                className={`px-4 py-2 rounded-2xl text-base break-words ${
+                  msg.sender === "user" ? "bennett-gradient-bg text-white" : ""
+                }`}
+              >
+                {msg.text}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
 
-        {isLoading && (
-          <div className="flex justify-start">
-            <div className="px-4 py-2 rounded-2xl text-bennett-gray text-base max-w-xs animate-pulse">
-              Bennett is typing…
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="px-4 py-2 rounded-2xl text-bennett-gray text-base max-w-xs animate-pulse">
+                Bennett is typing…
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        <div ref={messagesEndRef} />
-      </div>
+          <div ref={messagesEndRef} />
+        </div>
 
-      {/* Input Form - conditionally position fixed on small devices when focused */}
-      <form
-        onSubmit={handleSubmit}
-        className={`${
-          isSmallDevice && isInputFocused
-            ? "fixed bottom-0 left-0 right-0 bg-white z-50"
-            : ""
-        } p-4 flex gap-2 border-t`}
-      >
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          placeholder="Type your message..."
-          className="flex-1 px-4 py-2 border rounded-full text-base outline-none focus:ring-2 focus:ring-bennett-orange"
-        />
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="px-4 py-2 bennett-gradient-bg bennett-gradient-bg-hover text-white rounded-full text-base disabled:opacity-50"
+        {/* Input Form - conditionally position fixed on small devices when focused */}
+        <form
+          onSubmit={handleSubmit}
+          className={`${
+            isSmallDevice && isInputFocused
+              ? "fixed bottom-0 left-0 right-0 z-50"
+              : ""
+          } p-4 flex gap-2`}
         >
-          {isLoading ? "…" : "Send"}
-        </button>
-      </form>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type your message..."
+            className="flex-1 px-4 py-2 border rounded-full text-base outline-none focus:ring-2 focus:ring-bennett-orange"
+          />
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="px-4 py-2 bennett-gradient-bg bennett-gradient-bg-hover text-white rounded-full text-base disabled:opacity-50"
+          >
+            {isLoading ? "…" : "Send"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
