@@ -2,18 +2,19 @@ import { notFound } from "next/navigation";
 import blogPosts from "@/data/blogPosts";
 import Image from "next/image";
 
-type Props = {
-  params: { slug: string };
-};
-
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
     slug: post.slug,
   }));
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>; // Changed to Promise
+}) {
+  const { slug } = await params; // Await the params
+  const post = blogPosts.find((p) => p.slug === slug);
 
   if (!post) return notFound();
 
