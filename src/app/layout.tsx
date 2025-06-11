@@ -1,6 +1,7 @@
 import { IBM_Plex_Sans, Merriweather } from "next/font/google"; // import Merriweather
 import "./globals.css";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const ibmPlexSans = IBM_Plex_Sans({
   variable: "--font-ibm-plex-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
         <main className="font-(family-name:--font-ibm-plex-sans)">
           <NavBar />
           {children}
+          <Footer />
         </main>
       </body>
     </html>

@@ -11,7 +11,7 @@ export default function Home() {
 
   return isSmallDevice ? (
     <div className="min-h-screen w-full flex flex-col justify-center items-center pt-24">
-      <div className="flex flex-col justify-center items-center">
+      <div className="w-[90%] flex flex-col justify-center items-center">
         <h1 className="text-4xl py-4 bennett-gradient-text">
           Pick Your AI Tool
         </h1>
