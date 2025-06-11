@@ -59,7 +59,7 @@ const InvoiceExtraction = () => {
     <div className="w-[100%] mx-auto">
       {/* Upload area (always visible)*/}
       <div
-        className="border-dashed border-2 border-gray-400 rounded-lg p-6 text-center cursor-pointer hover:border-bennett-orange transition"
+        className="border-dashed border-2 border-bennett-gray rounded-lg p-6 text-center cursor-pointer hover:border-bennett-orange transition"
         onClick={() => fileInputRef.current?.click()}
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
@@ -135,7 +135,7 @@ const InvoiceExtraction = () => {
       <div
         className={`${
           selectedFile ? "h-[200px]" : "h-[500px]" // ✅ Height changes conditionally
-        } flex items-center justify-center border-dashed border-2 border-gray-400 rounded-lg p-6 cursor-pointer hover:border-bennett-orange transition mb-6`}
+        } flex items-center justify-center border-dashed border-2 border-bennett-gray rounded-lg p-6 cursor-pointer hover:border-bennett-orange transition mb-6`}
         onClick={() => fileInputRef.current?.click()}
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}

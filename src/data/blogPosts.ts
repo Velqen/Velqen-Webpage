@@ -68,6 +68,32 @@ const blogPosts = [
     "It’s completely free. No subscriptions, no hidden charges. Just clean, effortless reconciliation driven by smart AI."
   ],
 },
+{
+  id: 6,
+  slug: "we-put-users-first-homepage",
+  title: "We Put Users First on the Homepage",
+  category: "Company",
+  date: "June 12, 2025",
+  image: "/blog/post6.jpg", // update the path if needed
+  content: [
+    "Most AI platforms start by talking about themselves. We flipped that approach.",
+    "Instead of filling our homepage with mission statements or bios, we focused on you — the user. From the moment you land, you can try free AI tools like transaction classification, invoice OCR, and record reconciliation. No fluff. Just value.",
+    "We believe real trust is earned by showing what we can do, not by telling you who we are. That’s why we lead with functionality and let the product speak for itself."
+  ]
+},
+{
+  id: 7,
+  slug: "no-credit-card-needed",
+  title: "Why We Don’t Ask for Your Credit Card",
+  category: "Company",
+  date: "June 13, 2025",
+  image: "/blog/post7.jpg", // add or update this file in your /public/blog folder
+  content: [
+    "We believe signing up should be risk free, so we don’t ask for your credit card up front. All our AI finance features are available free without a trial or hidden fees.",
+    "By removing barriers we let you explore real value before making any commitment. Trust is earned by experience, not locked behind payment walls. Try it now and see for yourself."
+  ]
+},
+
 
 ];
 
