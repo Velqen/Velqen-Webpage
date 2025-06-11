@@ -3,6 +3,7 @@
 :root {
   /* --background: #0b0430; */
   --background: #f5f5ec;
+  --background-sec: #f0f0d7;
   --foreground: #171717;
   --bennett-gradient: linear-gradient(90deg, #f75229, #fa974b);
   --bennett-gradient-hover: linear-gradient(90deg, #f12711, #e09900);
@@ -13,6 +14,7 @@
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-sec: var(--background-sec);
   --color-foreground: var(--foreground);
   --color-bennett-orange: var(--bennett-orange);
   --color-bennett-gray: var(--bennett-gray);

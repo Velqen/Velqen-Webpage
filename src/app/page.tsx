@@ -18,41 +18,49 @@ export default function Home() {
         <GlideLink />
       </div>
 
-      <div
-        id="transaction-classification"
-        className="w-[90%] flex flex-col justify-center items-center pt-32"
-      >
-        <h1 className="text-4xl py-4 bennett-gradient-text text-center">
-          Transaction Classification
-        </h1>
-        <p className="text-center text-xl text-bennett-gray pb-10">
-          Understand where your money&#39;s going using AI.
-        </p>
-        <TransactionClassification />
+      <div className="w-full flex flex-col justify-center items-center mt-16">
+        <div
+          id="transaction-classification"
+          className="w-[90%] flex flex-col justify-center items-center py-24"
+        >
+          <h1 className="text-4xl py-4 bennett-gradient-text text-center">
+            Transaction Classification
+          </h1>
+          <p className="text-center text-xl text-bennett-gray pb-10">
+            Understand where your money&#39;s going using AI.
+          </p>
+          <TransactionClassification />
+        </div>
       </div>
-      <div
-        id="invoice-extraction"
-        className="w-[90%] flex flex-col justify-center items-center pt-32"
-      >
-        <h1 className="text-4xl py-4 bennett-gradient-text text-center">
-          Invoice Extraction
-        </h1>
-        <p className="text-center text-xl text-bennett-gray pb-10">
-          Use AI to pull key details from invoices.
-        </p>
-        <InvoiceExtraction />
+
+      <div className="bg-background-sec w-full flex flex-col justify-center items-center mt-16">
+        <div
+          id="invoice-extraction"
+          className="w-[90%] flex flex-col justify-center items-center py-24"
+        >
+          <h1 className="text-4xl py-4 bennett-gradient-text text-center">
+            Invoice Extraction
+          </h1>
+          <p className="text-center text-xl text-bennett-gray pb-10">
+            Use AI to pull key details from invoices.
+          </p>
+          <InvoiceExtraction />
+        </div>
       </div>
-      <div
-        id="record-reconciliation"
-        className="w-[90%] flex flex-col justify-center items-center pt-32"
-      >
-        <h1 className="text-4xl py-4 bennett-gradient-text text-center">
-          Record Reconciliation
-        </h1>
-        <p className="text-center text-xl text-bennett-gray pb-10">
-          Spot missed payments or duplicate charges automatically with AI.
-        </p>
-        <RecordReconciliation />
+
+      <div className="w-full flex flex-col justify-center items-center mt-16">
+        <div
+          id="record-reconciliation"
+          className="w-[90%] flex flex-col justify-center items-center py-24"
+        >
+          <h1 className="text-4xl py-4 bennett-gradient-text text-center">
+            Record Reconciliation
+          </h1>
+          <p className="text-center text-xl text-bennett-gray pb-10">
+            Spot missed payments or duplicate charges automatically with AI.
+          </p>
+          <RecordReconciliation />
+        </div>
       </div>
     </div>
   ) : (
@@ -64,41 +72,49 @@ export default function Home() {
         <GlideLink />
       </div>
 
-      <div
-        id="transaction-classification"
-        className="w-[80%] flex flex-col justify-center items-center pt-52"
-      >
-        <h1 className="text-7xl py-4 bennett-gradient-text">
-          Transaction Classification
-        </h1>
-        <p className="text-center text-2xl text-bennett-gray pb-14">
-          Understand where your money&#39;s going using AI.
-        </p>
-        <TransactionClassification />
+      <div className="w-full flex flex-col justify-center items-center mt-24">
+        <div
+          id="transaction-classification"
+          className="w-[80%] flex flex-col justify-center items-center py-24"
+        >
+          <h1 className="text-7xl py-4 bennett-gradient-text">
+            Transaction Classification
+          </h1>
+          <p className="text-center text-2xl text-bennett-gray pb-14">
+            Understand where your money&#39;s going using AI.
+          </p>
+          <TransactionClassification />
+        </div>
       </div>
-      <div
-        id="invoice-extraction"
-        className="w-[80%] flex flex-col justify-center items-center pt-52"
-      >
-        <h1 className="text-7xl py-4 bennett-gradient-text">
-          Invoice Extraction
-        </h1>
-        <p className="text-center text-2xl text-bennett-gray pb-14">
-          Use AI to pull key details from invoices.
-        </p>
-        <InvoiceExtraction />
+
+      <div className="bg-background-sec w-full flex flex-col justify-center items-center mt-24">
+        <div
+          id="invoice-extraction"
+          className="w-[80%] flex flex-col justify-center items-center py-24"
+        >
+          <h1 className="text-7xl py-4 bennett-gradient-text">
+            Invoice Extraction
+          </h1>
+          <p className="text-center text-2xl text-bennett-gray pb-14">
+            Use AI to pull key details from invoices.
+          </p>
+          <InvoiceExtraction />
+        </div>
       </div>
-      <div
-        id="record-reconciliation"
-        className="w-[80%] flex flex-col justify-center items-center pt-52"
-      >
-        <h1 className="text-7xl py-4 bennett-gradient-text">
-          Record Reconciliation
-        </h1>
-        <p className="text-center text-2xl text-bennett-gray pb-14">
-          Spot missed payments or duplicate charges automatically with AI.
-        </p>
-        <RecordReconciliation />
+
+      <div className="w-full flex flex-col justify-center items-center mt-24">
+        <div
+          id="record-reconciliation"
+          className="w-[80%] flex flex-col justify-center items-center py-24"
+        >
+          <h1 className="text-7xl py-4 bennett-gradient-text">
+            Record Reconciliation
+          </h1>
+          <p className="text-center text-2xl text-bennett-gray pb-14">
+            Spot missed payments or duplicate charges automatically with AI.
+          </p>
+          <RecordReconciliation />
+        </div>
       </div>
     </div>
   );

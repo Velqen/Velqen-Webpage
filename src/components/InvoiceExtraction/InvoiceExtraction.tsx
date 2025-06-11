@@ -140,7 +140,7 @@ const InvoiceExtraction = () => {
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
       >
-        <p className="text-bennett-gray">
+        <p className="text-bennett-gray text-xl">
           {selectedFile ? (
             <>
               📄 <strong>{selectedFile.name}</strong> selected
