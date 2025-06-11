@@ -40,6 +40,20 @@ const blogPosts = [
     "This is personal finance made simple, sharp, and seriously efficient.",
     ],
   },
+  {
+    id: 4,
+    slug: "safe-and-private-data",
+    title: "We Don’t Store Your Data. It’s 100% Safe and Private",
+    category: "Security",
+    date: "June 10, 2025",
+    hasIcons: true,
+    image: "/blog/post4.jpg",
+    content: [
+    "We take data security seriously. That’s why we don’t store any of your data, ever.",
+    "All invoice & company-related information is processed securely in real-time and never saved to our servers or databases. Once your session ends, your data disappears completely.",
+    "This means there’s zero risk of your sensitive financial data being leaked or accessed later, because we simply don’t keep it."
+    ],
+  },
 
 ];
 
