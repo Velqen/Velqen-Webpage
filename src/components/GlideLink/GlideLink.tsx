@@ -1,7 +1,10 @@
 import React from "react";
 import Image from "next/image";
+import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 const GlideLink = () => {
+  const { isSmallDevice } = useDeviceSize();
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -23,7 +26,9 @@ const GlideLink = () => {
           <Image
             src="/assets/csv_link.png"
             alt="Website design mockup"
-            className="object-cover w-[500px] h-[300px] rounded-lg" // ✅ Fixed units
+            className={`${
+              isSmallDevice ? "h-[250px]" : "h-[300px] "
+            }object-cover w-[500px] rounded-lg`}
             width={3000}
             height={3000}
           />
@@ -44,7 +49,9 @@ const GlideLink = () => {
           <Image
             src="/assets/invoice_link.png"
             alt="Website monetization interface"
-            className="object-cover w-[500px] h-[300px] rounded-lg" // ✅ Fixed units
+            className={`${
+              isSmallDevice ? "h-[250px]" : "h-[300px] "
+            }object-cover w-[500px] rounded-lg`}
             width={3000}
             height={3000}
           />
@@ -65,7 +72,9 @@ const GlideLink = () => {
           <Image
             src="/assets/reconciler_link.png"
             alt="Wix website examples"
-            className="object-cover w-[500px] h-[300px] rounded-lg" // ✅ Fixed units
+            className={`${
+              isSmallDevice ? "h-[250px]" : "h-[300px] "
+            }object-cover w-[500px] rounded-lg`}
             width={3000}
             height={3000}
           />

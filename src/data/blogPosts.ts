@@ -4,7 +4,7 @@ const blogPosts = [
     slug: "free-ai-transaction-classification",
     title: "We're launching free AI-powered transaction classification for all users",
     category: "Product",
-    date: "Jun 5, 2025",
+    date: "May 30, 2025",
     image: "/blog/post1.jpg",
     content: [
     "We're excited to announce that AI-powered transaction classification is now free for everyone!",
@@ -17,7 +17,7 @@ const blogPosts = [
     slug: "free-ocr-invoice-extraction",
     title: "Free OCR invoice extraction is now available for everyone",
     category: "Product",
-    date: "Jun 4, 2025",
+    date: "April 23, 2025",
     image: "/blog/post2.jpg",
     content: [
     "Tired of typing out invoice details?",
@@ -31,7 +31,7 @@ const blogPosts = [
     slug: "meet-bennett-ai-finance-assistant",
     title: "Meet Bennett: Your friendly AI finance assistant",
     category: "AI Assistant",
-    date: "April 23, 2025",
+    date: "May 18, 2025",
     hasIcons: true,
     image: "/blog/post3.jpg",
     content: [
@@ -45,7 +45,7 @@ const blogPosts = [
     slug: "safe-and-private-data",
     title: "We Don’t Store Your Data. It’s 100% Safe and Private",
     category: "Security",
-    date: "June 10, 2025",
+    date: "June 11, 2025",
     hasIcons: true,
     image: "/blog/post4.jpg",
     content: [
@@ -54,6 +54,20 @@ const blogPosts = [
     "This means there’s zero risk of your sensitive financial data being leaked or accessed later, because we simply don’t keep it."
     ],
   },
+  {
+  id: 5,
+  slug: "ai-bank-reconciliation-free",
+  title: "Free Bank Record Reconciliation with AI",
+  category: "Product",
+  date: "June 9, 2025",
+  hasIcons: true,
+  image: "/blog/post5.jpg",
+  content: [
+    "Reconciling your bank records doesn't have to be a headache anymore.",
+    "We use sentence transformers to automatically match and group transaction data, helping you spot differences instantly and keep your books accurate.",
+    "It’s completely free. No subscriptions, no hidden charges. Just clean, effortless reconciliation driven by smart AI."
+  ],
+},
 
 ];
 
