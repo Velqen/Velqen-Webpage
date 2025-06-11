@@ -1,17 +1,12 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
-
-type Message = {
-  sender: "user" | "bot";
-  text: string;
-};
+import { useChatBot } from "@/hooks/useChatBot";
 
 const ChatBot = () => {
   const { isSmallDevice } = useDeviceSize();
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const { messages, isLoading, handleSubmit } = useChatBot();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -27,40 +22,11 @@ const ChatBot = () => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!input.trim()) return;
-
-    setMessages((prev) => [...prev, { sender: "user", text: input }]);
-    setIsLoading(true);
-    const userInput = input;
-    setInput("");
-
-    try {
-      const res = await fetch("/api/chatBot", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_input: userInput }),
-      });
-
-      const data = await res.json();
-
-      setMessages((prev) => [
-        ...prev,
-        {
-          sender: "bot",
-          text: res.ok ? data.response : `Error: ${data.error || "Unknown"}`,
-        },
-      ]);
-    } catch (err) {
-      console.error(err);
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: "Error: Could not reach API." },
-      ]);
-    } finally {
-      setIsLoading(false);
-    }
+    await handleSubmit(input); // ✅ send only the input string
+    setInput(""); // ✅ clear input after sending
   };
 
   // Handle input focus
@@ -126,10 +92,10 @@ const ChatBot = () => {
 
         {/* Input Form - conditionally position fixed on small devices when focused */}
         <form
-          onSubmit={handleSubmit}
+          onSubmit={onSubmit}
           className={`${
             isSmallDevice ? "fixed bottom-0 left-0 right-0 z-50" : ""
-          } p-4 flex gap-2`}
+          } p-4 flex gap-2 mb-7`}
         >
           <input
             type="text"
