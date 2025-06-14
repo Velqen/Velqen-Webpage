@@ -9,7 +9,7 @@ const AboutUs = () => {
   const { isSmallDevice } = useDeviceSize();
 
   return isSmallDevice ? (
-    <div className="flex justify-center min-h-screen relative font-(family-name:--font-merriweather) mt-10">
+    <div className="flex justify-center min-h-screen relative font-(family-name:--font-merriweather) my-10">
       <div className="flex flex-col items-center w-[80%]">
         <div className="relative mt-20">
           <Image
@@ -34,7 +34,7 @@ const AboutUs = () => {
       </div>
     </div>
   ) : (
-    <div className="flex justify-center min-h-screen relative font-(family-name:--font-merriweather) mt-16">
+    <div className="flex justify-center min-h-screen relative font-(family-name:--font-merriweather) my-16">
       <div className="flex flex-col items-center w-[80%]">
         <div className="relative mt-20">
           <Image

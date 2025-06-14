@@ -48,7 +48,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col justify-center items-center">
+      <div className="bg-background-sec w-full flex flex-col justify-center items-center">
         <div
           id="record-reconciliation"
           className="w-[90%] flex flex-col justify-center items-center py-24"
@@ -102,7 +102,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col justify-center items-center ">
+      <div className="bg-background-sec w-full flex flex-col justify-center items-center ">
         <div
           id="record-reconciliation"
           className="w-[80%] flex flex-col justify-center items-center py-24"
