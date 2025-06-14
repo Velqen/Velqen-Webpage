@@ -70,8 +70,8 @@ const blogPosts = [
 },
 {
   id: 6,
-  slug: "we-put-users-first-homepage",
-  title: "We Put Users First on the Homepage",
+  slug: "we-prioritise-user-experience",
+  title: "We Prioritise User Experience",
   category: "Company",
   date: "June 12, 2025",
   image: "/blog/post6.jpg", // update the path if needed

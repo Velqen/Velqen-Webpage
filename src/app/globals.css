@@ -5,9 +5,10 @@
   --background: #f5f5ec;
   --background-sec: #f0f0d7;
   --foreground: #171717;
-  --bennett-gradient: linear-gradient(90deg, #f75229, #fa974b);
-  --bennett-gradient-hover: linear-gradient(90deg, #f12711, #e09900);
-  --bennett-orange: #ff7e5f;
+  --bennett-gradient: linear-gradient(90deg, #fd491c, #fa974b);
+  --bennett-gradient-hover: linear-gradient(90deg, #f1230c, #e09900);
+  --bennett-orange: #fd491c;
+  --bennett-light-orange: #f8eee6;
   --bennett-gray: #4b4b4b;
   --bennett-light-gray: #e6e6e6;
 }
@@ -17,6 +18,7 @@
   --color-background-sec: var(--background-sec);
   --color-foreground: var(--foreground);
   --color-bennett-orange: var(--bennett-orange);
+  --color-bennett-light-orange: var(--bennett-light-orange);
   --color-bennett-gray: var(--bennett-gray);
   --color-bennett-light-gray: var(--bennett-light-gray);
   --font-sans: var(--font-geist-sans);

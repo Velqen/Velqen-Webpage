@@ -8,8 +8,20 @@ type MatchedPair = {
   ledger_id: string;
 };
 
+type NLPMatchedPair = {
+  bank_id: string;
+  ledger_id: string;
+  matched_fields: {
+    amount?: boolean;
+    date?: boolean;
+    description?: boolean;
+    [key: string]: boolean | undefined;
+  };
+};
+
 type ReconciliationResult = {
-  matched: MatchedPair[];
+  matched_simple: MatchedPair[];
+  matched_nlp: NLPMatchedPair[];
   unmatched_bank: Record<string, unknown>[];
   unmatched_ledger: Record<string, unknown>[];
 };
@@ -27,11 +39,11 @@ function FileInput({
       <label className="font-medium mb-1">{label}</label>
       <label
         htmlFor={label}
-        className="flex items-center gap-2 cursor-pointer border border-gray-300 rounded px-3 py-2 hover:border-bennett-orange transition-colors"
+        className="flex items-center gap-2 cursor-pointer border border-bennett-gray rounded px-3 py-2 hover:border-bennett-orange transition-colors"
       >
         {/* Icon (using SVG for upload) */}
         <svg
-          className="w-5 h-5 text-gray-500"
+          className="w-5 h-5 text-bennett-gray"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
@@ -141,11 +153,14 @@ export default function RecordReconciliation() {
       {error && <div className="mt-4 text-red-600 font-medium">{error}</div>}
 
       {results && (
-        <div className="mt-8 space-y-8">
+        <div className="mt-8 space-y-16">
+          {/* Simple Reconciliation Matches */}
           <div>
-            <h2 className="font-semibold text-lg">✅ Matched Records</h2>
+            <h2 className="font-semibold text-lg">
+              ✅ Complete Matched Records
+            </h2>
             <ul className="list-disc list-inside mt-2 space-y-1 max-h-48 overflow-auto">
-              {results.matched.map((pair, idx) => (
+              {results.matched_simple.map((pair, idx) => (
                 <li key={idx}>
                   Bank ID {pair.bank_id} ↔ Ledger ID {pair.ledger_id}
                 </li>
@@ -153,22 +168,54 @@ export default function RecordReconciliation() {
             </ul>
           </div>
 
+          {/* NLP Reconciliation Matches */}
           <div>
-            <h2 className="font-semibold text-lg text-yellow-700">
-              ⚠️ Unmatched Bank Records
+            <h2 className="font-semibold text-lg ">
+              🤖 AI Matched Discrepancy Records
             </h2>
-            <pre className="bg-gray-100 p-3 rounded text-sm overflow-x-auto max-h-48 overflow-auto">
-              {JSON.stringify(results.unmatched_bank, null, 2)}
-            </pre>
+            <ul className="list-disc list-inside mt-2 space-y-4 max-h-64 overflow-auto">
+              {results.matched_nlp.map((pair, idx) => (
+                <li key={idx}>
+                  <span className="font-medium">
+                    Bank ID {pair.bank_id} ↔ Ledger ID {pair.ledger_id}
+                  </span>
+                  <div className="ml-4 text-bennett-gray">
+                    Close Match fields:&nbsp;
+                    {Object.entries(pair.matched_fields)
+                      .filter(([_, matched]) => matched)
+                      .map(([field]) => (
+                        <span
+                          key={field}
+                          className="inline-block bg-bennett-light-orange text-bennett-orange px-2 py-0.5 rounded mr-2"
+                        >
+                          {field}
+                        </span>
+                      ))}
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div>
-            <h2 className="font-semibold text-lg text-yellow-700">
-              ⚠️ Unmatched Ledger Records
-            </h2>
-            <pre className="bg-gray-100 p-3 rounded text-sm overflow-x-auto max-h-48 overflow-auto">
-              {JSON.stringify(results.unmatched_ledger, null, 2)}
-            </pre>
+          {/* Unmatched Bank Records */}
+          <div className="space-y-4">
+            <div>
+              <h2 className="font-semibold text-lg ">
+                ⚠️ Unmatched Bank Records
+              </h2>
+              <pre className="bg-gray-100 p-3 rounded text-sm overflow-x-auto max-h-48 overflow-auto">
+                {JSON.stringify(results.unmatched_bank, null, 2)}
+              </pre>
+            </div>
+            {/* Unmatched Ledger Records */}
+            <div>
+              <h2 className="font-semibold text-lg ">
+                ⚠️ Unmatched Ledger Records
+              </h2>
+              <pre className="bg-gray-100 p-3 rounded text-sm overflow-x-auto max-h-48 overflow-auto">
+                {JSON.stringify(results.unmatched_ledger, null, 2)}
+              </pre>
+            </div>
           </div>
         </div>
       )}
