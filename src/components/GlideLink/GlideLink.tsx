@@ -16,22 +16,25 @@ const GlideLink = () => {
   };
 
   return (
-    <div className="mx-auto py-12">
+    <div className="mx-auto py-12 w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {/* Card 1 - How to design a website */}
         <div
           className="bg-bennett-light-gray rounded-2xl overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-6 transition-all duration-300 ease-in-out"
           onClick={() => scrollToSection("transaction-classification")}
         >
-          <Image
-            src="/assets/csv_link.png"
-            alt="Website design mockup"
-            className={`${
-              isSmallDevice ? "h-[250px]" : "h-[300px] "
-            }object-cover w-[500px] rounded-lg`}
-            width={3000}
-            height={3000}
-          />
+          <div
+            className={`relative w-full ${
+              isSmallDevice ? "h-[250px]" : "h-[300px]"
+            }`}
+          >
+            <Image
+              src="/assets/csv_link.png"
+              alt="Website design mockup"
+              fill
+              className="object-cover rounded-lg"
+            />
+          </div>
 
           <div className="p-6">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
@@ -46,15 +49,18 @@ const GlideLink = () => {
           className="bg-bennett-light-gray rounded-2xl overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-6 transition-all duration-300 ease-in-out"
           onClick={() => scrollToSection("invoice-extraction")}
         >
-          <Image
-            src="/assets/invoice_link.png"
-            alt="Website monetization interface"
-            className={`${
-              isSmallDevice ? "h-[250px]" : "h-[300px] "
-            }object-cover w-[500px] rounded-lg`}
-            width={3000}
-            height={3000}
-          />
+          <div
+            className={`relative w-full ${
+              isSmallDevice ? "h-[250px]" : "h-[300px]"
+            }`}
+          >
+            <Image
+              src="/assets/invoice_link.png"
+              alt="Website monetization interface"
+              fill
+              className="object-cover rounded-lg"
+            />
+          </div>
 
           <div className="p-6">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
@@ -69,15 +75,19 @@ const GlideLink = () => {
           className="bg-bennett-light-gray rounded-2xl overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-6 transition-all duration-300 ease-in-out"
           onClick={() => scrollToSection("record-reconciliation")}
         >
-          <Image
-            src="/assets/reconciler_link.png"
-            alt="Wix website examples"
-            className={`${
-              isSmallDevice ? "h-[250px]" : "h-[300px] "
-            }object-cover w-[500px] rounded-lg`}
-            width={3000}
-            height={3000}
-          />
+          <div
+            className={`relative w-full ${
+              isSmallDevice ? "h-[250px]" : "h-[300px]"
+            }`}
+          >
+            <Image
+              src="/assets/reconciler_link.png"
+              alt="Wix website examples"
+              fill
+              className="object-cover rounded-lg"
+            />
+          </div>
+
           <div className="p-6">
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
               AI Record Reconciliation

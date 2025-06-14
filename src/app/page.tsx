@@ -77,7 +77,7 @@ export default function Home() {
           id="transaction-classification"
           className="w-[80%] flex flex-col justify-center items-center py-24"
         >
-          <h1 className="text-7xl py-4 bennett-gradient-text">
+          <h1 className="text-7xl py-4 bennett-gradient-text text-center">
             Transaction Classification
           </h1>
           <p className="text-center text-2xl text-bennett-gray pb-14">
@@ -92,7 +92,7 @@ export default function Home() {
           id="invoice-extraction"
           className="w-[80%] flex flex-col justify-center items-center py-24"
         >
-          <h1 className="text-7xl py-4 bennett-gradient-text">
+          <h1 className="text-7xl py-4 bennett-gradient-text text-center">
             Invoice Extraction
           </h1>
           <p className="text-center text-2xl text-bennett-gray pb-14">
@@ -107,7 +107,7 @@ export default function Home() {
           id="record-reconciliation"
           className="w-[80%] flex flex-col justify-center items-center py-24"
         >
-          <h1 className="text-7xl py-4 bennett-gradient-text">
+          <h1 className="text-7xl py-4 bennett-gradient-text text-center">
             Record Reconciliation
           </h1>
           <p className="text-center text-2xl text-bennett-gray pb-14">

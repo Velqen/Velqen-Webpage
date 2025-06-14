@@ -5,7 +5,7 @@ import { useState, ChangeEvent } from "react";
 export default function TransactionClassification() {
   const [file, setFile] = useState<File | null>(null);
   const [status, setStatus] = useState<string>("");
-
+  const [isUploading, setIsUploading] = useState(false);
   // Added for preview:
   const [previewHeaders, setPreviewHeaders] = useState<string[]>([]); // Added
   const [previewRows, setPreviewRows] = useState<string[][]>([]); // Added
@@ -35,6 +35,7 @@ export default function TransactionClassification() {
     const formData = new FormData();
     formData.append("file", file);
 
+    setIsUploading(true);
     setStatus("Uploading and classifying...");
 
     try {
@@ -79,6 +80,8 @@ export default function TransactionClassification() {
       // Clear preview on error
       setPreviewHeaders([]); // Added
       setPreviewRows([]); // Added
+    } finally {
+      setIsUploading(false); // ✅ end loading
     }
   };
 
@@ -123,7 +126,7 @@ export default function TransactionClassification() {
         <button
           onClick={handleUpload}
           className="w-full bennett-gradient-bg bennett-gradient-bg-hover text-white py-3 rounded disabled:opacity-50 transition"
-          disabled={!file}
+          disabled={!file || isUploading}
         >
           Upload & Classify
         </button>
