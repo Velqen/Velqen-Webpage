@@ -18,33 +18,7 @@ const GlideLink = () => {
   return (
     <div className="mx-auto py-12 w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {/* Card 1 - How to design a website */}
-        <div
-          className="bg-bennett-light-gray rounded-2xl overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-6 transition-all duration-300 ease-in-out"
-          onClick={() => scrollToSection("transaction-classification")}
-        >
-          <div
-            className={`relative w-full ${
-              isSmallDevice ? "h-[250px]" : "h-[300px]"
-            }`}
-          >
-            <Image
-              src="/assets/csv_link.png"
-              alt="Website design mockup"
-              fill
-              className="object-cover rounded-lg"
-            />
-          </div>
-
-          <div className="p-6">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">
-              AI Transaction Classification
-            </h3>
-            <p className="text-bennett-gray">👉 Click to Try</p>
-          </div>
-        </div>
-
-        {/* Card 2 - How to monetize your website */}
+        {/* Card 1 - OCR Invoice Extraction */}
         <div
           className="bg-bennett-light-gray rounded-2xl overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-6 transition-all duration-300 ease-in-out"
           onClick={() => scrollToSection("invoice-extraction")}
@@ -56,7 +30,7 @@ const GlideLink = () => {
           >
             <Image
               src="/assets/invoice_link.png"
-              alt="Website monetization interface"
+              alt="OCR Invoice Extraction"
               fill
               className="object-cover rounded-lg"
             />
@@ -70,7 +44,33 @@ const GlideLink = () => {
           </div>
         </div>
 
-        {/* Card 3 - Wix website examples */}
+        {/* Card 2 - AI Transaction Classification */}
+        <div
+          className="bg-bennett-light-gray rounded-2xl overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-6 transition-all duration-300 ease-in-out"
+          onClick={() => scrollToSection("transaction-classification")}
+        >
+          <div
+            className={`relative w-full ${
+              isSmallDevice ? "h-[250px]" : "h-[300px]"
+            }`}
+          >
+            <Image
+              src="/assets/csv_link.png"
+              alt="AI Transaction Classification"
+              fill
+              className="object-cover rounded-lg"
+            />
+          </div>
+
+          <div className="p-6">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">
+              AI Transaction Classification
+            </h3>
+            <p className="text-bennett-gray">👉 Click to Try</p>
+          </div>
+        </div>
+
+        {/* Card 3 - AI Record Reconciliation */}
         <div
           className="bg-bennett-light-gray rounded-2xl overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-6 transition-all duration-300 ease-in-out"
           onClick={() => scrollToSection("record-reconciliation")}
@@ -82,7 +82,7 @@ const GlideLink = () => {
           >
             <Image
               src="/assets/reconciler_link.png"
-              alt="Wix website examples"
+              alt="AI Record Reconciliation"
               fill
               className="object-cover rounded-lg"
             />

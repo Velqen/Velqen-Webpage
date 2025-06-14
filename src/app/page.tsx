@@ -18,21 +18,6 @@ export default function Home() {
         <GlideLink />
       </div>
 
-      <div className="w-full flex flex-col justify-center items-center mt-16">
-        <div
-          id="transaction-classification"
-          className="w-[90%] flex flex-col justify-center items-center py-24"
-        >
-          <h1 className="text-4xl py-4 bennett-gradient-text text-center">
-            Transaction Classification
-          </h1>
-          <p className="text-center text-xl text-bennett-gray pb-10">
-            Understand where your money&#39;s going using AI.
-          </p>
-          <TransactionClassification />
-        </div>
-      </div>
-
       <div className="bg-background-sec w-full flex flex-col justify-center items-center mt-16">
         <div
           id="invoice-extraction"
@@ -48,7 +33,22 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col justify-center items-center mt-16">
+      <div className="w-full flex flex-col justify-center items-center">
+        <div
+          id="transaction-classification"
+          className="w-[90%] flex flex-col justify-center items-center py-24"
+        >
+          <h1 className="text-4xl py-4 bennett-gradient-text text-center">
+            Transaction Classification
+          </h1>
+          <p className="text-center text-xl text-bennett-gray pb-10">
+            Understand where your money&#39;s going using AI.
+          </p>
+          <TransactionClassification />
+        </div>
+      </div>
+
+      <div className="w-full flex flex-col justify-center items-center">
         <div
           id="record-reconciliation"
           className="w-[90%] flex flex-col justify-center items-center py-24"
@@ -64,7 +64,7 @@ export default function Home() {
       </div>
     </div>
   ) : (
-    <div className="min-h-screen w-full flex flex-col justify-center items-center pt-40">
+    <div className="min-h-screen w-full flex flex-col justify-center items-center pt-44">
       <div className="w-[80%] flex flex-col justify-center items-center">
         <h1 className="text-7xl py-4 bennett-gradient-text">
           Pick Your AI Tool
@@ -72,22 +72,7 @@ export default function Home() {
         <GlideLink />
       </div>
 
-      <div className="w-full flex flex-col justify-center items-center mt-24">
-        <div
-          id="transaction-classification"
-          className="w-[80%] flex flex-col justify-center items-center py-24"
-        >
-          <h1 className="text-7xl py-4 bennett-gradient-text text-center">
-            Transaction Classification
-          </h1>
-          <p className="text-center text-2xl text-bennett-gray pb-14">
-            Understand where your money&#39;s going using AI.
-          </p>
-          <TransactionClassification />
-        </div>
-      </div>
-
-      <div className="bg-background-sec w-full flex flex-col justify-center items-center mt-24">
+      <div className="bg-background-sec w-full flex flex-col justify-center items-center mt-32">
         <div
           id="invoice-extraction"
           className="w-[80%] flex flex-col justify-center items-center py-24"
@@ -102,7 +87,22 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col justify-center items-center mt-24">
+      <div className="w-full flex flex-col justify-center items-center">
+        <div
+          id="transaction-classification"
+          className="w-[80%] flex flex-col justify-center items-center py-24"
+        >
+          <h1 className="text-7xl py-4 bennett-gradient-text text-center">
+            Transaction Classification
+          </h1>
+          <p className="text-center text-2xl text-bennett-gray pb-14">
+            Understand where your money&#39;s going using AI.
+          </p>
+          <TransactionClassification />
+        </div>
+      </div>
+
+      <div className="w-full flex flex-col justify-center items-center ">
         <div
           id="record-reconciliation"
           className="w-[80%] flex flex-col justify-center items-center py-24"
