@@ -6,13 +6,19 @@ type Props = {
   csvData: string[][];
 };
 
+interface jsPDFWithAutoTable extends jsPDF {
+  lastAutoTable?: {
+    finalY: number;
+  };
+}
+
 const ReportGenerator = ({ csvData }: Props) => {
   if (csvData.length === 0) {
     return <p className="text-bennett-gray">No CSV data uploaded yet.</p>;
   }
 
   const generatePDF = () => {
-    const doc = new jsPDF();
+    const doc: jsPDFWithAutoTable = new jsPDF();
     doc.setFontSize(18);
     doc.text("Income Statement", 14, 22);
 
@@ -58,7 +64,7 @@ const ReportGenerator = ({ csvData }: Props) => {
     });
 
     // Expense table
-    const finalY = (doc as any).lastAutoTable.finalY + 40;
+    const finalY = (doc.lastAutoTable?.finalY || 0) + 40;
     doc.text("Expenses", 14, finalY);
     autoTable(doc, {
       startY: finalY + 4,
@@ -78,7 +84,7 @@ const ReportGenerator = ({ csvData }: Props) => {
       },
     });
 
-    const summaryY = (doc as any).lastAutoTable.finalY + 20;
+    const summaryY = (doc.lastAutoTable?.finalY || 0) + 20;
     const profitLossValue = parseFloat(incomeTotal) - parseFloat(expenseTotal);
     const profitLoss = profitLossValue.toFixed(2);
     const isProfit = profitLossValue >= 0;
@@ -123,7 +129,7 @@ const ReportGenerator = ({ csvData }: Props) => {
       },
     });
 
-    const afterAssetsY = (doc as any).lastAutoTable.finalY + 30;
+    const afterAssetsY = (doc.lastAutoTable?.finalY || 0) + 30;
     doc.text("Liabilities", 14, afterAssetsY);
 
     autoTable(doc, {
