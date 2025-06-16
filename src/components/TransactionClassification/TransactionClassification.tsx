@@ -81,7 +81,7 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
         setPreviewRows(rawRows); // Added
       } // Added
 
-      setStatus("Classification complete. Preview below or download file."); // Modified message to mention preview
+      setStatus("Classification complete."); // Modified message to mention preview
     } catch (error: unknown) {
       let message = "Unknown error";
       if (error instanceof Error) {
@@ -103,10 +103,10 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
         <h2 className="text-2xl font-semibold mb-4">
           Upload Your CSV for Classification
         </h2>
-        <p className="mb-4 text-gray-600">
+        <p className="mb-4 text-bennett-gray">
           Please upload a CSV file containing at least the following fields:
         </p>
-        <ul className="mb-4 text-gray-600 list-disc list-inside">
+        <ul className="mb-4 text-bennett-gray list-disc list-inside">
           <li>
             <code>description</code>
           </li>
@@ -117,16 +117,16 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
             <code>amount</code>
           </li>
         </ul>
-        <p className="text-gray-600">
+        <p className="text-bennett-gray">
           Transactions will be automatically categorised into five groups:
         </p>
-        <p className="text-gray-600">
+        <p className="text-bennett-gray">
           Food & Drink, Income, Shopping, Transportation, Utilities
         </p>
       </div>
 
       {/* Right Upload Box */}
-      <div className="md:w-2/3 max-w-7xl p-6 border rounded-lg shadow-lg bg-white">
+      <div className="md:w-2/3 max-w-7xl p-6 border border-bennett-gray rounded-lg shadow-lg bg-white">
         <input
           type="file"
           accept=".csv"

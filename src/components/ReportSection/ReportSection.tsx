@@ -20,10 +20,10 @@ const ReportSection = ({ csvData }: Props) => {
         >
           {/* Left side: Heading & Button */}
           <div className="md:w-1/3 text-center md:text-left">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            <h2 className="text-4xl font-bold text-black mb-4">
               Generate Your Financial Report
             </h2>
-            <p className="text-lg text-gray-600 mb-6">
+            <p className="text-lg text-bennett-gray mb-6">
               Create a professional summary of your assets & liabilities in one
               click.
             </p>
