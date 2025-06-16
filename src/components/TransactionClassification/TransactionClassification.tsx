@@ -2,8 +2,13 @@
 
 import { useState, ChangeEvent } from "react";
 
-export default function TransactionClassification() {
+type Props = {
+  onCsvParsed?: (data: string[][]) => void; // ✅ New prop
+};
+
+export default function TransactionClassification({ onCsvParsed }: Props) {
   const [file, setFile] = useState<File | null>(null);
+  const [csvData, setCsvData] = useState<string[][]>([]);
   const [status, setStatus] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
   // Added for preview:
@@ -66,6 +71,12 @@ export default function TransactionClassification() {
         // Added
         const headers = lines[0].split(","); // Added
         const rawRows = lines.slice(1, 6).map((line) => line.split(",")); // Added (first 5 rows)
+        const fullCsv = [
+          headers,
+          ...lines.slice(1).map((line) => line.split(",")),
+        ]; // ✅ Line added
+        setCsvData(fullCsv); // ✅ Update local state
+        onCsvParsed?.(fullCsv);
         setPreviewHeaders(headers); // Added
         setPreviewRows(rawRows); // Added
       } // Added

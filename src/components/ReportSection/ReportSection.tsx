@@ -1,0 +1,56 @@
+import React, { useState } from "react";
+import Image from "next/image";
+import ReportGenerator from "../ReportGenerator/ReportGenerator";
+import { useDeviceSize } from "@/hooks/useDeviceSize";
+
+type Props = {
+  csvData: string[][];
+};
+
+const ReportSection = ({ csvData }: Props) => {
+  const [generateReport, setgenerateReport] = useState(false);
+  const { isSmallDevice } = useDeviceSize();
+
+  const handleToggle = () => {
+    setgenerateReport((prev) => !prev);
+  };
+
+  return (
+    <section className="w-full">
+      <div className="w-full">
+        <div
+          className={`${
+            isSmallDevice ? "gap-6" : "gap-20"
+          } flex flex-col md:flex-row justify-between items-center w-full`}
+        >
+          {/* Left side: Heading & Button */}
+          <div className="md:w-1/3 text-center md:text-left">
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+              Generate Your Financial Report
+            </h2>
+            <p className="text-lg text-gray-600 mb-6">
+              Create a professional summary of your assets & liabilities in one
+              click.
+            </p>
+
+            <div className="">
+              <ReportGenerator csvData={csvData} />
+            </div>
+          </div>
+
+          <div className={` relative w-full md:w-2/ flex items-center`}>
+            <Image
+              src="/assets/report.jpg"
+              alt="Financial Report"
+              width={1600}
+              height={1000}
+              className="object-contain border-4 border-bennett-gray rounded-xl shadow-lg"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ReportSection;

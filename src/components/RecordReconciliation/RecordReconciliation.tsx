@@ -114,7 +114,7 @@ export default function RecordReconciliation() {
   };
 
   return (
-    <div className="w-full mx-auto bg-white shadow-lg rounded-xl p-6 mb-32">
+    <div className="w-full mx-auto bg-white shadow-lg rounded-xl p-6 mb-10">
       <h1 className="text-2xl font-semibold mb-6">🧾 Record Reconciliation</h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">

@@ -45,7 +45,7 @@ const blogPosts = [
     slug: "safe-and-private-data",
     title: "We Don’t Store Your Data. It’s 100% Safe and Private",
     category: "Security",
-    date: "June 11, 2025",
+    date: "June 15, 2025",
     hasIcons: true,
     image: "/blog/post4.jpg",
     content: [
@@ -73,7 +73,7 @@ const blogPosts = [
   slug: "we-prioritise-user-experience",
   title: "We Prioritise User Experience",
   category: "Company",
-  date: "June 12, 2025",
+  date: "June 16, 2025",
   image: "/blog/post6.jpg", // update the path if needed
   content: [
     "Most AI platforms start by talking about themselves. We flipped that approach.",
