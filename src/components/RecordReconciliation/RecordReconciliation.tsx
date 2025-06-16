@@ -182,7 +182,7 @@ export default function RecordReconciliation() {
                   <div className="ml-4 text-bennett-gray">
                     Close Match fields:&nbsp;
                     {Object.entries(pair.matched_fields)
-                      .filter(([_, matched]) => matched)
+                      .filter(([, matched]) => matched)
                       .map(([field]) => (
                         <span
                           key={field}

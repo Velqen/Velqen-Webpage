@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import ReportGenerator from "../ReportGenerator/ReportGenerator";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
@@ -8,12 +8,7 @@ type Props = {
 };
 
 const ReportSection = ({ csvData }: Props) => {
-  const [generateReport, setgenerateReport] = useState(false);
   const { isSmallDevice } = useDeviceSize();
-
-  const handleToggle = () => {
-    setgenerateReport((prev) => !prev);
-  };
 
   return (
     <section className="w-full">

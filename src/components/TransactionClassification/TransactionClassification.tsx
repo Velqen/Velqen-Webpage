@@ -8,7 +8,7 @@ type Props = {
 
 export default function TransactionClassification({ onCsvParsed }: Props) {
   const [file, setFile] = useState<File | null>(null);
-  const [csvData, setCsvData] = useState<string[][]>([]);
+  const [, setCsvData] = useState<string[][]>([]);
   const [status, setStatus] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
   // Added for preview:
