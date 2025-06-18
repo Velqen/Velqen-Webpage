@@ -113,7 +113,7 @@ const NavBar = () => {
                   onClick={
                     () => signOut({ callbackUrl: "/" }) // ✅ line changed
                   }
-                  className="text-sm px-4 py-2  rounded"
+                  className="text-sm px-4 py-2 text-white rounded"
                 >
                   Sign Out
                 </button>
@@ -176,7 +176,7 @@ const NavBar = () => {
                     onClick={
                       () => signOut({ callbackUrl: "/" }) // ✅ line changed
                     }
-                    className="text-sm px-4 py-2 rounded"
+                    className="text-sm px-4 py-2 rounded text-white"
                   >
                     Sign Out
                   </button>
