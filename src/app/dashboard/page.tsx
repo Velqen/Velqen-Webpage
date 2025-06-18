@@ -6,6 +6,7 @@ import { supabase } from "@/lib/supabaseBrowser";
 
 const Page = () => {
   const { data: session, status } = useSession();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userData, setUserData] = useState<Record<string, any>[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
