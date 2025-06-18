@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useEffect, useRef, useState } from "react";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { ChevronDownIcon, UserIcon } from "lucide-react";
 
 const NavBar = () => {
@@ -109,12 +109,14 @@ const NavBar = () => {
                 <span className="text-base font-semibold">
                   {session.user.name}
                 </span>
-                <Link
-                  href="/api/auth/signout"
-                  className="text-sm px-4 py-2 bg-white rounded"
+                <button
+                  onClick={
+                    () => signOut({ callbackUrl: "/" }) // ✅ line changed
+                  }
+                  className="text-sm px-4 py-2  rounded"
                 >
                   Sign Out
-                </Link>
+                </button>
               </div>
             ) : (
               <button
@@ -170,12 +172,14 @@ const NavBar = () => {
 
               {open && (
                 <div className="absolute right-0 mt-2 w-36 rounded-md bennett-gradient-bg bennett-gradient-bg-hover shadow-lg z-20">
-                  <Link
-                    href="/api/auth/signout"
-                    className="block px-4 py-2 text-sm text-white "
+                  <button
+                    onClick={
+                      () => signOut({ callbackUrl: "/" }) // ✅ line changed
+                    }
+                    className="text-sm px-4 py-2 rounded"
                   >
                     Sign Out
-                  </Link>
+                  </button>
                 </div>
               )}
             </div>
