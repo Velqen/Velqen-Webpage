@@ -13,20 +13,16 @@ const Page = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!session?.user?.email) return;
-
       try {
-        const { data, error } = await supabase
-          .from("transaction_records")
-          .select("*")
-          .eq("user_email", session.user.email?.toLowerCase());
+        const res = await fetch("/api/fetchSupaBaseTransaction");
+        const result = await res.json();
 
-        if (error) throw error;
+        if (result.error) throw new Error(result.error);
 
-        setUserData(data || []);
+        setUserData(result.data || []);
       } catch (err) {
         const typedErr = err as { message?: string };
-        console.error("❌ Supabase fetch error:", typedErr.message);
+        console.error("❌ Fetch error:", typedErr.message);
         setError("Failed to fetch your data.");
       } finally {
         setLoading(false);
@@ -36,9 +32,19 @@ const Page = () => {
     fetchData();
   }, [session]);
 
-  if (status === "loading") return <div>Loading session...</div>;
+  if (status === "loading")
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading session...
+      </div>
+    );
+
   if (status === "unauthenticated")
-    return <div>Please log in to view your dashboard.</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Please log in to view your dashboard.
+      </div>
+    );
 
   return (
     <div className="p-4 my-52 space-y-4">
