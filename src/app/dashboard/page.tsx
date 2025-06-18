@@ -6,7 +6,7 @@ import { supabase } from "@/lib/supabaseBrowser";
 
 const Page = () => {
   const { data: session, status } = useSession();
-  const [userData, setUserData] = useState<any[]>([]);
+  const [userData, setUserData] = useState<Record<string, any>[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,8 +23,9 @@ const Page = () => {
         if (error) throw error;
 
         setUserData(data || []);
-      } catch (err: any) {
-        console.error("❌ Supabase fetch error:", err.message);
+      } catch (err) {
+        const typedErr = err as { message?: string };
+        console.error("❌ Supabase fetch error:", typedErr.message);
         setError("Failed to fetch your data.");
       } finally {
         setLoading(false);
