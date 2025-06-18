@@ -52,7 +52,7 @@ export default function Home() {
           <p className="text-center text-xl text-bennett-gray pb-10">
             Understand where your money&#39;s going using AI.
           </p>
-          <TransactionClassification />
+          <TransactionClassification onCsvParsed={handleCsvParsed} />
         </div>
       </div>
 
