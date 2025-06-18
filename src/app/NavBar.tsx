@@ -2,15 +2,18 @@
 
 import Link from "next/link";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
-import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { useEffect, useRef, useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { ChevronDownIcon, UserIcon } from "lucide-react";
+
 const NavBar = () => {
   const { isSmallDevice } = useDeviceSize();
   const [open, setOpen] = useState(false);
   const { status, data: session } = useSession();
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
-    if (open) {
+    if (open && isSmallDevice) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -19,6 +22,20 @@ const NavBar = () => {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !(dropdownRef.current as any).contains(e.target)
+      ) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return isSmallDevice ? (
     <nav className="absolute top-0 left-0 w-full z-500 p-4">
@@ -54,7 +71,7 @@ const NavBar = () => {
 
       {/* Dropdown menu below navbar */}
       {open && (
-        <div className="absolute top-full left-0 w-[calc(100vw-3rem)] h-[calc(100vh-7rem)] bg-[rgba(241,241,241,0.85)] backdrop-blur-md flex flex-col items-center gap-6 py-6 z-40 mx-[1.5rem] my-[1.5rem] rounded-lg">
+        <div className="absolute top-full left-0 w-[calc(100vw-3rem)] h-[calc(100vh-7rem)] bg-[rgba(243,240,240,0.8)] backdrop-blur-md flex flex-col items-center gap-6 py-6 z-40 mx-[1.5rem] my-[1.5rem] rounded-lg">
           <Link
             href="/"
             onClick={() => setOpen(false)}
@@ -83,6 +100,33 @@ const NavBar = () => {
           >
             About Us
           </Link>
+
+          <div className="mt-6">
+            {status === "authenticated" && session?.user?.name ? (
+              <div className="flex flex-col items-center gap-2">
+                <UserIcon className="w-5 h-5 text-gray-600" />
+                <span className="text-base font-semibold">
+                  {session.user.name}
+                </span>
+                <Link
+                  href="/api/auth/signout"
+                  className="text-sm px-4 py-2 bg-white rounded"
+                >
+                  Sign Out
+                </Link>
+              </div>
+            ) : (
+              <button
+                onClick={() =>
+                  signIn(undefined, { callbackUrl: window.location.href })
+                }
+                className="flex items-center gap-2 mt-2 px-4 py-2 rounded-md hover:bg-bennett-light-gray text-lg"
+              >
+                <UserIcon className="w-5 h-5 text-gray-600" />
+                Login
+              </button>
+            )}
+          </div>
         </div>
       )}
     </nav>
@@ -108,19 +152,41 @@ const NavBar = () => {
         </div>
         {/* Right */}
         <div className="flex-1 flex justify-end">
-          {status === "authenticated" && (
-            <div>
-              {session.user!.name}
-              <Link href="api/auth/signout">Sign Out</Link>
+          {status === "authenticated" && session?.user?.name && (
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setOpen(!open)}
+                className="inline-flex items-center gap-1 rounded-md bg-white px-3 py-2 text-sm font-medium  hover:bg-bennett-light-gray shadow"
+              >
+                <UserIcon className="w-5 h-5 text-gray-600" />
+
+                {session.user.name}
+                <ChevronDownIcon className="h-4 w-4 text-gray-500" />
+              </button>
+
+              {open && (
+                <div className="absolute right-0 mt-2 w-36 rounded-md bennett-gradient-bg bennett-gradient-bg-hover shadow-lg z-20">
+                  <Link
+                    href="/api/auth/signout"
+                    className="block px-4 py-2 text-sm text-white "
+                  >
+                    Sign Out
+                  </Link>
+                </div>
+              )}
             </div>
           )}
+
           {status === "unauthenticated" && (
-            <Link
-              href="/api/auth/signin"
-              className="text-bennett-blue hover:underline text-base font-medium"
+            <button
+              onClick={() =>
+                signIn(undefined, { callbackUrl: window.location.href })
+              }
+              className="flex items-center gap-2 mt-2 px-4 py-2 rounded-md hover:bg-bennett-light-gray text-lg"
             >
+              <UserIcon className="w-5 h-5 text-gray-600" />
               Login
-            </Link>
+            </button>
           )}
         </div>
       </div>
