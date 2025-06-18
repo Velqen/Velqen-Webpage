@@ -10,7 +10,7 @@ const NavBar = () => {
   const { isSmallDevice } = useDeviceSize();
   const [open, setOpen] = useState(false);
   const { status, data: session } = useSession();
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (open && isSmallDevice) {
@@ -21,14 +21,15 @@ const NavBar = () => {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [open]);
+  }, [open, isSmallDevice]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
         dropdownRef.current &&
-        !(dropdownRef.current as any).contains(e.target)
+        dropdownRef.current instanceof HTMLElement &&
+        !dropdownRef.current.contains(e.target as Node)
       ) {
         setOpen(false);
       }
@@ -139,6 +140,9 @@ const NavBar = () => {
         <div className="flex justify-center bg-white p-3 text-lg rounded-md shadow-sm border border-bennett-light-gray gap-8">
           <Link href="/" className="bennett-gradient-text">
             Home
+          </Link>
+          <Link href="/dashboard" className="bennett-gradient-text">
+            Dashboard
           </Link>
           <Link href="/ai-chatbot" className="bennett-gradient-text">
             AI Chat

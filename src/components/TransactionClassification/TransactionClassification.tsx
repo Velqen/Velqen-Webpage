@@ -1,5 +1,7 @@
 "use client";
 
+import { useDeviceSize } from "@/hooks/useDeviceSize";
+import { useSession } from "next-auth/react";
 import { useState, ChangeEvent } from "react";
 
 type Props = {
@@ -8,12 +10,16 @@ type Props = {
 
 export default function TransactionClassification({ onCsvParsed }: Props) {
   const [file, setFile] = useState<File | null>(null);
-  const [, setCsvData] = useState<string[][]>([]);
+  const [csvData, setCsvData] = useState<string[][]>([]);
   const [status, setStatus] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
+  const [isUploadingToDB, setIsUploadingToDB] = useState(false);
+  const { isSmallDevice } = useDeviceSize();
+
   // Added for preview:
   const [previewHeaders, setPreviewHeaders] = useState<string[]>([]); // Added
   const [previewRows, setPreviewRows] = useState<string[][]>([]); // Added
+  const { data: session, status: authStatus } = useSession(); // ✅ Correct
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -96,6 +102,31 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
     }
   };
 
+  const handleUploadToDB = async () => {
+    if (authStatus !== "authenticated" || csvData.length === 0) {
+      setStatus("❌ Must be logged in & have data.");
+      return;
+    }
+
+    setIsUploadingToDB(true);
+    setStatus("Uploading...");
+
+    try {
+      const res = await fetch("/api/uploadTransactionDB", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: session.user?.email, data: csvData }),
+      });
+
+      if (!res.ok) throw new Error();
+      setStatus("✅ Upload successful!");
+    } catch {
+      setStatus("❌ Upload failed.");
+    } finally {
+      setIsUploadingToDB(false);
+    }
+  };
+
   return (
     <div className="flex flex-col md:flex-row gap-8 w-full mx-auto">
       {/* Left Text Section */}
@@ -134,13 +165,32 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
           className="mb-5 block w-full border border-bennett-gray rounded-md p-3 hover:border-bennett-orange"
         />
 
-        <button
-          onClick={handleUpload}
-          className="w-full bennett-gradient-bg bennett-gradient-bg-hover text-white py-3 rounded disabled:opacity-50 transition"
-          disabled={!file || isUploading}
+        <div
+          className={` ${
+            isSmallDevice ? "flex-col gap-2" : "flex-row gap-6"
+          }  flex`}
         >
-          Upload & Classify
-        </button>
+          <button
+            onClick={handleUpload}
+            className="w-full bennett-gradient-bg bennett-gradient-bg-hover text-white py-3 rounded disabled:opacity-50 transition"
+            disabled={!file || isUploading}
+          >
+            Upload & Classify
+          </button>
+          <button
+            onClick={handleUploadToDB}
+            className="w-full bg-bennett-green hover:bg-bennett-green-hover text-white py-3 rounded disabled:opacity-50 transition"
+            disabled={
+              !file ||
+              csvData.length === 0 ||
+              isUploading ||
+              isUploadingToDB ||
+              authStatus !== "authenticated"
+            }
+          >
+            Upload to Database
+          </button>
+        </div>
 
         {status && <p className="mt-4 text-sm text-gray-700">{status}</p>}
 
