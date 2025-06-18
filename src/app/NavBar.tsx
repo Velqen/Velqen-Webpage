@@ -113,7 +113,7 @@ const NavBar = () => {
                   onClick={
                     () => signOut({ callbackUrl: "/" }) // ✅ line changed
                   }
-                  className="text-sm px-4 py-2 text-white rounded"
+                  className="text-sm px-4 py-2 rounded"
                 >
                   Sign Out
                 </button>
