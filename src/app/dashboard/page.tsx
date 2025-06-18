@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { supabase } from "@/lib/supabaseBrowser";
 
 const Page = () => {
   const { data: session, status } = useSession();
