@@ -3,9 +3,12 @@
 import Link from "next/link";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 const NavBar = () => {
   const { isSmallDevice } = useDeviceSize();
   const [open, setOpen] = useState(false);
+  const { status, data: session } = useSession();
+
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -103,8 +106,23 @@ const NavBar = () => {
             About Us
           </Link>
         </div>
-        {/* Right: Empty to balance */}
-        <div className="flex-1"></div>
+        {/* Right */}
+        <div className="flex-1 flex justify-end">
+          {status === "authenticated" && (
+            <div>
+              {session.user!.name}
+              <Link href="api/auth/signout">Sign Out</Link>
+            </div>
+          )}
+          {status === "unauthenticated" && (
+            <Link
+              href="/api/auth/signin"
+              className="text-bennett-blue hover:underline text-base font-medium"
+            >
+              Login
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );

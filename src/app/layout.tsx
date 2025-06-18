@@ -2,6 +2,7 @@ import { IBM_Plex_Sans, Merriweather } from "next/font/google"; // import Merriw
 import "./globals.css";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import AuthProvider from "./auth/Provider";
 
 const ibmPlexSans = IBM_Plex_Sans({
   variable: "--font-ibm-plex-sans",
@@ -31,15 +32,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${ibmPlexSans.variable} ${merriweather.variable} antialiased`}
-      >
-        <main className="font-(family-name:--font-ibm-plex-sans)">
-          <NavBar />
-          {children}
-          <Footer />
-        </main>
-      </body>
+      <AuthProvider>
+        <body
+          className={`${ibmPlexSans.variable} ${merriweather.variable} antialiased`}
+        >
+          <main className="font-(family-name:--font-ibm-plex-sans)">
+            <NavBar />
+            {children}
+            <Footer />
+          </main>
+        </body>
+      </AuthProvider>
     </html>
   );
 }
