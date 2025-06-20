@@ -14,7 +14,7 @@ interface jsPDFWithAutoTable extends jsPDF {
 
 const ReportGenerator = ({ csvData }: Props) => {
   if (csvData.length === 0) {
-    return <p className="text-bennett-gray">No CSV data uploaded yet.</p>;
+    return <p className="text-velqen-gray">No CSV data uploaded yet.</p>;
   }
 
   const generatePDF = () => {
@@ -155,7 +155,7 @@ const ReportGenerator = ({ csvData }: Props) => {
     <div>
       <button
         onClick={generatePDF}
-        className="px-6 py-2 bg-bennett-green text-white rounded-md hover:bg-bennett-green-hover transition"
+        className="px-6 py-2 bg-velqen-green text-white rounded-md hover:bg-velqen-green-hover transition"
       >
         Download PDF
       </button>

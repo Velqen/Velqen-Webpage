@@ -59,12 +59,12 @@ const InvoiceExtraction = () => {
     <div className="w-[100%] mx-auto">
       {/* Upload area (always visible)*/}
       <div
-        className="border-dashed border-2 border-bennett-gray rounded-lg p-6 text-center cursor-pointer hover:border-bennett-orange transition"
+        className="border-dashed border-2 border-velqen-gray rounded-lg p-6 text-center cursor-pointer hover:border-velqen-orange transition"
         onClick={() => fileInputRef.current?.click()}
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
       >
-        <p className="text-bennett-gray text-base">
+        <p className="text-velqen-gray text-base">
           {selectedFile ? (
             <>
               📄 <strong>{selectedFile.name}</strong> selected
@@ -72,7 +72,7 @@ const InvoiceExtraction = () => {
           ) : (
             <>
               Drag & drop your invoice PDF here or{" "}
-              <span className="bennett-gradient-text underline">browse</span>
+              <span className="velqen-gradient-text underline">browse</span>
             </>
           )}
         </p>
@@ -96,7 +96,7 @@ const InvoiceExtraction = () => {
               title="PDF Preview"
             />
             <button
-              className="mt-4 w-full py-3 bennett-gradient-bg bennett-gradient-bg-hover text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition"
+              className="mt-4 w-full py-3 velqen-gradient-bg velqen-gradient-bg-hover text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition"
               onClick={handleUpload}
               disabled={!selectedFile || isUploading}
             >
@@ -121,7 +121,7 @@ const InvoiceExtraction = () => {
                 />
               </div>
             ) : (
-              <div className="p-4 border rounded text-bennett-gray text-base italic">
+              <div className="p-4 border rounded text-velqen-gray text-base italic">
                 Extraction result will appear here.
               </div>
             )}
@@ -135,12 +135,12 @@ const InvoiceExtraction = () => {
       <div
         className={`${
           selectedFile ? "h-[200px]" : "h-[500px]" // ✅ Height changes conditionally
-        } flex items-center justify-center border-dashed border-2 border-bennett-gray rounded-lg p-6 cursor-pointer hover:border-bennett-orange transition mb-6`}
+        } flex items-center justify-center border-dashed border-2 border-velqen-gray rounded-lg p-6 cursor-pointer hover:border-velqen-orange transition mb-6`}
         onClick={() => fileInputRef.current?.click()}
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
       >
-        <p className="text-bennett-gray text-xl">
+        <p className="text-velqen-gray text-xl">
           {selectedFile ? (
             <>
               📄 <strong>{selectedFile.name}</strong> selected
@@ -148,7 +148,7 @@ const InvoiceExtraction = () => {
           ) : (
             <>
               Drag & drop your invoice PDF here or{" "}
-              <span className="bennett-gradient-text underline">browse</span>
+              <span className="velqen-gradient-text underline">browse</span>
             </>
           )}
         </p>
@@ -172,7 +172,7 @@ const InvoiceExtraction = () => {
               title="PDF Preview"
             />
             <button
-              className="mt-4 w-full py-3 bennett-gradient-bg bennett-gradient-bg-hover text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition text-xl"
+              className="mt-4 w-full py-3 velqen-gradient-bg velqen-gradient-bg-hover text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition text-xl"
               onClick={handleUpload}
               disabled={!selectedFile || isUploading}
             >
@@ -197,7 +197,7 @@ const InvoiceExtraction = () => {
                 />
               </div>
             ) : (
-              <div className="p-4 border h-full rounded text-bennett-gray text-xl italic">
+              <div className="p-4 border h-full rounded text-velqen-gray text-xl italic">
                 Extraction result will appear here.
               </div>
             )}

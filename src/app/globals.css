@@ -5,44 +5,46 @@
   --background: #f5f5ec;
   --background-sec: #f0f0d7;
   --foreground: #171717;
-  --bennett-gradient: linear-gradient(90deg, #fd491c, #fa974b);
-  --bennett-gradient-hover: linear-gradient(90deg, #f1230c, #e09900);
-  --bennett-orange: #fd491c;
-  --bennett-light-orange: #f8eee6;
-  --bennett-gray: #4b4b4b;
-  --bennett-light-gray: #e6e6e6;
-  --bennett-green: #1D6F42;
-  --bennett-green-hover: #249C5A;
+  --velqen-gradient: linear-gradient(90deg, #fd491c, #fa974b);
+  --velqen-gradient-hover: linear-gradient(90deg, #f1230c, #e09900);
+  --velqen-orange: #fd491c;
+  --velqen-light-orange: #f8eee6;
+  --velqen-gray: #4b4b4b;
+  --velqen-light-gray: #e6e6e6;
+  --velqen-green: #1D6F42;
+  --velqen-green-hover: #249C5A;
+  --velqen-black: #242323;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-background-sec: var(--background-sec);
   --color-foreground: var(--foreground);
-  --color-bennett-orange: var(--bennett-orange);
-  --color-bennett-light-orange: var(--bennett-light-orange);
-  --color-bennett-gray: var(--bennett-gray);
-  --color-bennett-light-gray: var(--bennett-light-gray);
-  --color-bennett-green: var(--bennett-green);
-  --color-bennett-green-hover: var(--bennett-green-hover);
+  --color-velqen-orange: var(--velqen-orange);
+  --color-velqen-light-orange: var(--velqen-light-orange);
+  --color-velqen-gray: var(--velqen-gray);
+  --color-velqen-light-gray: var(--velqen-light-gray);
+  --color-velqen-green: var(--velqen-green);
+  --color-velqen-green-hover: var(--velqen-green-hover);
+  --color-velqen-black: var(--velqen-black);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-.bennett-gradient-text {
-  background: var(--bennett-gradient);
+.velqen-gradient-text {
+  background: var(--velqen-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -moz-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.bennett-gradient-bg {
-  background: var(--bennett-gradient);
+.velqen-gradient-bg {
+  background: var(--velqen-gradient);
 }
 
-.bennett-gradient-bg-hover:hover {
-  background: var(--bennett-gradient-hover);
+.velqen-gradient-bg-hover:hover {
+  background: var(--velqen-gradient-hover);
 }
 
 body {

@@ -134,10 +134,10 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
         <h2 className="text-2xl font-semibold mb-4">
           Upload Your CSV for Classification
         </h2>
-        <p className="mb-4 text-bennett-gray">
+        <p className="mb-4 text-velqen-gray">
           Please upload a CSV file containing at least the following fields:
         </p>
-        <ul className="mb-4 text-bennett-gray list-disc list-inside">
+        <ul className="mb-4 text-velqen-gray list-disc list-inside">
           <li>
             <code>description</code>
           </li>
@@ -148,21 +148,21 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
             <code>amount</code>
           </li>
         </ul>
-        <p className="text-bennett-gray">
+        <p className="text-velqen-gray">
           Transactions will be automatically categorised into five groups:
         </p>
-        <p className="text-bennett-gray">
+        <p className="text-velqen-gray">
           Food & Drink, Income, Shopping, Transportation, Utilities
         </p>
       </div>
 
       {/* Right Upload Box */}
-      <div className="md:w-2/3 max-w-7xl p-6 border border-bennett-gray rounded-lg shadow-lg bg-white">
+      <div className="md:w-2/3 max-w-7xl p-6 border border-velqen-gray rounded-lg shadow-lg bg-white">
         <input
           type="file"
           accept=".csv"
           onChange={handleFileChange}
-          className="mb-5 block w-full border border-bennett-gray rounded-md p-3 hover:border-bennett-orange"
+          className="mb-5 block w-full border border-velqen-gray rounded-md p-3 hover:border-velqen-orange"
         />
 
         <div
@@ -172,14 +172,14 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
         >
           <button
             onClick={handleUpload}
-            className="w-full bennett-gradient-bg bennett-gradient-bg-hover text-white py-3 rounded disabled:opacity-50 transition"
+            className="w-full velqen-gradient-bg velqen-gradient-bg-hover text-white py-3 rounded disabled:opacity-50 transition"
             disabled={!file || isUploading}
           >
             Upload & Classify
           </button>
           <button
             onClick={handleUploadToDB}
-            className="w-full bg-bennett-green hover:bg-bennett-green-hover text-white py-3 rounded disabled:opacity-50 transition"
+            className="w-full bg-velqen-green hover:bg-velqen-green-hover text-white py-3 rounded disabled:opacity-50 transition"
             disabled={
               !file ||
               csvData.length === 0 ||
@@ -202,7 +202,7 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
                   {previewHeaders.map((header, idx) => (
                     <th
                       key={idx}
-                      className="px-3 py-2 text-left text-sm font-medium text-bennett-gray border border-bennett-light-gray"
+                      className="px-3 py-2 text-left text-sm font-medium text-velqen-gray border border-velqen-light-gray"
                     >
                       {header}
                     </th>
@@ -218,7 +218,7 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
                     {row.map((cell, cellIdx) => (
                       <td
                         key={cellIdx}
-                        className="px-3 py-2 text-sm text-bennett-gray border border-bennett-light-gray"
+                        className="px-3 py-2 text-sm text-velqen-gray border border-velqen-light-gray"
                       >
                         {cell}
                       </td>
@@ -227,7 +227,7 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
                 ))}
               </tbody>
             </table>
-            <p className="mt-2 text-xs text-bennett-gray text-center">
+            <p className="mt-2 text-xs text-velqen-gray text-center">
               Showing first {previewRows.length} rows
             </p>
           </div>

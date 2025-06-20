@@ -11,7 +11,9 @@ const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
 const Footer = () => {
   const pathname = usePathname(); // 👈 get current route
 
-  if (pathname === "/ai-chatbot") return null;
+  if (pathname === "/ai-chatbot" || pathname?.startsWith("/dashboard")) {
+    return null;
+  }
 
   return (
     <footer className="bg-neutral-900 text-white py-6">
@@ -21,7 +23,7 @@ const Footer = () => {
         </p>
         <div className="flex space-x-6">
           <a href={`mailto:${email}`} aria-label="Email">
-            <FaEnvelope className="w-5 h-5 hover:text-bennett-orange transition" />
+            <FaEnvelope className="w-5 h-5 hover:text-velqen-orange transition" />
           </a>
           <a
             href={twitterUrl}
@@ -29,7 +31,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             aria-label="X/Twitter"
           >
-            <FaXTwitter className="w-5 h-5 hover:text-bennett-orange transition" />
+            <FaXTwitter className="w-5 h-5 hover:text-velqen-orange transition" />
           </a>
           <a
             href={instagramUrl}
@@ -37,7 +39,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             aria-label="Instagram"
           >
-            <FaInstagram className="w-5 h-5 hover:text-bennett-orange transition" />
+            <FaInstagram className="w-5 h-5 hover:text-velqen-orange transition" />
           </a>
         </div>
       </div>

@@ -5,12 +5,14 @@ import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useEffect, useRef, useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { ChevronDownIcon, UserIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const NavBar = () => {
   const { isSmallDevice } = useDeviceSize();
   const [open, setOpen] = useState(false);
   const { status, data: session } = useSession();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (open && isSmallDevice) {
@@ -38,11 +40,14 @@ const NavBar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  if (pathname?.startsWith("/dashboard")) {
+    return null;
+  }
   return isSmallDevice ? (
     <nav className="absolute top-0 left-0 w-full z-500 p-4">
       <div className="flex justify-between items-center">
         {/* Site Name */}
-        <div className="font-bold text-2xl">Bennett</div>
+        <div className="font-bold text-2xl">velqen</div>
 
         {/* Hamburger Button */}
         <button
@@ -72,32 +77,39 @@ const NavBar = () => {
 
       {/* Dropdown menu below navbar */}
       {open && (
-        <div className="absolute top-full left-0 w-[calc(100vw-3rem)] h-[calc(100vh-7rem)] bg-[rgba(243,240,240,0.8)] backdrop-blur-md flex flex-col items-center gap-6 py-6 z-40 mx-[1.5rem] my-[1.5rem] rounded-lg">
+        <div className="absolute top-full left-0 w-[calc(100vw-3rem)] h-[calc(100vh-7rem)] bg-[rgba(255,255,255,0.99)] backdrop-blur-md flex flex-col items-center gap-6 py-6 z-40 mx-[1.5rem] my-[1.5rem] rounded-lg">
           <Link
             href="/"
             onClick={() => setOpen(false)}
-            className="bennett-gradient-text text-xl"
+            className="velqen-gradient-text text-xl"
           >
             Home
           </Link>
           <Link
+            href="/dashboard"
+            onClick={() => setOpen(false)}
+            className="velqen-gradient-text text-xl"
+          >
+            Dashboard
+          </Link>
+          <Link
             href="/ai-chatbot"
             onClick={() => setOpen(false)}
-            className="bennett-gradient-text text-xl"
+            className="velqen-gradient-text text-xl"
           >
             AI Chat
           </Link>
           <Link
             href="/blog"
             onClick={() => setOpen(false)}
-            className="bennett-gradient-text text-xl"
+            className="velqen-gradient-text text-xl"
           >
             Blog
           </Link>
           <Link
             href="/about-us"
             onClick={() => setOpen(false)}
-            className="bennett-gradient-text text-xl"
+            className="velqen-gradient-text text-xl"
           >
             About Us
           </Link>
@@ -123,7 +135,7 @@ const NavBar = () => {
                 onClick={() =>
                   signIn(undefined, { callbackUrl: window.location.href })
                 }
-                className="flex items-center gap-2 mt-2 px-4 py-2 rounded-md hover:bg-bennett-light-gray text-lg"
+                className="flex items-center gap-2 mt-2 px-4 py-2 rounded-md hover:bg-velqen-light-gray text-lg"
               >
                 <UserIcon className="w-5 h-5 text-gray-600" />
                 Login
@@ -137,22 +149,22 @@ const NavBar = () => {
     <nav className="absolute top-0 left-0 z-500 flex w-full justify-center">
       <div className="w-[80%] flex items-center justify-between py-4">
         {/* Left: Site name */}
-        <div className="flex-1 text-left font-bold text-2xl ">Bennett</div>
+        <div className="flex-1 text-left font-bold text-2xl ">velqen</div>
         {/* Center: Home link */}
-        <div className="flex justify-center bg-white p-3 text-lg rounded-md shadow-sm border border-bennett-light-gray gap-8">
-          <Link href="/" className="bennett-gradient-text">
+        <div className="flex justify-center bg-white p-3 text-lg rounded-md shadow-sm border border-velqen-light-gray gap-8">
+          <Link href="/" className="velqen-gradient-text">
             Home
           </Link>
-          <Link href="/dashboard" className="bennett-gradient-text">
+          <Link href="/dashboard" className="velqen-gradient-text">
             Dashboard
           </Link>
-          <Link href="/ai-chatbot" className="bennett-gradient-text">
+          <Link href="/ai-chatbot" className="velqen-gradient-text">
             AI Chat
           </Link>
-          <Link href="/blog" className="bennett-gradient-text">
+          <Link href="/blog" className="velqen-gradient-text">
             Blog
           </Link>
-          <Link href="/about-us" className="bennett-gradient-text">
+          <Link href="/about-us" className="velqen-gradient-text">
             About Us
           </Link>
         </div>
@@ -162,7 +174,7 @@ const NavBar = () => {
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setOpen(!open)}
-                className="inline-flex items-center gap-1 rounded-md bg-white px-3 py-2 text-sm font-medium  hover:bg-bennett-light-gray shadow"
+                className="inline-flex items-center gap-1 rounded-md bg-white px-3 py-2 text-sm font-medium  hover:bg-velqen-light-gray shadow"
               >
                 <UserIcon className="w-5 h-5 text-gray-600" />
 
@@ -171,7 +183,7 @@ const NavBar = () => {
               </button>
 
               {open && (
-                <div className="absolute right-0 mt-2 w-36 rounded-md bennett-gradient-bg bennett-gradient-bg-hover shadow-lg z-20">
+                <div className="absolute right-0 mt-2 w-36 rounded-md velqen-gradient-bg velqen-gradient-bg-hover shadow-lg z-20">
                   <button
                     onClick={
                       () => signOut({ callbackUrl: "/" }) // ✅ line changed
@@ -190,7 +202,7 @@ const NavBar = () => {
               onClick={() =>
                 signIn(undefined, { callbackUrl: window.location.href })
               }
-              className="flex items-center gap-2 mt-2 px-4 py-2 rounded-md hover:bg-bennett-light-gray text-lg"
+              className="flex items-center gap-2 mt-2 px-4 py-2 rounded-md hover:bg-velqen-light-gray text-lg"
             >
               <UserIcon className="w-5 h-5 text-gray-600" />
               Login

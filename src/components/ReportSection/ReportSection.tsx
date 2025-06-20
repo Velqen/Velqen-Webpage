@@ -23,7 +23,7 @@ const ReportSection = ({ csvData }: Props) => {
             <h2 className="text-4xl font-bold text-black mb-4">
               Generate Your Financial Report
             </h2>
-            <p className="text-lg text-bennett-gray mb-6">
+            <p className="text-lg text-velqen-gray mb-6">
               Create a professional summary of your assets & liabilities in one
               click.
             </p>
@@ -39,7 +39,7 @@ const ReportSection = ({ csvData }: Props) => {
               alt="Financial Report"
               width={1600}
               height={1000}
-              className="object-contain border-4 border-bennett-gray rounded-xl shadow-lg"
+              className="object-contain border-4 border-velqen-gray rounded-xl shadow-lg"
             />
           </div>
         </div>

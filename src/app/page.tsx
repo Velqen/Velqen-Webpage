@@ -21,7 +21,7 @@ export default function Home() {
     <div className="min-h-screen w-full flex flex-col justify-center items-center pt-24">
       <div className="w-[90%] flex flex-col justify-center items-center">
         <h1 className="text-4xl py-4 font-bold">
-          Pick Your <span className="bennett-gradient-text">AI</span> Tool
+          Pick Your <span className="velqen-gradient-text">AI</span> Tool
         </h1>
         <GlideLink />
       </div>
@@ -31,10 +31,10 @@ export default function Home() {
           id="invoice-extraction"
           className="w-[90%] flex flex-col justify-center items-center py-24"
         >
-          <h1 className="text-4xl py-4 bennett-gradient-text text-center">
+          <h1 className="text-4xl py-4 velqen-gradient-text text-center">
             Invoice Extraction
           </h1>
-          <p className="text-center text-xl text-bennett-gray pb-10">
+          <p className="text-center text-xl text-velqen-gray pb-10">
             Use AI to pull key details from invoices.
           </p>
           <InvoiceExtraction />
@@ -46,10 +46,10 @@ export default function Home() {
           id="transaction-classification"
           className="w-[90%] flex flex-col justify-center items-center py-24"
         >
-          <h1 className="text-4xl py-4 bennett-gradient-text text-center">
+          <h1 className="text-4xl py-4 velqen-gradient-text text-center">
             Transaction Classification
           </h1>
-          <p className="text-center text-xl text-bennett-gray pb-10">
+          <p className="text-center text-xl text-velqen-gray pb-10">
             Understand where your money&#39;s going using AI.
           </p>
           <TransactionClassification onCsvParsed={handleCsvParsed} />
@@ -61,10 +61,10 @@ export default function Home() {
           id="record-reconciliation"
           className="w-[90%] flex flex-col justify-center items-center py-24"
         >
-          <h1 className="text-4xl py-4 bennett-gradient-text text-center">
+          <h1 className="text-4xl py-4 velqen-gradient-text text-center">
             Record Reconciliation
           </h1>
-          <p className="text-center text-xl text-bennett-gray pb-10">
+          <p className="text-center text-xl text-velqen-gray pb-10">
             Spot missed payments or duplicate charges automatically with AI.
           </p>
           <RecordReconciliation />
@@ -84,7 +84,7 @@ export default function Home() {
     <div className="min-h-screen w-full flex flex-col justify-center items-center pt-44">
       <div className="w-[80%] flex flex-col justify-center items-center">
         <h1 className="text-7xl py-4 font-bold">
-          Pick Your <span className="bennett-gradient-text">AI</span> Tool
+          Pick Your <span className="velqen-gradient-text">AI</span> Tool
         </h1>
         <GlideLink />
       </div>
@@ -94,10 +94,10 @@ export default function Home() {
           id="invoice-extraction"
           className="w-[80%] flex flex-col justify-center items-center py-24"
         >
-          <h1 className="text-7xl py-4 bennett-gradient-text text-center">
+          <h1 className="text-7xl py-4 velqen-gradient-text text-center">
             Invoice Extraction
           </h1>
-          <p className="text-center text-2xl text-bennett-gray pb-14">
+          <p className="text-center text-2xl text-velqen-gray pb-14">
             Use AI to pull key details from invoices.
           </p>
           <InvoiceExtraction />
@@ -109,10 +109,10 @@ export default function Home() {
           id="transaction-classification"
           className="w-[80%] flex flex-col justify-center items-center py-24"
         >
-          <h1 className="text-7xl py-4 bennett-gradient-text text-center">
+          <h1 className="text-7xl py-4 velqen-gradient-text text-center">
             Transaction Classification
           </h1>
-          <p className="text-center text-2xl text-bennett-gray pb-14">
+          <p className="text-center text-2xl text-velqen-gray pb-14">
             Understand where your money&#39;s going using AI.
           </p>
           <TransactionClassification onCsvParsed={handleCsvParsed} />
@@ -124,10 +124,10 @@ export default function Home() {
           id="record-reconciliation"
           className="w-[80%] flex flex-col justify-center items-center py-24"
         >
-          <h1 className="text-7xl py-4 bennett-gradient-text text-center">
+          <h1 className="text-7xl py-4 velqen-gradient-text text-center">
             Record Reconciliation
           </h1>
-          <p className="text-center text-2xl text-bennett-gray pb-14">
+          <p className="text-center text-2xl text-velqen-gray pb-14">
             Spot missed payments or duplicate charges automatically with AI.
           </p>
           <RecordReconciliation />

@@ -71,7 +71,7 @@ const ChatBot = () => {
             >
               <div
                 className={`px-4 py-2 rounded-2xl text-base break-words ${
-                  msg.sender === "user" ? "bennett-gradient-bg text-white" : ""
+                  msg.sender === "user" ? "velqen-gradient-bg text-white" : ""
                 }`}
               >
                 {msg.text}
@@ -81,8 +81,8 @@ const ChatBot = () => {
 
           {isLoading && (
             <div className="flex justify-start">
-              <div className="px-4 py-2 rounded-2xl text-bennett-gray text-base max-w-xs animate-pulse">
-                Bennett is typing…
+              <div className="px-4 py-2 rounded-2xl text-velqen-gray text-base max-w-xs animate-pulse">
+                velqen is typing…
               </div>
             </div>
           )}
@@ -102,12 +102,12 @@ const ChatBot = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
-            className="flex-1 px-4 py-2 border rounded-full text-base outline-none focus:ring-2 focus:ring-bennett-orange"
+            className="flex-1 px-4 py-2 border rounded-full text-base outline-none focus:ring-2 focus:ring-velqen-orange"
           />
           <button
             type="submit"
             disabled={isLoading}
-            className="px-4 py-2 bennett-gradient-bg bennett-gradient-bg-hover text-white rounded-full text-base disabled:opacity-50"
+            className="px-4 py-2 velqen-gradient-bg velqen-gradient-bg-hover text-white rounded-full text-base disabled:opacity-50"
           >
             {isLoading ? "…" : "Send"}
           </button>

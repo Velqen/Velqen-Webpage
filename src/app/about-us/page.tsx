@@ -20,13 +20,13 @@ const AboutUs = () => {
             className="rounded-xl"
           />
           <h1
-            className="absolute top-32 left-1/2 transform -translate-x-1/2 bennett-gradient-text text-7xl whitespace-nowrap
+            className="absolute top-32 left-1/2 transform -translate-x-1/2 velqen-gradient-text text-7xl whitespace-nowrap
                         overflow-visible"
           >
             {aboutUsText.title}
           </h1>
         </div>
-        <div className="flex flex-col max-w-[600px] text-lg leading-relaxed text-bennett-gray mt-12 space-y-8">
+        <div className="flex flex-col max-w-[600px] text-lg leading-relaxed text-velqen-gray mt-12 space-y-8">
           {aboutUsText.description.map((text, idx) => (
             <p key={idx}>{text}</p> // line changed to dynamically render
           ))}
@@ -45,13 +45,13 @@ const AboutUs = () => {
             className="rounded-xl"
           />
           <h1
-            className="absolute top-32 left-1/2 transform -translate-x-1/2 bennett-gradient-text text-9xl whitespace-nowrap
+            className="absolute top-32 left-1/2 transform -translate-x-1/2 velqen-gradient-text text-9xl whitespace-nowrap
                        overflow-visible"
           >
             {aboutUsText.title}
           </h1>
         </div>
-        <div className="flex flex-col max-w-[600px] text-lg leading-relaxed text-bennett-gray mt-12 space-y-8">
+        <div className="flex flex-col max-w-[600px] text-lg leading-relaxed text-velqen-gray mt-12 space-y-8">
           {aboutUsText.description.map((text, idx) => (
             <p key={idx}>{text}</p> // line changed to dynamically render
           ))}

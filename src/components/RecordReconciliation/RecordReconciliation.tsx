@@ -39,11 +39,11 @@ function FileInput({
       <label className="font-medium mb-1">{label}</label>
       <label
         htmlFor={label}
-        className="flex items-center gap-2 cursor-pointer border border-bennett-gray rounded px-3 py-2 hover:border-bennett-orange transition-colors"
+        className="flex items-center gap-2 cursor-pointer border border-velqen-gray rounded px-3 py-2 hover:border-velqen-orange transition-colors"
       >
         {/* Icon (using SVG for upload) */}
         <svg
-          className="w-5 h-5 text-bennett-gray"
+          className="w-5 h-5 text-velqen-gray"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
@@ -144,7 +144,7 @@ export default function RecordReconciliation() {
           disabled={loading}
           className={` ${
             isSmallDevice ? "w-full" : ""
-          } bennett-gradient-bg bennett-gradient-bg-hover text-white py-3 px-6 rounded disabled:opacity-50`}
+          } velqen-gradient-bg velqen-gradient-bg-hover text-white py-3 px-6 rounded disabled:opacity-50`}
         >
           {loading ? "Reconciling..." : "Start Reconciliation"}
         </button>
@@ -179,14 +179,14 @@ export default function RecordReconciliation() {
                   <span className="font-medium">
                     Bank ID {pair.bank_id} ↔ Ledger ID {pair.ledger_id}
                   </span>
-                  <div className="ml-4 text-bennett-gray">
+                  <div className="ml-4 text-velqen-gray">
                     Close Match fields:&nbsp;
                     {Object.entries(pair.matched_fields)
                       .filter(([, matched]) => matched)
                       .map(([field]) => (
                         <span
                           key={field}
-                          className="inline-block bg-bennett-light-orange text-bennett-orange px-2 py-0.5 rounded mr-2"
+                          className="inline-block bg-velqen-light-orange text-velqen-orange px-2 py-0.5 rounded mr-2"
                         >
                           {field}
                         </span>
