@@ -4,7 +4,7 @@ import TransactionEditor from "../components/TransactionEditor/TransactionEditor
 const Transactions = () => {
   return (
     <>
-      <div>Transactions</div>
+      <div></div>
       <TransactionEditor />
     </>
   );

@@ -47,7 +47,7 @@ const NavBar = () => {
     <nav className="absolute top-0 left-0 w-full z-500 p-4">
       <div className="flex justify-between items-center">
         {/* Site Name */}
-        <div className="font-bold text-2xl">velqen</div>
+        <div className="font-bold text-2xl">Velqen</div>
 
         {/* Hamburger Button */}
         <button
@@ -77,39 +77,31 @@ const NavBar = () => {
 
       {/* Dropdown menu below navbar */}
       {open && (
-        <div className="absolute top-full left-0 w-[calc(100vw-3rem)] h-[calc(100vh-7rem)] bg-[rgba(255,255,255,0.99)] backdrop-blur-md flex flex-col items-center gap-6 py-6 z-40 mx-[1.5rem] my-[1.5rem] rounded-lg">
-          <Link
-            href="/"
-            onClick={() => setOpen(false)}
-            className="velqen-gradient-text text-xl"
-          >
+        <div className="absolute top-full left-0 w-[calc(100vw-3rem)] h-[calc(100vh-7rem)] bg-[rgba(255,255,255,0.85)] backdrop-blur-md flex flex-col items-center gap-6 py-6 z-40 mx-[1.5rem] my-[1.5rem] rounded-lg">
+          <Link href="/" onClick={() => setOpen(false)} className="text-xl">
             Home
           </Link>
           <Link
             href="/dashboard"
             onClick={() => setOpen(false)}
-            className="velqen-gradient-text text-xl"
+            className="text-xl"
           >
             Dashboard
           </Link>
           <Link
             href="/ai-chatbot"
             onClick={() => setOpen(false)}
-            className="velqen-gradient-text text-xl"
+            className="text-xl"
           >
             AI Chat
           </Link>
-          <Link
-            href="/blog"
-            onClick={() => setOpen(false)}
-            className="velqen-gradient-text text-xl"
-          >
+          <Link href="/blog" onClick={() => setOpen(false)} className="text-xl">
             Blog
           </Link>
           <Link
             href="/about-us"
             onClick={() => setOpen(false)}
-            className="velqen-gradient-text text-xl"
+            className="text-xl"
           >
             About Us
           </Link>
@@ -118,7 +110,7 @@ const NavBar = () => {
             {status === "authenticated" && session?.user?.name ? (
               <div className="flex flex-col items-center gap-2">
                 <UserIcon className="w-5 h-5 text-gray-600" />
-                <span className="text-base font-semibold">
+                <span className="text-base font-semibold velqen-gradient-text">
                   {session.user.name}
                 </span>
                 <button
@@ -149,22 +141,22 @@ const NavBar = () => {
     <nav className="absolute top-0 left-0 z-500 flex w-full justify-center">
       <div className="w-[80%] flex items-center justify-between py-4">
         {/* Left: Site name */}
-        <div className="flex-1 text-left font-bold text-2xl ">velqen</div>
+        <div className="flex-1 text-left font-bold text-2xl ">Velqen</div>
         {/* Center: Home link */}
         <div className="flex justify-center bg-white p-3 text-lg rounded-md shadow-sm border border-velqen-light-gray gap-8">
-          <Link href="/" className="velqen-gradient-text">
+          <Link href="/" className="">
             Home
           </Link>
-          <Link href="/dashboard" className="velqen-gradient-text">
+          <Link href="/dashboard" className="">
             Dashboard
           </Link>
-          <Link href="/ai-chatbot" className="velqen-gradient-text">
+          <Link href="/ai-chatbot" className="">
             AI Chat
           </Link>
-          <Link href="/blog" className="velqen-gradient-text">
+          <Link href="/blog" className="">
             Blog
           </Link>
-          <Link href="/about-us" className="velqen-gradient-text">
+          <Link href="/about-us" className="">
             About Us
           </Link>
         </div>

@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const user_input = body.user_input
 
-    const res = await fetch(`${process.env.CHATBOT_URL}/bennett-chatbot`, {
+    const res = await fetch(`${process.env.CHATBOT_URL}/velqen-chatbot`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_input })

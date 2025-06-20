@@ -112,7 +112,7 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
     setStatus("Uploading...");
 
     try {
-      const res = await fetch("/api/uploadTransactionDB", {
+      const res = await fetch("/api/frontendTransactionsDB", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: session.user?.email, data: csvData }),

@@ -1,4 +1,5 @@
 export type RecordItem = {
+  id: string;
   date: string;
   amount_rm: number;
   main_category: string;

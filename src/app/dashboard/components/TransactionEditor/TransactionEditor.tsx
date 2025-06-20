@@ -1,29 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { RecordItem } from "@/types/transactions";
-
-const mockData: RecordItem[] = [
-  {
-    date: "2025-06-15",
-    amount_rm: -23.9,
-    main_category: "Food",
-    sub_category: "GrabFood",
-    transaction_description: "Dinner at home",
-    merchant_name: "Grab",
-  },
-  {
-    date: "2025-06-14",
-    amount_rm: -50.0,
-    main_category: "Transport",
-    sub_category: "Reload",
-    transaction_description: "Touch 'n Go reload",
-    merchant_name: "TNG",
-  },
-];
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function TransactionEditor() {
-  const [data, setData] = useState<RecordItem[]>(mockData);
+  const [data, setData] = useState<RecordItem[]>([]);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editedRow, setEditedRow] = useState<RecordItem | null>(null);
 
@@ -35,6 +18,24 @@ export default function TransactionEditor() {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const res = await axios.get("/api/dashboardTransactions");
+      const sortedData = res.data.data.sort(
+        (a: RecordItem, b: RecordItem) =>
+          new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
+      setData(sortedData);
+    } catch (err) {
+      console.error("Failed to fetch transactions:", err);
+    }
+  };
+
   const startEdit = (i: number) => {
     const globalIndex = (currentPage - 1) * itemsPerPage + i; // ✅ map to global index
     setEditingIndex(globalIndex);
@@ -46,12 +47,19 @@ export default function TransactionEditor() {
     setEditingIndex(null);
   };
 
-  const saveEdit = () => {
+  const saveEdit = async () => {
     if (editedRow == null || editingIndex == null) return;
-    const updated = [...data];
-    updated[editingIndex] = editedRow;
-    setData(updated);
-    cancelEdit();
+
+    try {
+      // ✅ Call PUT on existing API with ID
+      await axios.put("/api/dashboardTransactions", editedRow);
+
+      // ✅ Refresh data after saving
+      await fetchData();
+      cancelEdit();
+    } catch (error) {
+      console.error("Failed to save changes:", error);
+    }
   };
 
   const handleChange = (
@@ -78,7 +86,8 @@ export default function TransactionEditor() {
         </thead>
         <tbody>
           {paginatedData.map((row, i) => {
-            const isEditing = i === editingIndex;
+            const globalIndex = (currentPage - 1) * itemsPerPage + i; // 🔁 recalculate here too
+            const isEditing = globalIndex === editingIndex;
             return (
               <tr key={`${row.date}-${i}`} className="border-t text-white">
                 <td className="px-3 py-2">{row.date}</td>
@@ -142,7 +151,7 @@ export default function TransactionEditor() {
                   ) : (
                     <span
                       className={
-                        row.amount_rm < 0 ? "text-red-500" : "text-green-600"
+                        row.amount_rm < 0 ? "text-red-500" : "text-green-300"
                       }
                     >
                       {Number(row.amount_rm).toFixed(2)}
@@ -168,7 +177,7 @@ export default function TransactionEditor() {
                   ) : (
                     <button
                       onClick={() => startEdit(i)}
-                      className="px-2 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+                      className="px-2 py-1 velqen-gradient-bg text-black rounded velqen-gradient-bg-hover"
                     >
                       Edit
                     </button>
@@ -184,9 +193,10 @@ export default function TransactionEditor() {
         <button
           disabled={currentPage === 1}
           onClick={() => setCurrentPage((p) => p - 1)}
-          className="px-3 py-1  rounded disabled:opacity-50"
+          className="px-3 py-1 flex items-center rounded disabled:opacity-50"
         >
-          ← Prev
+          <ChevronLeft size={18} />
+          Prev
         </button>
         <span>
           Page {currentPage} of {totalPages}
@@ -194,9 +204,10 @@ export default function TransactionEditor() {
         <button
           disabled={currentPage === totalPages}
           onClick={() => setCurrentPage((p) => p + 1)}
-          className="px-3 py-1  rounded disabled:opacity-50"
+          className="px-3 py-1 flex items-center rounded disabled:opacity-50"
         >
-          Next →
+          Next
+          <ChevronRight size={18} />
         </button>
       </div>
     </div>

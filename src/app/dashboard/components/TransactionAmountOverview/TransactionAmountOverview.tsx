@@ -12,7 +12,7 @@ import { format, parseISO } from "date-fns";
 import { RecordItem } from "@/types/transactions";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
-const TransactionOverview = () => {
+const TransactionAmountOverview = () => {
   const { isSmallDevice } = useDeviceSize();
   const [userData, setUserData] = useState<RecordItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ const TransactionOverview = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/fetchSupaBaseTransaction");
+        const res = await fetch("/api/dashboardTransactions");
         const result = await res.json();
         if (result.error) throw new Error(result.error);
         setUserData(result.data || []);
@@ -136,4 +136,4 @@ const TransactionOverview = () => {
   );
 };
 
-export default TransactionOverview;
+export default TransactionAmountOverview;

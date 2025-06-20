@@ -45,7 +45,7 @@ const AboutUs = () => {
             className="rounded-xl"
           />
           <h1
-            className="absolute top-32 left-1/2 transform -translate-x-1/2 velqen-gradient-text text-9xl whitespace-nowrap
+            className="absolute top-24 left-1/2 transform -translate-x-1/2 velqen-gradient-text text-[140px] whitespace-nowrap
                        overflow-visible"
           >
             {aboutUsText.title}

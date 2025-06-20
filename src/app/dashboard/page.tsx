@@ -2,7 +2,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import TransactionOverview from "@/app/dashboard/components/TransactionOverview/TransactionOverview";
+import TransactionAmountOverview from "@/app/dashboard/components/TransactionAmountOverview/TransactionAmountOverview";
 
 const Page = () => {
   const { data: session } = useSession();
@@ -15,7 +15,7 @@ const Page = () => {
         Welcome back, {userName || "Friend"} 👋
       </h1>
 
-      <TransactionOverview />
+      <TransactionAmountOverview />
     </>
   );
 };
