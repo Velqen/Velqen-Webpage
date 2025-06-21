@@ -9,14 +9,14 @@ const Page = () => {
   const userName = session?.user?.name;
 
   return (
-    <>
+    <div className="p-6 ">
       {/* ✅ Fix: use `userName` here after defining it */}
       <h1 className="text-2xl font-semibold text-white">
         Welcome back, {userName || "Friend"} 👋
       </h1>
 
       <TransactionAmountOverview />
-    </>
+    </div>
   );
 };
 

@@ -7,11 +7,12 @@ import { cn } from "@/lib/utils"; // optional utility function
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
+import Image from "next/image";
 
 const navItems = [
   { name: "Overview", href: "/dashboard" },
   { name: "Transactions", href: "/dashboard/transactions" },
-  // { name: "Reports", href: "/dashboard/reports" },
+  { name: "AI Assistant", href: "/dashboard/ai-assistant" },
   // { name: "Settings", href: "/dashboard/settings" },
 ];
 
@@ -41,10 +42,87 @@ export default function DashboardSidebar() {
       {/* 🟣 Sidebar */}
       <aside
         className={cn(
-          "w-64 min-h-screen bg-velqen-black border-r px-4 py-6 space-y-4 fixed top-0 left-0 z-40 transition-transform duration-300",
+          "w-64 min-h-screen bg-velqen-black border-r px-4 py-6 flex flex-col justify-between fixed top-0 left-0 z-40 transition-transform duration-300",
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
+        <div className="flex flex-col flex-grow space-y-4">
+          <div className="flex justify-center p-2 h-[90px]">
+            <Image
+              src="/Velqen_no_bg_logo.png"
+              alt="Logo"
+              width={1200}
+              height={4000}
+              className="object-contain"
+              priority
+            />
+          </div>
+          <h2 className="text-xl text-white font-bold mb-6">Dashboard</h2>
+          <nav className="flex flex-col gap-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "px-3 py-2 rounded hover:bg-gray-200 hover:text-black",
+                  pathname === item.href
+                    ? "bg-gray-300 font-medium text-black"
+                    : "text-white"
+                )}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
+
+        <div>
+          <Link
+            href="/"
+            className={cn(
+              "flex items-center gap-2 px-3 py-2 rounded text-white hover:bg-gray-200 transition hover:text-black",
+              pathname === "/" ? "bg-gray-300 font-medium" : ""
+            )}
+          >
+            <ArrowLeft size={18} />
+            Home
+          </Link>
+        </div>
+      </aside>
+    </>
+  ) : (
+    <aside className="w-64 min-h-screen bg-velqen-black border-r px-4 py-6 flex flex-col justify-between">
+      <div className="flex flex-col flex-grow space-y-4">
+        <div className="flex justify-center p-6 h-[110px]">
+          <Image
+            src="/Velqen_no_bg_logo.png"
+            alt="Logo"
+            width={1200}
+            height={4000}
+            className="object-contain"
+            priority
+          />
+        </div>
+        <h2 className="text-xl text-white font-bold mb-6">Dashboard</h2>
+        <nav className="flex flex-col gap-2">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "px-3 py-2 rounded  hover:bg-gray-200 hover:text-black",
+                pathname === item.href
+                  ? "bg-gray-300 font-medium text-black"
+                  : "text-white"
+              )}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+      </div>
+      <div>
+        {" "}
         <Link
           href="/"
           className={cn(
@@ -55,57 +133,7 @@ export default function DashboardSidebar() {
           <ArrowLeft size={18} />
           Home
         </Link>
-
-        <h2 className="text-xl text-white font-bold mb-6">Dashboard</h2>
-
-        <nav className="flex flex-col gap-2">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "px-3 py-2 rounded hover:bg-gray-200 hover:text-black",
-                pathname === item.href
-                  ? "bg-gray-300 font-medium text-black"
-                  : "text-white"
-              )}
-            >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
-      </aside>
-    </>
-  ) : (
-    <aside className="w-64 min-h-screen bg-velqen-black border-r px-4 py-6 space-y-4">
-      <Link
-        href="/"
-        className={cn(
-          "flex items-center gap-2 px-3 py-2 rounded text-white hover:bg-gray-200 transition hover:text-black",
-          pathname === "/" ? "bg-gray-300 font-medium" : ""
-        )}
-      >
-        <ArrowLeft size={18} />
-        Home
-      </Link>
-
-      <h2 className="text-xl text-white font-bold mb-6">Dashboard</h2>
-      <nav className="flex flex-col gap-2">
-        {navItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={cn(
-              "px-3 py-2 rounded  hover:bg-gray-200 hover:text-black",
-              pathname === item.href
-                ? "bg-gray-300 font-medium text-black"
-                : "text-white"
-            )}
-          >
-            {item.name}
-          </Link>
-        ))}
-      </nav>
+      </div>
     </aside>
   );
 }

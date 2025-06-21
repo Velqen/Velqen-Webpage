@@ -31,7 +31,7 @@ export default function DashboardLayout({
   return (
     <div className="flex min-h-screen">
       <DashboardSidebar />
-      <main className="flex-1 p-6 bg-velqen-gray text-white min-w-0">
+      <main className="flex-1 bg-velqen-gray text-white min-w-0">
         {children}
       </main>
     </div>

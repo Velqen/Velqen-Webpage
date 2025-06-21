@@ -70,7 +70,7 @@ export default function TransactionEditor() {
   };
 
   return (
-    <div className="block w-full overflow-x-auto p-4">
+    <div className="block w-full overflow-x-auto">
       {" "}
       <table className="min-w-full table-auto text-sm bg-black">
         <thead className=" text-white">

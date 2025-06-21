@@ -3,10 +3,10 @@ import TransactionEditor from "../components/TransactionEditor/TransactionEditor
 
 const Transactions = () => {
   return (
-    <>
-      <div></div>
+    <div className="p-6 ">
+      <div className="text-4xl mb-8 ">Editor</div>
       <TransactionEditor />
-    </>
+    </div>
   );
 };
 
