@@ -2,10 +2,11 @@
 
 :root {
   /* --background: #0b0430; */
-  --background: #f5f5ec;
-  --background-sec: #f0f0d7;
+  --background: #fdfdf6;
+  --background-sec: #f7f7e4;
   --foreground: #171717;
-  --velqen-gradient: linear-gradient(90deg, #fd491c, #fa974b);
+  --velqen-gradient: linear-gradient(90deg, #fd491c, #ffa618);
+  --velqen-gradient-vertical: linear-gradient(180deg, #fd491c, #fbbd5c);
   --velqen-gradient-hover: linear-gradient(90deg, #f1230c, #e09900);
   --velqen-orange: #fd491c;
   --velqen-light-orange: #f8eee6;
@@ -41,6 +42,9 @@
 
 .velqen-gradient-bg {
   background: var(--velqen-gradient);
+}
+.velqen-gradient-vertical-bg {
+  background: var(--velqen-gradient-vertical);
 }
 
 .velqen-gradient-bg-hover:hover {

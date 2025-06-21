@@ -19,7 +19,7 @@ const Footer = () => {
     <footer className="bg-neutral-900 text-white py-6">
       <div className="container mx-auto flex flex-col items-center space-y-4">
         <p className="text-sm text-center">
-          Website developed by <span className="font-semibold">Canto AGI</span>.
+          AI-powered by <span className="font-semibold">Velqen</span>.
         </p>
         <div className="flex space-x-6">
           <a href={`mailto:${email}`} aria-label="Email">

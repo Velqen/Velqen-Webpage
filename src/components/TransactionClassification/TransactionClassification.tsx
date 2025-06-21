@@ -139,20 +139,23 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
         </p>
         <ul className="mb-4 text-velqen-gray list-disc list-inside">
           <li>
-            <code>description</code>
+            <code>Transaction_Description</code>
           </li>
           <li>
-            <code>merchant_name</code>
+            <code>Amount_RM</code>
           </li>
           <li>
-            <code>amount</code>
+            <code>Merchant_Name</code>
+          </li>
+          <li>
+            <code>Date</code>
           </li>
         </ul>
         <p className="text-velqen-gray">
-          Transactions will be automatically categorised into five groups:
+          Transactions will be automatically categorised into categories groups:
         </p>
         <p className="text-velqen-gray">
-          Food & Drink, Income, Shopping, Transportation, Utilities
+          Main_Category, Sub_Category, Detailed_Category
         </p>
       </div>
 

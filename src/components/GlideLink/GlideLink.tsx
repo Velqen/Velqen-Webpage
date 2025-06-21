@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
+import { Rocket } from "lucide-react";
 
 const GlideLink = () => {
   const { isSmallDevice } = useDeviceSize();
@@ -40,7 +41,9 @@ const GlideLink = () => {
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
               OCR Invoice Extraction
             </h3>
-            <p className="text-velqen-gray">👉 Click to Try</p>
+            <p className="text-velqen-gray flex items-center gap-2">
+              <Rocket className="w-4 h-4" /> Try it now
+            </p>
           </div>
         </div>
 
@@ -66,7 +69,9 @@ const GlideLink = () => {
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
               AI Transaction Classification
             </h3>
-            <p className="text-velqen-gray">👉 Click to Try</p>
+            <p className="text-velqen-gray flex items-center gap-2">
+              <Rocket className="w-4 h-4" /> Try it now
+            </p>
           </div>
         </div>
 
@@ -92,7 +97,9 @@ const GlideLink = () => {
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
               AI Record Reconciliation
             </h3>
-            <p className="text-velqen-gray">👉 Click to Try</p>
+            <p className="text-velqen-gray flex items-center gap-2">
+              <Rocket className="w-4 h-4" /> Try it now
+            </p>
           </div>
         </div>
       </div>

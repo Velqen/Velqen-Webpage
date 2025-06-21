@@ -18,9 +18,17 @@ const TransactionAmountOverview = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedYear, setSelectedYear] = useState<string>("");
-  const primaryColor = getComputedStyle(document.documentElement)
-    .getPropertyValue("--velqen-orange")
-    .trim();
+  // const primaryColor = getComputedStyle(document.documentElement)
+  //   .getPropertyValue("--velqen-orange")
+  //   .trim();
+
+  const verticalGradient = getComputedStyle(document.documentElement)
+    .getPropertyValue("--velqen-gradient-vertical")
+    .trim(); // e.g. "linear-gradient(180deg, #fd491c, #fbbd5c)"
+  const [startColor, endColor] = verticalGradient.match(
+    /#(?:[0-9a-fA-F]{6})/g
+  ) || ["#fd491c", "#fbbd5c"];
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -103,6 +111,19 @@ const TransactionAmountOverview = () => {
                 data={formattedChartData}
                 margin={{ right: 20, left: 15, bottom: 30 }} // ✅ Give breathing room
               >
+                <defs>
+                  {/* 🚧 changed: define SVG gradient using CSS stops */}
+                  <linearGradient
+                    id="velqenGradientVertical"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop offset="0%" stopColor={startColor} />
+                    <stop offset="100%" stopColor={endColor} />
+                  </linearGradient>
+                </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#444" />
                 <XAxis
                   dataKey="month"
@@ -124,7 +145,7 @@ const TransactionAmountOverview = () => {
                   labelStyle={{ color: "#fff" }} // ✅ Tooltip label white
                   itemStyle={{ color: "#fff" }} // ✅ Tooltip content white
                 />
-                <Bar dataKey="total" fill={primaryColor} />
+                <Bar dataKey="total" fill="url(#velqenGradientVertical)" />
               </BarChart>
             </ResponsiveContainer>
           </div>

@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { ChevronDownIcon, UserIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const NavBar = () => {
   const { isSmallDevice } = useDeviceSize();
@@ -141,23 +142,59 @@ const NavBar = () => {
     <nav className="absolute top-0 left-0 z-500 flex w-full justify-center">
       <div className="w-[80%] flex items-center justify-between py-4">
         {/* Left: Site name */}
-        <div className="flex-1 text-left font-bold text-2xl ">Velqen</div>
+        <div className="flex-1 text-left">
+          <Image
+            src="/Velqen_no_bg_logo.png"
+            alt="Velqen Logo"
+            width={80}
+            height={45}
+          />
+        </div>
+
         {/* Center: Home link */}
         <div className="flex justify-center bg-white p-3 text-lg rounded-md shadow-sm border border-velqen-light-gray gap-8">
-          <Link href="/" className="">
-            Home
+          <Link href="/" className="group inline-block overflow-hidden h-6">
+            <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
+              <span className="block h-6">Home</span>
+              <span className="block h-6">Home</span>
+            </div>
           </Link>
-          <Link href="/dashboard" className="">
-            Dashboard
+
+          <Link
+            href="/dashboard"
+            className="group inline-block overflow-hidden h-6"
+          >
+            <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
+              <span className="block h-6">Dashboard</span>
+              <span className="block h-6">Dashboard</span>
+            </div>
           </Link>
-          <Link href="/ai-chatbot" className="">
-            AI Chat
+
+          <Link
+            href="/ai-chatbot"
+            className="group inline-block overflow-hidden h-6"
+          >
+            <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
+              <span className="block h-6">AI Chat</span>
+              <span className="block h-6">AI Chat</span>
+            </div>
           </Link>
-          <Link href="/blog" className="">
-            Blog
+
+          <Link href="/blog" className="group inline-block overflow-hidden h-6">
+            <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
+              <span className="block h-6">Blog</span>
+              <span className="block h-6">Blog</span>
+            </div>
           </Link>
-          <Link href="/about-us" className="">
-            About Us
+
+          <Link
+            href="/about-us"
+            className="group inline-block overflow-hidden h-6"
+          >
+            <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
+              <span className="block h-6">About Us</span>
+              <span className="block h-6">About Us</span>
+            </div>
           </Link>
         </div>
         {/* Right */}
