@@ -38,8 +38,8 @@ const AIChatPro = () => {
     if (!hasUserInteracted) {
       setHasUserInteracted(true);
     }
-    await handleSubmit(input); // ✅ send only the input string
     setInput(""); // ✅ clear input after sending
+    await handleSubmit(input); // ✅ send only the input string
   };
 
   if (!hasUserInteracted) {
@@ -81,7 +81,7 @@ const AIChatPro = () => {
 
   return (
     <div className="relative flex justify-center pt-24">
-      {/* Wrapper with 80% width & full height column */}
+      {/* Wrapper with 60% width & full height column */}
       <div
         className={`${
           isSmallDevice ? "w-full" : "w-[60%]"
