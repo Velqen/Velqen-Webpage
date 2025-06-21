@@ -36,7 +36,7 @@ const TransactionAmountOverview = () => {
         const result = await res.json();
         if (result.error) throw new Error(result.error);
         setUserData(result.data || []);
-      } catch (err) {
+      } catch {
         setError("Failed to fetch your data.");
       } finally {
         setLoading(false);
