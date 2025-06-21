@@ -4,6 +4,7 @@ export type RecordItem = {
   amount_rm: number;
   main_category: string;
   sub_category: string;
+  detailed_category: string;
   transaction_description: string;
   merchant_name: string;
 };

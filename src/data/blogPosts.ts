@@ -49,9 +49,9 @@ const blogPosts = [
     hasIcons: true,
     image: "/blog/post4.jpg",
     content: [
-    "We take data security seriously. That’s why we don’t store any of your data, ever.",
-    "All invoice & company-related information is processed securely in real-time and never saved to our servers or databases. Once your session ends, your data disappears completely.",
-    "This means there’s zero risk of your sensitive financial data being leaked or accessed later, because we simply don’t keep it."
+      "We take data security seriously. Your privacy is a priority.",
+      "When you use our AI tools, your data is processed instantly and securely. Nothing is stored. We don’t save any invoices or company information to our servers or databases. Once your session ends, everything disappears as if it was never there.",
+      "The only time we store your data is when you intentionally upload it to your account. Even then, it's encrypted and protected. No storage without consent. No leaks. No worries."
     ],
   },
   {
@@ -86,7 +86,7 @@ const blogPosts = [
   slug: "no-credit-card-needed",
   title: "Why We Don’t Ask for Your Credit Card",
   category: "Company",
-  date: "June 13, 2025",
+  date: "June 21, 2025",
   image: "/blog/post7.jpg", // add or update this file in your /public/blog folder
   content: [
     "We believe signing up should be risk free, so we don’t ask for your credit card up front. All our AI finance features are available free without a trial or hidden fees.",

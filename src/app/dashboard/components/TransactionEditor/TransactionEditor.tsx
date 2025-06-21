@@ -72,16 +72,17 @@ export default function TransactionEditor() {
   return (
     <div className="block w-full overflow-x-auto p-4">
       {" "}
-      <table className="min-w-full table-auto border text-sm bg-black border-white">
+      <table className="min-w-full table-auto text-sm bg-black">
         <thead className=" text-white">
           <tr>
-            <th className="px-3 py-2 text-left">Date</th>
-            <th className="px-3 py-2 text-left">Merchant</th>
-            <th className="px-3 py-2 text-left">Description</th>
-            <th className="px-3 py-2 text-left">Main Category</th>
-            <th className="px-3 py-2 text-left">Sub Category</th>
-            <th className="px-3 py-2 text-right">Amount (RM)</th>
-            <th className="px-3 py-2 text-center">Actions</th>
+            <th className="px-3 py-4 text-left">Date</th>
+            <th className="px-3 py-4 text-left">Merchant</th>
+            <th className="px-3 py-4 text-left">Description</th>
+            <th className="px-3 py-4 text-left">Main Category</th>
+            <th className="px-3 py-4 text-left">Sub Category</th>
+            <th className="px-3 py-4 text-left">Detailed Category</th>
+            <th className="px-3 py-4 text-right">Amount (RM)</th>
+            <th className="px-3 py-4 text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -89,9 +90,12 @@ export default function TransactionEditor() {
             const globalIndex = (currentPage - 1) * itemsPerPage + i; // 🔁 recalculate here too
             const isEditing = globalIndex === editingIndex;
             return (
-              <tr key={`${row.date}-${i}`} className="border-t text-white">
-                <td className="px-3 py-2">{row.date}</td>
-                <td className="px-3 py-2">
+              <tr
+                key={`${row.date}-${i}`}
+                className="border-t border-velqen-gray text-velqen-light-gray"
+              >
+                <td className="px-3 py-4">{row.date}</td>
+                <td className="px-3 py-4">
                   {isEditing ? (
                     <input
                       name="merchant_name"
@@ -103,7 +107,7 @@ export default function TransactionEditor() {
                     row.merchant_name
                   )}
                 </td>
-                <td className="px-3 py-2">
+                <td className="px-3 py-4">
                   {isEditing ? (
                     <input
                       name="transaction_description"
@@ -115,7 +119,7 @@ export default function TransactionEditor() {
                     row.transaction_description
                   )}
                 </td>
-                <td className="px-3 py-2">
+                <td className="px-3 py-4">
                   {isEditing ? (
                     <input
                       name="main_category"
@@ -127,7 +131,7 @@ export default function TransactionEditor() {
                     row.main_category
                   )}
                 </td>
-                <td className="px-3 py-2">
+                <td className="px-3 py-4">
                   {isEditing ? (
                     <input
                       name="sub_category"
@@ -139,7 +143,19 @@ export default function TransactionEditor() {
                     row.sub_category
                   )}
                 </td>
-                <td className="px-3 py-2 text-right">
+                <td className="px-3 py-4">
+                  {isEditing ? (
+                    <input
+                      name="detailed_category"
+                      value={editedRow?.detailed_category || ""}
+                      onChange={handleChange}
+                      className="border rounded px-2 py-1 w-full bg-velqen-gray"
+                    />
+                  ) : (
+                    row.detailed_category
+                  )}
+                </td>
+                <td className="px-3 py-4 text-right">
                   {isEditing ? (
                     <input
                       type="number"
@@ -158,7 +174,7 @@ export default function TransactionEditor() {
                     </span>
                   )}
                 </td>
-                <td className="px-3 py-2 text-center">
+                <td className="px-3 py-4 text-center">
                   {isEditing ? (
                     <div className="flex gap-2 justify-center">
                       <button

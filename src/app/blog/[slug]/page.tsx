@@ -19,7 +19,7 @@ export default async function BlogPostPage({
   if (!post) return notFound();
 
   return (
-    <div className="min-h-screen pt-40 px-4 max-w-3xl mx-auto">
+    <div className="min-h-screen pt-40 px-4 max-w-3xl mx-auto pb-20">
       <div className="relative h-[300px] w-full rounded-xl overflow-hidden mb-8">
         <Image
           src={post.image}
