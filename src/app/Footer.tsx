@@ -11,7 +11,11 @@ const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
 const Footer = () => {
   const pathname = usePathname(); // 👈 get current route
 
-  if (pathname === "/ai-chatbot" || pathname?.startsWith("/dashboard")) {
+  if (
+    pathname === "/ai-chatbot" ||
+    pathname === "/login" ||
+    pathname?.startsWith("/dashboard")
+  ) {
     return null;
   }
 

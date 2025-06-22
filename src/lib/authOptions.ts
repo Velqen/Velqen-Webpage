@@ -9,4 +9,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
+  pages: {
+    signIn: "/login", // 👈 tells NextAuth to use /login instead of default
+  },
 };
