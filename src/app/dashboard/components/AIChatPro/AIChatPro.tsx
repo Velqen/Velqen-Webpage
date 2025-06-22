@@ -80,15 +80,19 @@ const AIChatPro = () => {
   }
 
   return (
-    <div className="relative flex justify-center pt-24">
+    <div className="relative flex justify-center ">
       {/* Wrapper with 60% width & full height column */}
       <div
         className={`${
           isSmallDevice ? "w-full" : "w-[60%]"
-        } flex flex-col max-h-screen h-[calc(100vh-6rem)]`}
+        } flex flex-col max-h-screen h-[calc(100vh)]`}
       >
         {/* Chat Area */}
-        <div className="flex-1 p-4 space-y-3 overflow-y-auto min-h-0">
+        <div
+          className={`${
+            isSmallDevice ? "mb-28  mt-8" : "mt-10"
+          } flex-1 p-4 space-y-3 overflow-y-auto min-h-0`}
+        >
           {messages.map((msg, index) => (
             <div
               key={index}
