@@ -42,7 +42,7 @@ export default function DashboardSidebar() {
       {/* 🟣 Sidebar */}
       <aside
         className={cn(
-          "w-64 min-h-screen bg-velqen-black border-r px-4 py-6 flex flex-col justify-between fixed top-0 left-0 z-40 transition-transform duration-300",
+          "w-64 h-[100dvh] bg-velqen-black border-r px-4 py-6 flex flex-col justify-between fixed top-0 left-0 z-40 transition-transform duration-300",
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
