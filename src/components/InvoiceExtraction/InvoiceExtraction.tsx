@@ -6,54 +6,19 @@ const ReactJson = dynamic(() => import("react-json-view"), { ssr: false }); // �
 
 import React, { useState, useRef } from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
+import { useInvoiceExtraction } from "@/hooks/useInvoiceExtraction";
 const InvoiceExtraction = () => {
   const { isSmallDevice } = useDeviceSize();
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | undefined>();
-  const [isUploading, setIsUploading] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [result, setResult] = useState<any>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-      setPreviewUrl(URL.createObjectURL(file));
-    }
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const file = e.dataTransfer.files?.[0];
-    if (file && file.type === "application/pdf") {
-      setSelectedFile(file);
-      setPreviewUrl(URL.createObjectURL(file));
-    }
-  };
-
-  const handleUpload = async () => {
-    if (!selectedFile || isUploading) return; // ✅ Prevent double upload
-
-    setIsUploading(true); // ✅ Start upload
-
-    try {
-      const formData = new FormData();
-      formData.append("file", selectedFile);
-
-      const res = await fetch("/api/invoiceUpload", {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await res.json();
-      setResult(data.data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsUploading(false); // ✅ End upload
-    }
-  };
+  const {
+    selectedFile,
+    previewUrl,
+    isUploading,
+    result,
+    fileInputRef,
+    handleFileChange,
+    handleDrop,
+    handleUpload,
+  } = useInvoiceExtraction();
 
   return isSmallDevice ? (
     <div className="w-[100%] mx-auto">

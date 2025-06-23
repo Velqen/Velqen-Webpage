@@ -4,105 +4,30 @@ import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useSession } from "next-auth/react";
 import { useState, ChangeEvent } from "react";
 import useTransactions from "@/hooks/useTransactions";
+import { useTransactionClassification } from "@/hooks/useTransactionClassification";
 
 type Props = {
   onCsvParsed?: (data: string[][]) => void; // ✅ New prop
 };
 
 export default function TransactionClassification({ onCsvParsed }: Props) {
-  const [file, setFile] = useState<File | null>(null);
-  const [csvData, setCsvData] = useState<string[][]>([]);
-  const [status, setStatus] = useState<string>("");
-  const [isUploading, setIsUploading] = useState(false);
   const [isUploadingToDB, setIsUploadingToDB] = useState(false);
   const { isSmallDevice } = useDeviceSize();
   const { addTransaction } = useTransactions();
-
+  const {
+    file,
+    csvData,
+    status,
+    isUploading,
+    previewHeaders,
+    previewRows,
+    handleFileChange,
+    handleUpload,
+    setStatus,
+  } = useTransactionClassification({ onCsvParsed });
   // Added for preview:
-  const [previewHeaders, setPreviewHeaders] = useState<string[]>([]); // Added
-  const [previewRows, setPreviewRows] = useState<string[][]>([]); // Added
+
   const { data: session, status: authStatus } = useSession(); // ✅ Correct
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
-    if (selectedFile && selectedFile.type === "text/csv") {
-      setFile(selectedFile);
-      setStatus("");
-      // Clear previous preview when a new file is selected:
-      setPreviewHeaders([]); // Added
-      setPreviewRows([]); // Added
-    } else {
-      setFile(null);
-      setStatus("Please select a valid CSV file.");
-      setPreviewHeaders([]); // Added
-      setPreviewRows([]); // Added
-    }
-  };
-
-  const handleUpload = async () => {
-    if (!file) {
-      setStatus("Please select a CSV file.");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("file", file);
-
-    setIsUploading(true);
-    setStatus("Uploading and classifying...");
-
-    try {
-      const response = await fetch("api/transactionUpload", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to classify transactions.");
-      }
-
-      // Fetch blob from response
-      const blob = await response.blob();
-      // Create a download link as before
-      const url = window.URL.createObjectURL(new Blob([blob]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "classified_transactions.csv");
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-
-      // Added: parse blob text for preview
-      const text = await blob.text(); // Added
-      const lines = text.split("\n").filter((line) => line.trim() !== ""); // Added
-      if (lines.length > 0) {
-        // Added
-        const headers = lines[0].split(","); // Added
-        const rawRows = lines.slice(1, 6).map((line) => line.split(",")); // Added (first 5 rows)
-        const fullCsv = [
-          headers,
-          ...lines.slice(1).map((line) => line.split(",")),
-        ]; // ✅ Line added
-        setCsvData(fullCsv); // ✅ Update local state
-        onCsvParsed?.(fullCsv);
-        setPreviewHeaders(headers); // Added
-        setPreviewRows(rawRows); // Added
-      } // Added
-
-      setStatus("Classification complete."); // Modified message to mention preview
-    } catch (error: unknown) {
-      let message = "Unknown error";
-      if (error instanceof Error) {
-        message = error.message;
-      }
-      setStatus(`Error: ${message}`);
-      // Clear preview on error
-      setPreviewHeaders([]); // Added
-      setPreviewRows([]); // Added
-    } finally {
-      setIsUploading(false); // ✅ end loading
-    }
-  };
 
   const handleUploadToDB = async () => {
     if (authStatus !== "authenticated" || csvData.length === 0) {

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
+import { useRecordReconciliation } from "@/hooks/useRecordReconciliation";
 
 type MatchedPair = {
   bank_id: string;
@@ -72,46 +73,17 @@ function FileInput({
 }
 
 export default function RecordReconciliation() {
-  const [bankFile, setBankFile] = useState<File | null>(null);
-  const [ledgerFile, setLedgerFile] = useState<File | null>(null);
-  const [results, setResults] = useState<ReconciliationResult | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const {
+    bankFile,
+    ledgerFile,
+    results,
+    error,
+    loading,
+    setBankFile,
+    setLedgerFile,
+    handleSubmit,
+  } = useRecordReconciliation();
   const { isSmallDevice } = useDeviceSize();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setResults(null);
-    setLoading(true);
-
-    if (!bankFile || !ledgerFile) {
-      setError("Both files are required.");
-      setLoading(false);
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("bank", bankFile);
-    formData.append("ledger", ledgerFile);
-
-    try {
-      const res = await fetch("/api/recordReconciliation", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!res.ok) throw new Error("Failed to reconcile.");
-
-      const data = await res.json();
-      setResults(data);
-    } catch (err) {
-      console.error(err);
-      setError("Something went wrong. Please check your server.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="w-full mx-auto bg-white shadow-lg rounded-xl p-6 mb-10">
