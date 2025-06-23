@@ -21,7 +21,6 @@ export default function TransactionRow({
   isEditing,
   editedRow,
   setEditedRow,
-  setEditingIndex,
   onSave,
   onCancel,
   onStartEdit,

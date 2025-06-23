@@ -1,31 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useRecordReconciliation } from "@/hooks/useRecordReconciliation";
 
-type MatchedPair = {
-  bank_id: string;
-  ledger_id: string;
-};
-
-type NLPMatchedPair = {
-  bank_id: string;
-  ledger_id: string;
-  matched_fields: {
-    amount?: boolean;
-    date?: boolean;
-    description?: boolean;
-    [key: string]: boolean | undefined;
-  };
-};
-
-type ReconciliationResult = {
-  matched_simple: MatchedPair[];
-  matched_nlp: NLPMatchedPair[];
-  unmatched_bank: Record<string, unknown>[];
-  unmatched_ledger: Record<string, unknown>[];
-};
 function FileInput({
   label,
   file,

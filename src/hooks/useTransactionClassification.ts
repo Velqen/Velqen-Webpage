@@ -1,5 +1,5 @@
 // hooks/useTransactionClassification.ts
-import { useState, useRef, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 
 type CsvUploadOptions = {
   onCsvParsed?: (data: string[][]) => void;
@@ -76,7 +76,7 @@ export function useTransactionClassification({ onCsvParsed }: CsvUploadOptions =
       }
 
       setStatus("Classification complete.");
-    } catch (err) {
+    } catch {
       setStatus("❌ Error during upload.");
       setPreviewHeaders([]);
       setPreviewRows([]);

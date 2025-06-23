@@ -1,12 +1,12 @@
 // hooks/useTransactions.ts
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 import { RecordItem } from "@/types/transactions";
 
 export default function useTransactions() {
   const [data, setData] = useState<RecordItem[]>([]);
 
-  const fetchData = async () => {
+    const fetchData = useCallback(async () => {
     try {
       const res = await axios.get("/api/databaseTransaction");
       const sortedData = res.data.data.sort(
@@ -17,7 +17,7 @@ export default function useTransactions() {
     } catch (err) {
       console.error("Failed to fetch transactions:", err);
     }
-  };
+  }, []);
 
   const updateTransaction = async (editedRow: RecordItem) => {
     try {
@@ -35,7 +35,8 @@ export default function useTransactions() {
   const rows = Array.isArray(newRow) ? newRow : [newRow]; // 🟩 support bulk or single
 
   const formattedRows = rows.map((row) => {
-    const { id, ...rowWithoutId } = row;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const rowWithoutId = (({ id, ...rest }) => rest)(row);
 
     let parsedDate = rowWithoutId.date;
     if (typeof parsedDate === "string" && parsedDate.includes("/")) {

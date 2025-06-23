@@ -4,7 +4,6 @@ import dynamic from "next/dynamic"; // ✅ Add this at the top
 
 const ReactJson = dynamic(() => import("react-json-view"), { ssr: false }); // ✅ This disables SSR
 
-import React, { useState, useRef } from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useInvoiceExtraction } from "@/hooks/useInvoiceExtraction";
 const InvoiceExtraction = () => {

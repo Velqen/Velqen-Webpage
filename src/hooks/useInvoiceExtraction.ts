@@ -5,7 +5,7 @@ export function useInvoiceExtraction() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | undefined>();
   const [isUploading, setIsUploading] = useState(false);
-  const [result, setResult] = useState<any>(null); 
+  const [result, setResult] = useState<unknown>(null); 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

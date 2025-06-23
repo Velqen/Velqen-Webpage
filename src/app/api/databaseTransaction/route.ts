@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
   }
 
   // Normalise a single transaction row
-  const normaliseRow = (item: Record<string, any>) => {
+  const normaliseRow = (item: Record<string, unknown>) => {
     const isoDate = item.date;
     return {
       ...item,

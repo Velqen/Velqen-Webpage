@@ -2,7 +2,7 @@
 
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useSession } from "next-auth/react";
-import { useState, ChangeEvent } from "react";
+import { useState } from "react";
 import useTransactions from "@/hooks/useTransactions";
 import { useTransactionClassification } from "@/hooks/useTransactionClassification";
 
@@ -27,7 +27,7 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
   } = useTransactionClassification({ onCsvParsed });
   // Added for preview:
 
-  const { data: session, status: authStatus } = useSession(); // ✅ Correct
+  const { status: authStatus } = useSession(); // ✅ Correct
 
   const handleUploadToDB = async () => {
     if (authStatus !== "authenticated" || csvData.length === 0) {

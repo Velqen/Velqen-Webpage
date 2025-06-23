@@ -10,7 +10,7 @@ import NewTransactionRow from "../NewTransactionRow/NewTransactionRow";
 export default function TransactionEditor() {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editedRow, setEditedRow] = useState<RecordItem | null>(null);
-  const { data, setData, fetchData, updateTransaction, addTransaction } =
+  const { data, fetchData, updateTransaction, addTransaction } =
     useTransactions();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,7 +24,7 @@ export default function TransactionEditor() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const startEdit = (i: number) => {
     const globalIndex = (currentPage - 1) * itemsPerPage + i; // ✅ map to global index
@@ -47,13 +47,6 @@ export default function TransactionEditor() {
     } catch (error) {
       console.error("Failed to save changes:", error);
     }
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    if (!editedRow) return;
-    setEditedRow({ ...editedRow, [e.target.name]: e.target.value });
   };
 
   return (
