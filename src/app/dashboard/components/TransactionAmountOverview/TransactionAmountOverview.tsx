@@ -32,7 +32,7 @@ const TransactionAmountOverview = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/dashboardTransactions");
+        const res = await fetch("/api/databaseTransaction");
         const result = await res.json();
         if (result.error) throw new Error(result.error);
         setUserData(result.data || []);

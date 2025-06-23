@@ -3,6 +3,7 @@
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useSession } from "next-auth/react";
 import { useState, ChangeEvent } from "react";
+import useTransactions from "@/hooks/useTransactions";
 
 type Props = {
   onCsvParsed?: (data: string[][]) => void; // ✅ New prop
@@ -15,6 +16,7 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
   const [isUploading, setIsUploading] = useState(false);
   const [isUploadingToDB, setIsUploadingToDB] = useState(false);
   const { isSmallDevice } = useDeviceSize();
+  const { addTransaction } = useTransactions();
 
   // Added for preview:
   const [previewHeaders, setPreviewHeaders] = useState<string[]>([]); // Added
@@ -112,13 +114,20 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
     setStatus("Uploading...");
 
     try {
-      const res = await fetch("/api/frontendTransactionsDB", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: session.user?.email, data: csvData }),
-      });
+      const rows = csvData.slice(1); // skip header row
 
-      if (!res.ok) throw new Error();
+      const recordItems = rows.map((row) => ({
+        id: "",
+        transaction_description: row[0],
+        amount_rm: parseFloat(row[1]),
+        date: row[2],
+        merchant_name: row[3],
+        main_category: row[4],
+        sub_category: row[5],
+        detailed_category: row[6],
+      }));
+
+      await addTransaction(recordItems); // ✅ Replaces fetch
       setStatus("✅ Upload successful!");
     } catch {
       setStatus("❌ Upload failed.");
