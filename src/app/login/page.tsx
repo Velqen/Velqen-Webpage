@@ -1,8 +1,12 @@
 "use client";
 import Image from "next/image"; // ✅ Import Image
 import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
+
   return (
     <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
       <Image
@@ -19,7 +23,7 @@ export default function LoginPage() {
       </p>
 
       <button
-        onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+        onClick={() => signIn("google", { callbackUrl })}
         className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md transition"
       >
         Sign in with Google

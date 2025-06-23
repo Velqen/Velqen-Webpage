@@ -48,3 +48,33 @@ export async function PUT(req: NextRequest) {
 
   return NextResponse.json({ message: "Transaction updated successfully" });
 }
+
+// ✅ Post
+export async function POST(req: NextRequest) {
+  const token = await getToken({ req });
+
+  if (!token?.email) {
+    return NextResponse.json({ error: "Unauthenticated" }, { status: 401 });
+  }
+
+  const body = await req.json();
+
+  const { data, error } = await supabaseAdmin
+    .from("transaction_records")
+    .insert([
+      {
+        ...body,
+        user_email: token.email,
+      },
+    ])
+    .select()
+    .single();
+
+  if (error) {
+    console.error("Supabase insert error:", error); // 👈 add this
+    console.error("Submitted body:", body); // 👈 add this too
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ message: "Transaction added", data }, { status: 201 });
+}

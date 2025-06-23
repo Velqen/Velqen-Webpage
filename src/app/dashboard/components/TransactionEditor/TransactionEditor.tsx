@@ -1,14 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { RecordItem } from "@/types/transactions";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import useTransactions from "@/hooks/useTransactions";
+import TransactionRow from "../TransactionRow/TransactionRow";
+import NewTransactionRow from "../NewTransactionRow/NewTransactionRow";
 
 export default function TransactionEditor() {
-  const [data, setData] = useState<RecordItem[]>([]);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editedRow, setEditedRow] = useState<RecordItem | null>(null);
+  const { data, setData, fetchData, updateTransaction, addTransaction } =
+    useTransactions();
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -22,19 +25,6 @@ export default function TransactionEditor() {
   useEffect(() => {
     fetchData();
   }, []);
-
-  const fetchData = async () => {
-    try {
-      const res = await axios.get("/api/dashboardTransactions");
-      const sortedData = res.data.data.sort(
-        (a: RecordItem, b: RecordItem) =>
-          new Date(b.date).getTime() - new Date(a.date).getTime()
-      );
-      setData(sortedData);
-    } catch (err) {
-      console.error("Failed to fetch transactions:", err);
-    }
-  };
 
   const startEdit = (i: number) => {
     const globalIndex = (currentPage - 1) * itemsPerPage + i; // ✅ map to global index
@@ -51,10 +41,7 @@ export default function TransactionEditor() {
     if (editedRow == null || editingIndex == null) return;
 
     try {
-      // ✅ Call PUT on existing API with ID
-      await axios.put("/api/dashboardTransactions", editedRow);
-
-      // ✅ Refresh data after saving
+      await updateTransaction(editedRow); // ✅ using hook
       await fetchData();
       cancelEdit();
     } catch (error) {
@@ -87,121 +74,34 @@ export default function TransactionEditor() {
         </thead>
         <tbody>
           {paginatedData.map((row, i) => {
-            const globalIndex = (currentPage - 1) * itemsPerPage + i; // 🔁 recalculate here too
+            const globalIndex = (currentPage - 1) * itemsPerPage + i;
             const isEditing = globalIndex === editingIndex;
             return (
-              <tr
-                key={`${row.date}-${i}`}
-                className="border-t border-velqen-gray text-velqen-light-gray"
-              >
-                <td className="px-3 py-4">{row.date}</td>
-                <td className="px-3 py-4">
-                  {isEditing ? (
-                    <input
-                      name="merchant_name"
-                      value={editedRow?.merchant_name || ""}
-                      onChange={handleChange}
-                      className="border rounded px-2 py-1 w-full bg-velqen-gray "
-                    />
-                  ) : (
-                    row.merchant_name
-                  )}
-                </td>
-                <td className="px-3 py-4">
-                  {isEditing ? (
-                    <input
-                      name="transaction_description"
-                      value={editedRow?.transaction_description || ""}
-                      onChange={handleChange}
-                      className="border rounded px-2 py-1 w-full bg-velqen-gray"
-                    />
-                  ) : (
-                    row.transaction_description
-                  )}
-                </td>
-                <td className="px-3 py-4">
-                  {isEditing ? (
-                    <input
-                      name="main_category"
-                      value={editedRow?.main_category || ""}
-                      onChange={handleChange}
-                      className="border rounded px-2 py-1 w-full bg-velqen-gray"
-                    />
-                  ) : (
-                    row.main_category
-                  )}
-                </td>
-                <td className="px-3 py-4">
-                  {isEditing ? (
-                    <input
-                      name="sub_category"
-                      value={editedRow?.sub_category || ""}
-                      onChange={handleChange}
-                      className="border rounded px-2 py-1 w-full bg-velqen-gray"
-                    />
-                  ) : (
-                    row.sub_category
-                  )}
-                </td>
-                <td className="px-3 py-4">
-                  {isEditing ? (
-                    <input
-                      name="detailed_category"
-                      value={editedRow?.detailed_category || ""}
-                      onChange={handleChange}
-                      className="border rounded px-2 py-1 w-full bg-velqen-gray"
-                    />
-                  ) : (
-                    row.detailed_category
-                  )}
-                </td>
-                <td className="px-3 py-4 text-right">
-                  {isEditing ? (
-                    <input
-                      type="number"
-                      name="amount_rm"
-                      value={editedRow?.amount_rm || 0}
-                      onChange={handleChange}
-                      className="border rounded px-2 py-1 w-24 text-right bg-velqen-gray"
-                    />
-                  ) : (
-                    <span
-                      className={
-                        row.amount_rm < 0 ? "text-red-500" : "text-green-300"
-                      }
-                    >
-                      {Number(row.amount_rm).toFixed(2)}
-                    </span>
-                  )}
-                </td>
-                <td className="px-3 py-4 text-center">
-                  {isEditing ? (
-                    <div className="flex gap-2 justify-center">
-                      <button
-                        onClick={saveEdit}
-                        className="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
-                      >
-                        Save
-                      </button>
-                      <button
-                        onClick={cancelEdit}
-                        className="px-2 py-1 bg-gray-300 text-black rounded hover:bg-gray-400"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => startEdit(i)}
-                      className="px-2 py-1 velqen-gradient-bg text-black rounded velqen-gradient-bg-hover"
-                    >
-                      Edit
-                    </button>
-                  )}
-                </td>
-              </tr>
+              <TransactionRow
+                key={row.id || `${row.date}-${i}`}
+                row={row}
+                index={globalIndex}
+                isEditing={isEditing}
+                editedRow={editedRow}
+                setEditedRow={setEditedRow}
+                setEditingIndex={setEditingIndex}
+                onSave={saveEdit}
+                onCancel={cancelEdit}
+                onStartEdit={startEdit}
+              />
             );
           })}
+
+          <NewTransactionRow
+            onAdd={async (row) => {
+              try {
+                await addTransaction(row); // ✅ useTransactions hook
+                await fetchData(); // ✅ refresh list with real backend id
+              } catch (err) {
+                console.error("Failed to add row:", err);
+              }
+            }}
+          />
         </tbody>
       </table>
       {/* ✅ Pagination Controls */}
