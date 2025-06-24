@@ -29,7 +29,7 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-[100dvh]">
       <DashboardSidebar />
       <main className="flex-1 bg-velqen-gray text-white min-w-0">
         {children}
