@@ -117,7 +117,7 @@ const InvoiceExtraction = ({
                       alert("No data to download.");
                     }
                   }}
-                  className="mt-4 w-full py-3 bg-velqen-green hover:bg-velqen-green-hover text-white font-semibold rounded transition text-xl"
+                  className="mt-4 w-full py-3 bg-velqen-green hover:bg-velqen-green-hover text-white font-semibold rounded transition"
                 >
                   📥 Download as CSV
                 </button>
