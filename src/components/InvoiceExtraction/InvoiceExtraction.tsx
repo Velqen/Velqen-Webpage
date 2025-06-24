@@ -7,7 +7,7 @@ const ReactJson = dynamic(() => import("react-json-view"), { ssr: false }); // �
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useInvoiceExtraction } from "@/hooks/useInvoiceExtraction";
 import { downloadRecordsAsCSV } from "@/lib/exportInvoiceCSV";
-import { MinimalRecord, RecordItem } from "@/types/transactions";
+import { MinimalRecord } from "@/types/transactions";
 import { useEffect, useRef } from "react";
 const InvoiceExtraction = ({
   onExtractedRecords,
@@ -29,19 +29,16 @@ const InvoiceExtraction = ({
   const prevRecordsRef = useRef<MinimalRecord[] | null>(null);
 
   useEffect(() => {
-    const safeResult = result as any;
+    if (!result) return;
 
-    if (safeResult?.items && Array.isArray(safeResult.items)) {
-      const records = extractMinimalRecords(safeResult);
+    const records = extractMinimalRecords(result);
 
-      // Check if records changed (simple shallow compare)
-      const recordsString = JSON.stringify(records);
-      const prevRecordsString = JSON.stringify(prevRecordsRef.current);
+    const recordsString = JSON.stringify(records);
+    const prevRecordsString = JSON.stringify(prevRecordsRef.current);
 
-      if (records.length > 0 && recordsString !== prevRecordsString) {
-        onExtractedRecords(records);
-        prevRecordsRef.current = records;
-      }
+    if (records.length > 0 && recordsString !== prevRecordsString) {
+      onExtractedRecords(records);
+      prevRecordsRef.current = records;
     }
   }, [result, onExtractedRecords]);
 
@@ -97,19 +94,33 @@ const InvoiceExtraction = ({
           {/* Right side: Results */}
           <div className="flex-1">
             {result ? (
-              <div className="p-4 bg-gray-100 rounded shadow h-full overflow-auto">
-                <h2 className="text-base font-semibold mb-2">
-                  Extraction Result:
-                </h2>
-                <ReactJson
-                  src={result}
-                  collapsed={1}
-                  enableClipboard={true}
-                  displayDataTypes={false}
-                  name={false}
-                  style={{ fontSize: "0.85rem", wordBreak: "break-word" }}
-                />
-              </div>
+              <>
+                <div className="p-4 bg-gray-100 rounded shadow h-full overflow-auto">
+                  <h2 className="text-base font-semibold mb-2">
+                    Extraction Result:
+                  </h2>
+                  <ReactJson
+                    src={result}
+                    collapsed={1}
+                    enableClipboard={true}
+                    displayDataTypes={false}
+                    name={false}
+                    style={{ fontSize: "0.85rem", wordBreak: "break-word" }}
+                  />
+                </div>
+                <button
+                  onClick={() => {
+                    if (result) {
+                      downloadRecordsAsCSV([result as Record<string, unknown>]); // cast result as single record wrapped in array
+                    } else {
+                      alert("No data to download.");
+                    }
+                  }}
+                  className="mt-4 w-full py-3 bg-velqen-green hover:bg-velqen-green-hover text-white font-semibold rounded transition text-xl"
+                >
+                  📥 Download as CSV
+                </button>
+              </>
             ) : (
               <div className="p-4 border rounded text-velqen-gray text-base italic">
                 Extraction result will appear here.
@@ -190,12 +201,12 @@ const InvoiceExtraction = ({
                 <button
                   onClick={() => {
                     if (result) {
-                      downloadRecordsAsCSV([result as Record<string, any>]); // cast result as single record wrapped in array
+                      downloadRecordsAsCSV([result as Record<string, unknown>]); // cast result as single record wrapped in array
                     } else {
                       alert("No data to download.");
                     }
                   }}
-                  className="mt-4 w-full py-3 velqen-gradient-bg velqen-gradient-bg-hover text-white font-semibold rounded transition text-xl"
+                  className="mt-4 w-full py-3 bg-velqen-green hover:bg-velqen-green-hover text-white font-semibold rounded transition text-xl"
                 >
                   📥 Download as CSV
                 </button>
@@ -214,17 +225,27 @@ const InvoiceExtraction = ({
 
 export default InvoiceExtraction;
 
-export function extractMinimalRecords(result: any): MinimalRecord[] {
-  const amount = parseFloat(result.amount_rm);
+export function extractMinimalRecords(result: unknown): MinimalRecord[] {
+  const r = result as Record<string, unknown>; // ✅ no need to shape, just index
+
+  const amount = parseFloat(r["amount_rm"] as string);
   const validAmount = isNaN(amount) ? 0 : +amount.toFixed(2);
+
+  const items = r["items"] as { description?: string }[] | undefined;
+  const transaction_description = items?.[0]?.description || "No description";
+
+  const date = (r["date"] as string) || new Date().toISOString().split("T")[0];
+  const merchant =
+    (r["merchant_name"] as string) ||
+    (r["customer_name"] as string) ||
+    "Unknown";
 
   return [
     {
-      transaction_description:
-        result.items?.[0]?.description || "No description",
+      transaction_description,
       amount_rm: validAmount,
-      date: result.date || new Date().toISOString().split("T")[0],
-      merchant_name: result.merchant_name || result.customer_name || "Unknown",
+      date,
+      merchant_name: merchant,
     },
   ];
 }

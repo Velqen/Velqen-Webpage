@@ -1,7 +1,6 @@
 // anyfolder/exportInvoiceCSV.ts
-import { RecordItem } from '@/types/transactions';
 
-export function downloadRecordsAsCSV(records: Array<Record<string, any>>) {
+export function downloadRecordsAsCSV(records: Array<Record<string, unknown>>) {
   if (!records.length) {
     alert("No data to export.");
     return;

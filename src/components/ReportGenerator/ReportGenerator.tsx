@@ -19,6 +19,9 @@ export type ReportGeneratorHandle = {
 
 const ReportGenerator = forwardRef<ReportGeneratorHandle, Props>(
   ({ csvData }, ref) => {
+    useImperativeHandle(ref, () => ({
+      generatePDF,
+    }));
     if (csvData.length === 0) {
       return <p className="text-velqen-gray">No CSV data uploaded yet.</p>;
     }
@@ -169,9 +172,6 @@ const ReportGenerator = forwardRef<ReportGeneratorHandle, Props>(
       });
       doc.save("financial_report.pdf");
     };
-    useImperativeHandle(ref, () => ({
-      generatePDF,
-    }));
 
     return null; // No button or UI here
   }

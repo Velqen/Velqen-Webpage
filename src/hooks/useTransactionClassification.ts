@@ -38,7 +38,7 @@ export function useTransactionClassification({
     setStatus("Uploading and classifying...");
 
     try {
-      let formData = new FormData();
+      const formData = new FormData();
 
       if (file) {
         // ✅ Case 1: File selected manually
