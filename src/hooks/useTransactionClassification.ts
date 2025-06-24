@@ -1,17 +1,22 @@
-// hooks/useTransactionClassification.ts
-import { useState, ChangeEvent } from "react";
+// ✅ Line changed: Added `useEffect`
+import { useEffect, useState, ChangeEvent } from "react";
 
 type CsvUploadOptions = {
   onCsvParsed?: (data: string[][]) => void;
+  csvDataInput?: string[][]; // ✅ New: external data passed directly
 };
 
-export function useTransactionClassification({ onCsvParsed }: CsvUploadOptions = {}) {
+export function useTransactionClassification({
+  onCsvParsed,
+  csvDataInput,
+}: CsvUploadOptions = {}) {
   const [file, setFile] = useState<File | null>(null);
   const [csvData, setCsvData] = useState<string[][]>([]);
   const [status, setStatus] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
   const [previewHeaders, setPreviewHeaders] = useState<string[]>([]);
   const [previewRows, setPreviewRows] = useState<string[][]>([]);
+  const [hasProcessedInput, setHasProcessedInput] = useState(false); // ✅ avoid re-processing
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -29,23 +34,31 @@ export function useTransactionClassification({ onCsvParsed }: CsvUploadOptions =
   };
 
   const handleUpload = async () => {
-    if (!file) {
-      setStatus("Please select a CSV file.");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("file", file);
     setIsUploading(true);
     setStatus("Uploading and classifying...");
 
     try {
+      let formData = new FormData();
+
+      if (file) {
+        // ✅ Case 1: File selected manually
+        formData.append("file", file);
+      } else if (csvData.length > 0) {
+        // ✅ Case 2: CSV data from props (InvoiceExtraction)
+        const csvString = csvData.map((row) => row.join(",")).join("\n");
+        const blob = new Blob([csvString], { type: "text/csv" });
+        formData.append("file", new File([blob], "generated.csv", { type: "text/csv" }));
+      } else {
+        setStatus("❌ No file or CSV data to upload.");
+        return;
+      }
+
       const response = await fetch("api/transactionUpload", {
         method: "POST",
         body: formData,
       });
 
-      if (!response.ok) throw new Error("Failed to classify transactions.");
+      if (!response.ok) throw new Error("Upload failed");
 
       const blob = await response.blob();
 
@@ -58,32 +71,48 @@ export function useTransactionClassification({ onCsvParsed }: CsvUploadOptions =
       link.click();
       link.remove();
 
-      // Parse CSV
+      // Parse for preview
       const text = await blob.text();
       const lines = text.split("\n").filter((line) => line.trim() !== "");
 
       if (lines.length > 0) {
         const headers = lines[0].split(",");
         const rawRows = lines.slice(1, 6).map((line) => line.split(","));
-        const fullCsv = [
-          headers,
-          ...lines.slice(1).map((line) => line.split(",")),
-        ];
+        const fullCsv = [headers, ...lines.slice(1).map((line) => line.split(","))];
+
         setCsvData(fullCsv);
-        onCsvParsed?.(fullCsv);
         setPreviewHeaders(headers);
         setPreviewRows(rawRows);
+        onCsvParsed?.(fullCsv);
       }
 
-      setStatus("Classification complete.");
-    } catch {
+      setStatus("✅ Classification complete.");
+    } catch (err) {
+      console.error(err);
       setStatus("❌ Error during upload.");
-      setPreviewHeaders([]);
-      setPreviewRows([]);
     } finally {
       setIsUploading(false);
     }
   };
+
+
+  // ✅ New: Auto-process passed-in CSV (e.g. from InvoiceExtraction)
+  useEffect(() => {
+    if (
+      csvDataInput &&
+      csvDataInput.length > 0 &&
+      !hasProcessedInput
+    ) {
+      setCsvData(csvDataInput);
+      onCsvParsed?.(csvDataInput);
+
+      const [headers, ...rows] = csvDataInput;
+      setPreviewHeaders(headers);
+      setPreviewRows(rows.slice(0, 5)); // show first 5
+      setStatus("✅ Data received from InvoiceExtraction");
+      setHasProcessedInput(true);
+    }
+  }, [csvDataInput, hasProcessedInput, onCsvParsed]);
 
   return {
     file,

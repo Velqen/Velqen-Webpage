@@ -8,3 +8,8 @@ export type RecordItem = {
   transaction_description: string;
   merchant_name: string;
 };
+
+export type MinimalRecord = Pick<
+  RecordItem,
+  "date" | "amount_rm" | "transaction_description" | "merchant_name"
+>;

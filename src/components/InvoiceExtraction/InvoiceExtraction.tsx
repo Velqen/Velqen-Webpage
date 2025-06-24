@@ -6,7 +6,14 @@ const ReactJson = dynamic(() => import("react-json-view"), { ssr: false }); // â
 
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useInvoiceExtraction } from "@/hooks/useInvoiceExtraction";
-const InvoiceExtraction = () => {
+import { downloadRecordsAsCSV } from "@/lib/exportInvoiceCSV";
+import { MinimalRecord, RecordItem } from "@/types/transactions";
+import { useEffect, useRef } from "react";
+const InvoiceExtraction = ({
+  onExtractedRecords,
+}: {
+  onExtractedRecords: (records: MinimalRecord[]) => void;
+}) => {
   const { isSmallDevice } = useDeviceSize();
   const {
     selectedFile,
@@ -18,6 +25,25 @@ const InvoiceExtraction = () => {
     handleDrop,
     handleUpload,
   } = useInvoiceExtraction();
+
+  const prevRecordsRef = useRef<MinimalRecord[] | null>(null);
+
+  useEffect(() => {
+    const safeResult = result as any;
+
+    if (safeResult?.items && Array.isArray(safeResult.items)) {
+      const records = extractMinimalRecords(safeResult);
+
+      // Check if records changed (simple shallow compare)
+      const recordsString = JSON.stringify(records);
+      const prevRecordsString = JSON.stringify(prevRecordsRef.current);
+
+      if (records.length > 0 && recordsString !== prevRecordsString) {
+        onExtractedRecords(records);
+        prevRecordsRef.current = records;
+      }
+    }
+  }, [result, onExtractedRecords]);
 
   return isSmallDevice ? (
     <div className="w-[100%] mx-auto">
@@ -147,19 +173,33 @@ const InvoiceExtraction = () => {
           {/* Right side: Results */}
           <div className="flex-1">
             {result ? (
-              <div className="p-4 bg-gray-100 rounded shadow h-full overflow-x-auto">
-                <h2 className="text-xl font-semibold mb-2">
-                  Extraction Result:
-                </h2>
-                <ReactJson
-                  src={result}
-                  collapsed={1}
-                  enableClipboard={true}
-                  displayDataTypes={false}
-                  name={false}
-                  style={{ fontSize: "0.9rem", wordBreak: "break-word" }}
-                />
-              </div>
+              <>
+                <div className="p-4 bg-gray-100 rounded shadow h-full overflow-x-auto">
+                  <h2 className="text-xl font-semibold mb-2">
+                    Extraction Result:
+                  </h2>
+                  <ReactJson
+                    src={result}
+                    collapsed={1}
+                    enableClipboard={true}
+                    displayDataTypes={false}
+                    name={false}
+                    style={{ fontSize: "0.9rem", wordBreak: "break-word" }}
+                  />
+                </div>
+                <button
+                  onClick={() => {
+                    if (result) {
+                      downloadRecordsAsCSV([result as Record<string, any>]); // cast result as single record wrapped in array
+                    } else {
+                      alert("No data to download.");
+                    }
+                  }}
+                  className="mt-4 w-full py-3 velqen-gradient-bg velqen-gradient-bg-hover text-white font-semibold rounded transition text-xl"
+                >
+                  ðŸ“¥ Download as CSV
+                </button>
+              </>
             ) : (
               <div className="p-4 border h-full rounded text-velqen-gray text-xl italic">
                 Extraction result will appear here.
@@ -173,3 +213,18 @@ const InvoiceExtraction = () => {
 };
 
 export default InvoiceExtraction;
+
+export function extractMinimalRecords(result: any): MinimalRecord[] {
+  const amount = parseFloat(result.amount_rm);
+  const validAmount = isNaN(amount) ? 0 : +amount.toFixed(2);
+
+  return [
+    {
+      transaction_description:
+        result.items?.[0]?.description || "No description",
+      amount_rm: validAmount,
+      date: result.date || new Date().toISOString().split("T")[0],
+      merchant_name: result.merchant_name || result.customer_name || "Unknown",
+    },
+  ];
+}

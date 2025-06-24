@@ -2,18 +2,20 @@
 
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useTransactions from "@/hooks/useTransactions";
 import { useTransactionClassification } from "@/hooks/useTransactionClassification";
 
 type Props = {
-  onCsvParsed?: (data: string[][]) => void; // ✅ New prop
+  onCsvParsed?: (data: string[][]) => void;
+  csvData?: string[][];
 };
 
-export default function TransactionClassification({ onCsvParsed }: Props) {
+export default function TransactionClassification(props: Props) {
   const [isUploadingToDB, setIsUploadingToDB] = useState(false);
   const { isSmallDevice } = useDeviceSize();
   const { addTransaction } = useTransactions();
+
   const {
     file,
     csvData,
@@ -24,13 +26,40 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
     handleFileChange,
     handleUpload,
     setStatus,
-  } = useTransactionClassification({ onCsvParsed });
-  // Added for preview:
+    setCsvData,
+  } = useTransactionClassification({ onCsvParsed: props.onCsvParsed });
 
-  const { status: authStatus } = useSession(); // ✅ Correct
+  const effectiveCsvData = useMemo(() => {
+    return props.csvData?.length ? props.csvData : csvData;
+  }, [props.csvData, csvData]);
+  useEffect(() => {
+    if (effectiveCsvData.length > 0) {
+      console.log("🧾 effectiveCsvData[0]:", effectiveCsvData[0]);
+    }
+  }, [effectiveCsvData]);
+
+  useEffect(() => {
+    if (
+      props.csvData &&
+      props.csvData.length > 0 &&
+      props.csvData[0][0] !== "Transaction_Description"
+    ) {
+      const headers = [
+        "Transaction_Description",
+        "Amount_RM",
+        "Date",
+        "Merchant_Name",
+      ];
+      const merged = [headers, ...props.csvData];
+      setCsvData(merged);
+      setStatus("✅ Data received from InvoiceExtraction");
+    }
+  }, [props.csvData, setCsvData, setStatus]);
+
+  const { status: authStatus } = useSession();
 
   const handleUploadToDB = async () => {
-    if (authStatus !== "authenticated" || csvData.length === 0) {
+    if (authStatus !== "authenticated" || effectiveCsvData.length === 0) {
       setStatus("❌ Must be logged in & have data.");
       return;
     }
@@ -39,7 +68,7 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
     setStatus("Uploading...");
 
     try {
-      const rows = csvData.slice(1); // skip header row
+      const rows = effectiveCsvData.slice(1); // skip header
 
       const recordItems = rows.map((row) => ({
         id: "",
@@ -52,7 +81,7 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
         detailed_category: row[6],
       }));
 
-      await addTransaction(recordItems); // ✅ Replaces fetch
+      await addTransaction(recordItems);
       setStatus("✅ Upload successful!");
     } catch {
       setStatus("❌ Upload failed.");
@@ -63,7 +92,7 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
 
   return (
     <div className="flex flex-col md:flex-row gap-8 w-full mx-auto">
-      {/* Left Text Section */}
+      {/* Left Section */}
       <div className="md:w-1/3">
         <h2 className="text-2xl font-semibold mb-4">
           Upload Your CSV for Classification
@@ -86,14 +115,12 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
           </li>
         </ul>
         <p className="text-velqen-gray">
-          Transactions will be automatically categorised into categories groups:
-        </p>
-        <p className="text-velqen-gray">
-          Main_Category, Sub_Category, Detailed_Category
+          Transactions will be automatically categorised into: Main_Category,
+          Sub_Category, Detailed_Category.
         </p>
       </div>
 
-      {/* Right Upload Box */}
+      {/* Right Upload Section */}
       <div className="md:w-2/3 max-w-7xl p-6 border border-velqen-gray rounded-lg shadow-lg bg-white">
         <input
           type="file"
@@ -103,14 +130,17 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
         />
 
         <div
-          className={` ${
+          className={`flex ${
             isSmallDevice ? "flex-col gap-2" : "flex-row gap-6"
-          }  flex`}
+          }`}
         >
           <button
             onClick={handleUpload}
             className="w-full velqen-gradient-bg velqen-gradient-bg-hover text-white py-3 rounded disabled:opacity-50 transition"
-            disabled={!file || isUploading}
+            disabled={
+              (!file && (!effectiveCsvData || effectiveCsvData.length === 0)) ||
+              isUploading
+            }
           >
             Upload & Classify
           </button>
@@ -118,11 +148,11 @@ export default function TransactionClassification({ onCsvParsed }: Props) {
             onClick={handleUploadToDB}
             className="w-full bg-velqen-green hover:bg-velqen-green-hover text-white py-3 rounded disabled:opacity-50 transition"
             disabled={
-              !file ||
-              csvData.length === 0 ||
+              effectiveCsvData.length === 0 ||
               isUploading ||
               isUploadingToDB ||
-              authStatus !== "authenticated"
+              authStatus !== "authenticated" ||
+              !previewHeaders.includes("Main_Category")
             }
           >
             Upload to Database

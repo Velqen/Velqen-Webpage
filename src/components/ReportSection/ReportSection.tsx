@@ -1,6 +1,15 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import Image from "next/image";
-import ReportGenerator from "../ReportGenerator/ReportGenerator";
+import dynamic from "next/dynamic";
+
+const ReportGenerator = dynamic(
+  () => import("../ReportGenerator/ReportGenerator").then((mod) => mod.default),
+  { ssr: false }
+);
+
+import { ReportGeneratorHandle } from "../ReportGenerator/ReportGenerator";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 type Props = {
@@ -8,6 +17,7 @@ type Props = {
 };
 
 const ReportSection = ({ csvData }: Props) => {
+  const reportRef = useRef<ReportGeneratorHandle>(null);
   const { isSmallDevice } = useDeviceSize();
 
   return (
@@ -28,8 +38,16 @@ const ReportSection = ({ csvData }: Props) => {
               click.
             </p>
 
-            <div className="">
-              <ReportGenerator csvData={csvData} />
+            <div>
+              <button
+                onClick={() => reportRef.current?.generatePDF()}
+                className="px-6 py-2 bg-velqen-green text-white rounded-md hover:bg-velqen-green-hover transition"
+              >
+                Download PDF
+              </button>
+              {csvData.length > 0 && (
+                <ReportGenerator ref={reportRef} csvData={csvData} />
+              )}
             </div>
           </div>
 

@@ -3,19 +3,16 @@
 import GlideLink from "@/components/GlideLink/GlideLink";
 import InvoiceExtraction from "@/components/InvoiceExtraction/InvoiceExtraction";
 import RecordReconciliation from "@/components/RecordReconciliation/RecordReconciliation";
-import ReportGenerator from "@/components/ReportSection/ReportSection";
+import ReportSection from "@/components/ReportSection/ReportSection";
 import TransactionClassification from "@/components/TransactionClassification/TransactionClassification";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useState } from "react";
 
 export default function Home() {
   const { isSmallDevice } = useDeviceSize();
-  const [csvFromChild, setCsvFromChild] = useState<string[][]>([]);
-
-  const handleCsvParsed = (data: string[][]) => {
-    console.log("✅ Received CSV from TransactionClassification:", data);
-    setCsvFromChild(data); // store it in state if needed
-  };
+  const [invoiceCsv, setInvoiceCsv] = useState<string[][]>([]);
+  const [classifiedCsv, setClassifiedCsv] = useState<string[][]>([]);
+  const [hasBeenClassified, setHasBeenClassified] = useState(false);
 
   return isSmallDevice ? (
     <div className="min-h-screen w-full flex flex-col justify-center items-center pt-24">
@@ -35,7 +32,15 @@ export default function Home() {
           <p className="text-center text-xl text-velqen-gray pb-10">
             Use AI to pull key details from invoices.
           </p>
-          <InvoiceExtraction />
+          <InvoiceExtraction
+            onExtractedRecords={(records) => {
+              const csvFormat = records.map((r) =>
+                Object.values(r).map(String)
+              );
+              setInvoiceCsv(csvFormat);
+              setHasBeenClassified(false); // reset classification on new invoice data
+            }}
+          />
         </div>
       </div>
 
@@ -50,7 +55,13 @@ export default function Home() {
           <p className="text-center text-xl text-velqen-gray pb-10">
             Understand where your money&#39;s going using AI.
           </p>
-          <TransactionClassification onCsvParsed={handleCsvParsed} />
+          <TransactionClassification
+            csvData={invoiceCsv} // input invoice data
+            onCsvParsed={(data) => {
+              setClassifiedCsv(data);
+              setHasBeenClassified(true);
+            }}
+          />
         </div>
       </div>
 
@@ -72,7 +83,7 @@ export default function Home() {
           id="record-reconciliation"
           className="w-[90%] flex flex-col justify-center items-center py-24"
         >
-          <ReportGenerator csvData={csvFromChild} />
+          <ReportSection csvData={hasBeenClassified ? classifiedCsv : []} />
         </div>
       </div>
     </div>
@@ -94,7 +105,15 @@ export default function Home() {
           <p className="text-center text-2xl text-velqen-gray pb-14">
             Use AI to pull key details from invoices.
           </p>
-          <InvoiceExtraction />
+          <InvoiceExtraction
+            onExtractedRecords={(records) => {
+              const csvFormat = records.map((r) =>
+                Object.values(r).map(String)
+              );
+              setInvoiceCsv(csvFormat);
+              setHasBeenClassified(false); // reset classification on new invoice data
+            }}
+          />
         </div>
       </div>
 
@@ -109,7 +128,13 @@ export default function Home() {
           <p className="text-center text-2xl text-velqen-gray pb-14">
             Understand where your money&#39;s going using AI.
           </p>
-          <TransactionClassification onCsvParsed={handleCsvParsed} />
+          <TransactionClassification
+            csvData={invoiceCsv} // input invoice data
+            onCsvParsed={(data) => {
+              setClassifiedCsv(data);
+              setHasBeenClassified(true);
+            }}
+          />
         </div>
       </div>
 
@@ -131,7 +156,7 @@ export default function Home() {
           id="transaction-classification"
           className="w-[80%] flex flex-col justify-center items-center py-24"
         >
-          <ReportGenerator csvData={csvFromChild} />
+          <ReportSection csvData={hasBeenClassified ? classifiedCsv : []} />
         </div>
       </div>
     </div>
