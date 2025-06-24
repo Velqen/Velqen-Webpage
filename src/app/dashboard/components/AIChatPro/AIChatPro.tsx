@@ -45,7 +45,7 @@ const AIChatPro = () => {
   if (!hasUserInteracted) {
     // Initial centered layout (like ChatGPT)
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-[100dvh]">
         <div className={`${isSmallDevice ? "w-full px-4" : "w-[600px]"}`}>
           {/* Welcome message or title could go here */}
           <div className="text-center mb-8">
@@ -85,7 +85,7 @@ const AIChatPro = () => {
       <div
         className={`${
           isSmallDevice ? "w-full" : "w-[60%]"
-        } flex flex-col max-h-screen h-[calc(100vh)]`}
+        } flex flex-col h-[100dvh]`}
       >
         {/* Chat Area */}
         <div
