@@ -12,21 +12,21 @@ export const initialMessages: Message[] = [
 export const initialMessagesPro: Message[] = [
   {
     sender: "bot",
-    text: "I'm Velqen, you're professional financial assistant.",
+    text: "I'm Velqen, your financial assistant for transaction analysis and tax advice.",
   },
 ];
 export const greetings = [
-  "Your AI Assistant, Velqen.",
-  "Here to help, it's Velqen.",
-  "Velqen at your service — your financial sidekick.",
-  "Want to check your recent transactions? Just ask.",
-  "Need a spending breakdown? I'm on it.",
-  "Curious about your monthly expenses? I can help.",
-  "Looking for budgeting tips? Let’s dive in.",
-  "Ready to review your financial summary?",
-  "Want to track where your money's going? I'm here.",
-  "Need help planning for a goal? I’ve got suggestions.",
-  "Let’s take control of your finances, together.",
-  "Got a purchase you're unsure about? Ask me first.",
-  "Checking savings progress? I'm ready when you are.",
+  "Hi, I'm Velqen, your smart finance assistant.",
+  "Let's decode your spending habits together.",
+  "Need clarity on where your money's going? I've got your back.",
+  "Want a snapshot of your financial health? Just say the word.",
+  "Saving for something big? Let's build a plan.",
+  "Think you overspent last week? I'll show you the truth.",
+  "Curious about your top 3 expenses this month?",
+  "Need tax reduction tips? I've got insights tailored to you.",
+  "Let's make sure you're not missing out on deductible expenses.",
+  "Planning ahead for tax season? I can help you prep.",
+  "Time for a finance check-in? I'm all set.",
+  "Let's turn your goals into action, starting today.",
 ];
+

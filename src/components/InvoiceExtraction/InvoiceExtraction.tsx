@@ -232,8 +232,8 @@ export function extractMinimalRecords(result: unknown): MinimalRecord[] {
   const amount = parseFloat(r["amount_rm"] as string);
   const validAmount = isNaN(amount) ? 0 : +amount.toFixed(2);
 
-  const items = r["items"] as { description?: string }[] | undefined;
-  const transaction_description = items?.[0]?.description || "No description";
+  const transaction_description =
+    (r["transaction_description"] as string) || "No description"; // ✅ Line changed
 
   const date = (r["date"] as string) || new Date().toISOString().split("T")[0];
   const merchant =
