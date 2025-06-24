@@ -48,7 +48,15 @@ const NavBar = () => {
     <nav className="absolute top-0 left-0 w-full z-500 p-4">
       <div className="flex justify-between items-center">
         {/* Site Name */}
-        <div className="font-bold text-2xl">Velqen</div>
+        <div className="h-12 w-auto">
+          <Image
+            src="/Velqen_no_bg_logo.png"
+            alt="Velqen Logo"
+            className="h-full w-auto object-contain" // ✅ Make it scale properly
+            width={800}
+            height={450}
+          />
+        </div>
 
         {/* Hamburger Button */}
         <button
@@ -78,47 +86,57 @@ const NavBar = () => {
 
       {/* Dropdown menu below navbar */}
       {open && (
-        <div className="absolute top-full left-0 w-[calc(100vw-3rem)] h-[calc(100vh-7rem)] bg-[rgba(255,255,255,0.85)] backdrop-blur-md flex flex-col items-center gap-6 py-6 z-40 mx-[1.5rem] my-[1.5rem] rounded-lg">
-          <Link href="/" onClick={() => setOpen(false)} className="text-xl">
+        <div className="absolute top-full left-[-6px] w-[calc(100vw-0.5rem)] h-[calc(100vh-7rem)] bg-[rgba(255,255,255,0.95)] backdrop-blur-md flex flex-col items-left gap-6 py-6 px-6 z-40 mx-[0.7rem] my-[1.5rem] rounded-lg">
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="text-xl border-b border-b-velqen-light-gray pb-2"
+          >
             Home
           </Link>
           <Link
             href="/dashboard"
             onClick={() => setOpen(false)}
-            className="text-xl"
+            className="text-xl border-b border-b-velqen-light-gray pb-2"
           >
             Dashboard
           </Link>
           <Link
             href="/ai-chatbot"
             onClick={() => setOpen(false)}
-            className="text-xl"
+            className="text-xl border-b border-b-velqen-light-gray pb-2"
           >
             AI Chat
           </Link>
-          <Link href="/blog" onClick={() => setOpen(false)} className="text-xl">
+          <Link
+            href="/blog"
+            onClick={() => setOpen(false)}
+            className="text-xl border-b border-b-velqen-light-gray pb-2"
+          >
             Blog
           </Link>
           <Link
             href="/about-us"
             onClick={() => setOpen(false)}
-            className="text-xl"
+            className="text-xl border-b border-b-velqen-light-gray pb-2"
           >
             About Us
           </Link>
 
-          <div className="mt-6">
+          <div className="mt-10">
             {status === "authenticated" && session?.user?.name ? (
-              <div className="flex flex-col items-center gap-2">
-                <UserIcon className="w-5 h-5 text-gray-600" />
-                <span className="text-base font-semibold velqen-gradient-text">
-                  {session.user.name}
-                </span>
+              <div className="flex flex-col items-left gap-2">
+                <div className="flex items-center gap-2">
+                  <UserIcon className="w-5 h-5 text-gray-600" />
+                  <span className="text-base font-semibold velqen-gradient-text">
+                    {session.user.name}
+                  </span>
+                </div>
                 <button
                   onClick={
                     () => signOut({ callbackUrl: "/" }) // ✅ line changed
                   }
-                  className="text-sm px-4 py-2 rounded"
+                  className="text-sm py-2 rounded self-start"
                 >
                   Sign Out
                 </button>
@@ -128,7 +146,7 @@ const NavBar = () => {
                 onClick={() =>
                   signIn(undefined, { callbackUrl: window.location.href })
                 }
-                className="flex items-center gap-2 mt-2 px-4 py-2 rounded-md hover:bg-velqen-light-gray text-lg"
+                className="flex items-center gap-2 mt-2 py-2 rounded-md hover:bg-velqen-light-gray text-lg"
               >
                 <UserIcon className="w-5 h-5 text-gray-600" />
                 Login
@@ -142,12 +160,13 @@ const NavBar = () => {
     <nav className="absolute top-0 left-0 z-500 flex w-full justify-center">
       <div className="w-[80%] flex items-center justify-between py-4">
         {/* Left: Site name */}
-        <div className="flex-1 text-left">
+        <div className="flex-1 text-left h-20">
           <Image
             src="/Velqen_no_bg_logo.png"
             alt="Velqen Logo"
-            width={80}
-            height={45}
+            className="h-full w-auto object-contain" // ✅ Make it scale properly
+            width={800}
+            height={450}
           />
         </div>
 

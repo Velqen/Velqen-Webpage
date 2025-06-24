@@ -9,6 +9,7 @@ import { useInvoiceExtraction } from "@/hooks/useInvoiceExtraction";
 import { downloadRecordsAsCSV } from "@/lib/exportInvoiceCSV";
 import { MinimalRecord } from "@/types/transactions";
 import { useEffect, useRef } from "react";
+
 const InvoiceExtraction = ({
   onExtractedRecords,
 }: {
