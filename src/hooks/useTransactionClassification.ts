@@ -95,7 +95,6 @@ export function useTransactionClassification({
     }
   };
 
-
   // ✅ New: Auto-process passed-in CSV (e.g. from InvoiceExtraction)
   useEffect(() => {
     if (
