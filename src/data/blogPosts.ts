@@ -45,12 +45,12 @@ const blogPosts = [
     slug: "safe-and-private-data",
     title: "We Don’t Store Your Data. It’s 100% Safe and Private",
     category: "Security",
-    date: "June 15, 2025",
+    date: "June 27, 2025",
     hasIcons: true,
     image: "/blog/post4.jpg",
     content: [
       "We take data security seriously. Your privacy is a priority.",
-      "When you use our AI tools, your data is processed instantly and securely. Nothing is stored. We don’t save any invoices or company information to our servers or databases. Once your session ends, everything disappears as if it was never there.",
+      "When you use our AI tools, your data is processed instantly and securely on safe servers. Nothing is stored. We don’t save any invoices or company information to our servers or databases. Once your session ends, everything disappears as if it was never there, keeping your data protected at all times.",
       "The only time we store your data is when you intentionally upload it to your account. Even then, it's encrypted and protected. No storage without consent. No leaks. No worries."
     ],
   },
