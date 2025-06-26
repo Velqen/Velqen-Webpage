@@ -42,7 +42,7 @@ const blogPosts = [
       `Velqen is your AI financial assistant that actually pulls its weight. With features like AI-powered transaction classification, 
       OCR invoice extraction, and smart record reconciliation, Velqen takes care of the boring stuff. Each feature is designed to be quick and simple to use, 
       and let's not forget, your data stays safe throughout.`,
-      `There's more! With our Agentic Chatbot, it can now analyse your transactions, suggest tax strategies, and provide helpful advice, all based on your own financial data.
+      `There's more! With our AI Agent Chatbot, it can now analyse your transactions, suggest tax strategies, and provide helpful advice, all based on your own financial data.
       Everything happens through a built-in chatbot, right inside your dashboard.`,
       "This is an AI accounting app built for non-accountants. (For professionals, we have advanced features too.)",
     ],
