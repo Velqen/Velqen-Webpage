@@ -19,7 +19,10 @@ export function useInvoiceExtraction() {
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const file = e.dataTransfer.files?.[0];
-    if (file && file.type === "application/pdf") {
+    if (
+    file &&
+    (file.type === "application/pdf" || file.type.startsWith("image/"))
+  ) {
       setSelectedFile(file);
       setPreviewUrl(URL.createObjectURL(file));
     }

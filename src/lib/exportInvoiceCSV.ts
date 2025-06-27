@@ -1,4 +1,4 @@
-// anyfolder/exportInvoiceCSV.ts
+// lib/exportInvoiceCSV.ts
 
 export function downloadRecordsAsCSV(records: Array<Record<string, unknown>>) {
   if (!records.length) {

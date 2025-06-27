@@ -31,10 +31,10 @@ export default async function BlogPostPage({
       <div className="mb-2 text-sm text-gray-500">
         {post.date} · {post.category}
       </div>
-      <h1 className="text-3xl font-bold mb-6">{post.title}</h1>
+      <h1 className="text-3xl font-bold mb-20">{post.title}</h1>
       {Array.isArray(post.content) ? (
         post.content.map((paragraph, i) => (
-          <p key={i} className="text-lg mb-4">
+          <p key={i} className="text-lg mb-8">
             {paragraph}
           </p>
         ))

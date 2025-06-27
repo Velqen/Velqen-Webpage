@@ -15,6 +15,7 @@ export default function TransactionClassification(props: Props) {
   const [isUploadingToDB, setIsUploadingToDB] = useState(false);
   const { isSmallDevice } = useDeviceSize();
   const { addTransaction } = useTransactions();
+  const { status: authStatus } = useSession();
 
   const {
     file,
@@ -26,37 +27,38 @@ export default function TransactionClassification(props: Props) {
     handleFileChange,
     handleUpload,
     setStatus,
-    setCsvData,
-  } = useTransactionClassification({ onCsvParsed: props.onCsvParsed });
+  } = useTransactionClassification({
+    onCsvParsed: props.onCsvParsed,
+    csvDataInput: props.csvData,
+  });
 
   const effectiveCsvData = useMemo(() => {
-    return props.csvData?.length ? props.csvData : csvData;
-  }, [props.csvData, csvData]);
+    return csvData?.length ? csvData : [];
+  }, [csvData]);
+
   useEffect(() => {
     if (effectiveCsvData.length > 0) {
       console.log("🧾 effectiveCsvData[0]:", effectiveCsvData[0]);
     }
   }, [effectiveCsvData]);
 
-  useEffect(() => {
-    if (
-      props.csvData &&
-      props.csvData.length > 0 &&
-      props.csvData[0][0] !== "Transaction_Description"
-    ) {
-      const headers = [
-        "Transaction_Description",
-        "Amount_RM",
-        "Date",
-        "Merchant_Name",
-      ];
-      const merged = [headers, ...props.csvData];
-      setCsvData(merged);
-      setStatus("✅ Data received from InvoiceExtraction");
-    }
-  }, [props.csvData, setCsvData, setStatus]);
-
-  const { status: authStatus } = useSession();
+  // useEffect(() => {
+  //   if (
+  //     props.csvData &&
+  //     props.csvData.length > 0 &&
+  //     props.csvData[0][0] !== "Transaction_Description"
+  //   ) {
+  //     const headers = [
+  //       "Transaction_Description",
+  //       "Amount_RM",
+  //       "Date",
+  //       "Merchant_Name",
+  //     ];
+  //     const merged = [headers, ...props.csvData];
+  //     setCsvData(merged);
+  //     setStatus("✅ Data received from InvoiceExtraction");
+  //   }
+  // }, [props.csvData, setCsvData, setStatus]);
 
   const handleUploadToDB = async () => {
     if (authStatus !== "authenticated" || effectiveCsvData.length === 0) {
@@ -94,9 +96,6 @@ export default function TransactionClassification(props: Props) {
     <div className="flex flex-col md:flex-row gap-8 w-full mx-auto">
       {/* Left Section */}
       <div className="md:w-1/3">
-        <h2 className="text-2xl font-semibold mb-4">
-          Upload Your CSV for Classification
-        </h2>
         <p className="mb-4 text-velqen-gray">
           Please upload a CSV file containing at least the following fields:
         </p>

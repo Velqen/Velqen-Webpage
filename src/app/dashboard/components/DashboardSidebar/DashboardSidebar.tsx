@@ -28,7 +28,7 @@ export default function DashboardSidebar() {
         className={cn(
           "fixed z-50 p-2 rounded-full bg-velqen-black border  transition-all",
           "hover:bg-gray-300 hover:text-black",
-          "top-1/2 -translate-y-1/2",
+          "top-3 -translate-y-1",
           isOpen ? "left-64" : "left-2"
         )}
       >
@@ -63,6 +63,7 @@ export default function DashboardSidebar() {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={() => setIsOpen(!isOpen)}
                 className={cn(
                   "px-3 py-2 rounded hover:bg-gray-200 hover:text-black",
                   pathname === item.href
@@ -91,7 +92,7 @@ export default function DashboardSidebar() {
       </aside>
     </>
   ) : (
-    <aside className="w-64 min-h-screen bg-velqen-black border-r px-4 py-6 flex flex-col justify-between">
+    <aside className="fixed top-0 left-0 h-screen w-64 min-h-screen bg-velqen-black border-r px-4 py-6 flex flex-col justify-between">
       <div className="flex flex-col flex-grow space-y-4">
         <div className="flex justify-center p-6 h-[110px]">
           <Image

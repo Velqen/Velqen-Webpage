@@ -6,12 +6,14 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import useTransactions from "@/hooks/useTransactions";
 import TransactionRow from "../TransactionRow/TransactionRow";
 import NewTransactionRow from "../NewTransactionRow/NewTransactionRow";
+import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 export default function TransactionEditor() {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editedRow, setEditedRow] = useState<RecordItem | null>(null);
   const { data, fetchData, updateTransaction, addTransaction } =
     useTransactions();
+  const { isSmallDevice } = useDeviceSize();
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -50,7 +52,11 @@ export default function TransactionEditor() {
   };
 
   return (
-    <div className="block w-full overflow-x-auto">
+    <div
+      className={` ${
+        isSmallDevice ? "mb-10" : "mb-20"
+      } block w-full overflow-x-auto pb-6`}
+    >
       {" "}
       <table className="min-w-full table-auto text-sm bg-black">
         <thead className=" text-white">

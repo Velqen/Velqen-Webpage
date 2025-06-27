@@ -4,6 +4,7 @@
 import DashboardSidebar from "@/app/dashboard/components/DashboardSidebar/DashboardSidebar";
 import { useSession } from "next-auth/react";
 import React from "react";
+import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 export default function DashboardLayout({
   children,
@@ -11,6 +12,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const { status } = useSession();
+  const { isSmallDevice } = useDeviceSize();
 
   if (status === "loading") {
     return (
@@ -31,7 +33,11 @@ export default function DashboardLayout({
   return (
     <div className="flex min-h-[100dvh]">
       <DashboardSidebar />
-      <main className="flex-1 bg-velqen-gray text-white min-w-0">
+      <main
+        className={`${
+          isSmallDevice ? "" : "ml-64"
+        } flex-1 bg-velqen-gray text-white min-w-0`}
+      >
         {children}
       </main>
     </div>

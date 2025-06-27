@@ -22,9 +22,9 @@ const ReportGenerator = forwardRef<ReportGeneratorHandle, Props>(
     useImperativeHandle(ref, () => ({
       generatePDF,
     }));
-    if (csvData.length === 0) {
-      return <p className="text-velqen-gray">No CSV data uploaded yet.</p>;
-    }
+    // if (csvData.length === 0) {
+    //   return <p className="text-velqen-gray">No CSV data uploaded yet.</p>;
+    // }
 
     const generatePDF = () => {
       const doc: jsPDFWithAutoTable = new jsPDF();

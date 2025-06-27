@@ -49,13 +49,15 @@ const NavBar = () => {
       <div className="flex justify-between items-center">
         {/* Site Name */}
         <div className="h-12 w-auto">
-          <Image
-            src="/Velqen_no_bg_logo.png"
-            alt="Velqen Logo"
-            className="h-full w-auto object-contain" // ✅ Make it scale properly
-            width={800}
-            height={450}
-          />
+          <Link href="/">
+            <Image
+              src="/Velqen_no_bg_logo.png"
+              alt="Velqen Logo"
+              className="h-full w-auto object-contain " // ✅ Make it scale properly
+              width={800}
+              height={450}
+            />
+          </Link>
         </div>
 
         {/* Hamburger Button */}
@@ -160,14 +162,16 @@ const NavBar = () => {
     <nav className="absolute top-0 left-0 z-500 flex w-full justify-center">
       <div className="w-[80%] flex items-center justify-between py-4">
         {/* Left: Site name */}
-        <div className="flex-1 text-left h-20">
-          <Image
-            src="/Velqen_no_bg_logo.png"
-            alt="Velqen Logo"
-            className="h-full w-auto object-contain" // ✅ Make it scale properly
-            width={800}
-            height={450}
-          />
+        <div className="flex-shrink-0 text-left h-14">
+          <Link href="/">
+            <Image
+              src="/Velqen_no_bg_logo.png"
+              alt="Velqen Logo"
+              className="h-full w-auto object-contain" // ✅ Make it scale properly
+              width={800}
+              height={450}
+            />
+          </Link>
         </div>
 
         {/* Center: Home link */}
@@ -217,7 +221,7 @@ const NavBar = () => {
           </Link>
         </div>
         {/* Right */}
-        <div className="flex-1 flex justify-end">
+        <div className="flex-shrink-0 flex justify-end">
           {status === "authenticated" && session?.user?.name && (
             <div className="relative" ref={dropdownRef}>
               <button

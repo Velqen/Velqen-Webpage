@@ -75,7 +75,7 @@ const TransactionAmountOverview = () => {
     }));
 
   return (
-    <div className="p-4 my-20 space-y-6 text-white">
+    <div className="my-20 space-y-6 text-white">
       {loading ? (
         <p>Loading your data...</p>
       ) : error ? (
@@ -104,7 +104,7 @@ const TransactionAmountOverview = () => {
           {/* ✅ Monthly Bar Chart */}
           <div className="h-96 bg-black p-8 rounded-2xl">
             <h2 className="text-lg font-medium mb-4">
-              Monthly Spending – {selectedYear}
+              Monthly Spending - {selectedYear}
             </h2>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart

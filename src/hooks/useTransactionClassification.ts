@@ -70,6 +70,7 @@ export function useTransactionClassification({
       document.body.appendChild(link);
       link.click();
       link.remove();
+      URL.revokeObjectURL(url);
 
       // Parse for preview
       const text = await blob.text();
@@ -102,17 +103,28 @@ export function useTransactionClassification({
       csvDataInput.length > 0 &&
       !hasProcessedInput
     ) {
-      setCsvData(csvDataInput);
-      onCsvParsed?.(csvDataInput);
+      const hasHeaders = csvDataInput[0][0] === "Transaction_Description";
+      const headers = [
+        "Transaction_Description",
+        "Amount_RM",
+        "Date",
+        "Merchant_Name",
+      ];
 
-      const [headers, ...rows] = csvDataInput;
-      setPreviewHeaders(headers);
-      setPreviewRows(rows.slice(0, 5)); // show first 5
+      const finalCsv = hasHeaders ? csvDataInput : [headers, ...csvDataInput];
+
+      setCsvData(finalCsv);
+
+      const [finalHeaders, ...rows] = finalCsv;
+      setPreviewHeaders(finalHeaders);
+      setPreviewRows(rows.slice(0, 5));
       setStatus("✅ Data received from InvoiceExtraction");
       setHasProcessedInput(true);
     }
-  }, [csvDataInput, hasProcessedInput, onCsvParsed]);
-
+  }, [csvDataInput, hasProcessedInput]);
+  
+  
+  
   return {
     file,
     csvData,

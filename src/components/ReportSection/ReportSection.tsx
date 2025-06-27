@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
@@ -19,7 +19,14 @@ type Props = {
 const ReportSection = ({ csvData }: Props) => {
   const reportRef = useRef<ReportGeneratorHandle>(null);
   const { isSmallDevice } = useDeviceSize();
+  const [clicked, setClicked] = useState(false);
 
+  const handleDownloadClick = () => {
+    setClicked(true);
+    if (csvData.length > 0) {
+      reportRef.current?.generatePDF();
+    }
+  };
   return (
     <section className="w-full">
       <div className="w-full">
@@ -40,11 +47,18 @@ const ReportSection = ({ csvData }: Props) => {
 
             <div>
               <button
-                onClick={() => reportRef.current?.generatePDF()}
+                onClick={handleDownloadClick}
                 className="px-6 py-2 bg-velqen-green text-white rounded-md hover:bg-velqen-green-hover transition"
               >
                 Download PDF
               </button>
+
+              {clicked && csvData.length === 0 && (
+                <p className="mt-2 text-sm">
+                  Please classify your transactions first.
+                </p>
+              )}
+
               {csvData.length > 0 && (
                 <ReportGenerator ref={reportRef} csvData={csvData} />
               )}
