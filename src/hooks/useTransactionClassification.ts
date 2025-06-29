@@ -1,5 +1,5 @@
 // ✅ Line changed: Added `useEffect`
-import { useEffect, useState, ChangeEvent } from "react";
+import { useEffect, useState, ChangeEvent, useRef } from "react";
 
 type CsvUploadOptions = {
   onCsvParsed?: (data: string[][]) => void;
@@ -14,6 +14,7 @@ export function useTransactionClassification({
   const [csvData, setCsvData] = useState<string[][]>([]);
   const [status, setStatus] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewHeaders, setPreviewHeaders] = useState<string[]>([]);
   const [previewRows, setPreviewRows] = useState<string[][]>([]);
   const [hasProcessedInput, setHasProcessedInput] = useState(false); // ✅ avoid re-processing
@@ -32,6 +33,23 @@ export function useTransactionClassification({
       setPreviewRows([]);
     }
   };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+  e.preventDefault(); // Prevent default behaviour like opening the file
+  const droppedFile = e.dataTransfer.files?.[0];
+
+  if (droppedFile && droppedFile.type === "text/csv") {
+    setFile(droppedFile);                // ✅ Set the file
+    setStatus("");                       // ✅ Reset status
+    setPreviewHeaders([]);              // ✅ Clear preview headers
+    setPreviewRows([]);                 // ✅ Clear preview rows
+  } else {
+    setFile(null);
+    setStatus("Please select a valid CSV file.");  // ❌ Not a CSV
+    setPreviewHeaders([]);
+    setPreviewRows([]);
+  }
+};
 
   const handleUpload = async () => {
     setIsUploading(true);
@@ -53,7 +71,7 @@ export function useTransactionClassification({
         return;
       }
 
-      const response = await fetch("api/transactionUpload", {
+      const response = await fetch("/api/transactionUpload", {
         method: "POST",
         body: formData,
       });
@@ -132,9 +150,12 @@ export function useTransactionClassification({
     isUploading,
     previewHeaders,
     previewRows,
+    fileInputRef,
     handleFileChange,
     handleUpload,
+    handleDrop,
     setCsvData,
     setStatus,
+    setFile,
   };
 }

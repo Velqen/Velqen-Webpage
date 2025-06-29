@@ -28,13 +28,15 @@ export function useInvoiceExtraction() {
     }
   };
 
-  const handleUpload = async () => {
-    if (!selectedFile || isUploading) return;
+  const handleUpload = async (fileOverride?: File | React.MouseEvent) => {
+    const fileToUpload =
+    fileOverride instanceof File ? fileOverride : selectedFile;
+    if (!fileToUpload || isUploading) return;
     setIsUploading(true);
 
     try {
       const formData = new FormData();
-      formData.append("file", selectedFile);
+      formData.append("file", fileToUpload);
 
       const res = await fetch("/api/invoiceUpload", {
         method: "POST",
@@ -43,6 +45,7 @@ export function useInvoiceExtraction() {
 
       const data = await res.json();
       setResult(data.data);
+      return data.data;
     } catch (err) {
       console.error("Upload failed:", err);
     } finally {

@@ -8,31 +8,58 @@ import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import Image from "next/image";
+import { DashboardSidebarItems } from "../DashboardSidebarItems/DashboardSidebarItems";
 
 const navItems = [
   { name: "Overview", href: "/dashboard" },
   { name: "Transactions", href: "/dashboard/transactions" },
   { name: "AI Assistant", href: "/dashboard/ai-assistant" },
-  // { name: "Settings", href: "/dashboard/settings" },
+  {
+    name: "AI Tools",
+    children: [
+      {
+        name: "Invoice Extractor",
+        href: "/dashboard/ai-tools/invoice-extraction",
+      },
+      {
+        name: "Transaction Classifier",
+        href: "/dashboard/ai-tools/transaction-classification",
+      },
+      {
+        name: "Record Reconciler",
+        href: "/dashboard/ai-tools/record-reconciliation",
+      },
+    ],
+  },
 ];
 
 export default function DashboardSidebar() {
   const pathname = usePathname();
   const { isSmallDevice } = useDeviceSize();
-  const [isOpen, setIsOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [openDropdowns, setOpenDropdowns] = useState<Record<string, boolean>>(
+    {}
+  );
+  const toggleDropdown = (key: string) => {
+    setOpenDropdowns((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
   return isSmallDevice ? (
     <>
       {/* 🟠 Toggle Button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setSidebarOpen(!sidebarOpen)}
         className={cn(
           "fixed z-50 p-2 rounded-full bg-velqen-black border  transition-all",
           "hover:bg-gray-300 hover:text-black",
           "top-3 -translate-y-1",
-          isOpen ? "left-64" : "left-2"
+          sidebarOpen ? "left-64" : "left-2"
         )}
       >
-        {isOpen ? (
+        {sidebarOpen ? (
           <ChevronLeft size={20} className="text-white" />
         ) : (
           <ChevronRight size={20} className="text-white" />
@@ -43,7 +70,7 @@ export default function DashboardSidebar() {
       <aside
         className={cn(
           "w-64 h-[100dvh] bg-velqen-black border-r px-4 py-6 flex flex-col justify-between fixed top-0 left-0 z-40 transition-transform duration-300",
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <div className="flex flex-col flex-grow space-y-4">
@@ -58,23 +85,16 @@ export default function DashboardSidebar() {
             />
           </div>
           <h2 className="text-xl text-white font-bold mb-6">Dashboard</h2>
-          <nav className="flex flex-col gap-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsOpen(!isOpen)}
-                className={cn(
-                  "px-3 py-2 rounded hover:bg-gray-200 hover:text-black",
-                  pathname === item.href
-                    ? "bg-gray-300 font-medium text-black"
-                    : "text-white"
-                )}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+
+          <DashboardSidebarItems
+            navItems={navItems}
+            pathname={pathname}
+            openDropdowns={openDropdowns}
+            toggleDropdown={toggleDropdown}
+            onLinkClick={
+              isSmallDevice ? () => setSidebarOpen(false) : undefined
+            }
+          />
         </div>
 
         <div>
@@ -105,22 +125,14 @@ export default function DashboardSidebar() {
           />
         </div>
         <h2 className="text-xl text-white font-bold mb-6">Dashboard</h2>
-        <nav className="flex flex-col gap-2">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "px-3 py-2 rounded  hover:bg-gray-200 hover:text-black",
-                pathname === item.href
-                  ? "bg-gray-300 font-medium text-black"
-                  : "text-white"
-              )}
-            >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
+
+        <DashboardSidebarItems
+          navItems={navItems}
+          pathname={pathname}
+          openDropdowns={openDropdowns}
+          toggleDropdown={toggleDropdown}
+          onLinkClick={isSmallDevice ? () => setSidebarOpen(false) : undefined}
+        />
       </div>
       <div>
         {" "}
