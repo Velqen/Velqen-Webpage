@@ -25,14 +25,14 @@ const navItems = [
         name: "Transaction Classifier",
         href: "/dashboard/ai-tools/transaction-classification",
       },
-      {
-        name: "Record Reconciler",
-        href: "/dashboard/ai-tools/record-reconciliation",
-      },
-      {
-        name: "Invoice Generator",
-        href: "/dashboard/ai-tools/invoice-generator",
-      },
+      // {
+      //   name: "Record Reconciler",
+      //   href: "/dashboard/ai-tools/record-reconciliation",
+      // },
+      // {
+      //   name: "Invoice Generator",
+      //   href: "/dashboard/ai-tools/invoice-generator",
+      // },
     ],
   },
 ];
