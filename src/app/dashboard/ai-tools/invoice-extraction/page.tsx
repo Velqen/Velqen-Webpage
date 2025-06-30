@@ -8,6 +8,7 @@ import InvoiceActions from "../components/InvoiceActions/InvoiceActions";
 
 const Page = () => {
   const [invoiceFile, setInvoiceFile] = useState<File | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [invoiceResult, setInvoiceResult] = useState<any>(null);
 
   const handleFileSelect = (file: File) => {

@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
+import Link from "next/link";
 
 export default function LoginContent() {
   const searchParams = useSearchParams();
@@ -12,13 +13,13 @@ export default function LoginContent() {
 
   return isSmallDevice ? (
     <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
-      <a
+      <Link
         href="/"
         className="absolute top-4 left-4 flex items-center gap-2 text-white text-lg underline hover:text-velqen-orange"
       >
         <ArrowLeft className="w-5 h-5" />
         Back to Homepage
-      </a>
+      </Link>
       <Image
         src="/Velqen_no_bg_logo.png"
         alt="Velqen Logo"
@@ -47,13 +48,13 @@ export default function LoginContent() {
     </main>
   ) : (
     <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
-      <a
+      <Link
         href="/"
         className="absolute top-4 left-4 flex items-center gap-2 text-white text-lg underline hover:text-velqen-orange"
       >
         <ArrowLeft className="w-5 h-5" />
         Back to Homepage
-      </a>
+      </Link>
       <Image
         src="/Velqen_no_bg_logo.png"
         alt="Velqen Logo"
