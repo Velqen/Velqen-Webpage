@@ -87,9 +87,7 @@ const InvoiceActions = ({ file, onExtract }: Props) => {
           Send to Classification
         </button>
       </div>
-      {warnMessage && (
-        <p className="text-sm text-red-400 mt-2">{warnMessage}</p>
-      )}
+      {warnMessage && <p className="text-white mt-2">{warnMessage}</p>}
     </div>
   );
 };

@@ -2,6 +2,7 @@
 
 import { RecordItem } from "@/types/transactions";
 import React from "react";
+import { Pencil, Check, X } from "lucide-react";
 
 type Props = {
   row: RecordItem;
@@ -122,21 +123,21 @@ export default function TransactionRow({
               onClick={onSave}
               className="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
             >
-              Save
+              <Check className="w-4 h-4" />
             </button>
             <button
               onClick={onCancel}
               className="px-2 py-1 bg-gray-300 text-black rounded hover:bg-gray-400"
             >
-              Cancel
+              <X className="w-4 h-4" />
             </button>
           </div>
         ) : (
           <button
             onClick={() => onStartEdit(index)}
-            className="px-2 py-1 velqen-gradient-bg text-black rounded velqen-gradient-bg-hover"
+            className="px-2 py-1 rounded "
           >
-            Edit
+            <Pencil className="w-5 h-5 text-velqen-orange hover:text-velqen-light-orange" />
           </button>
         )}
       </td>
