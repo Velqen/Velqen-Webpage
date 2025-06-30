@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { useInvoiceExtraction } from "@/hooks/useInvoiceExtraction";
 import { UploadCloud } from "lucide-react";
+import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 type InvoiceInputProps = {
   onFileSelect: (file: File) => void;
 };
 
 const InvoiceInput = ({ onFileSelect }: InvoiceInputProps) => {
+  const { isSmallDevice } = useDeviceSize();
   const { selectedFile, fileInputRef, handleFileChange, handleDrop } =
     useInvoiceExtraction();
 
@@ -17,9 +19,13 @@ const InvoiceInput = ({ onFileSelect }: InvoiceInputProps) => {
   }, [selectedFile, onFileSelect]);
   return (
     <div className="w-full flex justify-center items-center">
-      <div className="bg-velqen-black p-10 rounded-lg shadow-[12px_12px_0px_0px_#000000]">
+      <div className="bg-velqen-black rounded-lg shadow-[12px_12px_0px_0px_#000000]">
         <div
-          className="w-[350px] h-[150px] xl:w-[700px] xl:h-[200px] border-dashed border-2 border-white rounded-lg p-6 flex flex-col justify-center items-center text-center cursor-pointer hover:border-velqen-orange transition"
+          className={`${
+            isSmallDevice
+              ? "w-[300px] h-[120px] p-4 m-4"
+              : "w-[350px] h-[150px] p-6 m-10"
+          } xl:w-[700px] xl:h-[200px] border-dashed border-2 border-white rounded-lg flex flex-col justify-center items-center text-center cursor-pointer hover:border-velqen-orange transition`}
           onClick={() => fileInputRef.current?.click()}
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
