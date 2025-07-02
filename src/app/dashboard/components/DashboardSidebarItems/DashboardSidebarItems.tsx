@@ -1,6 +1,6 @@
 // components/DashboardSidebarItems.tsx
 import Link from "next/link";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NavItem {
@@ -45,7 +45,11 @@ export function DashboardSidebarItems({
                 )}
               >
                 <span>{item.name}</span>
-                {isOpen ? <ChevronUp size={28} /> : <ChevronDown size={28} />}
+                {isOpen ? (
+                  <ChevronDown size={28} />
+                ) : (
+                  <ChevronRight size={28} />
+                )}
               </button>
               {isOpen && (
                 <div className="ml-4 mt-2 flex flex-col gap-1">

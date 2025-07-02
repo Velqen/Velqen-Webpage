@@ -58,7 +58,7 @@ const AIChatPro = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your message..."
-              className="w-full px-4 py-3 pr-16 border rounded-2xl text-base outline-none h-[150px] resize-none" // ⬅️ changed input → textarea, added resize-none
+              className="w-full px-4 py-3 pr-16 rounded-2xl text-base outline-none h-[150px] resize-none bg-[rgba(41,41,41,0.95)]"
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();

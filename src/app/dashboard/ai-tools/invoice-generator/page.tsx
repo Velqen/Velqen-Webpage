@@ -27,11 +27,11 @@ const Page = () => {
       {/* Right side (Invoice Preview) */}
       <div className="bg-black p-4 rounded-xl min-h-[400px]">
         <h2 className="text-white font-semibold mb-2">Invoice Preview</h2>
+        {invoiceData && <InvGenDownload />}
         {/* Placeholder for invoice preview */}
         <div className="overflow-y-auto max-h-[calc(100vh-120px)]">
           <InvGenPreview invoiceFields={invoiceData} />
         </div>
-        {invoiceData && <InvGenDownload />}
       </div>
     </div>
   );

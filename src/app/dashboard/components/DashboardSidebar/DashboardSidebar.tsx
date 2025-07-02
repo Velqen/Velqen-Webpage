@@ -29,10 +29,10 @@ const navItems = [
       //   name: "Record Reconciler",
       //   href: "/dashboard/ai-tools/record-reconciliation",
       // },
-      // {
-      //   name: "Invoice Generator",
-      //   href: "/dashboard/ai-tools/invoice-generator",
-      // },
+      {
+        name: "Invoice Generator",
+        href: "/dashboard/ai-tools/invoice-generator",
+      },
     ],
   },
 ];
