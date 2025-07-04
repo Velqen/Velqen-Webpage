@@ -40,9 +40,12 @@ export default function LoginContent() {
         Sign in with Google
       </button>
 
-      <footer className="text-lg text-gray-500 mt-8">
+      <footer className="text-lg text-gray-500 mt-8 flex gap-4">
         <a href="/privacy" className="underline">
           Privacy Policy
+        </a>
+        <a href="/terms-of-service" className="underline ">
+          Terms of Service
         </a>
       </footer>
     </main>
@@ -75,9 +78,12 @@ export default function LoginContent() {
         Sign in with Google
       </button>
 
-      <footer className="text-lg text-gray-500 mt-8">
-        <a href="/privacy" className="underline">
+      <footer className="text-lg text-gray-500 mt-8 flex gap-4">
+        <a href="/privacy-policy" className="underline">
           Privacy Policy
+        </a>
+        <a href="/terms-of-service" className="underline">
+          Terms of Service
         </a>
       </footer>
     </main>
