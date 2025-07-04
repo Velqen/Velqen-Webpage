@@ -7,7 +7,7 @@ export default function TermsOfServicePage() {
           By using Velqen, you agree to our terms. We provide services as-is and
           may update features without prior notice. Users are responsible for
           their actions and content. We are not liable for misuse or external
-          services' failures. These terms may change as we evolve.
+          services&#39; failures. These terms may change as we evolve.
         </p>
       </div>
     </main>
