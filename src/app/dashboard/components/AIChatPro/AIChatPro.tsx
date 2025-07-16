@@ -2,7 +2,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useChatBotPro } from "@/hooks/useChatBotPro";
-import { Send } from "lucide-react";
 import { greetings } from "@/data/chatInitialMessages";
 import ReactMarkdown from "react-markdown";
 import ChatInputBar from "../ChatInputBar/ChatInputBar";
