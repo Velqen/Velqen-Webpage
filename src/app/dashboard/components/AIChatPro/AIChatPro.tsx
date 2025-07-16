@@ -5,6 +5,7 @@ import { useChatBotPro } from "@/hooks/useChatBotPro";
 import { Send } from "lucide-react";
 import { greetings } from "@/data/chatInitialMessages";
 import ReactMarkdown from "react-markdown";
+import ChatInputBar from "../ChatInputBar/ChatInputBar";
 
 const AIChatPro = () => {
   const { isSmallDevice } = useDeviceSize();
@@ -53,27 +54,13 @@ const AIChatPro = () => {
           </div>
 
           {/* Centered Input Form */}
-          <form onSubmit={onSubmit} className="relative w-full">
-            <textarea
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your message..."
-              className="w-full px-4 py-3 pr-16 rounded-2xl text-base outline-none h-[150px] resize-none bg-[rgba(41,41,41,0.95)]"
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  onSubmit();
-                }
-              }}
-            />
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="absolute bottom-6 right-4 p-3 velqen-gradient-bg velqen-gradient-bg-hover text-white rounded-full disabled:opacity-50"
-            >
-              {isLoading ? "…" : <Send size={24} />}
-            </button>
-          </form>
+          <ChatInputBar
+            input={input}
+            setInput={setInput}
+            onSubmit={onSubmit}
+            isLoading={isLoading}
+            isSmallDevice={isSmallDevice}
+          />
         </div>
       </div>
     );
@@ -90,7 +77,7 @@ const AIChatPro = () => {
         {/* Chat Area */}
         <div
           className={`${
-            isSmallDevice ? "mb-28  mt-8" : "mt-10"
+            isSmallDevice ? "mt-8" : "mt-10"
           } flex-1 p-4 space-y-3 overflow-y-auto min-h-0`}
         >
           {messages.map((msg, index) => (
@@ -124,27 +111,13 @@ const AIChatPro = () => {
         </div>
 
         {/* Input Form - conditionally position fixed on small devices when focused */}
-        <form
+        <ChatInputBar
+          input={input}
+          setInput={setInput}
           onSubmit={onSubmit}
-          className={`${
-            isSmallDevice ? "fixed bottom-0 left-0 right-0 " : ""
-          } p-4 flex gap-2 mb-7`}
-        >
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your message..."
-            className="flex-1 px-4 py-2 border rounded-full text-base outline-none"
-          />
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="p-3 velqen-gradient-bg velqen-gradient-bg-hover text-white rounded-full text-base disabled:opacity-50"
-          >
-            {isLoading ? "…" : <Send size={24} />}
-          </button>
-        </form>
+          isLoading={isLoading}
+          isSmallDevice={isSmallDevice}
+        />
       </div>
     </div>
   );

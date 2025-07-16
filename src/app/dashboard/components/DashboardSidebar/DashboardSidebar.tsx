@@ -11,9 +11,10 @@ import Image from "next/image";
 import { DashboardSidebarItems } from "../DashboardSidebarItems/DashboardSidebarItems";
 
 const navItems = [
-  { name: "Overview", href: "/dashboard" },
+  { name: "Assistant", href: "/dashboard" },
+  { name: "Overview", href: "/dashboard/transaction-overview" },
   { name: "Transactions", href: "/dashboard/transactions" },
-  { name: "AI Assistant", href: "/dashboard/ai-assistant" },
+  // { name: "AI Assistant", href: "/dashboard/ai-assistant" },
   {
     name: "AI Tools",
     children: [
