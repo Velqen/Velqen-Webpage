@@ -1,25 +1,13 @@
 // app/dashboard/page.tsx
-"use client";
+import React from "react";
+import AIChatPro from "./components/AIChatPro/AIChatPro";
 
-import { useSession } from "next-auth/react";
-import TransactionAmountOverview from "@/app/dashboard/components/TransactionAmountOverview/TransactionAmountOverview";
-import { useDeviceSize } from "@/hooks/useDeviceSize";
-
-const Page = () => {
-  const { data: session } = useSession();
-  const userName = session?.user?.name;
-  const { isSmallDevice } = useDeviceSize();
-
+const page = () => {
   return (
-    <div className={` ${isSmallDevice ? "pt-14 " : ""} p-6 px-10`}>
-      {/* ✅ Fix: use `userName` here after defining it */}
-      <h1 className="text-2xl font-semibold text-white">
-        Welcome back, {userName || "Friend"} 👋
-      </h1>
-
-      <TransactionAmountOverview />
+    <div>
+      <AIChatPro />
     </div>
   );
 };
 
-export default Page;
+export default page;
