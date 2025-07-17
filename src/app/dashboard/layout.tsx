@@ -16,7 +16,7 @@ export default function DashboardLayout({
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-velqen-gray text-white text-2xl">
         Loading session...
       </div>
     );
@@ -24,7 +24,7 @@ export default function DashboardLayout({
 
   if (status === "unauthenticated") {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-velqen-gray text-white text-2xl">
         You must be signed in to view this page.
       </div>
     );

@@ -2,9 +2,10 @@
 
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useSession } from "next-auth/react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import useTransactions from "@/hooks/useTransactions";
 import { useTransactionClassification } from "@/hooks/useTransactionClassification";
+import { UploadCloud } from "lucide-react";
 
 type Props = {
   onCsvParsed?: (data: string[][]) => void;
@@ -16,6 +17,7 @@ export default function TransactionClassification(props: Props) {
   const { isSmallDevice } = useDeviceSize();
   const { addTransaction } = useTransactions();
   const { status: authStatus } = useSession();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const {
     file,
@@ -120,14 +122,38 @@ export default function TransactionClassification(props: Props) {
       </div>
 
       {/* Right Upload Section */}
-      <div className="md:w-2/3 max-w-7xl p-6 border border-velqen-gray rounded-lg shadow-lg bg-white">
-        <input
-          type="file"
-          accept=".csv"
-          onChange={handleFileChange}
-          className="mb-5 block w-full border border-velqen-gray rounded-md p-3 hover:border-velqen-orange"
-        />
-
+      <div className="md:w-2/3 max-w-7xl ">
+        <div className="bg-velqen-black rounded-lg p-8 mb-6">
+          <div
+            onClick={() => fileInputRef.current?.click()}
+            className="border-dashed border-2 border-white rounded-lg p-6 flex flex-col justify-center items-center text-center cursor-pointer hover:border-velqen-orange transition"
+          >
+            <UploadCloud
+              className="text-white mb-4"
+              size={48}
+              strokeWidth={1.5}
+            />
+            <p className="text-white text-base">
+              {file ? (
+                <>
+                  📄 <strong>{file.name}</strong> selected
+                </>
+              ) : (
+                <>
+                  Drag & drop your invoice PDF here or{" "}
+                  <span className="velqen-gradient-text underline">browse</span>
+                </>
+              )}
+            </p>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".csv"
+              onChange={handleFileChange}
+              className="hidden"
+            />
+          </div>
+        </div>
         <div
           className={`flex ${
             isSmallDevice ? "flex-col gap-2" : "flex-row gap-6"

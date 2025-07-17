@@ -59,9 +59,9 @@ export function DashboardSidebarItems({
                       href={child.href!}
                       onClick={onLinkClick}
                       className={cn(
-                        "px-3 py-1 rounded text-md hover:bg-gray-200 hover:text-black",
+                        "px-3 py-1 rounded text-md hover:text-velqen-orange",
                         pathname === child.href
-                          ? "bg-gray-300 font-medium text-black"
+                          ? "text-velqen-orange"
                           : "text-white"
                       )}
                     >

@@ -1,15 +1,15 @@
 // components/BlogCard.tsx
 import Link from "next/link";
 import Image from "next/image";
-import { BlogPost } from "@/types/blog";
+import { BlogPostItem } from "@/types/blog";
 
 /** Reusable blog-post card */
-const BlogCard = ({ post }: { post: BlogPost }) => {
+const BlogCard = ({ post }: { post: BlogPostItem }) => {
   return (
     // Card Wrapper ↓
     <Link href={`/blog/${post.slug}`} className="block">
       {/* Image Container */}
-      <div className="relative h-[300px] w-full overflow-hidden rounded-xl aspect-[4/3]">
+      <div className="relative h-[300px] w-full overflow-hidden aspect-[4/3]">
         <Image
           src={post.image}
           alt={post.title}

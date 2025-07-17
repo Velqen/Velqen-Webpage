@@ -53,11 +53,11 @@ const ChatBot = () => {
   // };
 
   return (
-    <div className="fixed inset-0 flex justify-center z-50 pt-24">
+    <div className="fixed inset-0 flex justify-center z-50 pt-24 ">
       {/* Wrapper with 80% width & full height column */}
       <div
         className={`${
-          isSmallDevice ? "w-full" : "w-[60%]"
+          isSmallDevice ? "w-full pb-32" : "w-[50%]"
         } flex flex-col h-full`}
       >
         {/* Chat Area */}
@@ -72,7 +72,7 @@ const ChatBot = () => {
               <div
                 className={`px-4 py-2 rounded-2xl text-base break-words ${
                   msg.sender === "user" ? "velqen-gradient-bg text-white" : ""
-                }`}
+                }  max-w-[600px]`}
               >
                 {msg.text}
               </div>
@@ -102,12 +102,12 @@ const ChatBot = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
-            className="flex-1 px-4 py-2 border rounded-full text-base outline-none focus:ring-2 focus:ring-velqen-orange"
+            className="flex-1 px-4 py-3 border rounded-lg text-base outline-none"
           />
           <button
             type="submit"
             disabled={isLoading}
-            className="px-4 py-2 velqen-gradient-bg velqen-gradient-bg-hover text-white rounded-full text-base disabled:opacity-50"
+            className="px-4 py-3 velqen-gradient-bg velqen-gradient-bg-hover text-white rounded-lg text-base disabled:opacity-50"
           >
             {isLoading ? "…" : "Send"}
           </button>

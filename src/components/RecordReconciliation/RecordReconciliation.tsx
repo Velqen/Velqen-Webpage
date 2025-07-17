@@ -2,6 +2,8 @@
 
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useRecordReconciliation } from "@/hooks/useRecordReconciliation";
+import { UploadCloud } from "lucide-react";
+import { useRef } from "react";
 
 function FileInput({
   label,
@@ -12,39 +14,46 @@ function FileInput({
   file: File | null;
   onFileChange: (file: File | null) => void;
 }) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
   return (
     <div className="flex flex-col">
-      <label className="font-medium mb-1">{label}</label>
-      <label
-        htmlFor={label}
-        className="flex items-center gap-2 cursor-pointer border border-velqen-gray rounded px-3 py-2 hover:border-velqen-orange transition-colors"
-      >
-        {/* Icon (using SVG for upload) */}
-        <svg
-          className="w-5 h-5 text-velqen-gray"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          viewBox="0 0 24 24"
+      <label className="font-medium mb-2">{label}</label>{" "}
+      {/* unchanged label */}
+      {/* Updated UI design only */}
+      <div className="bg-velqen-black rounded-lg p-8 mb-6">
+        <div
+          onClick={() => fileInputRef.current?.click()} // ← same trigger
+          className="bg-velqen-black border-dashed border-2 border-white rounded-lg p-6 flex flex-col justify-center items-center text-center cursor-pointer hover:border-velqen-orange transition"
         >
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <polyline points="17 8 12 3 7 8" />
-          <line x1="12" y1="3" x2="12" y2="15" />
-        </svg>
+          <UploadCloud
+            className="text-white mb-4"
+            size={48}
+            strokeWidth={1.5}
+          />
 
-        <span className="truncate">
-          {file ? file.name : "Select CSV file..."}
-        </span>
-      </label>
-      <input
-        id={label}
-        type="file"
-        accept=".csv"
-        onChange={(e) => onFileChange(e.target.files?.[0] || null)}
-        className="hidden"
-      />
+          <p className="text-white text-base">
+            {file ? (
+              <>
+                📄 <strong>{file.name}</strong> selected
+              </>
+            ) : (
+              <>
+                Drag & drop your CSV file here or{" "}
+                <span className="velqen-gradient-text underline">browse</span>
+              </>
+            )}
+          </p>
+
+          <input
+            ref={fileInputRef}
+            id={label} // ← unchanged ID
+            type="file"
+            accept=".csv"
+            onChange={(e) => onFileChange(e.target.files?.[0] || null)}
+            className="hidden"
+          />
+        </div>
+      </div>
     </div>
   );
 }
@@ -63,7 +72,7 @@ export default function RecordReconciliation() {
   const { isSmallDevice } = useDeviceSize();
 
   return (
-    <div className="w-full mx-auto bg-white shadow-lg rounded-xl p-6 mb-10">
+    <div className="w-full mx-auto p-6 mb-10">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div
           className={

@@ -10,6 +10,7 @@ import { downloadRecordsAsCSV } from "@/lib/exportInvoiceCSV";
 import { MinimalRecord } from "@/types/transactions";
 import { useEffect, useRef } from "react";
 import { extractMinimalRecords } from "@/lib/extractMinimalRecords";
+import { UploadCloud } from "lucide-react";
 
 const InvoiceExtraction = ({
   onExtractedRecords,
@@ -46,33 +47,40 @@ const InvoiceExtraction = ({
 
   return isSmallDevice ? (
     <div className="w-[100%] mx-auto">
-      {/* Upload area (always visible)*/}
-      <div
-        className="border-dashed border-2 border-velqen-gray rounded-lg p-6 text-center cursor-pointer hover:border-velqen-orange transition"
-        onClick={() => fileInputRef.current?.click()}
-        onDrop={handleDrop}
-        onDragOver={(e) => e.preventDefault()}
-      >
-        <p className="text-velqen-gray text-base">
-          {selectedFile ? (
-            <>
-              📄 <strong>{selectedFile.name}</strong> selected
-            </>
-          ) : (
-            <>
-              Drag & drop your invoice PDF here or{" "}
-              <span className="velqen-gradient-text underline">browse</span>
-            </>
-          )}
-        </p>
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="application/pdf,image/*"
-          onChange={handleFileChange}
-          className="hidden"
-        />
+      <div className="bg-velqen-black rounded-lg p-8">
+        <div
+          className="border-dashed border-2 border-white rounded-lg p-6 flex flex-col justify-center items-center text-center cursor-pointer hover:border-velqen-orange transition"
+          onClick={() => fileInputRef.current?.click()}
+          onDrop={handleDrop}
+          onDragOver={(e) => e.preventDefault()}
+        >
+          <UploadCloud
+            className="text-white mb-4"
+            size={48}
+            strokeWidth={1.5}
+          />
+          <p className="text-white text-base">
+            {selectedFile ? (
+              <>
+                📄 <strong>{selectedFile.name}</strong> selected
+              </>
+            ) : (
+              <>
+                Drag & drop your invoice PDF here or{" "}
+                <span className="velqen-gradient-text underline">browse</span>
+              </>
+            )}
+          </p>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="application/pdf,image/*"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+        </div>
       </div>
+      {/* Upload area (always visible)*/}
 
       {/* Conditionally show everything else only if file is selected */}
       {selectedFile && (
@@ -133,37 +141,47 @@ const InvoiceExtraction = ({
       )}
     </div>
   ) : (
-    <div className="py-6 w-full mx-auto">
+    <div className="py-6 w-full mx-auto ">
       {/* Upload area (always visible) */}
       <div
         className={`${
-          selectedFile ? "h-[200px]" : "h-[500px]" // ✅ Height changes conditionally
-        } flex items-center justify-center border-dashed border-2 border-velqen-gray rounded-lg p-6 cursor-pointer hover:border-velqen-orange transition mb-6`}
-        onClick={() => fileInputRef.current?.click()}
-        onDrop={handleDrop}
-        onDragOver={(e) => e.preventDefault()}
+          selectedFile ? "mb-10 p-10" : "p-14"
+        } bg-velqen-black rounded-lg `}
       >
-        <p className="text-velqen-gray text-xl">
-          {selectedFile ? (
-            <>
-              📄 <strong>{selectedFile.name}</strong> selected
-            </>
-          ) : (
-            <>
-              Drag & drop your invoice PDF here or{" "}
-              <span className="velqen-gradient-text underline">browse</span>
-            </>
-          )}
-        </p>
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="application/pdf,image/*"
-          onChange={handleFileChange}
-          className="hidden"
-        />
+        <div
+          className={`${
+            selectedFile ? "h-[200px]" : "h-[500px]" // ✅ Height changes conditionally
+          } flex flex-col justify-center items-center text-center border-dashed border-2 border-white rounded-lg p-6 cursor-pointer hover:border-velqen-orange transition`}
+          onClick={() => fileInputRef.current?.click()}
+          onDrop={handleDrop}
+          onDragOver={(e) => e.preventDefault()}
+        >
+          <UploadCloud
+            className="text-white mb-4"
+            size={48}
+            strokeWidth={1.5}
+          />
+          <p className="text-white text-xl">
+            {selectedFile ? (
+              <>
+                📄 <strong>{selectedFile.name}</strong> selected
+              </>
+            ) : (
+              <>
+                Drag & drop your invoice PDF here or{" "}
+                <span className="velqen-gradient-text underline">browse</span>
+              </>
+            )}
+          </p>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="application/pdf,image/*"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+        </div>
       </div>
-
       {/* ✅ Minimal change: add this condition */}
       {selectedFile && (
         <div className="flex flex-col xl:flex-row gap-6">
@@ -171,7 +189,7 @@ const InvoiceExtraction = ({
           <div className="flex-1">
             <iframe
               src={previewUrl || undefined} // ✅ Fix: convert `null` to `undefined`
-              className="w-full h-[550px] border rounded"
+              className="w-full h-[750px] border rounded"
               title="PDF Preview"
             />
             <button
