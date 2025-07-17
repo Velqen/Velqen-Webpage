@@ -103,13 +103,13 @@ const NavBar = () => {
           >
             Dashboard
           </Link>
-          <Link
+          {/* <Link
             href="/ai-chatbot"
             onClick={() => setOpen(false)}
             className="text-xl border-b border-b-velqen-light-gray pb-2"
           >
             AI Chat
-          </Link>
+          </Link> */}
           <Link
             href="/blog"
             onClick={() => setOpen(false)}
@@ -193,7 +193,7 @@ const NavBar = () => {
             </div>
           </Link>
 
-          <Link
+          {/* <Link
             href="/ai-chatbot"
             className="group inline-block overflow-hidden h-6"
           >
@@ -201,7 +201,7 @@ const NavBar = () => {
               <span className="block h-6">AI Chat</span>
               <span className="block h-6">AI Chat</span>
             </div>
-          </Link>
+          </Link> */}
 
           <Link href="/blog" className="group inline-block overflow-hidden h-6">
             <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
@@ -231,16 +231,16 @@ const NavBar = () => {
                 <UserIcon className="w-5 h-5 text-gray-600" />
 
                 {session.user.name}
-                <ChevronDownIcon className="h-4 w-4 text-gray-500" />
+                <ChevronDownIcon className="h-4 w-4 text-gray-600" />
               </button>
 
               {open && (
-                <div className="absolute right-0 mt-2 w-36 rounded-md velqen-gradient-bg velqen-gradient-bg-hover shadow-lg z-20">
+                <div className="absolute right-0 mt-2 w-36 rounded-md border border-velqen-orange bg-white hover:bg-velqen-light-gray shadow-lg z-20">
                   <button
                     onClick={
                       () => signOut({ callbackUrl: "/" }) // ✅ line changed
                     }
-                    className="text-sm px-4 py-2 rounded text-white"
+                    className="text-sm px-4 py-2 rounded text-gray-600"
                   >
                     Sign Out
                   </button>
