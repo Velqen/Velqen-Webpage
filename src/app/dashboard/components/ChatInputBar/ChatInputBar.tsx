@@ -1,8 +1,8 @@
 // components/ChatInputBar.tsx
 "use client";
 import React from "react";
-import { Send, Paperclip } from "lucide-react";
-import { useInvoiceExtraction } from "@/hooks/useInvoiceExtraction";
+import { Send } from "lucide-react";
+import ChatFileUpload from "../ChatFileUpload/ChatFileUpload";
 
 interface ChatInputBarProps {
   input: string;
@@ -10,6 +10,8 @@ interface ChatInputBarProps {
   onSubmit: (e?: React.FormEvent<HTMLFormElement>) => void;
   isLoading: boolean;
   isSmallDevice: boolean;
+  setTasks: (tasks: string) => void;
+  setProcessedContent: (content: string) => void;
 }
 
 const ChatInputBar = ({
@@ -18,10 +20,9 @@ const ChatInputBar = ({
   onSubmit,
   isLoading,
   isSmallDevice,
+  setTasks,
+  setProcessedContent,
 }: ChatInputBarProps) => {
-  const { fileInputRef, handleFileChange, handleUpload } =
-    useInvoiceExtraction();
-
   return (
     <form
       onSubmit={onSubmit}
@@ -41,35 +42,13 @@ const ChatInputBar = ({
           }}
         />
         <div className="flex justify-between p-4">
-          <button
-            type="button"
-            title="Attach file"
-            onClick={() => fileInputRef.current?.click()}
-            className="p-3 text-white rounded-full hover:bg-velqen-gray"
-          >
-            <Paperclip size={20} />
-          </button>
-          <input
-            ref={fileInputRef}
-            id="fileInput"
-            type="file"
-            accept="application/pdf,image/*"
-            className="hidden"
-            onChange={async (e) => {
-              const file = e.target.files?.[0];
-              if (!file) return;
-              const isAccepted =
-                file.type === "application/pdf" ||
-                file.type.startsWith("image/");
-              if (isAccepted) {
-                handleFileChange(e); // ✅ set state & preview
-                const response = await handleUpload(file); // ✅ upload
-                console.log("📦 Upload response:", response); // ✅ log result
-              } else {
-                alert("Only images and PDFs are supported.");
-              }
+          <ChatFileUpload
+            onExtracted={({ tasks, processedContent }) => {
+              setTasks(tasks);
+              setProcessedContent(processedContent);
             }}
           />
+
           <button
             type="submit"
             disabled={isLoading}

@@ -11,7 +11,7 @@ type Props = {
 };
 
 const InvoiceActions = ({ file, onExtract }: Props) => {
-  const { handleUpload, result } = useInvoiceExtraction();
+  const { handleExtractionUpload, result } = useInvoiceExtraction();
   const [isExtracting, setIsExtracting] = useState(false);
   const [warnMessage, setWarnMessage] = useState("");
   const router = useRouter();
@@ -22,7 +22,7 @@ const InvoiceActions = ({ file, onExtract }: Props) => {
       return; // 🟩 early return if no file
     }
     setIsExtracting(true);
-    const result = await handleUpload(file);
+    const result = await handleExtractionUpload(file);
     if (result) {
       onExtract(result);
     }

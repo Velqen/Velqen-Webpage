@@ -19,14 +19,14 @@ const InvoiceExtraction = ({
 }) => {
   const { isSmallDevice } = useDeviceSize();
   const {
-    selectedFile,
+    selectedExtractionFile,
     previewUrl,
-    isUploading,
+    isExtractionUploading,
     result,
     fileInputRef,
-    handleFileChange,
+    handleExtractionFileChange,
     handleDrop,
-    handleUpload,
+    handleExtractionUpload,
   } = useInvoiceExtraction();
 
   const prevRecordsRef = useRef<MinimalRecord[] | null>(null);
@@ -60,9 +60,9 @@ const InvoiceExtraction = ({
             strokeWidth={1.5}
           />
           <p className="text-white text-base">
-            {selectedFile ? (
+            {selectedExtractionFile ? (
               <>
-                📄 <strong>{selectedFile.name}</strong> selected
+                📄 <strong>{selectedExtractionFile.name}</strong> selected
               </>
             ) : (
               <>
@@ -75,7 +75,7 @@ const InvoiceExtraction = ({
             ref={fileInputRef}
             type="file"
             accept="application/pdf,image/*"
-            onChange={handleFileChange}
+            onChange={handleExtractionFileChange}
             className="hidden"
           />
         </div>
@@ -83,7 +83,7 @@ const InvoiceExtraction = ({
       {/* Upload area (always visible)*/}
 
       {/* Conditionally show everything else only if file is selected */}
-      {selectedFile && (
+      {selectedExtractionFile && (
         <div className="flex flex-col gap-6 mt-6">
           {/* Left side: Preview & Upload */}
           <div className="flex-1">
@@ -94,10 +94,10 @@ const InvoiceExtraction = ({
             />
             <button
               className="mt-4 w-full py-3 velqen-gradient-bg velqen-gradient-bg-hover text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition"
-              onClick={handleUpload}
-              disabled={!selectedFile || isUploading}
+              onClick={handleExtractionUpload}
+              disabled={!selectedExtractionFile || isExtractionUploading}
             >
-              {isUploading ? "Uploading..." : "📤 Upload & Process"}
+              {isExtractionUploading ? "Uploading..." : "📤 Upload & Process"}
             </button>
           </div>
 
@@ -145,12 +145,12 @@ const InvoiceExtraction = ({
       {/* Upload area (always visible) */}
       <div
         className={`${
-          selectedFile ? "mb-10 p-10" : "p-14"
+          selectedExtractionFile ? "mb-10 p-10" : "p-14"
         } bg-velqen-black rounded-lg `}
       >
         <div
           className={`${
-            selectedFile ? "h-[200px]" : "h-[500px]" // ✅ Height changes conditionally
+            selectedExtractionFile ? "h-[200px]" : "h-[500px]" // ✅ Height changes conditionally
           } flex flex-col justify-center items-center text-center border-dashed border-2 border-white rounded-lg p-6 cursor-pointer hover:border-velqen-orange transition`}
           onClick={() => fileInputRef.current?.click()}
           onDrop={handleDrop}
@@ -162,9 +162,9 @@ const InvoiceExtraction = ({
             strokeWidth={1.5}
           />
           <p className="text-white text-xl">
-            {selectedFile ? (
+            {selectedExtractionFile ? (
               <>
-                📄 <strong>{selectedFile.name}</strong> selected
+                📄 <strong>{selectedExtractionFile.name}</strong> selected
               </>
             ) : (
               <>
@@ -177,13 +177,13 @@ const InvoiceExtraction = ({
             ref={fileInputRef}
             type="file"
             accept="application/pdf,image/*"
-            onChange={handleFileChange}
+            onChange={handleExtractionFileChange}
             className="hidden"
           />
         </div>
       </div>
       {/* ✅ Minimal change: add this condition */}
-      {selectedFile && (
+      {selectedExtractionFile && (
         <div className="flex flex-col xl:flex-row gap-6">
           {/* Left side: Preview & Upload */}
           <div className="flex-1">
@@ -194,10 +194,10 @@ const InvoiceExtraction = ({
             />
             <button
               className="mt-4 w-full py-3 velqen-gradient-bg velqen-gradient-bg-hover text-white font-semibold rounded disabled:opacity-50 disabled:cursor-not-allowed transition text-xl"
-              onClick={handleUpload}
-              disabled={!selectedFile || isUploading}
+              onClick={handleExtractionUpload}
+              disabled={!selectedExtractionFile || isExtractionUploading}
             >
-              {isUploading ? "Uploading..." : "📤 Upload & Process"}
+              {isExtractionUploading ? "Uploading..." : "📤 Upload & Process"}
             </button>
           </div>
 

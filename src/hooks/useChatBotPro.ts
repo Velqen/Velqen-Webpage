@@ -6,6 +6,8 @@ import { initialMessagesPro } from "@/data/chatInitialMessages";
 export function useChatBotPro() {
   const [messages, setMessages] = useState<Message[]>(initialMessagesPro); // ✅ line changed
   const [isLoading, setIsLoading] = useState(false);
+  const [tasks, setTasks] = useState("");
+  const [processedContent, setProcessedContent] = useState("");
 
   const handleSubmit = useCallback(async (userInput: string) => {
     const userMessage: Message = { sender: "user", text: userInput };
@@ -17,7 +19,11 @@ export function useChatBotPro() {
       const res = await fetch("/api/chatBotPro", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_input: userInput }),
+        body: JSON.stringify({ 
+          user_input: userInput,
+          tasks,
+          processedContent,
+         }),
       });
 
       const data = await res.json();
@@ -36,7 +42,15 @@ export function useChatBotPro() {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  },  [tasks, processedContent]);
 
-  return { messages, isLoading, handleSubmit };
+  return {   
+    messages,
+    isLoading,
+    handleSubmit,
+    tasks,            
+    processedContent,     
+    setTasks,            
+    setProcessedContent,  
+  };
 }

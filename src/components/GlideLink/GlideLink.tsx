@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
-import { Rocket } from "lucide-react";
 
 const GlideLink = () => {
   const { isSmallDevice } = useDeviceSize();

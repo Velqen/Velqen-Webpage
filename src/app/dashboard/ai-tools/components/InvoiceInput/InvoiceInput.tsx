@@ -9,14 +9,18 @@ type InvoiceInputProps = {
 
 const InvoiceInput = ({ onFileSelect }: InvoiceInputProps) => {
   const { isSmallDevice } = useDeviceSize();
-  const { selectedFile, fileInputRef, handleFileChange, handleDrop } =
-    useInvoiceExtraction();
+  const {
+    selectedExtractionFile,
+    fileInputRef,
+    handleExtractionFileChange,
+    handleDrop,
+  } = useInvoiceExtraction();
 
   useEffect(() => {
-    if (selectedFile) {
-      onFileSelect(selectedFile);
+    if (selectedExtractionFile) {
+      onFileSelect(selectedExtractionFile);
     }
-  }, [selectedFile, onFileSelect]);
+  }, [selectedExtractionFile, onFileSelect]);
   return (
     <div className="w-full flex justify-center items-center">
       <div className="bg-velqen-black rounded-lg shadow-[12px_12px_0px_0px_#000000]">
@@ -36,9 +40,9 @@ const InvoiceInput = ({ onFileSelect }: InvoiceInputProps) => {
             strokeWidth={1.5}
           />
           <p className="text-whiite text-base">
-            {selectedFile ? (
+            {selectedExtractionFile ? (
               <>
-                📄 <strong>{selectedFile.name}</strong> selected
+                📄 <strong>{selectedExtractionFile.name}</strong> selected
               </>
             ) : (
               <>Click to upload or drag & drop</>
@@ -48,7 +52,7 @@ const InvoiceInput = ({ onFileSelect }: InvoiceInputProps) => {
             ref={fileInputRef}
             type="file"
             accept="application/pdf,image/*"
-            onChange={handleFileChange}
+            onChange={handleExtractionFileChange}
             className="hidden"
           />
         </div>

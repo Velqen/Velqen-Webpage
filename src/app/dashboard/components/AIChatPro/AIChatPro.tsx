@@ -9,7 +9,8 @@ import ChatInputBar from "../ChatInputBar/ChatInputBar";
 const AIChatPro = () => {
   const { isSmallDevice } = useDeviceSize();
   const [input, setInput] = useState("");
-  const { messages, isLoading, handleSubmit } = useChatBotPro();
+  const { messages, isLoading, handleSubmit, setTasks, setProcessedContent } =
+    useChatBotPro();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const [greeting, setGreeting] = useState("");
@@ -59,6 +60,8 @@ const AIChatPro = () => {
             onSubmit={onSubmit}
             isLoading={isLoading}
             isSmallDevice={isSmallDevice}
+            setTasks={setTasks}
+            setProcessedContent={setProcessedContent}
           />
         </div>
       </div>
@@ -116,6 +119,8 @@ const AIChatPro = () => {
           onSubmit={onSubmit}
           isLoading={isLoading}
           isSmallDevice={isSmallDevice}
+          setTasks={setTasks}
+          setProcessedContent={setProcessedContent}
         />
       </div>
     </div>
