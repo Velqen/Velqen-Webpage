@@ -18,7 +18,11 @@ const page = () => {
   return (
     <div className="pt-36">
       <div className="w-full flex items-center justify-center">
-        <div className="flex flex-col justify-center items-center text-black">
+        <div
+          className={`${
+            isSmallDevice ? "w-[90%]" : "w-[80%]"
+          } flex flex-col justify-center items-center text-black`}
+        >
           <h1
             className={`${
               isSmallDevice ? "text-4xl" : " text-6xl"
@@ -26,7 +30,7 @@ const page = () => {
           >
             Pick Your <span className="velqen-gradient-text">AI</span> Tool
           </h1>
-          <div className="mt-8">
+          <div className="mt-8 w-full">
             <GlideLink />
           </div>
         </div>
@@ -48,8 +52,8 @@ const page = () => {
           </h1>
           <p
             className={` ${
-              isSmallDevice ? "text-xl" : "text-2xl"
-            } text-center text-velqen-gray pb-14`}
+              isSmallDevice ? "text-xl pb-10" : "text-2xl pb-14"
+            } text-center text-velqen-gray `}
           >
             Use AI to pull key details from invoices.
           </p>
@@ -80,8 +84,8 @@ const page = () => {
           </h1>
           <p
             className={` ${
-              isSmallDevice ? "text-xl" : "text-2xl"
-            } text-center text-velqen-gray pb-14`}
+              isSmallDevice ? "text-xl pb-10" : "text-2xl pb-14"
+            } text-center text-velqen-gray`}
           >
             Understand where your money&#39;s going using AI.
           </p>
@@ -110,8 +114,8 @@ const page = () => {
           </h1>
           <p
             className={` ${
-              isSmallDevice ? "text-xl" : "text-2xl"
-            } text-center text-velqen-gray pb-14`}
+              isSmallDevice ? "text-xl pb-10" : "text-2xl pb-14"
+            } text-center text-velqen-gray`}
           >
             Spot missed payments or duplicate charges automatically with AI.
           </p>
