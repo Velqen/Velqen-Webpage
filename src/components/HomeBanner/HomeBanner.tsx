@@ -33,7 +33,7 @@ const HomeBanner = () => {
               : "flex-row justify-center space-x-8"
           } flex`}
         >
-          <Link href="/dashboard">
+          <Link href="/velqen">
             <button className="group inline-block overflow-hidden h-[48px] w-[200px] relative rounded">
               <div className="absolute inset-0 transform group-hover:-translate-y-12 transition-transform duration-300">
                 <span className="h-[48px] bg-black text-white px-6 py-2 text-lg md:text-2xl flex items-center justify-center">

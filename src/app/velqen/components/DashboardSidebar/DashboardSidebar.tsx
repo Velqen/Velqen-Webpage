@@ -11,28 +11,28 @@ import Image from "next/image";
 import { DashboardSidebarItems } from "../DashboardSidebarItems/DashboardSidebarItems";
 
 const navItems = [
-  { name: "Assistant", href: "/dashboard" },
-  { name: "Overview", href: "/dashboard/transaction-overview" },
-  { name: "Transactions", href: "/dashboard/transactions" },
+  { name: "Assistant", href: "/velqen" },
+  { name: "Overview", href: "/velqen/transaction-overview" },
+  { name: "Transactions", href: "/velqen/transactions" },
   // { name: "AI Assistant", href: "/dashboard/ai-assistant" },
   {
     name: "AI Tools",
     children: [
       {
         name: "Invoice Extractor",
-        href: "/dashboard/ai-tools/invoice-extraction",
+        href: "/velqen/ai-tools/invoice-extraction",
       },
       {
         name: "Transaction Classifier",
-        href: "/dashboard/ai-tools/transaction-classification",
+        href: "/velqen/ai-tools/transaction-classification",
       },
       // {
       //   name: "Record Reconciler",
-      //   href: "/dashboard/ai-tools/record-reconciliation",
+      //   href: "/velqen/ai-tools/record-reconciliation",
       // },
       {
         name: "Invoice Generator",
-        href: "/dashboard/ai-tools/invoice-generator",
+        href: "/velqen/ai-tools/invoice-generator",
       },
     ],
   },

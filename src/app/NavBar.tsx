@@ -41,7 +41,7 @@ const NavBar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  if (pathname?.startsWith("/dashboard") || pathname === "/login") {
+  if (pathname?.startsWith("/velqen") || pathname === "/login") {
     return null;
   }
   return isSmallDevice ? (
@@ -97,11 +97,11 @@ const NavBar = () => {
             Home
           </Link>
           <Link
-            href="/dashboard"
+            href="/velqen"
             onClick={() => setOpen(false)}
             className="text-xl border-b border-b-velqen-light-gray pb-2"
           >
-            Dashboard
+            Velqen
           </Link>
           <Link
             href="/ai-tools"
@@ -184,12 +184,12 @@ const NavBar = () => {
           </Link>
 
           <Link
-            href="/dashboard"
+            href="/velqen"
             className="group inline-block overflow-hidden h-6"
           >
             <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
-              <span className="block h-6">Dashboard</span>
-              <span className="block h-6">Dashboard</span>
+              <span className="block h-6">Velqen</span>
+              <span className="block h-6">Velqen</span>
             </div>
           </Link>
 

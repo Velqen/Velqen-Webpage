@@ -6,10 +6,9 @@ import RecordReconciliation from "@/components/RecordReconciliation/RecordReconc
 import ReportSection from "@/components/ReportSection/ReportSection";
 import TransactionClassification from "@/components/TransactionClassification/TransactionClassification";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
-import { is } from "date-fns/locale";
 import React, { useState } from "react";
 
-const page = () => {
+const Page = () => {
   const { isSmallDevice } = useDeviceSize();
   const [invoiceCsv, setInvoiceCsv] = useState<string[][]>([]);
   const [classifiedCsv, setClassifiedCsv] = useState<string[][]>([]);
@@ -136,4 +135,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

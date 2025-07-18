@@ -1,4 +1,4 @@
-// app/dashboard/ai-tools/layout.tsx
+// app/velqen/ai-tools/layout.tsx
 "use client";
 
 import { useDeviceSize } from "@/hooks/useDeviceSize";

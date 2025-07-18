@@ -1,7 +1,7 @@
 // app/dashboard/layout.tsx
 "use client";
 
-import DashboardSidebar from "@/app/dashboard/components/DashboardSidebar/DashboardSidebar";
+import DashboardSidebar from "@/app/velqen/components/DashboardSidebar/DashboardSidebar";
 import { useSession } from "next-auth/react";
 import React from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";

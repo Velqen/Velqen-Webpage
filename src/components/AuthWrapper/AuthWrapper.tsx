@@ -17,7 +17,7 @@ const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
   if (status === "unauthenticated") {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        Please log in to view your dashboard.
+        Please log in to use Velqen.
       </div>
     );
   }

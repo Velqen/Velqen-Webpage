@@ -124,7 +124,7 @@ const blogPosts: BlogPostItem[] = [
     date: "June 21, 2025",
     image: "/blog/post7.jpg",
     content: [
-      { type: "paragraph", text: `We don’t ask for your credit card up front because exploring something new shouldn’t come with strings attached. All AI finance features on the homepage are free to try. 
+      { type: "paragraph", text: `We don't ask for your credit card up front because exploring something new shouldn’t come with strings attached. All AI finance features on the homepage are free to try. 
     To access the full dashboard and use our AI assistant, just sign in. No trials, no hidden fees, no charges.` },
       { type: "paragraph", text: "By removing barriers we let you explore real value before making any commitment. Trust is earned by experience, not locked behind payment walls. Try it now and see for yourself." }
     ]

@@ -78,7 +78,7 @@ const InvoiceActions = ({ file, onExtract }: Props) => {
                 "invoice_result",
                 JSON.stringify(csvFormat)
               );
-              router.push("/dashboard/ai-tools/transaction-classification");
+              router.push("/velqen/ai-tools/transaction-classification");
             } else {
               showTempWarning("⚠️ Please extract the invoice before sending.");
             }

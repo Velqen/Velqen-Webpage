@@ -14,7 +14,7 @@ const Footer = () => {
   if (
     pathname === "/ai-chatbot" ||
     pathname === "/login" ||
-    pathname?.startsWith("/dashboard")
+    pathname?.startsWith("/velqen")
   ) {
     return null;
   }
