@@ -20,7 +20,7 @@ export default function TransactionClassification(props: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const {
-    file,
+    classificationFile,
     csvData,
     status,
     isUploading,
@@ -134,9 +134,9 @@ export default function TransactionClassification(props: Props) {
               strokeWidth={1.5}
             />
             <p className="text-white text-base">
-              {file ? (
+              {classificationFile ? (
                 <>
-                  📄 <strong>{file.name}</strong> selected
+                  📄 <strong>{classificationFile.name}</strong> selected
                 </>
               ) : (
                 <>
@@ -163,7 +163,8 @@ export default function TransactionClassification(props: Props) {
             onClick={handleUpload}
             className="w-full velqen-gradient-bg velqen-gradient-bg-hover text-white py-3 rounded disabled:opacity-50 transition"
             disabled={
-              (!file && (!effectiveCsvData || effectiveCsvData.length === 0)) ||
+              (!classificationFile &&
+                (!effectiveCsvData || effectiveCsvData.length === 0)) ||
               isUploading
             }
           >

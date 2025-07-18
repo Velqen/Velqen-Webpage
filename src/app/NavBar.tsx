@@ -103,13 +103,13 @@ const NavBar = () => {
           >
             Dashboard
           </Link>
-          {/* <Link
-            href="/ai-chatbot"
+          <Link
+            href="/ai-tools"
             onClick={() => setOpen(false)}
             className="text-xl border-b border-b-velqen-light-gray pb-2"
           >
-            AI Chat
-          </Link> */}
+            AI Tools
+          </Link>
           <Link
             href="/blog"
             onClick={() => setOpen(false)}
@@ -193,15 +193,15 @@ const NavBar = () => {
             </div>
           </Link>
 
-          {/* <Link
-            href="/ai-chatbot"
+          <Link
+            href="/ai-tools"
             className="group inline-block overflow-hidden h-6"
           >
             <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
-              <span className="block h-6">AI Chat</span>
-              <span className="block h-6">AI Chat</span>
+              <span className="block h-6">AI Tools</span>
+              <span className="block h-6">AI Tools</span>
             </div>
-          </Link> */}
+          </Link>
 
           <Link href="/blog" className="group inline-block overflow-hidden h-6">
             <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">

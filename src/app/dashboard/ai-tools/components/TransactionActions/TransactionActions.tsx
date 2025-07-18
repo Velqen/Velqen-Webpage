@@ -17,7 +17,7 @@ const TransactionActions = (props: Props) => {
     previewRows,
     handleUpload,
     setStatus,
-    setFile,
+    setClassificationFile,
   } = useTransactionClassification({
     onCsvParsed: props.onCsvParsed,
     csvDataInput: props.csvData,
@@ -27,9 +27,9 @@ const TransactionActions = (props: Props) => {
 
   useEffect(() => {
     if (props.inputFile) {
-      setFile(props.inputFile);
+      setClassificationFile(props.inputFile);
     }
-  }, [setFile, props.inputFile]);
+  }, [setClassificationFile, props.inputFile]);
 
   const effectiveCsvData = useMemo(() => {
     if (!csvData || csvData.length === 0) return [];

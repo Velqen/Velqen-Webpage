@@ -10,7 +10,7 @@ export function useTransactionClassification({
   onCsvParsed,
   csvDataInput,
 }: CsvUploadOptions = {}) {
-  const [file, setFile] = useState<File | null>(null);
+  const [classificationFile, setClassificationFile] = useState<File | null>(null);
   const [csvData, setCsvData] = useState<string[][]>([]);
   const [status, setStatus] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
@@ -22,12 +22,12 @@ export function useTransactionClassification({
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile && selectedFile.type === "text/csv") {
-      setFile(selectedFile);
+      setClassificationFile(selectedFile);
       setStatus("");
       setPreviewHeaders([]);
       setPreviewRows([]);
     } else {
-      setFile(null);
+      setClassificationFile(null);
       setStatus("Please select a valid CSV file.");
       setPreviewHeaders([]);
       setPreviewRows([]);
@@ -35,21 +35,21 @@ export function useTransactionClassification({
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-  e.preventDefault(); // Prevent default behaviour like opening the file
-  const droppedFile = e.dataTransfer.files?.[0];
+    e.preventDefault(); // Prevent default behaviour like opening the file
+    const droppedFile = e.dataTransfer.files?.[0];
 
-  if (droppedFile && droppedFile.type === "text/csv") {
-    setFile(droppedFile);                // ✅ Set the file
-    setStatus("");                       // ✅ Reset status
-    setPreviewHeaders([]);              // ✅ Clear preview headers
-    setPreviewRows([]);                 // ✅ Clear preview rows
-  } else {
-    setFile(null);
-    setStatus("Please select a valid CSV file.");  // ❌ Not a CSV
-    setPreviewHeaders([]);
-    setPreviewRows([]);
-  }
-};
+    if (droppedFile && droppedFile.type === "text/csv") {
+      setClassificationFile(droppedFile);                // ✅ Set the file
+      setStatus("");                       // ✅ Reset status
+      setPreviewHeaders([]);              // ✅ Clear preview headers
+      setPreviewRows([]);                 // ✅ Clear preview rows
+    } else {
+      setClassificationFile(null);
+      setStatus("Please select a valid CSV file.");  // ❌ Not a CSV
+      setPreviewHeaders([]);
+      setPreviewRows([]);
+    }
+  };
 
   const handleUpload = async () => {
     setIsUploading(true);
@@ -58,9 +58,9 @@ export function useTransactionClassification({
     try {
       const formData = new FormData();
 
-      if (file) {
+      if (classificationFile) {
         // ✅ Case 1: File selected manually
-        formData.append("file", file);
+        formData.append("file", classificationFile);
       } else if (csvData.length > 0) {
         // ✅ Case 2: CSV data from props (InvoiceExtraction)
         const csvString = csvData.map((row) => row.join(",")).join("\n");
@@ -144,7 +144,7 @@ export function useTransactionClassification({
   
   
   return {
-    file,
+    classificationFile,
     csvData,
     status,
     isUploading,
@@ -156,6 +156,6 @@ export function useTransactionClassification({
     handleDrop,
     setCsvData,
     setStatus,
-    setFile,
+    setClassificationFile,
   };
 }

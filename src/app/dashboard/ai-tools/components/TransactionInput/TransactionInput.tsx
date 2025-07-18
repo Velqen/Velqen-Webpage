@@ -14,14 +14,14 @@ const TransactionInput = ({
   onTransactionSelect,
 }: TransactionInputProps) => {
   const { isSmallDevice } = useDeviceSize();
-  const { file, fileInputRef, handleFileChange, handleDrop } =
+  const { classificationFile, fileInputRef, handleFileChange, handleDrop } =
     useTransactionClassification();
 
   useEffect(() => {
-    if (file && onTransactionSelect) {
-      onTransactionSelect(file); // ✅ Renamed usage
+    if (classificationFile && onTransactionSelect) {
+      onTransactionSelect(classificationFile); // ✅ Renamed usage
     }
-  }, [file, onTransactionSelect]);
+  }, [classificationFile, onTransactionSelect]);
 
   return (
     <div className="w-full flex justify-center items-center">
@@ -42,9 +42,9 @@ const TransactionInput = ({
             strokeWidth={1.5}
           />
           <p className="text-whiite text-base">
-            {file ? (
+            {classificationFile ? (
               <>
-                📊 <strong>{file.name}</strong> selected
+                📊 <strong>{classificationFile.name}</strong> selected
               </>
             ) : inputCsvData?.length ? (
               <>✅ Data received from InvoiceExtraction</>
