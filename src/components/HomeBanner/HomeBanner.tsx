@@ -19,7 +19,7 @@ const HomeBanner = () => {
 
       {/* Foreground Content */}
       <div className="relative z-10 text-center space-y-6 px-4">
-        <h1 className="text-5xl md:text-7xl font-bold">
+        <h1 className="text-5xl md:text-8xl font-bold">
           <span className="">Simplicity</span> is Everything
         </h1>
 

@@ -71,9 +71,9 @@ const FadingGrid: React.FC<FadingGridProps> = ({
           key={i}
           style={{
             backgroundColor: grayIndexes.includes(i)
-              ? "rgba(30, 30, 30, 0.20)"
+              ? "rgba(30, 30, 30, 0.10)"
               : "",
-            border: "1px solid rgba(0, 0, 0, 0.20)",
+            border: "1px solid rgba(0, 0, 0, 0.10)",
             opacity: getOpacity(i),
             aspectRatio: "1",
             width: "100%",

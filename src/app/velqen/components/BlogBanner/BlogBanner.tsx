@@ -14,7 +14,7 @@ const BlogBanner = () => {
       {/* Text content above overlay */}
       <div className="relative z-10 p-8 inline-block">
         <h1 className="text-4xl md:text-7xl font-bold mb-4">
-          AI Excellence in Finance
+          AI Excellence in Simplicity
         </h1>
         <p className="text-lg md:text-2xl text-gray-200">
           Explore AI insights & real-world applications powering our assistant.
