@@ -101,7 +101,7 @@ const NavBar = () => {
             onClick={() => setOpen(false)}
             className="text-xl border-b border-b-velqen-light-gray pb-2"
           >
-            Dashboard
+            Velqen
           </Link>
           {/* <Link
             href="/ai-chatbot"
@@ -110,7 +110,7 @@ const NavBar = () => {
           >
             AI Chat
           </Link> */}
-          <Link
+          {/* <Link
             href="/blog"
             onClick={() => setOpen(false)}
             className="text-xl border-b border-b-velqen-light-gray pb-2"
@@ -123,7 +123,7 @@ const NavBar = () => {
             className="text-xl border-b border-b-velqen-light-gray pb-2"
           >
             About Us
-          </Link>
+          </Link> */}
 
           <div className="mt-10">
             {status === "authenticated" && session?.user?.name ? (
@@ -188,8 +188,8 @@ const NavBar = () => {
             className="group inline-block overflow-hidden h-6"
           >
             <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
-              <span className="block h-6">Dashboard</span>
-              <span className="block h-6">Dashboard</span>
+              <span className="block h-6">Velqen</span>
+              <span className="block h-6">Velqen</span>
             </div>
           </Link>
 
@@ -203,7 +203,7 @@ const NavBar = () => {
             </div>
           </Link> */}
 
-          <Link href="/blog" className="group inline-block overflow-hidden h-6">
+          {/* <Link href="/blog" className="group inline-block overflow-hidden h-6">
             <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
               <span className="block h-6">Blog</span>
               <span className="block h-6">Blog</span>
@@ -218,7 +218,7 @@ const NavBar = () => {
               <span className="block h-6">About Us</span>
               <span className="block h-6">About Us</span>
             </div>
-          </Link>
+          </Link> */}
         </div>
         {/* Right */}
         <div className="flex-shrink-0 flex justify-end">

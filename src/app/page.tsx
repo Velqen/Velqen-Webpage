@@ -196,8 +196,14 @@
 
 export default function Home() {
   return (
-    <div className="min-h-screen w-full flex justify-center items-center">
-      {/* Your content here */}
+    <div className="min-h-screen w-full flex flex-col justify-center items-center">
+      <h1 className="text-5xl md:text-8xl font-bold pb-10">
+        <span className="">Simplicity</span> is Everything
+      </h1>
+
+      <p className="text-2xl md:text-4xl max-w-[1000px] text-velqen-gray">
+        AI Financial Assistant in your Pocket
+      </p>
     </div>
   );
 }
