@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import TransactionClassification from "@/components/TransactionClassification/TransactionClassification";
 
-const page = () => {
+const Page = () => {
   const { isSmallDevice } = useDeviceSize();
   const [, setClassifiedCsv] = useState<string[][]>([]);
 
@@ -40,4 +40,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -1,18 +1,11 @@
 "use client";
 
 import GlideLink from "@/components/GlideLink/GlideLink";
-import InvoiceExtraction from "@/components/InvoiceExtraction/InvoiceExtraction";
-import RecordReconciliation from "@/components/RecordReconciliation/RecordReconciliation";
-import ReportSection from "@/components/ReportSection/ReportSection";
-import TransactionClassification from "@/components/TransactionClassification/TransactionClassification";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
-import React, { useState } from "react";
+import React from "react";
 
 const Page = () => {
   const { isSmallDevice } = useDeviceSize();
-  const [invoiceCsv, setInvoiceCsv] = useState<string[][]>([]);
-  const [classifiedCsv, setClassifiedCsv] = useState<string[][]>([]);
-  const [hasBeenClassified, setHasBeenClassified] = useState(false);
 
   return (
     <div className="pt-36">

@@ -4,12 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { audienceFlowSteps } from "@/data/audienceFlowSteps"; // ✅ import here
 import Image from "next/image";
 
-type Step = {
-  title: string;
-  description: string;
-  image: string;
-};
-
 export default function AudienceFlowShowcase() {
   const steps = audienceFlowSteps; // ✅ call directly here
 

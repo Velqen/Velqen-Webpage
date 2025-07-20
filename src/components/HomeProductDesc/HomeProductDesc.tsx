@@ -26,8 +26,8 @@ const HomeProductDesc = () => {
               </h2>
             </div>
             <p className="text-velqen-gray text-xl ml-16 mt-1">
-              Say goodbye to clunky dashboards & features you'll never touch.
-              Just talk and our chatbot handles the rest.
+              Say goodbye to clunky dashboards & features you&#39;ll never
+              touch. Just talk and our chatbot handles the rest.
             </p>
           </div>
 

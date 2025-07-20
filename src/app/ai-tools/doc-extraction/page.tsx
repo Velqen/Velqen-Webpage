@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import InvoiceExtraction from "@/components/InvoiceExtraction/InvoiceExtraction";
 
-const page = () => {
+const Page = () => {
   const { isSmallDevice } = useDeviceSize();
   const [, setInvoiceCsv] = useState<string[][]>([]);
   return (
@@ -40,4 +40,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

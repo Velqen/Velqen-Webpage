@@ -4,7 +4,7 @@ import React from "react";
 import RecordReconciliation from "@/components/RecordReconciliation/RecordReconciliation";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
-const page = () => {
+const Page = () => {
   const { isSmallDevice } = useDeviceSize();
 
   return (
@@ -35,4 +35,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
