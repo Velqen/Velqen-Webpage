@@ -80,7 +80,7 @@ const GlideLink = () => {
         {/* Card 3 - AI Record Reconciliation */}
         <div
           className=" rounded-2xl overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-6 transition-all duration-300 ease-in-out"
-          onClick={() => scrollToSection("record-reconciliation")}
+          onClick={() => router.push(`${pathname}/doc-reconciliation`)}
         >
           <div
             className={`relative w-full ${

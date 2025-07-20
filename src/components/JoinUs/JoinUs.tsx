@@ -28,9 +28,16 @@ const JoinUs = () => {
         </p>
         <a
           href={`mailto:${hiringEmail}`}
-          className="inline-block mt-4 bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition"
+          className="group inline-block overflow-hidden h-[48px] w-[200px] relative rounded"
         >
-          Contact Us
+          <div className="absolute inset-0 transform group-hover:-translate-y-12 transition-transform duration-300">
+            <span className="h-[48px] bg-white text-black px-6 py-2 text-lg md:text-2xl flex items-center justify-center">
+              Contact Us
+            </span>
+            <span className="h-[48px] velqen-gradient-vertical-bg text-black px-6 py-2 text-lg md:text-2xl flex items-center justify-center">
+              Contact Us
+            </span>
+          </div>
         </a>
       </div>
     </div>

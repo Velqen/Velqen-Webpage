@@ -1,5 +1,6 @@
 "use client";
 
+import AudienceFlowShowcase from "@/components/AudienceFlowShowcase/AudienceFlowShowcase";
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
 import HomeProductDesc from "@/components/HomeProductDesc/HomeProductDesc";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
@@ -22,6 +23,9 @@ export default function Home() {
         } flex `}
       >
         <HomeProductDesc />
+      </div>
+      <div>
+        <AudienceFlowShowcase />
       </div>
     </div>
   );

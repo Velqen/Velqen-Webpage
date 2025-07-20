@@ -45,7 +45,7 @@ const HomeProductDesc = () => {
       </div>
       <div
         className={`${
-          isSmallDevice ? "w-full" : "h-[850px] pr-16"
+          isSmallDevice ? "h-[650px]" : "h-[850px] w-auto"
         } flex justify-center`}
       >
         <Image

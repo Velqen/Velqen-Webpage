@@ -35,7 +35,7 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="bg-background-sec w-full flex flex-col justify-center items-center mt-32">
+      {/* <div className="bg-background-sec w-full flex flex-col justify-center items-center mt-32">
         <div
           id="invoice-extraction"
           className={` ${
@@ -130,7 +130,7 @@ const Page = () => {
         >
           <ReportSection csvData={hasBeenClassified ? classifiedCsv : []} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
