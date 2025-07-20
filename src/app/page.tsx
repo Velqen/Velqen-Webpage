@@ -1,8 +1,8 @@
 "use client";
 
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
+import HomeProductDesc from "@/components/HomeProductDesc/HomeProductDesc";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
-import Image from "next/image";
 
 export default function Home() {
   const { isSmallDevice } = useDeviceSize();
@@ -21,22 +21,7 @@ export default function Home() {
             : "w-[80%] flex-row items-center justify-center"
         } flex `}
       >
-        <div
-          className={`${
-            isSmallDevice ? "w-full" : "h-[850px] pr-16"
-          } flex justify-center`}
-        >
-          <Image
-            src="/assets/phone2.2.png"
-            alt="Phone UI"
-            width={5000}
-            height={5000}
-            className="object-contain w-auto"
-          />
-        </div>
-        <h1 className={`${isSmallDevice ? "text-4xl" : "text-6xl"} font-bold`}>
-          Try <span className=" velqen-gradient-text">Velqen</span> Now
-        </h1>
+        <HomeProductDesc />
       </div>
     </div>
   );
