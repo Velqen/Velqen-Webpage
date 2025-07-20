@@ -37,10 +37,10 @@ export default function AudienceFlowShowcase() {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row w-9xl mx-auto px-4 py-20 gap-8">
+    <div className="flex flex-col md:flex-row w-9xl mx-auto py-20 gap-8 px-12 xl:px-28">
       {/* Sticky Image Side */}
-      <div className="w-full h-screen sticky top-0 flex items-center justify-center">
-        <div className="relative w-3xl h-full">
+      <div className="w-[60%] h-screen sticky top-0 flex items-center justify-center">
+        <div className="relative w-[90%] h-full">
           {/* ✅ Set height for Image */}
           <Image
             src={steps[activeIndex].image}
@@ -53,7 +53,7 @@ export default function AudienceFlowShowcase() {
       </div>
 
       {/* Scrollable Steps */}
-      <div className="md:w-1/2 w-full flex flex-col pl-12">
+      <div className="md:w-[50%] w-full flex flex-col pl-12">
         {steps.map((step, i) => (
           <div
             key={i}
@@ -61,9 +61,9 @@ export default function AudienceFlowShowcase() {
               stepRefs.current[i] = el;
             }}
             data-index={i}
-            className="space-y-4 min-h-screen flex flex-col justify-center py-20 w-[600px]"
+            className="space-y-4 min-h-screen flex flex-col justify-center py-20 w-[85%]"
           >
-            <h3 className="text-6xl font-semibold">{step.title}</h3>
+            <h3 className="tex-4xl md:text-6xl font-semibold">{step.title}</h3>
             <p className="text-gray-600 text-2xl">{step.description}</p>
           </div>
         ))}
