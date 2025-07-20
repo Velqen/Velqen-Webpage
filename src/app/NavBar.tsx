@@ -96,13 +96,13 @@ const NavBar = () => {
           >
             Home
           </Link>
-          <Link
+          {/* <Link
             href="/dashboard"
             onClick={() => setOpen(false)}
             className="text-xl border-b border-b-velqen-light-gray pb-2"
           >
             Velqen
-          </Link>
+          </Link> */}
           {/* <Link
             href="/ai-chatbot"
             onClick={() => setOpen(false)}
@@ -183,7 +183,7 @@ const NavBar = () => {
             </div>
           </Link>
 
-          <Link
+          {/* <Link
             href="/dashboard"
             className="group inline-block overflow-hidden h-6"
           >
@@ -191,7 +191,7 @@ const NavBar = () => {
               <span className="block h-6">Velqen</span>
               <span className="block h-6">Velqen</span>
             </div>
-          </Link>
+          </Link> */}
 
           {/* <Link
             href="/ai-chatbot"
