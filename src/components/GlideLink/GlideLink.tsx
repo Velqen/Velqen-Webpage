@@ -1,10 +1,15 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
+import { useRouter, usePathname } from "next/navigation";
 
 const GlideLink = () => {
   const { isSmallDevice } = useDeviceSize();
 
+  const router = useRouter();
+  const pathname = usePathname();
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -21,7 +26,7 @@ const GlideLink = () => {
         {/* Card 1 - OCR Invoice Extraction */}
         <div
           className=" rounded-2xl overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-6 transition-all duration-300 ease-in-out"
-          onClick={() => scrollToSection("invoice-extraction")}
+          onClick={() => router.push(`${pathname}/doc-extraction`)}
         >
           <div
             className={`relative w-full ${
@@ -47,7 +52,7 @@ const GlideLink = () => {
         {/* Card 2 - AI Transaction Classification */}
         <div
           className=" rounded-2xl overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-6 transition-all duration-300 ease-in-out"
-          onClick={() => scrollToSection("transaction-classification")}
+          onClick={() => router.push(`${pathname}/doc-classification`)}
         >
           <div
             className={`relative w-full ${
