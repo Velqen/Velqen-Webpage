@@ -116,14 +116,14 @@ const NavBar = () => {
             className="text-xl border-b border-b-velqen-light-gray pb-2"
           >
             Blog
-          </Link>
+          </Link> */}
           <Link
             href="/about-us"
             onClick={() => setOpen(false)}
             className="text-xl border-b border-b-velqen-light-gray pb-2"
           >
             About Us
-          </Link> */}
+          </Link>
 
           <div className="mt-10">
             {status === "authenticated" && session?.user?.name ? (
@@ -208,7 +208,7 @@ const NavBar = () => {
               <span className="block h-6">Blog</span>
               <span className="block h-6">Blog</span>
             </div>
-          </Link>
+          </Link> */}
 
           <Link
             href="/about-us"
@@ -218,7 +218,7 @@ const NavBar = () => {
               <span className="block h-6">About Us</span>
               <span className="block h-6">About Us</span>
             </div>
-          </Link> */}
+          </Link>
         </div>
         {/* Right */}
         <div className="flex-shrink-0 flex justify-end">
