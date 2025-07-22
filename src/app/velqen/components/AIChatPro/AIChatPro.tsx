@@ -50,7 +50,7 @@ const AIChatPro = () => {
         <div className={`${isSmallDevice ? "w-full px-4" : "w-[600px]"}`}>
           {/* Welcome message or title could go here */}
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-semibold  mb-2">{greeting} </h1>
+            <h1 className="text-3xl font-semibold  mb-2">{greeting} </h1>
           </div>
 
           {/* Centered Input Form */}

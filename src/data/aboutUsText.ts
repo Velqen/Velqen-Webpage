@@ -1,12 +1,13 @@
 const aboutUsText = {
   title: "Velqen",
   description: [
-    `Velqen is an AI company founded in 2025 with a clear mission: to deliver transparent, reliable AI that empowers finance teams to achieve more with less. 
-    Our assistant takes care of the tedious work so your team can stay focused on what really counts.`,
+    `Velqen is an AI company founded in 2025 with a clear mission: Simplicity.`,
+    `Existing financial tools and dashboards are often clunky and overwhelming, so we built Velqen to bridge finance and people using the most natural medium: plain language.
+    All the complexity stays under the hood, exactly where it belongs.`,
     `Here, AI isn't a feature. It's our foundation. Velqen helps you work with documents, whether it's extracting key details, classifying them, or reconciling inconsistencies.
-    It reads like a human, scales like software, and excels at every step.`,
-    `Our platform prioritises clarity and speed, offering a simple-to-use interface for working with complex workloads and documents.
-    Behind the scenes, it connects you to the best and quickest AI tools. The end result is meaningful breakthroughs and competitive advantage for your organisation.`,
+    You just tell it what you need, and it will handle the rest. It's that simple.`,
+    `Our platform prioritises simplicity and speed, offering a chat interface that is capable to handle all of your financial tasks.
+    Behind the scenes, it connects you to the best and quickest AI tools.`,
     `AI was meant to simplify life. And that's exactly what we're doing at Velqen.`, 
     // `Invoice in, magic out. Our AI reads your documents, categorises transactions, and checks your numbers. 
     // Like a super-organised teammate, but without the spreadsheet tantrums.`
