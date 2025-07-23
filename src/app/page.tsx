@@ -2,6 +2,7 @@
 
 import AudienceFlowShowcase from "@/components/AudienceFlowShowcase/AudienceFlowShowcase";
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
+import HomeCoreFeatures from "@/components/HomeCoreFeatures/HomeCoreFeatures";
 import HomeProductDesc from "@/components/HomeProductDesc/HomeProductDesc";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
@@ -23,6 +24,15 @@ export default function Home() {
         } flex `}
       >
         <HomeProductDesc />
+      </div>
+      <div
+        className={`${
+          isSmallDevice
+            ? "flex-col justify-center items-center"
+            : "flex-row items-center justify-center"
+        } w-full flex bg-velqen-black`}
+      >
+        {/* <HomeCoreFeatures /> */}
       </div>
       <div>
         <AudienceFlowShowcase />
