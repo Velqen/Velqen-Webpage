@@ -28,11 +28,11 @@ export default function Home() {
       <div
         className={`${
           isSmallDevice
-            ? "flex-col justify-center items-center"
-            : "flex-row items-center justify-center"
+            ? "justify-center items-center"
+            : "items-center justify-center mt-32"
         } w-full flex bg-velqen-black`}
       >
-        {/* <HomeCoreFeatures /> */}
+        <HomeCoreFeatures />
       </div>
       <div>
         <AudienceFlowShowcase />

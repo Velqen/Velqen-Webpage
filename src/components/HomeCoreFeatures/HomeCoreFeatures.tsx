@@ -30,8 +30,8 @@ export default function HomeCoreFeatures() {
       {/* Title */}
       <h2
         className={`${
-          isSmallDevice ? "text-4xl" : "text-7xl"
-        } text-white font-semibold my-16`}
+          isSmallDevice ? "text-5xl" : "text-6xl"
+        } xl:text-7xl text-white font-semibold my-16`}
       >
         Why Velqen?
       </h2>
@@ -69,8 +69,8 @@ export default function HomeCoreFeatures() {
               src="/home/features.png"
               alt="Velqen Agent Architecture"
               className="w-full h-auto object-contain"
-              width={800} // or any value that matches the max display width
-              height={0} // height will be auto due to h-auto
+              width={8000} // or any value that matches the max display width
+              height={8000} // height will be auto due to h-auto
             />
           </div>
         </div>

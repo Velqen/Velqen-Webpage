@@ -10,7 +10,11 @@ const HomeProductDesc = () => {
   return (
     <>
       <div className="flex flex-col gap-4 max-w-[850px]">
-        <h1 className={`${isSmallDevice ? "text-4xl" : "text-7xl"} font-bold`}>
+        <h1
+          className={`${
+            isSmallDevice ? "text-5xl" : "text-6xl"
+          } xl:text-7xl font-bold`}
+        >
           Redefining Your Assistant with{" "}
           <span className="velqen-gradient-text">Velqen.</span>
           {/* Try <span className="velqen-gradient-text">Velqen</span> Now */}
@@ -21,7 +25,7 @@ const HomeProductDesc = () => {
           <div>
             <div className="flex items-center gap-4">
               <Wallet className="w-12 h-12 flex-shrink-0" />
-              <h2 className="text-3xl font-semibold">
+              <h2 className="text-2xl xl:text-3xl font-semibold">
                 Your One True Finance Assistant
               </h2>
             </div>
@@ -35,7 +39,9 @@ const HomeProductDesc = () => {
           <div>
             <div className="flex items-center gap-4">
               <Layers3 className="w-12 h-12 flex-shrink-0" />
-              <h2 className="text-3xl font-semibold">All in One AI</h2>
+              <h2 className="text-2xl xl:text-3xl font-semibold">
+                All in One AI
+              </h2>
             </div>
             <p className="text-velqen-gray text-xl ml-16 mt-1">
               Access the latest AI automation & tools, all in one place.
@@ -45,7 +51,7 @@ const HomeProductDesc = () => {
       </div>
       <div
         className={`${
-          isSmallDevice ? "h-[650px]" : "h-[850px] w-auto"
+          isSmallDevice ? "" : "min-w-[300px]"
         } flex justify-center`}
       >
         <Image
@@ -53,7 +59,7 @@ const HomeProductDesc = () => {
           alt="Phone UI"
           width={5000}
           height={5000}
-          className="object-contain w-auto"
+          className="w-full h-auto object-contain"
         />
       </div>
     </>
