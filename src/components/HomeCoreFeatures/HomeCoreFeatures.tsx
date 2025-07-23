@@ -59,17 +59,18 @@ export default function HomeCoreFeatures() {
       </div>
 
       <div className="mt-12">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-[1300px] mx-auto px-4">
           <div
             className={`${
-              isSmallDevice ? "h-[500px]" : "h-[800px]"
+              isSmallDevice ? "" : ""
             } w-full relative rounded-xl overflow-hidden`}
           >
             <Image
               src="/home/features.png"
               alt="Velqen Agent Architecture"
-              fill // ✅ fills the container based on height
-              className="object-contain"
+              className="w-full h-auto object-contain"
+              width={800} // or any value that matches the max display width
+              height={0} // height will be auto due to h-auto
             />
           </div>
         </div>
