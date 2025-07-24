@@ -1,6 +1,7 @@
 "use client";
 
 import AudienceFlowShowcase from "@/components/AudienceFlowShowcase/AudienceFlowShowcase";
+import FloatingLogos from "@/components/FloatingLogos/FloatingLogos";
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
 import HomeCoreFeatures from "@/components/HomeCoreFeatures/HomeCoreFeatures";
 import HomeProductDesc from "@/components/HomeProductDesc/HomeProductDesc";
@@ -16,6 +17,7 @@ export default function Home() {
       } min-h-screen w-full flex flex-col justify-center items-center`}
     >
       <HomeBanner />
+      <FloatingLogos />
       <div
         className={`${
           isSmallDevice

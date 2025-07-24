@@ -54,7 +54,7 @@ export default function AudienceFlowShowcase() {
             {/* Text content */}
             <div className="space-y-4">
               <h3 className="text-3xl font-semibold">{step.title}</h3>
-              <p className="text-gray-600 text-xl">{step.description}</p>
+              <p className="text-velqen-black text-xl">{step.description}</p>
             </div>
           </div>
         ))}
@@ -97,7 +97,7 @@ export default function AudienceFlowShowcase() {
               <h3 className="text-5xl xl:text-6xl font-semibold">
                 {step.title}
               </h3>
-              <p className="text-gray-600 text-2xl">{step.description}</p>
+              <p className="text-velqen-black text-2xl">{step.description}</p>
             </div>
           ))}
         </div>

@@ -29,9 +29,9 @@ const HomeProductDesc = () => {
                 Your One True Finance Assistant
               </h2>
             </div>
-            <p className="text-velqen-gray text-xl ml-16 mt-1">
+            <p className="text-velqen-black text-xl ml-16 mt-1">
               Say goodbye to clunky dashboards & features you&#39;ll never
-              touch. Just talk and our chatbot handles the rest.
+              touch.
             </p>
           </div>
 
@@ -43,7 +43,7 @@ const HomeProductDesc = () => {
                 All in One AI
               </h2>
             </div>
-            <p className="text-velqen-gray text-xl ml-16 mt-1">
+            <p className="text-velqen-black text-xl ml-16 mt-1">
               Access the latest AI automation & tools, all in one place.
             </p>
           </div>

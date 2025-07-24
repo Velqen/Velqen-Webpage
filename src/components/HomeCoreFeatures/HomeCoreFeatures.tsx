@@ -34,7 +34,7 @@ export default function HomeCoreFeatures() {
           isSmallDevice ? "text-5xl" : "text-6xl"
         } xl:text-7xl text-white font-semibold my-16`}
       >
-        Why Velqen?
+        Why Velqen
       </h2>
 
       {/* Features grid */}
