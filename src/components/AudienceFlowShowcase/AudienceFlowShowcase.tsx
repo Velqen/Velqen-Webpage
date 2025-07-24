@@ -62,8 +62,11 @@ export default function AudienceFlowShowcase() {
     </>
   ) : (
     <>
-      <div className="flex w-full justify-center items-center mt-44 text-6xl xl:text-7xl font-bold">
-        The Perfect Solution
+      <div className="flex w-full justify-center items-center text-center mt-44 text-6xl xl:text-7xl font-bold">
+        <div className="max-w-[700px] xl:max-w-[850px]">
+          Crafted with <span className="velqen-gradient-text">Simpllicity</span>
+          , Made for You
+        </div>
       </div>
       <div className="flex flex-row w-9xl mx-auto gap-8 px-4 xl:px-28">
         {/* Sticky Image Side */}
