@@ -13,6 +13,14 @@ interface CardData {
 const cardsData: CardData[] = [
   {
     id: 1,
+    imageSrc: "/home/features3.jpg",
+    title: "Simplicity",
+
+    cardWidth: "w-75 xl:w-95",
+    cardHeight: "h-[210px] xl:h-[250px]",
+  },
+  {
+    id: 2,
     imageSrc: "/home/features1.jpg",
     title: "Intuitive Interface",
 
@@ -20,17 +28,9 @@ const cardsData: CardData[] = [
     cardHeight: "h-[210px] xl:h-[250px]",
   },
   {
-    id: 2,
+    id: 3,
     imageSrc: "/home/features2.jpg",
     title: "Robust Performance",
-
-    cardWidth: "w-75 xl:w-95",
-    cardHeight: "h-[210px] xl:h-[250px]",
-  },
-  {
-    id: 3,
-    imageSrc: "/home/features3.jpg",
-    title: "Simplicity",
 
     cardWidth: "w-75 xl:w-95",
     cardHeight: "h-[210px] xl:h-[250px]",
@@ -74,23 +74,6 @@ const SlantingCards = () => {
           </div>
         ))}
       </div>
-
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .slant-card {
-            transform: none !important;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            width: 85% !important;
-            max-width: 400px;
-            height: auto !important;
-            margin: 20px 0;
-          }
-          .slant-card:hover {
-            transform: scale(1.02) !important;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-          }
-        }
-      `}</style>
     </section>
   );
 };
