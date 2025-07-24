@@ -34,7 +34,7 @@ const HomeBanner = () => {
           } flex`}
         >
           <Link href="/velqen">
-            <button className="group inline-block overflow-hidden h-[40px] xl:h-[48px] w-[180px] xl:w-[200px] relative rounded">
+            <button className="group inline-block overflow-hidden h-[46px] xl:h-[52px] w-[180px] xl:w-[200px] relative rounded">
               <div className="absolute inset-0 transform group-hover:-translate-y-full transition-transform duration-300 text-xl xl:text-2xl">
                 <span className="h-full bg-black text-white px-6 py-2 flex items-center justify-center">
                   Get Started
@@ -46,7 +46,7 @@ const HomeBanner = () => {
             </button>
           </Link>
           <Link href="/ai-tools">
-            <button className="group inline-block overflow-hidden h-[40px] xl:h-[48px] w-[180px] xl:w-[200px] relative rounded">
+            <button className="group inline-block overflow-hidden h-[46px] xl:h-[52px] w-[180px] xl:w-[200px] relative rounded">
               <div className="absolute inset-0 transform group-hover:-translate-y-full transition-transform duration-300 text-xl xl:text-2xl">
                 <span className="h-full bg-white border text-black px-6 py-2 flex items-center justify-center">
                   Free AI Tools

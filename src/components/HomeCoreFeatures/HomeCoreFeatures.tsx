@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
+import SlantingCards from "../SlantingCards/SlantingCards";
 
 const features = [
   {
@@ -37,7 +38,7 @@ export default function HomeCoreFeatures() {
       </h2>
 
       {/* Features grid */}
-      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-[1300px] mx-auto">
+      <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 max-w-[1300px] mx-auto">
         {features.map((feature, index) => (
           <div key={index} className=" p-6 hover:shadow-lg transition-all">
             <h3
@@ -57,8 +58,8 @@ export default function HomeCoreFeatures() {
           </div>
         ))}
       </div>
-
-      <div className="mt-12">
+      <div className="mt-12">{!isSmallDevice && <SlantingCards />}</div>
+      {/* <div className="mt-12">
         <div className="max-w-[1300px] mx-auto px-4">
           <div
             className={`${
@@ -74,7 +75,7 @@ export default function HomeCoreFeatures() {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
