@@ -95,7 +95,7 @@ export default function AudienceFlowShowcase() {
                 stepRefs.current[i] = el;
               }}
               data-index={i}
-              className="space-y-4 min-h-screen flex flex-col justify-center py-20 w-[95%] xl:w-[80%]"
+              className="space-y-4 min-h-screen flex flex-col justify-center py-20 w-[95%] xl:w-[70%]"
             >
               <h3 className="text-5xl xl:text-6xl font-semibold">
                 {step.title}
