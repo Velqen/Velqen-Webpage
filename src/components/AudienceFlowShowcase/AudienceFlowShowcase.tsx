@@ -36,7 +36,10 @@ export default function AudienceFlowShowcase() {
   return isSmallDevice ? (
     <>
       <div className="flex w-full text-center justify-center items-center mt-44 text-5xl font-bold">
-        The Perfect Solution
+        <div className="max-w-[600px]">
+          Crafted with <span className="velqen-gradient-text">Simpllicity</span>
+          , Made for You
+        </div>
       </div>
       <div className="mx-auto py-20 px-6 space-y-28">
         {steps.map((step, i) => (
@@ -61,17 +64,17 @@ export default function AudienceFlowShowcase() {
       </div>
     </>
   ) : (
-    <>
+    <div>
       <div className="flex w-full justify-center items-center text-center mt-44 text-6xl xl:text-7xl font-bold">
         <div className="max-w-[700px] xl:max-w-[850px]">
           Crafted with <span className="velqen-gradient-text">Simpllicity</span>
           , Made for You
         </div>
       </div>
-      <div className="flex flex-row w-9xl mx-auto gap-8 px-4 xl:px-28">
+      <div className="flex w-full flex-row mx-auto gap-8 xl:gap-10 px-1 xl:px-2">
         {/* Sticky Image Side */}
-        <div className="w-[60%] h-screen sticky top-0 flex items-center justify-center">
-          <div className="relative w-full xl:w-[90%] h-full">
+        <div className="w-[60%] h-screen sticky top-0 flex items-center justify-center pl-6">
+          <div className="relative w-full xl:w-[95%] h-full">
             {/* ✅ Set height for Image */}
             <Image
               src={steps[activeIndex].image}
@@ -84,7 +87,7 @@ export default function AudienceFlowShowcase() {
         </div>
 
         {/* Scrollable Steps */}
-        <div className="w-[50%] flex flex-col pl-2 xl:pl-12">
+        <div className="w-[50%] flex flex-col items-center pl-2 xl:pl-2">
           {steps.map((step, i) => (
             <div
               key={i}
@@ -92,7 +95,7 @@ export default function AudienceFlowShowcase() {
                 stepRefs.current[i] = el;
               }}
               data-index={i}
-              className="space-y-4 min-h-screen flex flex-col justify-center py-20 w-[85%]"
+              className="space-y-4 min-h-screen flex flex-col justify-center py-20 w-[95%] xl:w-[80%]"
             >
               <h3 className="text-5xl xl:text-6xl font-semibold">
                 {step.title}
@@ -102,6 +105,6 @@ export default function AudienceFlowShowcase() {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }

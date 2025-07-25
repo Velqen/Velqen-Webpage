@@ -5,7 +5,7 @@ import { Wallet, Layers3 } from "lucide-react";
 import Image from "next/image";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
-const HomeProductDesc = () => {
+const HomePainPoint = () => {
   const { isSmallDevice } = useDeviceSize();
   return (
     <>
@@ -15,7 +15,7 @@ const HomeProductDesc = () => {
             isSmallDevice ? "text-5xl" : "text-6xl"
           } xl:text-7xl font-bold`}
         >
-          Redefining Your Assistant with{" "}
+          Redefine Your Finance with{" "}
           <span className="velqen-gradient-text">Velqen.</span>
           {/* Try <span className="velqen-gradient-text">Velqen</span> Now */}
         </h1>
@@ -66,4 +66,4 @@ const HomeProductDesc = () => {
   );
 };
 
-export default HomeProductDesc;
+export default HomePainPoint;

@@ -38,7 +38,13 @@ export default function HomeCoreFeatures() {
       </h2>
 
       {/* Features grid */}
-      <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 max-w-[1300px] mx-auto">
+      <div
+        className={`${
+          isSmallDevice
+            ? "grid-cols-1 max-w-[500px]"
+            : "grid-cols-2 max-w-[1300px]"
+        } grid gap-6 xl:grid-cols-3 mx-auto`}
+      >
         {features.map((feature, index) => (
           <div key={index} className=" p-6 hover:shadow-lg transition-all">
             <h3

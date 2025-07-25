@@ -4,7 +4,7 @@ import AudienceFlowShowcase from "@/components/AudienceFlowShowcase/AudienceFlow
 import FloatingLogos from "@/components/FloatingLogos/FloatingLogos";
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
 import HomeCoreFeatures from "@/components/HomeCoreFeatures/HomeCoreFeatures";
-import HomeProductDesc from "@/components/HomeProductDesc/HomeProductDesc";
+import HomePainPoint from "@/components/HomePainPoint/HomePainPoint";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 export default function Home() {
@@ -25,7 +25,7 @@ export default function Home() {
             : "w-[80%] flex-row items-center justify-center"
         } flex `}
       >
-        <HomeProductDesc />
+        <HomePainPoint />
       </div>
       <div
         className={`${
@@ -37,7 +37,7 @@ export default function Home() {
         <HomeCoreFeatures />
       </div>
 
-      <div>
+      <div className="w-full">
         <AudienceFlowShowcase />
       </div>
     </div>

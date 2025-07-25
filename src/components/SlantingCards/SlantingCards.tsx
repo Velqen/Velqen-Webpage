@@ -1,18 +1,21 @@
 // components/SlantingCards.tsx
 import Image from "next/image";
 import { cardsData } from "@/data/slantingCardData";
+import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 // ⬅ Changed: 3D transform removed, replaced with 2D skew and rotation
 const commonTransformClasses =
   "transform origin-center skew-y-[20deg] rotate-[-30deg]";
 
 const SlantingCards = () => {
+  const { isSmallDevice } = useDeviceSize();
+
   return (
     <section className="w-full flex items-center justify-center py-16 px-4S">
       {/* Wrapping container */}
-      <div className="grid sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 justify-center items-center ">
+      <div className="grid grid-cols-3 xl:grid-cols-3 justify-center items-center ">
         {cardsData.map((card) => (
-          <div key={card.id} className="relative ">
+          <div key={card.id} className={`${isSmallDevice ? "" : ""} relative `}>
             <div
               className={`
                 slant-card relative
@@ -22,7 +25,7 @@ const SlantingCards = () => {
                 ${card.cardWidth} ${card.cardHeight}
                 ${commonTransformClasses}
                 hover:scale-105 hover:skew-y-0 hover:rotate-0 hover:shadow-2xl
-                -mx-0 z-0 hover:z-10
+                -mx-0 z-0 hover:z-10 
               `}
             >
               <Image
