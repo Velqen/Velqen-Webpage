@@ -9,7 +9,7 @@ const features = [
   {
     title: "Speak Human",
     description:
-      "No buzzwords, no jargon. Velqen keeps everything in plain English so you know exactly what’s going on.",
+      "No buzzwords, no jargon. Velqen keeps everything in plain English so you know exactly what's going on.",
   },
   {
     title: "Built Like a Chat App",
@@ -50,7 +50,7 @@ export default function HomeCoreFeatures() {
             <h3
               className={`${
                 isSmallDevice ? "text-xl" : "text-2xl"
-              } font-bold mb-2 text-white`}
+              } xl:text-3xl font-bold mb-2 text-white`}
             >
               {feature.title}
             </h3>
