@@ -3,6 +3,7 @@
 import React from "react";
 import { Send } from "lucide-react";
 import ChatFileUpload from "../ChatFileUpload/ChatFileUpload";
+import ChatActionButton from "../ChatActionButton/ChatActionButton";
 
 interface ChatInputBarProps {
   input: string;
@@ -42,12 +43,15 @@ const ChatInputBar = ({
           }}
         />
         <div className="flex justify-between p-4">
-          <ChatFileUpload
-            onExtracted={({ tasks, processedContent }) => {
-              setTasks(tasks);
-              setProcessedContent(processedContent);
-            }}
-          />
+          <div className="flex">
+            <ChatFileUpload
+              onExtracted={({ tasks, processedContent }) => {
+                setTasks(tasks);
+                setProcessedContent(processedContent);
+              }}
+            />
+            <ChatActionButton />
+          </div>
 
           <button
             type="submit"

@@ -3,10 +3,6 @@ import { forwardRef, useImperativeHandle } from "react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-type Props = {
-  csvData: string[][];
-};
-
 interface jsPDFWithAutoTable extends jsPDF {
   lastAutoTable?: {
     finalY: number;
@@ -17,24 +13,32 @@ export type ReportGeneratorHandle = {
   generatePDF: () => void;
 };
 
-const ReportGenerator = forwardRef<ReportGeneratorHandle, Props>(
-  ({ csvData }, ref) => {
-    useImperativeHandle(ref, () => ({
-      generatePDF,
-    }));
-    // if (csvData.length === 0) {
-    //   return <p className="text-velqen-gray">No CSV data uploaded yet.</p>;
-    // }
+const ReportGenerator = forwardRef<ReportGeneratorHandle>((_, ref) => {
+  useImperativeHandle(ref, () => ({
+    generatePDF,
+  }));
+  // if (csvData.length === 0) {
+  //   return <p className="text-velqen-gray">No CSV data uploaded yet.</p>;
+  // }
 
-    const generatePDF = () => {
+  const generatePDF = async () => {
+    try {
+      const response = await fetch("/api/transactionForReport");
+      const csvData: string[][] = await response.json();
+
+      if (!csvData.length) {
+        console.warn("No data received from backend");
+        return;
+      }
+
       const doc: jsPDFWithAutoTable = new jsPDF();
       doc.setFontSize(18);
       doc.text("Income Statement", 14, 22);
 
       const headers = csvData[0];
       const rows = csvData.slice(1);
-      const subCategoryIndex = headers.indexOf("Sub_Category");
-      const amountIndex = headers.indexOf("Amount_RM");
+      const subCategoryIndex = headers.indexOf("Sub Category");
+      const amountIndex = headers.indexOf("Amount (RM)");
 
       // Split into Income & Expenses
       const incomeRows = rows.filter(
@@ -171,10 +175,12 @@ const ReportGenerator = forwardRef<ReportGeneratorHandle, Props>(
         },
       });
       doc.save("financial_report.pdf");
-    };
+    } catch (err) {
+      console.error("Failed to fetch or generate PDF", err);
+    }
+  };
 
-    return null; // No button or UI here
-  }
-);
+  return null; // No button or UI here
+});
 ReportGenerator.displayName = "ReportGenerator";
 export default ReportGenerator;
