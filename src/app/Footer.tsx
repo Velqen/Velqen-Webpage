@@ -3,7 +3,6 @@
 import React from "react";
 import { FaInstagram, FaXTwitter, FaEnvelope } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
 import { useScrollProgressToBottom } from "@/hooks/useScrollBottom";
 
 const instagramUrl = process.env.NEXT_PUBLIC_INSTAGRAM_URL;
@@ -26,11 +25,10 @@ const Footer = () => {
       {/* Spacer that pushes content up */}
       <div className="h-96" />
 
-      <motion.footer
+      <footer
         style={{
           clipPath: `inset(${FOOTER_HEIGHT - progress}px 0% 0% 0%)`,
         }}
-        transition={{ ease: "linear", duration: 0.1 }}
         className="bg-neutral-900 text-white py-6 fixed bottom-0 left-0 w-full z-50 h-96"
       >
         <div className="container mx-auto flex flex-col items-center space-y-4">
@@ -59,7 +57,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
-      </motion.footer>
+      </footer>
     </>
   );
 };
