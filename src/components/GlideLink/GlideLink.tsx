@@ -96,9 +96,7 @@ const GlideLink = () => {
           </div>
 
           <div className="p-6">
-            <h3 className="text-2xl text-gray-900 mb-2">
-              Record Reconciliation
-            </h3>
+            <h3 className="text-2xl text-gray-900 mb-2">Invoice Genrator</h3>
             <p className="text-velqen-gray flex items-center gap-2">
               {/* <Rocket className="w-4 h-4" /> Try it now */}
             </p>
