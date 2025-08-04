@@ -30,14 +30,6 @@ const ChatFileUpload = ({ onExtracted }: ChatFileUploadProps) => {
     csvDataInput: [],
   });
 
-  React.useEffect(() => {
-    if (csvData.length > 0) {
-      onExtracted({
-        tasks: "TransactionClassification",
-        processedContent: csvData,
-      });
-    }
-  }, [csvData]);
   return (
     <>
       <button
@@ -52,7 +44,7 @@ const ChatFileUpload = ({ onExtracted }: ChatFileUploadProps) => {
         ref={fileInputRef}
         id="fileInput"
         type="file"
-        accept="application/pdf,image/*"
+        accept="application/pdf,image/*,text/csv"
         className="hidden"
         onChange={async (e) => {
           const file = e.target.files?.[0];
@@ -63,13 +55,18 @@ const ChatFileUpload = ({ onExtracted }: ChatFileUploadProps) => {
           if (isPdfOrImage) {
             handleExtractionFileChange(e);
             const response = await handleExtractionUpload(file);
+            console.log("Extraction Response:", response);
             onExtracted({
               tasks: "DocumentExtraction",
               processedContent: response,
             });
           } else if (isCsv) {
-            setClassificationFile(file);
-            const csvResponse = await handleClassificationUpload();
+            const csvResponse = await handleClassificationUpload(file);
+            console.log("CSV Response:", csvResponse);
+            onExtracted({
+              tasks: "RecordClassification",
+              processedContent: csvResponse,
+            });
           } else {
             alert("Only images and PDFs are supported.");
           }

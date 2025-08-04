@@ -84,7 +84,7 @@ const TransactionActions = (props: Props) => {
         <div className="flex justify-end gap-4 p-4">
           <button
             className="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition"
-            onClick={handleClassificationUpload}
+            onClick={() => handleClassificationUpload()}
           >
             Classify Transaction
           </button>

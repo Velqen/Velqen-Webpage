@@ -1,7 +1,9 @@
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const useScrollProgressToBottom = (triggerDistance = 400) => {
   const [progress, setProgress] = useState(0); 
+const pathname = usePathname(); 
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,7 +20,7 @@ export const useScrollProgressToBottom = (triggerDistance = 400) => {
     handleScroll(); // init
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [triggerDistance]);
+  }, [pathname, triggerDistance]);
 
   return progress;
 };

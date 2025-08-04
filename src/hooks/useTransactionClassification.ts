@@ -51,31 +51,36 @@ export function useTransactionClassification({
     }
   };
 
-  const handleClassificationUpload = async () => {
+  const handleClassificationUpload = async (file?: File): Promise<string[][]> => {
+    console.log("🚀 Starting classification upload...");
     setIsUploading(true);
     setStatus("Uploading and classifying...");
-
+ 
     try {
       const formData = new FormData();
 
-      if (classificationFile) {
-        // ✅ Case 1: File selected manually
-        formData.append("file", classificationFile);
-      } else if (csvData.length > 0) {
+      const fileToUse = file || classificationFile;
+
+      if (fileToUse) {
+        console.log("📁 using file:", fileToUse.name);
+        formData.append("file", fileToUse); // ✅ use directly
+      } 
+      
+      else if (csvData.length > 0) {
         // ✅ Case 2: CSV data from props (InvoiceExtraction)
         const csvString = csvData.map((row) => row.join(",")).join("\n");
         const blob = new Blob([csvString], { type: "text/csv" });
         formData.append("file", new File([blob], "generated.csv", { type: "text/csv" }));
       } else {
         setStatus("❌ No file or CSV data to upload.");
-        return;
+        return[];
       }
 
       const response = await fetch("/api/transactionUpload", {
         method: "POST",
         body: formData,
       });
-
+      console.log("📡 Upload response:", response);
       if (!response.ok) throw new Error("Upload failed");
 
       const blob = await response.blob();
@@ -104,12 +109,17 @@ export function useTransactionClassification({
         setPreviewHeaders(headers);
         setPreviewRows(rawRows);
         onCsvParsed?.(fullCsv);
+
+        setStatus("✅ Classification complete.");
+        return fullCsv; // ✅ Return full CSV here
       }
 
-      setStatus("✅ Classification complete.");
+        return [];
+      
     } catch (err) {
       console.error(err);
       setStatus("❌ Error during upload.");
+      return [];
     } finally {
       setIsUploading(false);
     }

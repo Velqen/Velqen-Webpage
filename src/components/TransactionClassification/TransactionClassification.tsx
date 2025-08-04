@@ -161,7 +161,7 @@ export default function TransactionClassification(props: Props) {
           }`}
         >
           <button
-            onClick={handleClassificationUpload}
+            onClick={() => handleClassificationUpload()}
             className="w-full velqen-gradient-bg velqen-gradient-bg-hover text-white py-3 rounded disabled:opacity-50 transition"
             disabled={
               (!classificationFile &&
