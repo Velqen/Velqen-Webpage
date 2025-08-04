@@ -2,15 +2,42 @@
 import React from "react";
 import { Paperclip } from "lucide-react";
 import { useInvoiceExtraction } from "@/hooks/useInvoiceExtraction";
+import { useTransactionClassification } from "@/hooks/useTransactionClassification";
+import { ProcessedContent } from "@/types/chat";
 
 interface ChatFileUploadProps {
-  onExtracted: (payload: { tasks: string; processedContent: string }) => void;
+  onExtracted: (payload: {
+    tasks: string;
+    processedContent: ProcessedContent;
+  }) => void;
 }
 
 const ChatFileUpload = ({ onExtracted }: ChatFileUploadProps) => {
   const { fileInputRef, handleExtractionFileChange, handleExtractionUpload } =
     useInvoiceExtraction();
 
+  const {
+    csvData,
+    status,
+    isUploading,
+    previewHeaders,
+    previewRows,
+    handleClassificationUpload,
+    setStatus,
+    setClassificationFile,
+    downloadCsv,
+  } = useTransactionClassification({
+    csvDataInput: [],
+  });
+
+  React.useEffect(() => {
+    if (csvData.length > 0) {
+      onExtracted({
+        tasks: "TransactionClassification",
+        processedContent: csvData,
+      });
+    }
+  }, [csvData]);
   return (
     <>
       <button
@@ -30,15 +57,19 @@ const ChatFileUpload = ({ onExtracted }: ChatFileUploadProps) => {
         onChange={async (e) => {
           const file = e.target.files?.[0];
           if (!file) return;
-          const isAccepted =
+          const isPdfOrImage =
             file.type === "application/pdf" || file.type.startsWith("image/");
-          if (isAccepted) {
+          const isCsv = file.type === "text/csv";
+          if (isPdfOrImage) {
             handleExtractionFileChange(e);
             const response = await handleExtractionUpload(file);
             onExtracted({
               tasks: "DocumentExtraction",
               processedContent: response,
             });
+          } else if (isCsv) {
+            setClassificationFile(file);
+            const csvResponse = await handleClassificationUpload();
           } else {
             alert("Only images and PDFs are supported.");
           }

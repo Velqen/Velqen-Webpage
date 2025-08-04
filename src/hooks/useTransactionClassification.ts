@@ -51,7 +51,7 @@ export function useTransactionClassification({
     }
   };
 
-  const handleUpload = async () => {
+  const handleClassificationUpload = async () => {
     setIsUploading(true);
     setStatus("Uploading and classifying...");
 
@@ -81,14 +81,15 @@ export function useTransactionClassification({
       const blob = await response.blob();
 
       // Auto-download
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "classified_transactions.csv");
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(url);
+      // const url = URL.createObjectURL(blob);
+      // const link = document.createElement("a");
+      // link.href = url;
+      // link.setAttribute("download", "classified_transactions.csv");
+      // document.body.appendChild(link);
+      // link.click();
+      // link.remove();
+      // URL.revokeObjectURL(url);
+
 
       // Parse for preview
       const text = await blob.text();
@@ -114,6 +115,25 @@ export function useTransactionClassification({
     }
   };
 
+  const downloadCsv = () => {
+        if (csvData.length === 0) {
+          setStatus("❌ No CSV data available for download.");
+          return;
+        }
+
+        const csvString = csvData.map((row) => row.join(",")).join("\n");
+        const blob = new Blob([csvString], { type: "text/csv" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "classified_transactions.csv");
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+
+        setStatus("✅ CSV downloaded.");
+      };
   // ✅ New: Auto-process passed-in CSV (e.g. from InvoiceExtraction)
   useEffect(() => {
     if (
@@ -152,10 +172,11 @@ export function useTransactionClassification({
     previewRows,
     fileInputRef,
     handleFileChange,
-    handleUpload,
+    handleClassificationUpload,
     handleDrop,
     setCsvData,
     setStatus,
     setClassificationFile,
+    downloadCsv,
   };
 }

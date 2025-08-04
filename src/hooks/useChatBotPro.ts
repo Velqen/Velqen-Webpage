@@ -2,12 +2,13 @@
 import { useState, useCallback } from "react";
 import type { Message } from "@/types/chat";
 import { initialMessagesPro } from "@/data/chatInitialMessages";
+import { ProcessedContent } from "@/types/chat";
 
 export function useChatBotPro() {
   const [messages, setMessages] = useState<Message[]>(initialMessagesPro); // ✅ line changed
   const [isLoading, setIsLoading] = useState(false);
   const [tasks, setTasks] = useState("");
-  const [processedContent, setProcessedContent] = useState("");
+  const [processedContent, setProcessedContent] = useState<ProcessedContent>("");
 
   const handleSubmit = useCallback(async (userInput: string) => {
     const userMessage: Message = { sender: "user", text: userInput };

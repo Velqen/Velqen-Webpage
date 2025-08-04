@@ -27,8 +27,9 @@ export default function TransactionClassification(props: Props) {
     previewHeaders,
     previewRows,
     handleFileChange,
-    handleUpload,
+    handleClassificationUpload,
     setStatus,
+    downloadCsv,
   } = useTransactionClassification({
     onCsvParsed: props.onCsvParsed,
     csvDataInput: props.csvData,
@@ -160,7 +161,7 @@ export default function TransactionClassification(props: Props) {
           }`}
         >
           <button
-            onClick={handleUpload}
+            onClick={handleClassificationUpload}
             className="w-full velqen-gradient-bg velqen-gradient-bg-hover text-white py-3 rounded disabled:opacity-50 transition"
             disabled={
               (!classificationFile &&
@@ -182,6 +183,12 @@ export default function TransactionClassification(props: Props) {
             }
           >
             Upload to Database
+          </button>
+          <button
+            className="w-full bg-velqen-gray text-black py-3 rounded disabled:opacity-50 transition"
+            onClick={downloadCsv}
+          >
+            Download CSV
           </button>
         </div>
 

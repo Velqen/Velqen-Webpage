@@ -4,7 +4,7 @@ import React from "react";
 import { Send } from "lucide-react";
 import ChatFileUpload from "../ChatFileUpload/ChatFileUpload";
 import ChatActionButton from "../ChatActionButton/ChatActionButton";
-
+import { ProcessedContent } from "@/types/chat";
 interface ChatInputBarProps {
   input: string;
   setInput: (val: string) => void;
@@ -12,7 +12,7 @@ interface ChatInputBarProps {
   isLoading: boolean;
   isSmallDevice: boolean;
   setTasks: (tasks: string) => void;
-  setProcessedContent: (content: string) => void;
+  setProcessedContent: (content: ProcessedContent) => void;
 }
 
 const ChatInputBar = ({
