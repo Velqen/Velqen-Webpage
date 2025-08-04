@@ -3,6 +3,7 @@ import "./globals.css";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import AuthProvider from "./auth/Provider";
+import SmoothScrollProvider from "@/components/SmoothScrollProvider/SmoothScrollProvider";
 
 const ibmPlexSans = IBM_Plex_Sans({
   variable: "--font-ibm-plex-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
         <body
           className={`${ibmPlexSans.variable} ${merriweather.variable} antialiased`}
         >
+          <SmoothScrollProvider />
           <main className="font-(family-name:--font-ibm-plex-sans)">
             <NavBar />
             {children}

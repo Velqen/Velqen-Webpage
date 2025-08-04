@@ -55,7 +55,7 @@ const HomePainPoint = () => {
         } flex justify-center`}
       >
         <Image
-          src="/assets/phone2.2.png"
+          src="/home/phone2.2.png"
           alt="Phone UI"
           width={5000}
           height={5000}

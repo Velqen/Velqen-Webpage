@@ -34,7 +34,7 @@ const GlideLink = () => {
             }`}
           >
             <Image
-              src="/assets/invoice_link.png"
+              src="/ai-tools/invoice_link.png"
               alt="OCR Invoice Extraction"
               fill
               className="object-cover rounded-lg"
@@ -60,7 +60,7 @@ const GlideLink = () => {
             }`}
           >
             <Image
-              src="/assets/csv_link2.jpg"
+              src="/ai-tools/csv_link2.jpg"
               alt="AI Transaction Classification"
               fill
               className="object-cover rounded-lg"
@@ -88,7 +88,7 @@ const GlideLink = () => {
             }`}
           >
             <Image
-              src="/assets/reconciler_link.png"
+              src="/ai-tools/reconciler_link.png"
               alt="AI Record Reconciliation"
               fill
               className="object-cover rounded-lg"
