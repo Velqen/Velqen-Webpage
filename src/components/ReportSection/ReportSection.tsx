@@ -59,9 +59,7 @@ const ReportSection = ({ csvData }: Props) => {
                 </p>
               )}
 
-              {csvData.length > 0 && (
-                <ReportGenerator ref={reportRef} csvData={csvData} />
-              )}
+              {csvData.length > 0 && <ReportGenerator ref={reportRef} />}
             </div>
           </div>
 

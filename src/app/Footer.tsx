@@ -45,8 +45,8 @@ const Footer = () => {
               Work with an assistant. Not an app.
             </p>
             <p className="text-4xl xl:text-6xl font-bold text-white leading-snug">
-              SIMPLICITY ISN'T A LUXURY. <br />
-              IT'S A STRATEGY FOR GROWTH.
+              SIMPLICITY ISN&#39;T A LUXURY. <br />
+              IT&#39;S A STRATEGY FOR GROWTH.
             </p>
           </div>
 

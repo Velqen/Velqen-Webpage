@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import SlantingCards from "../SlantingCards/SlantingCards";

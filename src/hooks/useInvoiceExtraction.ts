@@ -37,7 +37,7 @@ export function useInvoiceExtraction() {
     try {
       const formData = new FormData();
       formData.append("file", fileToUpload);
-
+ 
       const res = await fetch("/api/invoiceUpload", {
         method: "POST",
         body: formData,

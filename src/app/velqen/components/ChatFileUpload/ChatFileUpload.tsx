@@ -16,17 +16,7 @@ const ChatFileUpload = ({ onExtracted }: ChatFileUploadProps) => {
   const { fileInputRef, handleExtractionFileChange, handleExtractionUpload } =
     useInvoiceExtraction();
 
-  const {
-    csvData,
-    status,
-    isUploading,
-    previewHeaders,
-    previewRows,
-    handleClassificationUpload,
-    setStatus,
-    setClassificationFile,
-    downloadCsv,
-  } = useTransactionClassification({
+  const { handleClassificationUpload } = useTransactionClassification({
     csvDataInput: [],
   });
 
@@ -55,14 +45,14 @@ const ChatFileUpload = ({ onExtracted }: ChatFileUploadProps) => {
           if (isPdfOrImage) {
             handleExtractionFileChange(e);
             const response = await handleExtractionUpload(file);
-            console.log("Extraction Response:", response);
+
             onExtracted({
               tasks: "DocumentExtraction",
               processedContent: response,
             });
           } else if (isCsv) {
             const csvResponse = await handleClassificationUpload(file);
-            console.log("CSV Response:", csvResponse);
+
             onExtracted({
               tasks: "RecordClassification",
               processedContent: csvResponse,
