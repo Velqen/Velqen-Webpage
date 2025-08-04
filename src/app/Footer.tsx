@@ -42,7 +42,7 @@ const Footer = () => {
         >
           <div className="flex flex-col space-y-2">
             <p className="text-xl text-muted-foreground">
-              Good things don't wait. Try Velqen now.
+              Work with an assistant. Not an app.
             </p>
             <p className="text-4xl xl:text-6xl font-bold text-white leading-snug">
               SIMPLICITY ISN'T A LUXURY. <br />
