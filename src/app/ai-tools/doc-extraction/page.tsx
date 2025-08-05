@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
-import InvoiceExtraction from "@/components/InvoiceExtraction/InvoiceExtraction";
+import InvoiceExtraction from "@/app/ai-tools/doc-extraction/InvoiceExtraction";
 
 const Page = () => {
   const { isSmallDevice } = useDeviceSize();

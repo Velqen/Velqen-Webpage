@@ -1,6 +1,6 @@
 "use client";
 
-import GlideLink from "@/components/GlideLink/GlideLink";
+import GlideLink from "@/app/ai-tools/GlideLink";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import React from "react";
 

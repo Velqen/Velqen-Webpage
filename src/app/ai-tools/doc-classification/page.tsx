@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
-import TransactionClassification from "@/components/TransactionClassification/TransactionClassification";
+import TransactionClassification from "@/app/ai-tools/doc-classification/TransactionClassification";
 
 const Page = () => {
   const { isSmallDevice } = useDeviceSize();
