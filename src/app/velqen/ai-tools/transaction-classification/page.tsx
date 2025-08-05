@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import TransactionInput from "../components/TransactionInput/TransactionInput";
-import TransactionActions from "../components/TransactionActions/TransactionActions";
+import TransactionInput from "./TransactionInput";
+import TransactionActions from "./TransactionActions";
 
 const Page = () => {
   const [transactionData, setTransactionData] = useState<string[][] | null>(

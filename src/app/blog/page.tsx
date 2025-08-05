@@ -5,7 +5,7 @@ import blogPosts from "@/data/blogPosts";
 import BlogCard from "@/app/blog/BlogCard";
 import { BlogPostItem } from "@/types/blog"; // ← make sure you're using this
 import { useDeviceSize } from "@/hooks/useDeviceSize";
-import BlogBanner from "../velqen/components/BlogBanner/BlogBanner";
+import BlogBanner from "./BlogBanner";
 
 const Blog = () => {
   const { isSmallDevice } = useDeviceSize();

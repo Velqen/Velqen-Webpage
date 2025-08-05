@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import InvGenChat from "../components/InvGenChat/InvGenChat";
+import InvGenChat from "./InvGenChat";
 import { InvGenFieldProps } from "@/types/invgen";
-import InvGenPreview from "../components/InvGenPreview/InvGenPreview";
-import InvGenDownload from "../components/InvGenDownload/InvGenDownload";
+import InvGenPreview from "./InvGenPreview";
+import InvGenDownload from "./InvGenDownload";
 
 const Page = () => {
   const [invoiceData, setInvoiceData] = useState<InvGenFieldProps | null>(null);

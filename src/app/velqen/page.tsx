@@ -1,6 +1,6 @@
 // app/velqen/page.tsx
 import React from "react";
-import AIChatPro from "./components/AIChatPro/AIChatPro";
+import AIChatPro from "./AIChatPro";
 
 const page = () => {
   return (

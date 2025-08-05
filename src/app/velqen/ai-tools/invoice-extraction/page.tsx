@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import InvoiceInput from "../components/InvoiceInput/InvoiceInput";
-import InvoiceDashboard from "../components/InvoiceDashboard/InvoiceDashboard";
-import InvoiceViewer from "../components/InvoiceViewer/InvoiceViewer";
-import InvoiceActions from "../components/InvoiceActions/InvoiceActions";
+import InvoiceInput from "./InvoiceInput";
+import InvoiceDashboard from "./InvoiceDashboard";
+import InvoiceViewer from "./InvoiceViewer";
+import InvoiceActions from "./InvoiceActions";
 
 const Page = () => {
   const [invoiceFile, setInvoiceFile] = useState<File | null>(null);

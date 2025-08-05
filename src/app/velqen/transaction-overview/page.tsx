@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import TransactionAmountOverview from "@/app/velqen/components/TransactionAmountOverview/TransactionAmountOverview";
+import TransactionAmountOverview from "@/app/velqen/transaction-overview/TransactionAmountOverview";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 const Page = () => {

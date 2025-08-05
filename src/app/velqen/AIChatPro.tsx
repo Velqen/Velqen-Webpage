@@ -4,7 +4,7 @@ import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useChatBotPro } from "@/hooks/useChatBotPro";
 import { greetings } from "@/data/chatInitialMessages";
 import ReactMarkdown from "react-markdown";
-import ChatInputBar from "../ChatInputBar/ChatInputBar";
+import ChatInputBar from "./components/ChatInputBar/ChatInputBar";
 
 const AIChatPro = () => {
   const { isSmallDevice } = useDeviceSize();
