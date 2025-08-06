@@ -49,7 +49,7 @@ const FadingGrid: React.FC<FadingGridProps> = ({
     const centerY = Math.floor(displayRows / 2);
 
     const dist = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
-    const shrinkFactor = isSmallDevice ? 0.12 : 0.065;
+    const shrinkFactor = isSmallDevice ? 0.12 : 0.045;
     const raw = 1 - dist * shrinkFactor;
     return Math.pow(Math.max(raw, 0), 2.5);
   };
@@ -71,9 +71,9 @@ const FadingGrid: React.FC<FadingGridProps> = ({
           key={i}
           style={{
             backgroundColor: grayIndexes.includes(i)
-              ? "rgba(30, 30, 30, 0.10)"
+              ? "rgba(30, 30, 30, 0.15)"
               : "",
-            border: "1px solid rgba(0, 0, 0, 0.10)",
+            border: "1px solid rgba(0, 0, 0, 0.15)",
             opacity: getOpacity(i),
             aspectRatio: "1",
             width: "100%",
