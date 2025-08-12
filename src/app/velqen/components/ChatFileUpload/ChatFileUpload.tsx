@@ -10,9 +10,13 @@ interface ChatFileUploadProps {
     tasks: string;
     processedContent: ProcessedContent;
   }) => void;
+  setIsProcessingFile: (val: boolean) => void;
 }
 
-const ChatFileUpload = ({ onExtracted }: ChatFileUploadProps) => {
+const ChatFileUpload = ({
+  onExtracted,
+  setIsProcessingFile,
+}: ChatFileUploadProps) => {
   const { fileInputRef, handleExtractionFileChange, handleExtractionUpload } =
     useInvoiceExtraction();
 
@@ -39,26 +43,32 @@ const ChatFileUpload = ({ onExtracted }: ChatFileUploadProps) => {
         onChange={async (e) => {
           const file = e.target.files?.[0];
           if (!file) return;
+
+          setIsProcessingFile(true);
           const isPdfOrImage =
             file.type === "application/pdf" || file.type.startsWith("image/");
           const isCsv = file.type === "text/csv";
-          if (isPdfOrImage) {
-            handleExtractionFileChange(e);
-            const response = await handleExtractionUpload(file);
+          try {
+            if (isPdfOrImage) {
+              handleExtractionFileChange(e);
+              const response = await handleExtractionUpload(file);
 
-            onExtracted({
-              tasks: "DocumentExtraction",
-              processedContent: response,
-            });
-          } else if (isCsv) {
-            const csvResponse = await handleClassificationUpload(file);
+              onExtracted({
+                tasks: "DocumentExtraction",
+                processedContent: response,
+              });
+            } else if (isCsv) {
+              const csvResponse = await handleClassificationUpload(file);
 
-            onExtracted({
-              tasks: "RecordClassification",
-              processedContent: csvResponse,
-            });
-          } else {
-            alert("Only images and PDFs are supported.");
+              onExtracted({
+                tasks: "RecordClassification",
+                processedContent: csvResponse,
+              });
+            } else {
+              alert("Only images and PDFs are supported.");
+            }
+          } finally {
+            setIsProcessingFile(false); // <-- end processing
           }
         }}
       />

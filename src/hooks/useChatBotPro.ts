@@ -33,15 +33,17 @@ export function useChatBotPro() {
         text: res.ok ? data.response : `Error: ${data.error || "Unknown"}`,
       };
 
-      setMessages((prev) => [...prev, botMessage]); // ✅ line changed
+      setMessages((prev) => [...prev, botMessage]); 
     } catch {
       const errorMessage: Message = {
         sender: "bot",
         text: "Error: Could not reach API.",
       };
-      setMessages((prev) => [...prev, userMessage, errorMessage]); // ✅ line changed
+      setMessages((prev) => [...prev, userMessage, errorMessage]); 
     } finally {
       setIsLoading(false);
+      setTasks("");              
+      setProcessedContent("");
     }
   },  [tasks, processedContent]);
 

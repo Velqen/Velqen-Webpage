@@ -1,6 +1,6 @@
 // components/ChatInputBar.tsx
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Send } from "lucide-react";
 import ChatFileUpload from "../ChatFileUpload/ChatFileUpload";
 import ChatActionButton from "../ChatActionButton/ChatActionButton";
@@ -24,6 +24,7 @@ const ChatInputBar = ({
   setTasks,
   setProcessedContent,
 }: ChatInputBarProps) => {
+  const [isProcessingFile, setIsProcessingFile] = useState(false);
   return (
     <form
       onSubmit={onSubmit}
@@ -37,6 +38,10 @@ const ChatInputBar = ({
           className="w-full px-4 py-3 mb-12 text-base outline-none h-[150px] resize-none"
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
+              if (isProcessingFile) {
+                e.preventDefault(); // stop submission
+                return;
+              }
               e.preventDefault();
               onSubmit();
             }
@@ -49,13 +54,14 @@ const ChatInputBar = ({
                 setTasks(tasks);
                 setProcessedContent(processedContent);
               }}
+              setIsProcessingFile={setIsProcessingFile}
             />
             <ChatActionButton />
           </div>
 
           <button
             type="submit"
-            disabled={isLoading}
+            disabled={isLoading || isProcessingFile}
             className={`${
               isSmallDevice ? "" : ""
             } p-3 velqen-gradient-bg velqen-gradient-bg-hover text-white rounded-full disabled:opacity-50`}

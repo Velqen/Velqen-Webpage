@@ -24,7 +24,7 @@ const HomeBanner = () => {
         </h1>
 
         <p className="text-3xl xl:text-4xl max-w-[1000px] text-velqen-gray">
-          AI Financial Assistant in your Pocket
+          You don't need a degree to understand Finance
         </p>
         <div
           className={`${

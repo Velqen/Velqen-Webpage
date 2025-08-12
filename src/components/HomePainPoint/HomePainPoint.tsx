@@ -26,12 +26,12 @@ const HomePainPoint = () => {
             <div className="flex items-center gap-4">
               <Wallet className="w-12 h-12 flex-shrink-0" />
               <h2 className="text-2xl xl:text-3xl font-semibold">
-                Your One True Finance Assistant
+                The "Assistant"
               </h2>
             </div>
             <p className="text-velqen-black text-xl ml-16 mt-1">
-              Say goodbye to clunky dashboards & features you&#39;ll never
-              touch.
+              You're busy and don't have time to poke around financial apps to
+              work on your money. You need a real assistant for that.
             </p>
           </div>
 
@@ -40,11 +40,12 @@ const HomePainPoint = () => {
             <div className="flex items-center gap-4">
               <Layers3 className="w-12 h-12 flex-shrink-0" />
               <h2 className="text-2xl xl:text-3xl font-semibold">
-                All in One AI
+                The "Translator"
               </h2>
             </div>
             <p className="text-velqen-black text-xl ml-16 mt-1">
-              Access the latest AI automation & tools, all in one place.
+              You're not here to learn about accounting jargons or get a finance
+              degree.
             </p>
           </div>
         </div>

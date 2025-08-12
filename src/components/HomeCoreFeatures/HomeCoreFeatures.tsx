@@ -8,17 +8,17 @@ const features = [
   {
     title: "Speak Human",
     description:
-      "No buzzwords, no jargon. Velqen keeps everything in plain English so you know exactly what's going on.",
+      "No buzzwords, no jargon. Simple explanation beats complicated report every time.",
   },
   {
-    title: "Built Like a Chat App",
+    title: "One click, peace of mind",
     description:
-      "Feels like messaging a smart teammate. No messy UI, no unnecessary dashboards. Just the core interface you need.",
+      "Your finances can finally work quietly under the hood without pushing tons of buttons.",
   },
   {
     title: "Make It Yours",
     description:
-      "Start with a simple setup, then build your own tools on top. Velqen adapts to your way of working.",
+      "Forget one-size-fits-all. Shape the AI to match your exact workflow.",
   },
 ];
 
