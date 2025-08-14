@@ -8,6 +8,14 @@ import { ChevronDownIcon, UserIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
+const NAV_ITEMS = [
+  { name: "Home", href: "/" },
+  // { name: "Velqen", href: "/velqen" },
+  // { name: "AI Tools", href: "/ai-tools" },
+  // { name: "Blog", href: "/blog" },
+  // { name: "About Us", href: "/about-us" },
+];
+
 const NavBar = () => {
   const { isSmallDevice } = useDeviceSize();
   const [open, setOpen] = useState(false);
@@ -89,41 +97,16 @@ const NavBar = () => {
       {/* Dropdown menu below navbar */}
       {open && (
         <div className="absolute top-full left-[-6px] w-[calc(100vw-0.5rem)] h-[calc(100vh-7rem)] bg-[rgba(255,255,255,0.95)] backdrop-blur-md flex flex-col items-left gap-6 py-6 px-6 z-40 mx-[0.7rem] my-[1.5rem] rounded-lg">
-          <Link
-            href="/"
-            onClick={() => setOpen(false)}
-            className="text-xl border-b border-b-velqen-light-gray pb-2"
-          >
-            Home
-          </Link>
-          <Link
-            href="/velqen"
-            onClick={() => setOpen(false)}
-            className="text-xl border-b border-b-velqen-light-gray pb-2"
-          >
-            Velqen
-          </Link>
-          <Link
-            href="/ai-tools"
-            onClick={() => setOpen(false)}
-            className="text-xl border-b border-b-velqen-light-gray pb-2"
-          >
-            AI Tools
-          </Link>
-          <Link
-            href="/blog"
-            onClick={() => setOpen(false)}
-            className="text-xl border-b border-b-velqen-light-gray pb-2"
-          >
-            Blog
-          </Link>
-          <Link
-            href="/about-us"
-            onClick={() => setOpen(false)}
-            className="text-xl border-b border-b-velqen-light-gray pb-2"
-          >
-            About Us
-          </Link>
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className="text-xl border-b border-b-velqen-light-gray pb-2"
+            >
+              {item.name}
+            </Link>
+          ))}
 
           <div className="mt-10">
             {status === "authenticated" && session?.user?.name ? (
@@ -176,49 +159,18 @@ const NavBar = () => {
 
         {/* Center: Home link */}
         <div className="flex justify-center bg-white p-3 text-lg rounded-md shadow-sm border border-velqen-light-gray gap-8">
-          <Link href="/" className="group inline-block overflow-hidden h-6">
-            <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
-              <span className="block h-6">Home</span>
-              <span className="block h-6">Home</span>
-            </div>
-          </Link>
-
-          <Link
-            href="/velqen"
-            className="group inline-block overflow-hidden h-6"
-          >
-            <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
-              <span className="block h-6">Velqen</span>
-              <span className="block h-6">Velqen</span>
-            </div>
-          </Link>
-
-          <Link
-            href="/ai-tools"
-            className="group inline-block overflow-hidden h-6"
-          >
-            <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
-              <span className="block h-6">AI Tools</span>
-              <span className="block h-6">AI Tools</span>
-            </div>
-          </Link>
-
-          <Link href="/blog" className="group inline-block overflow-hidden h-6">
-            <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
-              <span className="block h-6">Blog</span>
-              <span className="block h-6">Blog</span>
-            </div>
-          </Link>
-
-          <Link
-            href="/about-us"
-            className="group inline-block overflow-hidden h-6"
-          >
-            <div className="transform group-hover:-translate-y-6 group-hover:transition-transform group-hover:duration-300">
-              <span className="block h-6">About Us</span>
-              <span className="block h-6">About Us</span>
-            </div>
-          </Link>
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="group inline-block overflow-hidden h-6"
+            >
+              <div className="transform group-hover:-translate-y-6 transition-transform duration-300">
+                <span className="block h-6">{item.name}</span>
+                <span className="block h-6">{item.name}</span>
+              </div>
+            </Link>
+          ))}
         </div>
         {/* Right */}
         <div className="flex-shrink-0 flex justify-end">

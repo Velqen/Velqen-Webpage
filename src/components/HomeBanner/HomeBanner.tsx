@@ -4,6 +4,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
+import WaitingListPage from "@/app/_components/WaitingList";
 
 const FadingGrid = dynamic(() => import("../FadingGrid/FadingGrid"), {
   ssr: false, // ✅ Prevent hydration mismatch
@@ -26,7 +27,8 @@ const HomeBanner = () => {
         <p className="text-3xl xl:text-4xl max-w-[1000px] text-velqen-gray">
           You don't need a degree to understand Finance
         </p>
-        <div
+        <WaitingListPage />
+        {/* <div
           className={`${
             isSmallDevice
               ? "flex-col space-y-2"
@@ -57,7 +59,7 @@ const HomeBanner = () => {
               </div>
             </button>
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );
