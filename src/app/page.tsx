@@ -7,6 +7,7 @@ export default function Home() {
   const { isSmallDevice } = useDeviceSize();
 
   return (
+
     <div
       className={`${
         isSmallDevice ? "" : "pt-12"
@@ -36,6 +37,7 @@ export default function Home() {
       <div className="w-full">
         <AudienceFlowShowcase />
       </div> */}
+
     </div>
   );
   // <div className="min-h-screen w-full flex flex-col justify-center items-center">

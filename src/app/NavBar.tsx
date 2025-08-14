@@ -97,6 +97,7 @@ const NavBar = () => {
       {/* Dropdown menu below navbar */}
       {open && (
         <div className="absolute top-full left-[-6px] w-[calc(100vw-0.5rem)] h-[calc(100vh-7rem)] bg-[rgba(255,255,255,0.95)] backdrop-blur-md flex flex-col items-left gap-6 py-6 px-6 z-40 mx-[0.7rem] my-[1.5rem] rounded-lg">
+
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
@@ -107,6 +108,7 @@ const NavBar = () => {
               {item.name}
             </Link>
           ))}
+
 
           <div className="mt-10">
             {status === "authenticated" && session?.user?.name ? (
@@ -159,6 +161,7 @@ const NavBar = () => {
 
         {/* Center: Home link */}
         <div className="flex justify-center bg-white p-3 text-lg rounded-md shadow-sm border border-velqen-light-gray gap-8">
+
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
@@ -171,6 +174,7 @@ const NavBar = () => {
               </div>
             </Link>
           ))}
+
         </div>
         {/* Right */}
         <div className="flex-shrink-0 flex justify-end">
