@@ -2,8 +2,7 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
-import { useDeviceSize } from "@/hooks/useDeviceSize";
+
 import WaitingListPage from "@/app/_components/WaitingList";
 
 const FadingGrid = dynamic(() => import("../FadingGrid/FadingGrid"), {
@@ -11,8 +10,6 @@ const FadingGrid = dynamic(() => import("../FadingGrid/FadingGrid"), {
 });
 
 const HomeBanner = () => {
-  const { isSmallDevice } = useDeviceSize();
-
   return (
     <div className="relative h-[100dvh] text-black flex items-center justify-center overflow-hidden w-full bg-[var(--background)]">
       {/* Background Grid */}
@@ -25,7 +22,7 @@ const HomeBanner = () => {
         </h1>
 
         <p className="text-3xl xl:text-4xl max-w-[1000px] text-velqen-gray">
-          You don't need a degree to understand Finance
+          You don&#39;t need a degree to understand Finance
         </p>
         <WaitingListPage />
         {/* <div

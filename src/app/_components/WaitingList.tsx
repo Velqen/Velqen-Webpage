@@ -24,8 +24,13 @@ export default function WaitingListPage() {
 
       setMessage(data.message);
       setEmail("");
-    } catch (err: any) {
-      setMessage(err.message || "Something went wrong");
+    } catch (err: unknown) {
+      // <-- change here
+      if (err instanceof Error) {
+        setMessage(err.message);
+      } else {
+        setMessage("Something went wrong");
+      }
     } finally {
       setLoading(false);
     }
