@@ -10,7 +10,7 @@ export function useTransactionClassification({
   onCsvParsed,
   csvDataInput,
 }: CsvUploadOptions = {}) {
-  const [file, setFile] = useState<File | null>(null);
+  const [classificationFile, setClassificationFile] = useState<File | null>(null);
   const [csvData, setCsvData] = useState<string[][]>([]);
   const [status, setStatus] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
@@ -22,12 +22,12 @@ export function useTransactionClassification({
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile && selectedFile.type === "text/csv") {
-      setFile(selectedFile);
+      setClassificationFile(selectedFile);
       setStatus("");
       setPreviewHeaders([]);
       setPreviewRows([]);
     } else {
-      setFile(null);
+      setClassificationFile(null);
       setStatus("Please select a valid CSV file.");
       setPreviewHeaders([]);
       setPreviewRows([]);
@@ -35,60 +35,66 @@ export function useTransactionClassification({
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-  e.preventDefault(); // Prevent default behaviour like opening the file
-  const droppedFile = e.dataTransfer.files?.[0];
+    e.preventDefault(); // Prevent default behaviour like opening the file
+    const droppedFile = e.dataTransfer.files?.[0];
 
-  if (droppedFile && droppedFile.type === "text/csv") {
-    setFile(droppedFile);                // ✅ Set the file
-    setStatus("");                       // ✅ Reset status
-    setPreviewHeaders([]);              // ✅ Clear preview headers
-    setPreviewRows([]);                 // ✅ Clear preview rows
-  } else {
-    setFile(null);
-    setStatus("Please select a valid CSV file.");  // ❌ Not a CSV
-    setPreviewHeaders([]);
-    setPreviewRows([]);
-  }
-};
+    if (droppedFile && droppedFile.type === "text/csv") {
+      setClassificationFile(droppedFile);                // ✅ Set the file
+      setStatus("");                       // ✅ Reset status
+      setPreviewHeaders([]);              // ✅ Clear preview headers
+      setPreviewRows([]);                 // ✅ Clear preview rows
+    } else {
+      setClassificationFile(null);
+      setStatus("Please select a valid CSV file.");  // ❌ Not a CSV
+      setPreviewHeaders([]);
+      setPreviewRows([]);
+    }
+  };
 
-  const handleUpload = async () => {
+  const handleClassificationUpload = async (file?: File): Promise<string[][]> => {
+    console.log("🚀 Starting classification upload...");
     setIsUploading(true);
     setStatus("Uploading and classifying...");
-
+ 
     try {
       const formData = new FormData();
 
-      if (file) {
-        // ✅ Case 1: File selected manually
-        formData.append("file", file);
-      } else if (csvData.length > 0) {
+      const fileToUse = file || classificationFile;
+
+      if (fileToUse) {
+        console.log("📁 using file:", fileToUse.name);
+        formData.append("file", fileToUse); // ✅ use directly
+      } 
+      
+      else if (csvData.length > 0) {
         // ✅ Case 2: CSV data from props (InvoiceExtraction)
         const csvString = csvData.map((row) => row.join(",")).join("\n");
         const blob = new Blob([csvString], { type: "text/csv" });
         formData.append("file", new File([blob], "generated.csv", { type: "text/csv" }));
       } else {
         setStatus("❌ No file or CSV data to upload.");
-        return;
+        return[];
       }
 
       const response = await fetch("/api/transactionUpload", {
         method: "POST",
         body: formData,
       });
-
+      console.log("📡 Upload response:", response);
       if (!response.ok) throw new Error("Upload failed");
 
       const blob = await response.blob();
 
       // Auto-download
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "classified_transactions.csv");
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(url);
+      // const url = URL.createObjectURL(blob);
+      // const link = document.createElement("a");
+      // link.href = url;
+      // link.setAttribute("download", "classified_transactions.csv");
+      // document.body.appendChild(link);
+      // link.click();
+      // link.remove();
+      // URL.revokeObjectURL(url);
+
 
       // Parse for preview
       const text = await blob.text();
@@ -103,17 +109,41 @@ export function useTransactionClassification({
         setPreviewHeaders(headers);
         setPreviewRows(rawRows);
         onCsvParsed?.(fullCsv);
+
+        setStatus("✅ Classification complete.");
+        return fullCsv; // ✅ Return full CSV here
       }
 
-      setStatus("✅ Classification complete.");
+        return [];
+      
     } catch (err) {
       console.error(err);
       setStatus("❌ Error during upload.");
+      return [];
     } finally {
       setIsUploading(false);
     }
   };
 
+  const downloadCsv = () => {
+        if (csvData.length === 0) {
+          setStatus("❌ No CSV data available for download.");
+          return;
+        }
+
+        const csvString = csvData.map((row) => row.join(",")).join("\n");
+        const blob = new Blob([csvString], { type: "text/csv" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "classified_transactions.csv");
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+
+        setStatus("✅ CSV downloaded.");
+      };
   // ✅ New: Auto-process passed-in CSV (e.g. from InvoiceExtraction)
   useEffect(() => {
     if (
@@ -144,7 +174,7 @@ export function useTransactionClassification({
   
   
   return {
-    file,
+    classificationFile,
     csvData,
     status,
     isUploading,
@@ -152,10 +182,11 @@ export function useTransactionClassification({
     previewRows,
     fileInputRef,
     handleFileChange,
-    handleUpload,
+    handleClassificationUpload,
     handleDrop,
     setCsvData,
     setStatus,
-    setFile,
+    setClassificationFile,
+    downloadCsv,
   };
 }

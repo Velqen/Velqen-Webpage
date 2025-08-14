@@ -2,16 +2,16 @@
 import { useState, useRef } from "react";
 
 export function useInvoiceExtraction() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedExtractionFile, setExtractionSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | undefined>();
-  const [isUploading, setIsUploading] = useState(false);
+  const [isExtractionUploading, setIsExtractionUploading] = useState(false);
   const [result, setResult] = useState<unknown>(null); 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleExtractionFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setSelectedFile(file);
+      setExtractionSelectedFile(file);
       setPreviewUrl(URL.createObjectURL(file));
     }
   };
@@ -23,21 +23,21 @@ export function useInvoiceExtraction() {
     file &&
     (file.type === "application/pdf" || file.type.startsWith("image/"))
   ) {
-      setSelectedFile(file);
+      setExtractionSelectedFile(file);
       setPreviewUrl(URL.createObjectURL(file));
     }
   };
 
-  const handleUpload = async (fileOverride?: File | React.MouseEvent) => {
+  const handleExtractionUpload = async (fileOverride?: File | React.MouseEvent) => {
     const fileToUpload =
-    fileOverride instanceof File ? fileOverride : selectedFile;
-    if (!fileToUpload || isUploading) return;
-    setIsUploading(true);
+    fileOverride instanceof File ? fileOverride : selectedExtractionFile;
+    if (!fileToUpload || isExtractionUploading) return;
+    setIsExtractionUploading(true);
 
     try {
       const formData = new FormData();
       formData.append("file", fileToUpload);
-
+ 
       const res = await fetch("/api/invoiceUpload", {
         method: "POST",
         body: formData,
@@ -49,18 +49,18 @@ export function useInvoiceExtraction() {
     } catch (err) {
       console.error("Upload failed:", err);
     } finally {
-      setIsUploading(false);
+      setIsExtractionUploading(false);
     }
   };
 
   return {
-    selectedFile,
+    selectedExtractionFile,
     previewUrl,
-    isUploading,
+    isExtractionUploading,
     result,
     fileInputRef,
-    handleFileChange,
+    handleExtractionFileChange,
     handleDrop,
-    handleUpload,
+    handleExtractionUpload,
   };
 }

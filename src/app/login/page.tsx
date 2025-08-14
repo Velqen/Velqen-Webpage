@@ -1,7 +1,7 @@
 "use client";
 export const dynamic = "force-dynamic";
 
-import LoginContent from "@/components/LoginContent/LoginContent";
+import LoginContent from "@/app/login/LoginContent";
 import { Suspense } from "react";
 
 export default function LoginPage() {

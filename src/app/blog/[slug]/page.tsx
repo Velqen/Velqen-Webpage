@@ -19,8 +19,8 @@ export default async function BlogPostPage({
   if (!post) return notFound();
 
   return (
-    <div className="min-h-screen pt-40 px-4 max-w-3xl mx-auto pb-20">
-      <div className="relative h-[300px] w-full rounded-xl overflow-hidden mb-8">
+    <div className="w-full flex flex-col items-center">
+      <div className="relative h-[500px] w-[1300px] overflow-hidden mb-16 mt-40">
         <Image
           src={post.image}
           alt={post.title}
@@ -28,19 +28,47 @@ export default async function BlogPostPage({
           className="object-cover"
         />
       </div>
-      <div className="mb-2 text-sm text-gray-500">
-        {post.date} · {post.category}
+      <div className="px-4 max-w-3xl mx-auto pb-20">
+        <div className="mb-2 text-sm text-gray-500">
+          {post.date} · {post.category}
+        </div>
+        <h1 className="text-3xl font-bold mb-11">{post.title}</h1>
+        {Array.isArray(post.content) &&
+          post.content.map((block, i) => {
+            if (block.type === "paragraph") {
+              return (
+                <p key={i} className="text-lg mb-8">
+                  {block.text}
+                </p>
+              );
+            }
+            if (block.type === "image") {
+              return (
+                <div
+                  key={i}
+                  className="relative h-[300px] w-full overflow-hidden my-10"
+                >
+                  <Image
+                    src={block.src}
+                    alt={block.alt || ""}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              );
+            }
+            if (block.type === "bullet") {
+              return (
+                <ul key={i} className="list-disc pl-6 text-lg mb-8">
+                  {block.items.map((item: string, idx: number) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              );
+            }
+            return null;
+          })}
       </div>
-      <h1 className="text-3xl font-bold mb-20">{post.title}</h1>
-      {Array.isArray(post.content) ? (
-        post.content.map((paragraph, i) => (
-          <p key={i} className="text-lg mb-8">
-            {paragraph}
-          </p>
-        ))
-      ) : (
-        <p className="text-lg">{post.content}</p>
-      )}
     </div>
   );
 }
