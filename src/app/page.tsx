@@ -1,6 +1,10 @@
 "use client";
 
+import AudienceFlowShowcase from "@/components/AudienceFlowShowcase/AudienceFlowShowcase";
+import FloatingLogos from "@/components/FloatingLogos/FloatingLogos";
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
+import HomeCoreFeatures from "@/components/HomeCoreFeatures/HomeCoreFeatures";
+import HomePainPoint from "@/components/HomePainPoint/HomePainPoint";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 export default function Home() {
@@ -13,7 +17,7 @@ export default function Home() {
       } min-h-screen w-full flex flex-col justify-center items-center`}
     >
       <HomeBanner />
-      {/* <FloatingLogos />
+      <FloatingLogos />
       <div
         className={`${
           isSmallDevice
@@ -35,7 +39,7 @@ export default function Home() {
 
       <div className="w-full">
         <AudienceFlowShowcase />
-      </div> */}
+      </div>
     </div>
   );
   // <div className="min-h-screen w-full flex flex-col justify-center items-center">
