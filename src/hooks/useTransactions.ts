@@ -6,7 +6,7 @@ import { RecordItem } from "@/types/transactions";
 export default function useTransactions() {
   const [data, setData] = useState<RecordItem[]>([]);
 
-    const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async () => {
     try {
       const res = await axios.get("/api/databaseTransaction");
       const sortedData = res.data.data.sort(
