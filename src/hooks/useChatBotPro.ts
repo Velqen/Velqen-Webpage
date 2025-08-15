@@ -34,6 +34,17 @@ export function useChatBotPro() {
       };
 
       setMessages((prev) => [...prev, botMessage]); 
+
+      if (tasks && processedContent) {
+      const tasksMessage: Message = {
+        sender: "bot",
+        text: "",
+        isTask: true,
+        processedContent,
+        tasks,  
+      };
+      setMessages((prev) => [...prev, tasksMessage]);
+    }
     } catch {
       const errorMessage: Message = {
         sender: "bot",
