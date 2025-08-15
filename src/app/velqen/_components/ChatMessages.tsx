@@ -9,15 +9,23 @@ import TaskMessage from "./TaskMessage";
 interface ChatMessagesProps {
   messages: ChatMessage[];
   isLoading: boolean;
+  setInput: (val: string) => void;
   isSmallDevice: boolean;
   messagesEndRef: React.RefObject<HTMLDivElement | null>;
+  onSendMessage?: () => void;
+  setTasks: (tasks: string) => void;
+  setProcessedContent: (content: ProcessedContent) => void;
 }
 
 const ChatMessages: React.FC<ChatMessagesProps> = ({
   messages,
   isLoading,
+  setInput,
   isSmallDevice,
   messagesEndRef,
+  onSendMessage,
+  setTasks,
+  setProcessedContent,
 }) => {
   return (
     <div
@@ -38,6 +46,10 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
             <TaskMessage
               tasks={msg.tasks}
               processedContent={msg.processedContent}
+              onSubmit={onSendMessage}
+              setTasks={setTasks}
+              setProcessedContent={setProcessedContent}
+              setInput={setInput}
             />
           ) : (
             <div

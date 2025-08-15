@@ -144,6 +144,23 @@ export function useTransactionClassification({
 
         setStatus("✅ CSV downloaded.");
       };
+
+  const addHeadersIfMissing = (data: string[][]): string[][] => {
+    if (!data || data.length === 0) return [];
+
+    const requiredHeaders = [
+      "Transaction_Description",
+      "Amount_RM",
+      "Date",
+      "Merchant_Name",
+    ];
+
+    const alreadyHasHeaders = data[0].every(
+      (header, index) => header.trim() === requiredHeaders[index]
+    );
+
+    return alreadyHasHeaders ? data : [requiredHeaders, ...data];
+  };
   // ✅ New: Auto-process passed-in CSV (e.g. from InvoiceExtraction)
   useEffect(() => {
     if (
@@ -188,5 +205,6 @@ export function useTransactionClassification({
     setStatus,
     setClassificationFile,
     downloadCsv,
+    addHeadersIfMissing
   };
 }

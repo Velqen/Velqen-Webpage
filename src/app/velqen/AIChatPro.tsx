@@ -87,8 +87,12 @@ const AIChatPro = () => {
         <ChatMessages
           messages={messages}
           isLoading={isLoading}
+          setInput={setInput}
           isSmallDevice={isSmallDevice}
           messagesEndRef={messagesEndRef}
+          onSendMessage={onSubmit}
+          setTasks={setTasks}
+          setProcessedContent={setProcessedContent}
         />
 
         {/* Input Form - conditionally position fixed on small devices when focused */}
