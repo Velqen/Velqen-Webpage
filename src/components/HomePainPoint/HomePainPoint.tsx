@@ -26,12 +26,12 @@ const HomePainPoint = () => {
             <div className="flex items-center gap-4">
               <Wallet className="w-12 h-12 flex-shrink-0" />
               <h2 className="text-2xl xl:text-3xl font-semibold">
-                The &#39;Assistant&#39;
+                The Assistant
               </h2>
             </div>
             <p className="text-velqen-black text-xl ml-16 mt-1">
               You&#39;re busy and don&#39;t have time to poke around financial
-              apps to work on your money. You need a real assistant for that.
+              apps. You need a real assistant for that.
             </p>
           </div>
 
@@ -40,7 +40,7 @@ const HomePainPoint = () => {
             <div className="flex items-center gap-4">
               <Layers3 className="w-12 h-12 flex-shrink-0" />
               <h2 className="text-2xl xl:text-3xl font-semibold">
-                The &#39;Translator&#39;
+                The Translator
               </h2>
             </div>
             <p className="text-velqen-black text-xl ml-16 mt-1">

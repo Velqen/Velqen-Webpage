@@ -17,7 +17,7 @@ export default function Home() {
       } min-h-screen w-full flex flex-col justify-center items-center`}
     >
       <HomeBanner />
-      <FloatingLogos />
+      {/* <FloatingLogos /> */}
       <div
         className={`${
           isSmallDevice
@@ -27,7 +27,7 @@ export default function Home() {
       >
         <HomePainPoint />
       </div>
-      <div
+      {/* <div
         className={`${
           isSmallDevice
             ? "justify-center items-center"
@@ -39,7 +39,7 @@ export default function Home() {
 
       <div className="w-full">
         <AudienceFlowShowcase />
-      </div>
+      </div> */}
     </div>
   );
   // <div className="min-h-screen w-full flex flex-col justify-center items-center">
