@@ -28,8 +28,8 @@ const HomeBanner = () => {
         <p className="text-3xl xl:text-4xl max-w-[1000px] text-velqen-gray">
           You don&#39;t need a degree to understand Finance
         </p>
-        <WaitingListPage />
-        {/* <div
+        {/* <WaitingListPage /> */}
+        <div
           className={`${
             isSmallDevice
               ? "flex-col space-y-2"
@@ -60,7 +60,7 @@ const HomeBanner = () => {
               </div>
             </button>
           </Link>
-        </div> */}
+        </div>
       </div>
     </div>
   );

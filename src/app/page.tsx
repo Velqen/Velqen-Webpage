@@ -3,8 +3,8 @@
 import AudienceFlowShowcase from "@/components/AudienceFlowShowcase/AudienceFlowShowcase";
 import FloatingLogos from "@/components/FloatingLogos/FloatingLogos";
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
-import HomeCoreFeatures from "@/components/HomeCoreFeatures/HomeCoreFeatures";
-import HomePainPoint from "@/components/HomePainPoint/HomePainPoint";
+import HomePainPoints from "@/components/HomePainPoints/HomePainPoints";
+import HomeFeatures from "@/components/HomeFeatures/HomeFeatures";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 export default function Home() {
@@ -17,29 +17,29 @@ export default function Home() {
       } min-h-screen w-full flex flex-col justify-center items-center`}
     >
       <HomeBanner />
-      {/* <FloatingLogos /> */}
+      <FloatingLogos />
+      <div
+        className={`${
+          isSmallDevice
+            ? "justify-center items-center"
+            : "items-center justify-center"
+        } w-full flex bg-velqen-black`}
+      >
+        <HomePainPoints />
+      </div>
       <div
         className={`${
           isSmallDevice
             ? "w-[90%] flex-col justify-center items-center"
             : "w-[80%] flex-row items-center justify-center"
-        } flex `}
+        } flex  mt-32`}
       >
-        <HomePainPoint />
-      </div>
-      {/* <div
-        className={`${
-          isSmallDevice
-            ? "justify-center items-center"
-            : "items-center justify-center mt-32"
-        } w-full flex bg-velqen-black`}
-      >
-        <HomeCoreFeatures />
+        <HomeFeatures />
       </div>
 
       <div className="w-full">
         <AudienceFlowShowcase />
-      </div> */}
+      </div>
     </div>
   );
   // <div className="min-h-screen w-full flex flex-col justify-center items-center">

@@ -3,26 +3,27 @@
 import React from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import SlantingCards from "../SlantingCards/SlantingCards";
+import Image from "next/image";
 
 const features = [
   {
-    title: "Speak Human",
+    title: "Financial Jargons",
     description:
-      "No buzzwords, no jargon. Simple explanation beats complicated report every time.",
+      "Financial apps are full of jargon and buzzwords, but you're not here to earn a finance degree.",
   },
   {
-    title: "One click, peace of mind",
+    title: "Overwhelming Dashboards",
     description:
-      "Your finances can finally work quietly under the hood without pushing tons of buttons.",
+      "Using financial dashboards feels like flying a spaceship with messy controls and buttons everywhere.",
   },
   {
-    title: "Make It Yours",
+    title: "Unnecessary Features",
     description:
-      "Forget one-size-fits-all. Shape the AI to match your exact workflow.",
+      "You feel like the apps are stuffing unnecessary features down your throat.",
   },
 ];
 
-export default function HomeCoreFeatures() {
+export default function HomePainPoints() {
   const { isSmallDevice } = useDeviceSize();
 
   return (
@@ -49,7 +50,7 @@ export default function HomeCoreFeatures() {
             <h3
               className={`${
                 isSmallDevice ? "text-xl" : "text-2xl"
-              } xl:text-3xl font-bold mb-2 text-white`}
+              } xl:text-3xl font-bold mb-6 text-white`}
             >
               {feature.title}
             </h3>
@@ -63,8 +64,8 @@ export default function HomeCoreFeatures() {
           </div>
         ))}
       </div>
-      <div className="mt-12">{!isSmallDevice && <SlantingCards />}</div>
-      {/* <div className="mt-12">
+      {/* <div className="mt-12">{!isSmallDevice && <SlantingCards />}</div> */}
+      <div className="mt-12">
         <div className="max-w-[1300px] mx-auto px-4">
           <div
             className={`${
@@ -80,7 +81,7 @@ export default function HomeCoreFeatures() {
             />
           </div>
         </div>
-      </div> */}
+      </div>
     </section>
   );
 }
