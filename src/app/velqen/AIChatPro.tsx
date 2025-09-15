@@ -9,15 +9,8 @@ import ChatMessages from "./_components/ChatMessages";
 const AIChatPro = () => {
   const { isSmallDevice } = useDeviceSize();
   const [input, setInput] = useState("");
-  const {
-    messages,
-    isLoading,
-    tasks,
-    processedContent,
-    handleSubmit,
-    setTasks,
-    setProcessedContent,
-  } = useChatBotPro();
+  const { messages, isLoading, handleSubmit, setTasks, setProcessedContent } =
+    useChatBotPro();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const [greeting, setGreeting] = useState("");

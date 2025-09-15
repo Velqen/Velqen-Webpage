@@ -3,7 +3,6 @@
 import React from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import SlantingCards from "../SlantingCards/SlantingCards";
-import Image from "next/image";
 
 const features = [
   {

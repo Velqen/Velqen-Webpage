@@ -1,10 +1,8 @@
 "use client";
 
 import AudienceFlowShowcase from "@/components/AudienceFlowShowcase/AudienceFlowShowcase";
-import FloatingLogos from "@/components/FloatingLogos/FloatingLogos";
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
 import HomePainPoints from "@/components/HomePainPoints/HomePainPoints";
-import HomeFeatures from "@/components/HomeFeatures/HomeFeatures";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 export default function Home() {

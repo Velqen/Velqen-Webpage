@@ -1,13 +1,8 @@
 // velqen/_components/TaskMessage.tsx
 "use client";
 
-import React, { useState } from "react";
-import { FiDownload } from "react-icons/fi"; // example icon
-import { Message as ChatMessage } from "@/types/chat";
+import React from "react";
 import { ProcessedContent } from "@/types/chat";
-import { downloadRecordsAsCSV } from "@/lib/exportInvoiceCSV";
-import { extractMinimalRecords } from "@/lib/extractMinimalRecords";
-import { useTransactionClassification } from "@/hooks/useTransactionClassification";
 import ChatExtractionResponse from "./ChatExtractionResponse";
 import ChatClassificationResponse from "./ChatClassificationResponse";
 interface TaskMessageProps {
@@ -28,8 +23,7 @@ const TaskMessage: React.FC<TaskMessageProps> = ({
   setInput,
 }) => {
   // You can parse tasks or just render buttons/icons here
-  const { handleClassificationUpload, addHeadersIfMissing } =
-    useTransactionClassification();
+
   if (tasks === "DocumentExtraction") {
     return (
       <ChatExtractionResponse
@@ -41,11 +35,12 @@ const TaskMessage: React.FC<TaskMessageProps> = ({
       />
     );
   } else if (tasks === "RecordClassification") {
+    const records =
+      Array.isArray(processedContent) && Array.isArray(processedContent[0])
+        ? (processedContent as string[][])
+        : undefined;
     return (
-      <ChatClassificationResponse
-        tasks={tasks}
-        processedContent={processedContent}
-      />
+      <ChatClassificationResponse tasks={tasks} processedContent={records} />
     );
   }
 };

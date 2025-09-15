@@ -2,7 +2,6 @@
 
 import React, { useEffect } from "react";
 import { FiDownload } from "react-icons/fi";
-import { ProcessedContent } from "@/types/chat";
 import { useTransactionClassification } from "@/hooks/useTransactionClassification";
 import useTransactions from "@/hooks/useTransactions";
 
