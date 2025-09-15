@@ -64,8 +64,8 @@ export default function HomePainPoints() {
           </div>
         ))}
       </div>
-      {/* <div className="mt-12">{!isSmallDevice && <SlantingCards />}</div> */}
-      <div className="mt-12">
+      <div className="mt-12">{!isSmallDevice && <SlantingCards />}</div>
+      {/* <div className="mt-12">
         <div className="max-w-[1300px] mx-auto px-4">
           <div
             className={`${
@@ -73,7 +73,7 @@ export default function HomePainPoints() {
             } w-full relative rounded-xl overflow-hidden`}
           >
             <Image
-              src="/home/features.png"
+              src="/home/Frame 1.png"
               alt="Velqen Agent Architecture"
               className="w-full h-auto object-contain"
               width={8000} // or any value that matches the max display width
@@ -81,7 +81,7 @@ export default function HomePainPoints() {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
