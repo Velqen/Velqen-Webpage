@@ -9,6 +9,7 @@ export default function Home() {
   const { isSmallDevice } = useDeviceSize();
 
   return (
+
     <div
       className={`${
         isSmallDevice ? "" : "pt-12"
