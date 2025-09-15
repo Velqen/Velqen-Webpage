@@ -6,23 +6,23 @@ import SlantingCards from "../SlantingCards/SlantingCards";
 
 const features = [
   {
-    title: "Speak Human",
+    title: "Financial Jargons",
     description:
-      "No buzzwords, no jargon. Simple explanation beats complicated report every time.",
+      "Financial apps are full of jargon and buzzwords, but you're not here to earn a finance degree.",
   },
   {
-    title: "One click, peace of mind",
+    title: "Overwhelming Dashboards",
     description:
-      "Your finances can finally work quietly under the hood without pushing tons of buttons.",
+      "Using financial dashboards feels like flying a spaceship with messy controls and buttons everywhere.",
   },
   {
-    title: "Make It Yours",
+    title: "Unnecessary Features",
     description:
-      "Forget one-size-fits-all. Shape the AI to match your exact workflow.",
+      "You feel like the apps are stuffing unnecessary features down your throat.",
   },
 ];
 
-export default function HomeCoreFeatures() {
+export default function HomePainPoints() {
   const { isSmallDevice } = useDeviceSize();
 
   return (
@@ -49,7 +49,7 @@ export default function HomeCoreFeatures() {
             <h3
               className={`${
                 isSmallDevice ? "text-xl" : "text-2xl"
-              } xl:text-3xl font-bold mb-2 text-white`}
+              } xl:text-3xl font-bold mb-6 text-white`}
             >
               {feature.title}
             </h3>
@@ -72,7 +72,7 @@ export default function HomeCoreFeatures() {
             } w-full relative rounded-xl overflow-hidden`}
           >
             <Image
-              src="/home/features.png"
+              src="/home/Frame 1.png"
               alt="Velqen Agent Architecture"
               className="w-full h-auto object-contain"
               width={8000} // or any value that matches the max display width

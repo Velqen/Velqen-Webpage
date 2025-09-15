@@ -4,12 +4,15 @@ import React from "react";
 import dynamic from "next/dynamic";
 
 import WaitingListPage from "@/app/_components/WaitingList";
+// import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 const FadingGrid = dynamic(() => import("../FadingGrid/FadingGrid"), {
   ssr: false, // ✅ Prevent hydration mismatch
 });
 
 const HomeBanner = () => {
+  // const { isSmallDevice } = useDeviceSize();
+
   return (
     <div className="relative h-[100dvh] text-black flex items-center justify-center overflow-hidden w-full bg-[var(--background)]">
       {/* Background Grid */}

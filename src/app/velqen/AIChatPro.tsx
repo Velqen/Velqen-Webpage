@@ -3,8 +3,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useChatBotPro } from "@/hooks/useChatBotPro";
 import { greetings } from "@/data/chatInitialMessages";
-import ReactMarkdown from "react-markdown";
 import ChatInputBar from "./components/ChatInputBar/ChatInputBar";
+import ChatMessages from "./_components/ChatMessages";
 
 const AIChatPro = () => {
   const { isSmallDevice } = useDeviceSize();
@@ -77,40 +77,16 @@ const AIChatPro = () => {
         } flex flex-col h-[100dvh]`}
       >
         {/* Chat Area */}
-        <div
-          className={`${
-            isSmallDevice ? "mt-8" : "mt-10"
-          } flex-1 p-4 space-y-3 overflow-y-auto min-h-0`}
-        >
-          {messages.map((msg, index) => (
-            <div
-              key={index}
-              className={`flex ${
-                msg.sender === "user" ? "justify-end" : "justify-start"
-              }`}
-            >
-              <div
-                className={`px-4 py-2 rounded-2xl text-base break-words ${
-                  msg.sender === "user" ? "bg-velqen-black text-white" : ""
-                }`}
-              >
-                <div className="prose max-w-full">
-                  <ReactMarkdown>{msg.text}</ReactMarkdown>
-                </div>
-              </div>
-            </div>
-          ))}
-
-          {isLoading && (
-            <div className="flex justify-start">
-              <div className="px-4 py-2 rounded-2xl text-velqen-gray text-base max-w-xs animate-pulse">
-                velqen is typing…
-              </div>
-            </div>
-          )}
-
-          <div ref={messagesEndRef} />
-        </div>
+        <ChatMessages
+          messages={messages}
+          isLoading={isLoading}
+          setInput={setInput}
+          isSmallDevice={isSmallDevice}
+          messagesEndRef={messagesEndRef}
+          onSendMessage={onSubmit}
+          setTasks={setTasks}
+          setProcessedContent={setProcessedContent}
+        />
 
         {/* Input Form - conditionally position fixed on small devices when focused */}
         <ChatInputBar

@@ -1,11 +1,11 @@
-// components/HomeProductDesc.tsx
+// components/HomeFeatures.tsx
 "use client";
 
 import { Wallet, Layers3 } from "lucide-react";
 import Image from "next/image";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
-const HomePainPoint = () => {
+const HomeFeatures = () => {
   const { isSmallDevice } = useDeviceSize();
   return (
     <>
@@ -21,42 +21,40 @@ const HomePainPoint = () => {
         </h1>
 
         <div className="flex flex-col gap-8 mt-12 text-left max-w-[600px]">
-          {/* Simplicity */}
           <div>
             <div className="flex items-center gap-4">
               <Wallet className="w-12 h-12 flex-shrink-0" />
               <h2 className="text-2xl xl:text-3xl font-semibold">
-                The &#39;Assistant&#39;
+                The Assistant
               </h2>
             </div>
             <p className="text-velqen-black text-xl ml-16 mt-1">
-              You&#39;re busy and don&#39;t have time to poke around financial
-              apps to work on your money. You need a real assistant for that.
+              Start chatting and let Velqen do the tasks for you. Just like a
+              real assistant
             </p>
           </div>
 
-          {/* AI Intelligence */}
           <div>
             <div className="flex items-center gap-4">
               <Layers3 className="w-12 h-12 flex-shrink-0" />
               <h2 className="text-2xl xl:text-3xl font-semibold">
-                The &#39;Translator&#39;
+                The Translator
               </h2>
             </div>
             <p className="text-velqen-black text-xl ml-16 mt-1">
-              You&#39;re not here to learn about accounting jargons or get a
-              finance degree.
+              We explain your money just like a friend would, no jargons no
+              bullshit.
             </p>
           </div>
         </div>
       </div>
       <div
         className={`${
-          isSmallDevice ? "" : "min-w-[300px]"
+          isSmallDevice ? "" : "min-w-[300px] max-h-[750px]"
         } flex justify-center`}
       >
         <Image
-          src="/home/phone2.2.png"
+          src="/home/phone.png"
           alt="Phone UI"
           width={5000}
           height={5000}
@@ -67,4 +65,4 @@ const HomePainPoint = () => {
   );
 };
 
-export default HomePainPoint;
+export default HomeFeatures;
