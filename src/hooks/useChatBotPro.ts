@@ -35,14 +35,23 @@ export function useChatBotPro() {
 
       setMessages((prev) => [...prev, botMessage]); 
 
-      if (tasks && processedContent) {
-      const tasksMessage: Message = {
-        sender: "bot",
-        text: "",
-        isTask: true,
-        processedContent: processedContent,
-        tasks: tasks,
-      };
+      if (data.tasks !== undefined && data.tasks !== null) {
+        setTasks(data.tasks);
+      }
+      if (data.processedContent !== undefined && data.processedContent !== null) {
+        setProcessedContent(data.processedContent);
+      }
+      console.log("Tasks from API:", data.tasks);
+      console.log("Processed Content from API:", data.processedContent);
+
+      if (data.tasks && data.processedContent) {
+        const tasksMessage: Message = {
+          sender: "bot",
+          text: "",
+          isTask: true,
+          processedContent: data.processedContent,
+          tasks: data.tasks,
+        };
       setMessages((prev) => [...prev, tasksMessage]);
     }
     } catch {
