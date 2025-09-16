@@ -2,6 +2,7 @@
 
 import AudienceFlowShowcase from "@/components/AudienceFlowShowcase/AudienceFlowShowcase";
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
+import HomeFeatures from "@/components/HomeFeatures/HomeFeatures";
 import HomePainPoints from "@/components/HomePainPoints/HomePainPoints";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
@@ -9,7 +10,6 @@ export default function Home() {
   const { isSmallDevice } = useDeviceSize();
 
   return (
-
     <div
       className={`${
         isSmallDevice ? "" : "pt-12"
@@ -26,7 +26,7 @@ export default function Home() {
       >
         <HomePainPoints />
       </div>
-      {/* <div
+      <div
         className={`${
           isSmallDevice
             ? "w-[90%] flex-col justify-center items-center"
@@ -34,7 +34,7 @@ export default function Home() {
         } flex  mt-32`}
       >
         <HomeFeatures />
-      </div> */}
+      </div>
 
       <div className="w-full">
         <AudienceFlowShowcase />

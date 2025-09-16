@@ -40,8 +40,8 @@ export function useChatBotPro() {
         sender: "bot",
         text: "",
         isTask: true,
-        processedContent,
-        tasks,  
+        processedContent: processedContent,
+        tasks: tasks,
       };
       setMessages((prev) => [...prev, tasksMessage]);
     }

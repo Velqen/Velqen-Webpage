@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     }
 
     // 🔁 Send to your backend server
-    const backendResponse = await fetch(`${backendURL}/velqen-inv-gen-chatbot`, {
+    const backendResponse = await fetch(`${backendURL}/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_input: message }),

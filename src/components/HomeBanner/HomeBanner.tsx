@@ -4,14 +4,15 @@ import React from "react";
 import dynamic from "next/dynamic";
 
 import WaitingListPage from "@/app/_components/WaitingList";
-// import { useDeviceSize } from "@/hooks/useDeviceSize";
+import { useDeviceSize } from "@/hooks/useDeviceSize";
+import Link from "next/link";
 
 const FadingGrid = dynamic(() => import("../FadingGrid/FadingGrid"), {
   ssr: false, // ✅ Prevent hydration mismatch
 });
 
 const HomeBanner = () => {
-  // const { isSmallDevice } = useDeviceSize();
+  const { isSmallDevice } = useDeviceSize();
 
   return (
     <div className="relative h-[100dvh] text-black flex items-center justify-center overflow-hidden w-full bg-[var(--background)]">
@@ -27,8 +28,8 @@ const HomeBanner = () => {
         <p className="text-3xl xl:text-4xl max-w-[1000px] text-velqen-gray">
           You don&#39;t need a degree to understand Finance
         </p>
-        <WaitingListPage />
-        {/* <div
+        {/* <WaitingListPage /> */}
+        <div
           className={`${
             isSmallDevice
               ? "flex-col space-y-2"
@@ -59,7 +60,7 @@ const HomeBanner = () => {
               </div>
             </button>
           </Link>
-        </div> */}
+        </div>
       </div>
     </div>
   );
