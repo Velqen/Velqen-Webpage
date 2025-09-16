@@ -2,15 +2,8 @@
 import React, { useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { ProcessedContent } from "@/types/chat";
 
-interface InvGenDownloadProps {
-  processedContent?: ProcessedContent;
-}
-
-const InvGenDownload: React.FC<InvGenDownloadProps> = ({
-  processedContent,
-}) => {
+const InvGenDownload = () => {
   const [loading, setLoading] = useState(false);
 
   const handleDownload = async () => {

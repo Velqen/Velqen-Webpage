@@ -3,7 +3,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-import WaitingListPage from "@/app/_components/WaitingList";
+// import WaitingListPage from "@/app/_components/WaitingList";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import Link from "next/link";
 

@@ -1,22 +1,25 @@
 import React from "react";
 import { ProcessedContent } from "@/types/chat";
+import { InvGenFieldProps } from "@/types/invgen";
 
 interface InvoicePreviewProps {
   processedContent?: ProcessedContent;
 }
 
-const InvoicePreview: React.FC<InvoicePreviewProps> = ({ processedContent }) => {
+const InvoicePreview: React.FC<InvoicePreviewProps> = ({
+  processedContent,
+}) => {
   // Extract invoice fields from processedContent
   const {
     Amount_RM,
     Date: invoiceDate,
     Product_Description,
     Receiver_Name,
-    Invoice_Number: invoiceNumber,
   } = processedContent && typeof processedContent === "object"
-    ? (processedContent as any)
+    ? (processedContent as InvGenFieldProps)
     : {};
 
+  const invoiceNumber = "INV-" + Math.floor(Math.random() * 1000000);
   const today = new Date().toLocaleDateString();
 
   return (

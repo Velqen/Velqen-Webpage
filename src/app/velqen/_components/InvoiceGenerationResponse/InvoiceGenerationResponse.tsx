@@ -9,13 +9,10 @@ interface InvoiceGenerationResponseProps {
 }
 
 const InvoiceGenerationResponse: React.FC<InvoiceGenerationResponseProps> = ({
-  tasks,
   processedContent,
 }) => {
   console.log("InvoiceGenerationResponse component triggered");
   // Extract invoice fields from processedContent
-
-  const today = new Date().toLocaleDateString();
 
   return (
     <div>
@@ -24,7 +21,7 @@ const InvoiceGenerationResponse: React.FC<InvoiceGenerationResponseProps> = ({
           <InvoicePreview processedContent={processedContent} />
           {/* Download button for invoice PDF */}
           <div className="mt-4">
-            <InvGenDownload processedContent={processedContent} />
+            <InvGenDownload />
           </div>
         </>
       ) : (
