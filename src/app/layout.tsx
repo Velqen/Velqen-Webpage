@@ -1,5 +1,5 @@
 import { IBM_Plex_Sans, Merriweather } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import AuthProvider from "./auth/Provider";
 import ClientLayout from "./ClientLayout";
 
