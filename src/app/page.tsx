@@ -23,7 +23,7 @@ export default function Home() {
           isSmallDevice
             ? "justify-center items-center"
             : "items-center justify-center"
-        } w-full flex bg-velqen-black relative min-h-[180dvh]`}
+        } w-full flex bg-black relative min-h-[180dvh]`}
       >
         <HomePainPoints />
       </div>

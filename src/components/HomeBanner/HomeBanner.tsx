@@ -22,8 +22,8 @@ const HomeBanner = () => {
 
       {/* Foreground Content */}
       <div className="relative z-10 text-center space-y-6 px-4 velqen">
-        <h1 className="text-7xl xl:text-8xl font-bold  mb-10">
-          <span className="inline-block mr-8">
+        <h1 className="text-5xl md:text-7xl xl:text-8xl font-bold  mb-10">
+          <span className="md:inline-block md:mr-8">
             {" "}
             <RotatingText
               texts={["Simplicity", "Jargonless", "Cool", "Velqen"]}

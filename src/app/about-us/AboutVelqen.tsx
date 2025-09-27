@@ -32,7 +32,7 @@ const AboutVelqen = () => {
       </div>
     </div>
   ) : (
-    <div className="flex justify-center min-h-screen relative font-(family-name:--font-merriweather) py-16 ">
+    <div className="flex justify-center min-h-screen relative font-(family-name:--font-merriweather) py-20 mb-20">
       <div className="flex flex-col items-center w-[80%]">
         <div style={{ width: "100%", height: "600px", position: "relative" }}>
           <Orb
@@ -42,7 +42,7 @@ const AboutVelqen = () => {
             forceHoverState={false}
           />
         </div>{" "}
-        <h1 className="absolute top-64 left-1/2 transform -translate-x-1/2 text-white text-[140px] whitespace-nowrap overflow-visible pointer-events-none">
+        <h1 className="absolute top-[280px] left-1/2 transform -translate-x-1/2 text-white text-[140px] whitespace-nowrap overflow-visible pointer-events-none">
           {aboutUsText.title}
         </h1>
         <div className="relative "></div>
