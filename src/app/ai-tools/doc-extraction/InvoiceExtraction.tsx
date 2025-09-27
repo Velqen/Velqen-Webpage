@@ -1,8 +1,5 @@
 "use client";
 // ✅ Line changed
-import dynamic from "next/dynamic"; // ✅ Add this at the top
-
-const ReactJson = dynamic(() => import("react-json-view"), { ssr: false }); // ✅ This disables SSR
 
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useInvoiceExtraction } from "@/hooks/useInvoiceExtraction";
@@ -109,14 +106,9 @@ const InvoiceExtraction = ({
                   <h2 className="text-base font-semibold mb-2">
                     Extraction Result:
                   </h2>
-                  <ReactJson
-                    src={result}
-                    collapsed={1}
-                    enableClipboard={true}
-                    displayDataTypes={false}
-                    name={false}
-                    style={{ fontSize: "0.85rem", wordBreak: "break-word" }}
-                  />
+                  <pre className="whitespace-pre-wrap text-sm">
+                    {JSON.stringify(result, null, 2)}
+                  </pre>
                 </div>
                 <button
                   onClick={() => {
@@ -209,14 +201,9 @@ const InvoiceExtraction = ({
                   <h2 className="text-xl font-semibold mb-2">
                     Extraction Result:
                   </h2>
-                  <ReactJson
-                    src={result}
-                    collapsed={1}
-                    enableClipboard={true}
-                    displayDataTypes={false}
-                    name={false}
-                    style={{ fontSize: "0.9rem", wordBreak: "break-word" }}
-                  />
+                  <pre className="whitespace-pre-wrap text-sm">
+                    {JSON.stringify(result, null, 2)}
+                  </pre>
                 </div>
                 <button
                   onClick={() => {

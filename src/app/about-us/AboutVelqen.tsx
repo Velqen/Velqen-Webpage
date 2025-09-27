@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import aboutUsText from "@/data/aboutUsText";
 import Orb from "@/components/Animations/Orb";

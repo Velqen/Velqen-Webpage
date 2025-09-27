@@ -1,6 +1,5 @@
 "use client";
 
-import Particles from "@/components/Animations/Particles";
 import AudienceFlowShowcase from "@/components/AudienceFlowShowcase/AudienceFlowShowcase";
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
 import HomeFeatures from "@/components/HomeFeatures/HomeFeatures";

@@ -4,16 +4,16 @@ import Link from "next/link";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useEffect, useRef, useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { ChevronDownIcon, UserIcon } from "lucide-react";
+import { UserIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import DarkNavBar from "./DarkNavBar";
 
 const NAV_ITEMS = [
   { name: "Home", href: "/" },
-  { name: "Velqen", href: "/velqen" },
-  { name: "AI Tools", href: "/ai-tools" },
-  { name: "Blog", href: "/blog" },
+  // { name: "Velqen", href: "/velqen" },
+  // { name: "AI Tools", href: "/ai-tools" },
+  // { name: "Blog", href: "/blog" },
   { name: "About Us", href: "/about-us" },
 ];
 
