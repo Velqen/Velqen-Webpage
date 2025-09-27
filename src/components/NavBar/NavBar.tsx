@@ -7,6 +7,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { ChevronDownIcon, UserIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import DarkNavBar from "./DarkNavBar";
 
 const NAV_ITEMS = [
   { name: "Home", href: "/" },
@@ -22,7 +23,8 @@ const NavBar = () => {
   const { status, data: session } = useSession();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-
+  // Define pages where you want DarkNavBar
+  const darkPages = ["/about-us", "/velqen"];
   useEffect(() => {
     if (open && isSmallDevice) {
       document.body.style.overflow = "hidden";
@@ -51,6 +53,9 @@ const NavBar = () => {
 
   if (pathname?.startsWith("/velqen") || pathname === "/login") {
     return null;
+  }
+  if (darkPages.some((p) => pathname?.startsWith(p))) {
+    return <DarkNavBar />;
   }
   return isSmallDevice ? (
     <nav className="absolute top-0 left-0 w-full z-500 p-4">
@@ -173,8 +178,8 @@ const NavBar = () => {
           ))}
         </div>
         {/* Right */}
-        <div className="flex-shrink-0 flex justify-end">
-          {status === "authenticated" && session?.user?.name && (
+        <div className="flex-shrink-0 flex justify-end w-[50px]">
+          {/* {status === "authenticated" && session?.user?.name && (
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setOpen(!open)}
@@ -211,7 +216,7 @@ const NavBar = () => {
               <UserIcon className="w-5 h-5 text-gray-600" />
               Login
             </button>
-          )}
+          )} */}
         </div>
       </div>
     </nav>

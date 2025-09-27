@@ -1,6 +1,6 @@
 import { IBM_Plex_Sans, Merriweather } from "next/font/google"; // import Merriweather
 import "./globals.css";
-import NavBar from "./NavBar";
+import NavBar from "../components/NavBar/NavBar";
 import Footer from "./Footer";
 import AuthProvider from "./auth/Provider";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider/SmoothScrollProvider";

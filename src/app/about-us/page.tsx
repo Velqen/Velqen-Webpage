@@ -6,7 +6,7 @@ import JoinUs from "@/app/about-us/JoinUs";
 
 const AboutUs = () => {
   return (
-    <div>
+    <div className="bg-velqen-black">
       <AboutVelqen />
       <JoinUs />
     </div>
