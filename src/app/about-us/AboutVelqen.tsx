@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import aboutUsText from "@/data/aboutUsText";
-import Orb from "@/components/BGAnimations/Orb";
+import Orb from "@/components/Animations/Orb";
 
 const AboutVelqen = () => {
   const { isSmallDevice } = useDeviceSize();

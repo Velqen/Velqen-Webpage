@@ -1,5 +1,6 @@
 "use client";
 
+import Particles from "@/components/Animations/Particles";
 import AudienceFlowShowcase from "@/components/AudienceFlowShowcase/AudienceFlowShowcase";
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
 import HomeFeatures from "@/components/HomeFeatures/HomeFeatures";
@@ -22,7 +23,7 @@ export default function Home() {
           isSmallDevice
             ? "justify-center items-center"
             : "items-center justify-center"
-        } w-full flex bg-velqen-black`}
+        } w-full flex bg-velqen-black relative min-h-[180dvh]`}
       >
         <HomePainPoints />
       </div>

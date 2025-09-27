@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 // import WaitingListPage from "@/app/_components/WaitingList";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import Link from "next/link";
+import RotatingText from "../Animations/RotatingText";
 
 const FadingGrid = dynamic(() => import("../FadingGrid/FadingGrid"), {
   ssr: false, // ✅ Prevent hydration mismatch
@@ -20,9 +21,24 @@ const HomeBanner = () => {
       <FadingGrid displayCols={51} displayRows={25} />
 
       {/* Foreground Content */}
-      <div className="relative z-10 text-center space-y-6 px-4">
+      <div className="relative z-10 text-center space-y-6 px-4 velqen">
         <h1 className="text-7xl xl:text-8xl font-bold  mb-10">
-          <span className="">Simplicity</span> is Everything
+          <span className="inline-block mr-8">
+            {" "}
+            <RotatingText
+              texts={["Simplicity", "Jargonless", "Cool", "Velqen"]}
+              mainClassName="px-2 sm:px-2 md:px-3  text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+              staggerFrom={"last"}
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={2000}
+            />{" "}
+          </span>
+          is Everything
         </h1>
 
         <p className="text-3xl xl:text-4xl max-w-[1000px] text-velqen-gray">
