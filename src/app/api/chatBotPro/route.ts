@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 
         const data = await res.json()
 
-        return NextResponse.json({ response: data.response })
+        return NextResponse.json({ response: data.response, tasks: data.tasks, processedContent: data.processedContent })
     } catch (error) {
         console.error('API error:', error)
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })

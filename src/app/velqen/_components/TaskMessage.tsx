@@ -5,6 +5,7 @@ import React from "react";
 import { ProcessedContent } from "@/types/chat";
 import ChatExtractionResponse from "./ChatExtractionResponse";
 import ChatClassificationResponse from "./ChatClassificationResponse";
+import InvoiceGenerationResponse from "./InvoiceGenerationResponse/InvoiceGenerationResponse";
 interface TaskMessageProps {
   tasks?: string;
   processedContent?: ProcessedContent;
@@ -23,6 +24,7 @@ const TaskMessage: React.FC<TaskMessageProps> = ({
   setInput,
 }) => {
   // You can parse tasks or just render buttons/icons here
+  console.log("TaskMessage tasks:", tasks);
 
   if (tasks === "DocumentExtraction") {
     return (
@@ -41,6 +43,13 @@ const TaskMessage: React.FC<TaskMessageProps> = ({
         : undefined;
     return (
       <ChatClassificationResponse tasks={tasks} processedContent={records} />
+    );
+  } else if (tasks === "InvoiceGeneration") {
+    return (
+      <InvoiceGenerationResponse
+        tasks={tasks}
+        processedContent={processedContent}
+      />
     );
   }
 };
