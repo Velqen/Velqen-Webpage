@@ -1,14 +1,12 @@
-import { IBM_Plex_Sans, Merriweather } from "next/font/google"; // import Merriweather
+import { IBM_Plex_Sans, Merriweather } from "next/font/google";
 import "./globals.css";
-import NavBar from "../components/NavBar/NavBar";
-import Footer from "./Footer";
 import AuthProvider from "./auth/Provider";
-import SmoothScrollProvider from "@/components/SmoothScrollProvider/SmoothScrollProvider";
+import ClientLayout from "./ClientLayout";
 
 const ibmPlexSans = IBM_Plex_Sans({
   variable: "--font-ibm-plex-sans",
   subsets: ["latin"],
-  weight: ["400", "700"], // <-- Add this line
+  weight: ["400", "700"],
 });
 
 const merriweather = Merriweather({
@@ -22,29 +20,24 @@ export const metadata = {
   description:
     "Free AI tool for invoice extraction, transaction classification, and record reconciliation",
   icons: {
-    icon: "/Velqen_no_bg_logo.png", // 🔁 This is your custom favicon
+    icon: "/Velqen_no_bg_logo.png",
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <AuthProvider>
-        <body
-          className={`${ibmPlexSans.variable} ${merriweather.variable} antialiased`}
-        >
-          <SmoothScrollProvider />
-          <main className="font-(family-name:--font-ibm-plex-sans)">
-            <NavBar />
-            {children}
-            <Footer />
-          </main>
-        </body>
-      </AuthProvider>
+      <body
+        className={`${ibmPlexSans.variable} ${merriweather.variable} antialiased`}
+      >
+        <AuthProvider>
+          <ClientLayout>{children}</ClientLayout>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

@@ -31,7 +31,7 @@ const AboutVelqen = () => {
       </div>
     </div>
   ) : (
-    <div className="flex justify-center min-h-screen relative font-(family-name:--font-merriweather) py-20 mb-20">
+    <div className="flex justify-center min-h-screen relative font-(family-name:--font-merriweather) py-20">
       <div className="flex flex-col items-center w-[80%]">
         <div style={{ width: "100%", height: "600px", position: "relative" }}>
           <Orb

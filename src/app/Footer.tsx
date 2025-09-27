@@ -33,7 +33,7 @@ const Footer = () => {
           height: `${FOOTER_HEIGHT}px`,
           clipPath: `inset(${FOOTER_HEIGHT - progress}px 0% 0% 0%)`,
         }}
-        className="bg-neutral-900 text-white py-6 fixed bottom-0 left-0 w-full z-50"
+        className="bg-black text-white py-6 fixed bottom-0 left-0 w-full z-50"
       >
         <div
           className={`${
