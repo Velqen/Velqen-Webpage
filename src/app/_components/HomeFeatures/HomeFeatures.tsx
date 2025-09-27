@@ -9,7 +9,7 @@ const HomeFeatures = () => {
   const { isSmallDevice } = useDeviceSize();
   return (
     <>
-      <div className="flex flex-col gap-4 max-w-[850px]">
+      <div className="flex flex-col gap-4 max-w-[850px] text-white">
         <h1
           className={`${
             isSmallDevice ? "text-5xl" : "text-6xl"
@@ -28,9 +28,9 @@ const HomeFeatures = () => {
                 The Assistant
               </h2>
             </div>
-            <p className="text-velqen-black text-xl ml-16 mt-1">
-              Start chatting and let Velqen do the tasks for you. Just like a
-              real assistant
+            <p className="text-velqen-light-gray text-xl ml-16 mt-1">
+              All accounting features are right under your AI assistant&#39;s
+              hood, no more navigating, just chat.
             </p>
           </div>
 
@@ -41,7 +41,7 @@ const HomeFeatures = () => {
                 The Translator
               </h2>
             </div>
-            <p className="text-velqen-black text-xl ml-16 mt-1">
+            <p className="text-velqen-light-gray text-xl ml-16 mt-1">
               We explain your money just like a friend would, no jargons no
               bullshit.
             </p>
@@ -50,7 +50,7 @@ const HomeFeatures = () => {
       </div>
       <div
         className={`${
-          isSmallDevice ? "" : "min-w-[300px] max-h-[750px]"
+          isSmallDevice ? "mt-16" : "min-w-[300px] max-h-[750px]"
         } flex justify-center`}
       >
         <Image
