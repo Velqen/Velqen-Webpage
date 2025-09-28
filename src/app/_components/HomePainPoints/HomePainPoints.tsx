@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
-import SlantingCards from "../../../components/SlantingCards/SlantingCards";
+
 import Particles from "../../../components/Animations/Particles";
 import { Lightbulb, Target, Rocket } from "lucide-react";
 const features = [
@@ -34,7 +34,7 @@ export default function HomePainPoints() {
       <div
         style={{
           width: "100%",
-          height: isSmallDevice ? "1000px" : "1100px",
+          height: isSmallDevice ? "1200px" : "1100px",
           position: "relative",
         }}
       >

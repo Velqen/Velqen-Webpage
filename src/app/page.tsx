@@ -5,7 +5,8 @@ import HomeBanner from "@/app/_components/HomeBanner/HomeBanner";
 import HomeFeatures from "@/app/_components/HomeFeatures/HomeFeatures";
 import HomePainPoints from "@/app/_components/HomePainPoints/HomePainPoints";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
-import VelqenFunctions from "./_components/VelqenFunctions/VelqenFunctions";
+// import VelqenFunctions from "./_components/VelqenFunctions/VelqenFunctions";
+import WaitingListPage from "./_components/WaitingList";
 
 export default function Home() {
   const { isSmallDevice } = useDeviceSize();
@@ -38,10 +39,11 @@ export default function Home() {
           <HomeFeatures />
         </div>
       </div>
-      <VelqenFunctions />
+      {/* <VelqenFunctions /> */}
       <div className="w-full">
         <AudienceFlowShowcase />
       </div>
+      <WaitingListPage />
     </div>
   );
   // <div className="min-h-screen w-full flex flex-col justify-center items-center">
