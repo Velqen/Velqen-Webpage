@@ -3,15 +3,13 @@
 import Link from "next/link";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useEffect, useRef, useState } from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { UserIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import DarkNavBar from "./DarkNavBar";
 
 const NAV_ITEMS = [
   { name: "Home", href: "/" },
-  // { name: "Velqen", href: "/velqen" },
+  { name: "Velqen", href: "/velqen" },
   // { name: "AI Tools", href: "/ai-tools" },
   // { name: "Blog", href: "/blog" },
   { name: "About Us", href: "/about-us" },
@@ -20,7 +18,6 @@ const NAV_ITEMS = [
 const NavBar = () => {
   const { isSmallDevice } = useDeviceSize();
   const [open, setOpen] = useState(false);
-  const { status, data: session } = useSession();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   // Define pages where you want DarkNavBar
@@ -113,7 +110,7 @@ const NavBar = () => {
             </Link>
           ))}
 
-          <div className="mt-10">
+          {/* <div className="mt-10">
             {status === "authenticated" && session?.user?.name ? (
               <div className="flex flex-col items-left gap-2">
                 <div className="flex items-center gap-2">
@@ -142,7 +139,7 @@ const NavBar = () => {
                 Login
               </button>
             )}
-          </div>
+          </div> */}
         </div>
       )}
     </nav>

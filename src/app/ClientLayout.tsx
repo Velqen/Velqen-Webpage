@@ -25,7 +25,9 @@ export default function ClientLayout({
         }
       >
         <NavBar />
-        <main>{children}</main>
+        <main className="flex-1">{children}</main>
+      </div>
+      <div className="sticky z-[-100000] bottom-0">
         <Footer />
       </div>
     </SmoothScrollProvider>

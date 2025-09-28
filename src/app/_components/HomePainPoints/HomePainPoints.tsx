@@ -2,24 +2,27 @@
 
 import React from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
-import SlantingCards from "../SlantingCards/SlantingCards";
-import Particles from "../Animations/Particles";
 
+import Particles from "../../../components/Animations/Particles";
+import { Lightbulb, Target, Rocket } from "lucide-react";
 const features = [
   {
     title: "Financial Jargons",
     description:
-      "Financial apps are full of jargon and buzzwords, but you're not here to earn a finance degree.",
+      "Financial apps are full of jargon and buzzwords, and you feel lost in translation.",
+    Icon: Lightbulb, // ✅ Use imported icon
   },
   {
     title: "Overwhelming Dashboards",
     description:
-      "Using financial dashboards feels like flying a spaceship with messy controls and buttons everywhere.",
+      "It feels like flying a spaceship with buttons and controls everywhere.",
+    Icon: Rocket, // ✅ Use imported icon
   },
   {
     title: "Unnecessary Features",
     description:
       "You feel like the apps are stuffing unnecessary features down your throat.",
+    Icon: Target, // ✅ Use imported icon
   },
 ];
 
@@ -28,7 +31,13 @@ export default function HomePainPoints() {
 
   return (
     <>
-      <div style={{ width: "100%", height: "1600px", position: "relative" }}>
+      <div
+        style={{
+          width: "100%",
+          height: isSmallDevice ? "1200px" : "1100px",
+          position: "relative",
+        }}
+      >
         <Particles
           particleColors={["#ffffff", "#ffffff"]}
           particleCount={1000}
@@ -42,48 +51,50 @@ export default function HomePainPoints() {
       </div>{" "}
       <section
         className={`${
-          isSmallDevice ? "py-12" : "py-32"
-        } text-center absolute top-1/7 left-1/2 transform -translate-x-1/2 pointer-events-none w-full`}
+          isSmallDevice ? "py-12 text-start" : "py-32 text-center"
+        }  absolute left-1/2 transform -translate-x-1/2 pointer-events-none w-full`}
       >
         {/* Title */}
         <h2
           className={`${
-            isSmallDevice ? "text-5xl" : "text-6xl"
-          } xl:text-7xl text-white font-semibold my-16`}
+            isSmallDevice ? "text-5xl" : "text-6xl mb-24"
+          } xl:text-7xl text-white font-semibold  p-8`}
         >
           Why Velqen
         </h2>
         {/* Features grid */}
         <div
           className={`${
-            isSmallDevice
-              ? "grid-cols-1 max-w-[500px]"
-              : "grid-cols-2 max-w-[1300px]"
-          } grid gap-6 xl:grid-cols-3 mx-auto`}
+            isSmallDevice ? "grid-cols-1 " : "grid-cols-2 max-w-[1500px]"
+          } grid xl:grid-cols-3 mx-auto`}
         >
+          {" "}
           {features.map((feature, index) => (
             <div
               key={index}
-              className=" p-6 hover:shadow-lg transition-all min-w-[200px]"
+              className={`m-8 text-left flex flex-col items-start pt-8
+              ${
+                !isSmallDevice && index !== 0
+                  ? "border-l border-gray-700  pl-10" // ✅ vertical line for desktop
+                  : ""
+              } 
+              ${
+                isSmallDevice
+                  ? "border-t border-gray-700" // ✅ horizontal line for mobile
+                  : " gap-8"
+              }`}
             >
-              <h3
-                className={`${
-                  isSmallDevice ? "text-xl" : "text-2xl"
-                } xl:text-3xl font-bold mb-6 text-white`}
-              >
+              <feature.Icon className="w-10 h-10 text-white mb-4 md:mb-14" />
+              <h3 className="text-2xl xl:text-3xl  text-white">
                 {feature.title}
               </h3>
-              <p
-                className={`${
-                  isSmallDevice ? "text-lg" : "text-xl"
-                } text-velqen-light-gray`}
-              >
+              <p className="text-velqen-light-gray text-lg xl:text-xl">
                 {feature.description}
               </p>
             </div>
           ))}
         </div>
-        <div className="mt-12">{!isSmallDevice && <SlantingCards />}</div>
+        {/* <div className="mt-12">{!isSmallDevice && <SlantingCards />}</div> */}
         {/* <div className="mt-12">
           <div className="max-w-[1300px] mx-auto px-4">
             <div

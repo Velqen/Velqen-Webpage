@@ -1,10 +1,12 @@
 "use client";
 
-import AudienceFlowShowcase from "@/components/AudienceFlowShowcase/AudienceFlowShowcase";
-import HomeBanner from "@/components/HomeBanner/HomeBanner";
-import HomeFeatures from "@/components/HomeFeatures/HomeFeatures";
-import HomePainPoints from "@/components/HomePainPoints/HomePainPoints";
+import AudienceFlowShowcase from "@/app/_components/AudienceFlowShowcase/AudienceFlowShowcase";
+import HomeBanner from "@/app/_components/HomeBanner/HomeBanner";
+import HomeFeatures from "@/app/_components/HomeFeatures/HomeFeatures";
+import HomePainPoints from "@/app/_components/HomePainPoints/HomePainPoints";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
+// import VelqenFunctions from "./_components/VelqenFunctions/VelqenFunctions";
+import WaitingListPage from "./_components/WaitingList";
 
 export default function Home() {
   const { isSmallDevice } = useDeviceSize();
@@ -22,23 +24,26 @@ export default function Home() {
           isSmallDevice
             ? "justify-center items-center"
             : "items-center justify-center"
-        } w-full flex bg-black relative min-h-[180dvh]`}
+        } w-full flex bg-black relative min-h-[120dvh]`}
       >
         <HomePainPoints />
       </div>
-      <div
-        className={`${
-          isSmallDevice
-            ? "w-[90%] flex-col justify-center items-center"
-            : "w-[80%] flex-row items-center justify-center"
-        } flex  mt-32`}
-      >
-        <HomeFeatures />
+      <div className="bg-black w-full flex flex-col justify-center items-center">
+        <div
+          className={`${
+            isSmallDevice
+              ? "w-[90%] flex-col justify-center items-center"
+              : "w-[80%] flex-row items-center justify-center"
+          } flex  my-48 `}
+        >
+          <HomeFeatures />
+        </div>
       </div>
-
+      {/* <VelqenFunctions /> */}
       <div className="w-full">
         <AudienceFlowShowcase />
       </div>
+      <WaitingListPage />
     </div>
   );
   // <div className="min-h-screen w-full flex flex-col justify-center items-center">
