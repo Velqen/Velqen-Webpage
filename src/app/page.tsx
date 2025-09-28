@@ -5,7 +5,7 @@ import HomeBanner from "@/app/_components/HomeBanner/HomeBanner";
 import HomeFeatures from "@/app/_components/HomeFeatures/HomeFeatures";
 import HomePainPoints from "@/app/_components/HomePainPoints/HomePainPoints";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
-// import VelqenFunctions from "./_components/VelqenFunctions/VelqenFunctions";
+import VelqenFunctions from "./_components/VelqenFunctions/VelqenFunctions";
 import WaitingListPage from "./_components/WaitingList";
 
 export default function Home() {
@@ -39,7 +39,7 @@ export default function Home() {
           <HomeFeatures />
         </div>
       </div>
-      {/* <VelqenFunctions /> */}
+      <VelqenFunctions />
       <div className="w-full">
         <AudienceFlowShowcase />
       </div>

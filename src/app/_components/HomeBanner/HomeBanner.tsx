@@ -68,7 +68,7 @@ const HomeBanner = () => {
               </div>
             </button>
           </Link>
-          {/* <Link href="/ai-tools">
+          <Link href="/ai-tools">
             <button className="group inline-block overflow-hidden h-[38px] md:h-[46px] xl:h-[52px] w-[180px] xl:w-[200px] relative ">
               <div className="absolute inset-0 transform group-hover:-translate-y-full transition-transform duration-300 text-xl xl:text-2xl">
                 <span className="h-full bg-white border text-black px-6 py-2 flex items-center justify-center">
@@ -79,7 +79,7 @@ const HomeBanner = () => {
                 </span>
               </div>
             </button>
-          </Link> */}
+          </Link>
         </div>
       </div>
     </div>

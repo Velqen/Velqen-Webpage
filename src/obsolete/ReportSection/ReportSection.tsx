@@ -5,11 +5,14 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 
 const ReportGenerator = dynamic(
-  () => import("../ReportGenerator/ReportGenerator").then((mod) => mod.default),
+  () =>
+    import("../../components/ReportGenerator/ReportGenerator").then(
+      (mod) => mod.default
+    ),
   { ssr: false }
 );
 
-import { ReportGeneratorHandle } from "../ReportGenerator/ReportGenerator";
+import { ReportGeneratorHandle } from "../../components/ReportGenerator/ReportGenerator";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 type Props = {
