@@ -49,7 +49,7 @@ const HomeBanner = () => {
           </p>
         </div>
 
-        <div
+        {/* <div
           className={`${
             isSmallDevice
               ? "flex-col space-y-2"
@@ -80,7 +80,7 @@ const HomeBanner = () => {
               </div>
             </button>
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

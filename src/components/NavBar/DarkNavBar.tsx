@@ -5,14 +5,7 @@ import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-
-const NAV_ITEMS = [
-  { name: "Home", href: "/" },
-  { name: "Velqen", href: "/velqen" },
-  { name: "AI Tools", href: "/ai-tools" },
-  { name: "Blog", href: "/blog" },
-  { name: "About Us", href: "/about-us" },
-];
+import { NAV_ITEMS } from "./NavBar";
 
 const DarkNavBar = () => {
   const { isSmallDevice } = useDeviceSize();

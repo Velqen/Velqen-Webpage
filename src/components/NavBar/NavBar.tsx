@@ -7,11 +7,11 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import DarkNavBar from "./DarkNavBar";
 
-const NAV_ITEMS = [
+export const NAV_ITEMS = [
   { name: "Home", href: "/" },
-  { name: "Velqen", href: "/velqen" },
-  { name: "AI Tools", href: "/ai-tools" },
-  { name: "Blog", href: "/blog" },
+  // { name: "Velqen", href: "/velqen" },
+  // { name: "AI Tools", href: "/ai-tools" },
+  // { name: "Blog", href: "/blog" },
   { name: "About Us", href: "/about-us" },
 ];
 
