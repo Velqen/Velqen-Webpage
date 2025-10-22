@@ -3,8 +3,8 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-import { useDeviceSize } from "@/hooks/useDeviceSize";
-import Link from "next/link";
+// import { useDeviceSize } from "@/hooks/useDeviceSize";
+// import Link from "next/link";
 import RotatingText from "../../../components/Animations/RotatingText";
 
 const FadingGrid = dynamic(
@@ -15,7 +15,7 @@ const FadingGrid = dynamic(
 );
 
 const HomeBanner = () => {
-  const { isSmallDevice } = useDeviceSize();
+  // const { isSmallDevice } = useDeviceSize();
 
   return (
     <div className="relative h-[100dvh] text-black flex items-center justify-center overflow-hidden w-full bg-[var(--background)]">
