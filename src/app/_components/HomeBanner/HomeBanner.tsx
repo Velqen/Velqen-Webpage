@@ -3,8 +3,8 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-import { useDeviceSize } from "@/hooks/useDeviceSize";
-import Link from "next/link";
+// import { useDeviceSize } from "@/hooks/useDeviceSize";
+// import Link from "next/link";
 import RotatingText from "../../../components/Animations/RotatingText";
 
 const FadingGrid = dynamic(
@@ -15,7 +15,7 @@ const FadingGrid = dynamic(
 );
 
 const HomeBanner = () => {
-  const { isSmallDevice } = useDeviceSize();
+  // const { isSmallDevice } = useDeviceSize();
 
   return (
     <div className="relative h-[100dvh] text-black flex items-center justify-center overflow-hidden w-full bg-[var(--background)]">
@@ -49,7 +49,7 @@ const HomeBanner = () => {
           </p>
         </div>
 
-        <div
+        {/* <div
           className={`${
             isSmallDevice
               ? "flex-col space-y-2"
@@ -68,7 +68,7 @@ const HomeBanner = () => {
               </div>
             </button>
           </Link>
-          {/* <Link href="/ai-tools">
+          <Link href="/ai-tools">
             <button className="group inline-block overflow-hidden h-[38px] md:h-[46px] xl:h-[52px] w-[180px] xl:w-[200px] relative ">
               <div className="absolute inset-0 transform group-hover:-translate-y-full transition-transform duration-300 text-xl xl:text-2xl">
                 <span className="h-full bg-white border text-black px-6 py-2 flex items-center justify-center">
@@ -79,8 +79,8 @@ const HomeBanner = () => {
                 </span>
               </div>
             </button>
-          </Link> */}
-        </div>
+          </Link>
+        </div> */}
       </div>
     </div>
   );
