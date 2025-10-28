@@ -9,7 +9,7 @@ import DarkNavBar from "./DarkNavBar";
 
 export const NAV_ITEMS = [
   { name: "Home", href: "/" },
-  // { name: "Velqen", href: "/velqen" },
+  { name: "Velqen", href: "/velqen" },
   // { name: "AI Tools", href: "/ai-tools" },
   // { name: "Blog", href: "/blog" },
   { name: "About Us", href: "/about-us" },
