@@ -6,6 +6,7 @@ import { ProcessedContent } from "@/types/chat";
 import { downloadRecordsAsCSV } from "@/lib/exportInvoiceCSV";
 import { extractMinimalRecords } from "@/lib/extractMinimalRecords";
 import { useTransactionClassification } from "@/hooks/useTransactionClassification";
+import DocumentCard from "./DocumentCard";
 
 interface ChatExtractionResponseProps {
   processedContent?: ProcessedContent;
@@ -32,17 +33,9 @@ const ChatExtractionResponse: React.FC<ChatExtractionResponseProps> = ({
     }
   }, [shouldAutoSubmit, processedContent, onSubmit]);
   return (
-    <div className="px-4 py-2 rounded-2xl text-base break-words  flex flex-col space-y-2">
+    <div className="px-4 py-2 rounded-2xl text-base break-words flex flex-col space-y-2">
       <div>DocumentExtraction</div>
-      {processedContent && (
-        <div>
-          {typeof processedContent === "string" ? (
-            processedContent
-          ) : (
-            <pre>{JSON.stringify(processedContent, null, 2)}</pre>
-          )}
-        </div>
-      )}
+      {processedContent && <DocumentCard processedContent={processedContent} />}
       <div className="flex space-x-2">
         <button
           onClick={() => {
