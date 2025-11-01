@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
   try {
-    const invoiceExtraction = process.env.INVOICE_EXTRACTION_BACKEND;
+    const invoiceExtraction = process.env.BACKEND_API_URL;
 
     // ✅ Step 1: Wake the Flask server
     try {
-      await fetch(`${invoiceExtraction}/ping`);
+      await fetch(`${invoiceExtraction}/doc-extraction/ping`);
       await new Promise(res => setTimeout(res, 3000)); // wait 3 seconds
     } catch (e) {
       console.warn("Flask wake-up failed:", e);
@@ -18,16 +18,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'No file uploaded' }, { status: 400 })
     }
 
-    const arrayBuffer = await file.arrayBuffer()
-    const buffer = Buffer.from(arrayBuffer)
+    // Create new FormData for backend request
+    const backendFormData = new FormData()
+    backendFormData.append('file', file)
 
-
-    const response = await fetch(`${invoiceExtraction}/process-invoice`, {
+    const response = await fetch(`${invoiceExtraction}/doc-extraction/`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/pdf',
-      },
-      body: buffer,
+      body: backendFormData,
     })
 
     let data = null;

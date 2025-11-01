@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
 
-    const backendURL = process.env.TRANSACTION_CLASSIFICATION_URL;
+    const backendURL = process.env.BACKEND_API_URL;
     if (!backendURL) {
       return NextResponse.json(
         { error: "Backend URL not configured" },
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     const forwardForm = new FormData();
     forwardForm.append("file", file, file.name);
 
-    const response = await fetch(`${backendURL}/classify-transaction`, {
+    const response = await fetch(`${backendURL}/category-classify/`, {
       method: "POST",
       body: forwardForm,
     });

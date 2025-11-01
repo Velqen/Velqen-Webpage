@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
         const body = await req.json()
         const user_input = body.user_input
 
-        const res = await fetch(`${process.env.CHATBOT_PRO_URL}/velqen-chatbot-pro`, {
+        const res = await fetch(`${process.env.BACKEND_API_URL}/chatbot/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_input, email: token.email, tasks: body.tasks, processedContent: body.processedContent })
