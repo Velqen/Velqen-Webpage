@@ -25,6 +25,16 @@ const ChatInputBar = ({
   setProcessedContent,
 }: ChatInputBarProps) => {
   const [isProcessingFile, setIsProcessingFile] = useState(false);
+  // Auto-grow textarea logic
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+  React.useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "";
+      textareaRef.current.style.height =
+        Math.min(textareaRef.current.scrollHeight, 200) + "px";
+    }
+  }, [input]);
+
   return (
     <form
       onSubmit={onSubmit}
@@ -32,10 +42,12 @@ const ChatInputBar = ({
     >
       <div className="relative w-full rounded-2xl bg-velqen-black">
         <textarea
+          ref={textareaRef}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type your message..."
-          className="w-full px-4 py-3 mb-12 text-base outline-none h-[150px] resize-none"
+          className="w-full px-4 py-3 mb-2 text-base outline-none min-h-[20px] max-h-[200px] resize-none"
+          style={{ height: "20px" }}
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               if (isProcessingFile) {
@@ -47,8 +59,8 @@ const ChatInputBar = ({
             }
           }}
         />
-        <div className="flex justify-between p-4">
-          <div className="flex">
+        <div className="flex justify-between items-center p-2 gap-2">
+          <div className="flex items-center gap-2">
             <ChatFileUpload
               onExtracted={({ tasks, processedContent }) => {
                 setTasks(tasks);
@@ -58,13 +70,10 @@ const ChatInputBar = ({
             />
             <ChatActionButton />
           </div>
-
           <button
             type="submit"
             disabled={isLoading || isProcessingFile}
-            className={`${
-              isSmallDevice ? "" : ""
-            } p-3 velqen-gradient-bg velqen-gradient-bg-hover text-white rounded-full disabled:opacity-50`}
+            className={`p-3 velqen-gradient-bg velqen-gradient-bg-hover text-white rounded-full disabled:opacity-50`}
           >
             {isLoading ? "…" : <Send size={18} />}
           </button>

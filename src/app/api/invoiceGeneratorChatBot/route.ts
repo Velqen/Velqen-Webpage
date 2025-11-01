@@ -8,15 +8,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid message' }, { status: 400 });
     }
 
-    const backendURL = process.env.INV_GEN_CHATBOT_URL;
+    const backendURL = process.env.BACKEND_API_URL;
 
     if (!backendURL) {
-      console.error("Missing INV_GEN_CHATBOT_URL in env");
+      console.error("Missing BACKEND_API_URL in env");
       return NextResponse.json({ error: "Chatbot URL not configured" }, { status: 500 });
     }
 
     // 🔁 Send to your backend server
-    const backendResponse = await fetch(`${backendURL}/`, {
+    const backendResponse = await fetch(`${backendURL}/invoice-generator/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_input: message }),
