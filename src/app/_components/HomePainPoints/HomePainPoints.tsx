@@ -4,8 +4,14 @@ import React from "react";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 import Particles from "../../../components/Animations/Particles";
-import { Lightbulb, Target, Rocket } from "lucide-react";
+import { Lightbulb, Rocket, Wallet } from "lucide-react";
 const features = [
+  {
+    title: "Scattered Bank Accounts",
+    description:
+      "You have multiple banks and wallets, and it's hard to track all of them in one place.",
+    Icon: Wallet, // ✅ Use imported icon
+  },
   {
     title: "Financial Jargons",
     description:
@@ -17,12 +23,6 @@ const features = [
     description:
       "It feels like flying a spaceship with buttons and controls everywhere.",
     Icon: Rocket, // ✅ Use imported icon
-  },
-  {
-    title: "Unnecessary Features",
-    description:
-      "You feel like the apps are stuffing unnecessary features down your throat.",
-    Icon: Target, // ✅ Use imported icon
   },
 ];
 

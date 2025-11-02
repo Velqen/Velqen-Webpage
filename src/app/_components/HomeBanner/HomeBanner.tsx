@@ -28,7 +28,7 @@ const HomeBanner = () => {
           <span className="inline-flex justify-center md:mr-10 w-[600px]">
             {" "}
             <RotatingText
-              texts={["Simplicity", "Jargonless", "Effortless", "Velqen"]}
+              texts={["Simplicity", "Unified", "Jargonless", "Effortless"]}
               mainClassName="px-2 sm:px-2 md:px-3 bg-velqen-black w-full text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
               staggerFrom={"last"}
               initial={{ y: "100%" }}
