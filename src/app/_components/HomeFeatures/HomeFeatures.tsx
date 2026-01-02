@@ -1,7 +1,7 @@
 // components/HomeFeatures.tsx
 "use client";
 
-import { Wallet, Layers3 } from "lucide-react";
+import { Check } from "lucide-react";
 import Image from "next/image";
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 
@@ -23,7 +23,20 @@ const HomeFeatures = () => {
         <div className="flex flex-col gap-8 mt-12 text-left max-w-[600px]">
           <div>
             <div className="flex items-center gap-4">
-              <Wallet className="w-12 h-12 flex-shrink-0" />
+              <Check className="w-12 h-12 flex-shrink-0" />
+              <h2 className="text-2xl xl:text-3xl font-semibold">
+                The Centralizer
+              </h2>
+            </div>
+            <p className="text-velqen-light-gray text-xl ml-16 mt-1">
+              Track all your banks, wallets, and digital assets in one place, no
+              more scattered accounts.
+            </p>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-4">
+              <Check className="w-12 h-12 flex-shrink-0" />
               <h2 className="text-2xl xl:text-3xl font-semibold">
                 The Assistant
               </h2>
@@ -36,14 +49,14 @@ const HomeFeatures = () => {
 
           <div>
             <div className="flex items-center gap-4">
-              <Layers3 className="w-12 h-12 flex-shrink-0" />
+              <Check className="w-12 h-12 flex-shrink-0" />
               <h2 className="text-2xl xl:text-3xl font-semibold">
                 The Translator
               </h2>
             </div>
             <p className="text-velqen-light-gray text-xl ml-16 mt-1">
               We explain your money just like a friend would, no jargons no
-              bullshit.
+              fluff.
             </p>
           </div>
         </div>
