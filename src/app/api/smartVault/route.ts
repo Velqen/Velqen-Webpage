@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
 export async function POST(req: NextRequest) {
   try {
+    const token = await getToken({ req });
+
+    if (!token?.email) {
+      return NextResponse.json({ error: 'Unauthenticated' }, { status: 401 });
+    }
+
     const formData = await req.formData();
     const files = formData.getAll('files') as File[];
 
@@ -22,6 +29,7 @@ export async function POST(req: NextRequest) {
     files.forEach((file) => {
       backendFormData.append('files', file, file.name);
     });
+    backendFormData.append('user_email', token.email);
 
     const response = await fetch(`${backendURL}/smart-vault/`, {
       method: 'POST',

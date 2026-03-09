@@ -1,4 +1,4 @@
-import { Loader2, CheckCircle2, AlertCircle, File } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, File, Database } from "lucide-react";
 import { FileStatus } from "./useSmartVault";
 
 type RecentFilesPanelProps = {
@@ -91,6 +91,37 @@ function FileCard({ file }: { file: FileStatus }) {
       </div>
 
       {file.status === "processing" && <ProgressBar />}
+
+      {file.status === "complete" && file.classified && (
+        <div className="mt-3 pt-3 border-t border-gray-800 space-y-1.5">
+          <DetailRow label="Description" value={file.classified.Transaction_Description as string} />
+          <DetailRow label="Amount" value={file.classified.Amount_RM != null ? `RM ${file.classified.Amount_RM}` : undefined} />
+          <DetailRow label="Merchant" value={file.classified.Merchant_Name as string} />
+          <DetailRow label="Category" value={file.classified.Main_Category as string} />
+          <DetailRow label="Subcategory" value={file.classified.Sub_Category as string} />
+
+          {file.stored && (
+            <div className="flex items-center gap-1.5 mt-2">
+              <Database size={12} className="text-velqen-green" />
+              <span className="text-xs text-velqen-green font-medium">Saved to database</span>
+            </div>
+          )}
+        </div>
+      )}
+
+      {file.status === "error" && file.error && (
+        <p className="mt-2 text-xs text-red-400 truncate">{file.error}</p>
+      )}
+    </div>
+  );
+}
+
+function DetailRow({ label, value }: { label: string; value?: string }) {
+  if (!value) return null;
+  return (
+    <div className="flex justify-between text-xs">
+      <span className="text-velqen-gray">{label}</span>
+      <span className="text-velqen-light-gray font-medium truncate ml-2 max-w-[60%] text-right">{value}</span>
     </div>
   );
 }

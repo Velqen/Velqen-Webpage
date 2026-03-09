@@ -6,6 +6,10 @@ export type FileStatus = {
   type: string;
   icon: string;
   size?: string;
+  extracted?: Record<string, unknown>;
+  classified?: Record<string, unknown>;
+  stored?: boolean;
+  error?: string;
 };
 
 const ALLOWED_TYPES = [
@@ -78,7 +82,14 @@ export function useSmartVault() {
         prev.map((f) => {
           const result = data.results?.find((r: any) => r.fileName === f.name);
           if (result) {
-            return { ...f, status: result.status === "success" ? "complete" : "error" };
+            return {
+              ...f,
+              status: result.status === "success" ? "complete" : "error",
+              extracted: result.data?.extracted,
+              classified: result.data?.classified,
+              stored: result.data?.stored,
+              error: result.error ?? undefined,
+            };
           }
           return f;
         })
