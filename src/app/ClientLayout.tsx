@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider/SmoothScrollProvider";
 
 const BLACK_PAGES = ["/about-us"];
+const BARE_PAGES = ["/login"];
 
 export default function ClientLayout({
   children,
@@ -14,6 +15,11 @@ export default function ClientLayout({
 }) {
   const pathname = usePathname();
   const isBlackPage = BLACK_PAGES.includes(pathname);
+  const isBarePage = BARE_PAGES.includes(pathname);
+
+  if (isBarePage) {
+    return <>{children}</>;
+  }
 
   return (
     <SmoothScrollProvider>

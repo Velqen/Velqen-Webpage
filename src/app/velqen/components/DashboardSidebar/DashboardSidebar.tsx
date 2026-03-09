@@ -34,6 +34,10 @@ const navItems = [
         name: "Invoice Generator",
         href: "/velqen/ai-tools/invoice-generator",
       },
+      {
+        name: "Smart Vault",
+        href: "/velqen/ai-tools/smart-vault",
+      },
     ],
   },
 ];
