@@ -4,21 +4,13 @@ import { getToken } from "next-auth/jwt";
 export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
-  const token = await getToken({ req });
-
-  if (!token?.email) {
-    return NextResponse.json({ error: "Unauthenticated" }, { status: 401 });
-  }
-
-  const backendURL = process.env.BACKEND_API_URL;
-  if (!backendURL) {
-    return NextResponse.json(
-      { error: "Backend URL not configured" },
-      { status: 500 }
-    );
-  }
-
   try {
+    const token = await getToken({ req });
+
+    if (!token?.email) {
+      return NextResponse.json({ error: "Unauthenticated" }, { status: 401 });
+    }
+
     const formData = await req.formData();
     const files = formData.getAll("files") as File[];
 
@@ -26,28 +18,34 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No files uploaded" }, { status: 400 });
     }
 
-    const forwardForm = new FormData();
-    for (const file of files) {
-      forwardForm.append("files", file, file.name);
+    const backendURL = process.env.BACKEND_API_URL;
+    if (!backendURL) {
+      return NextResponse.json(
+        { error: "Backend URL not configured" },
+        { status: 500 }
+      );
     }
-    forwardForm.append("user_email", token.email);
+
+    const backendFormData = new FormData();
+    for (const file of files) {
+      backendFormData.append("files", file, file.name);
+    }
+    backendFormData.append("user_email", token.email);
 
     const response = await fetch(`${backendURL}/smart-vault/`, {
       method: "POST",
-      body: forwardForm,
+      body: backendFormData,
     });
 
     if (!response.ok) {
-      return NextResponse.json(
-        { error: "Backend processing failed" },
-        { status: 500 }
-      );
+      throw new Error("Smart Vault processing failed");
     }
 
     const data = await response.json();
     return NextResponse.json(data);
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : "Server error";
+    console.error("Smart Vault API Error:", err);
+    const message = err instanceof Error ? err.message : "Unexpected server error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
