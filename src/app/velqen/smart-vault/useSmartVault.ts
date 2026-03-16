@@ -80,7 +80,7 @@ export function useSmartVault() {
       // Update status based on results
       setFiles((prev) =>
         prev.map((f) => {
-          const result = data.results?.find((r: any) => r.fileName === f.name);
+          const result = data.results?.find((r: { fileName: string; status: string }) => r.fileName === f.name);
           if (result) {
             return {
               ...f,
