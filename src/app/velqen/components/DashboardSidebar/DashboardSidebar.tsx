@@ -14,6 +14,9 @@ const navItems = [
   { name: "Assistant", href: "/velqen" },
   { name: "Overview", href: "/velqen/transaction-overview" },
   { name: "Transactions", href: "/velqen/transactions" },
+  { name: "Integrations", href: "/velqen/integrations" },
+  { name: "Finance", href: "/velqen/finance" },
+  { name: "General Ledger", href: "/velqen/gl" },
   // { name: "AI Assistant", href: "/dashboard/ai-assistant" },
   {
     name: "AI Tools",
