@@ -15,6 +15,10 @@ const navItems = [
   { name: "Smart Vault", href: "/velqen/smart-vault" },
   { name: "Overview", href: "/velqen/transaction-overview" },
   { name: "Transactions", href: "/velqen/transactions" },
+  { name: "Integrations", href: "/velqen/integrations" },
+  { name: "Finance", href: "/velqen/finance" },
+  { name: "General Ledger", href: "/velqen/gl" },
+  { name: "Bank Recon", href: "/velqen/bank-recon" },
   // { name: "AI Assistant", href: "/dashboard/ai-assistant" },
   {
     name: "AI Tools",
@@ -34,6 +38,10 @@ const navItems = [
       {
         name: "Invoice Generator",
         href: "/velqen/ai-tools/invoice-generator",
+      },
+      {
+        name: "Smart Vault",
+        href: "/velqen/ai-tools/smart-vault",
       },
     ],
   },
