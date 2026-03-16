@@ -17,6 +17,7 @@ const navItems = [
   { name: "Integrations", href: "/velqen/integrations" },
   { name: "Finance", href: "/velqen/finance" },
   { name: "General Ledger", href: "/velqen/gl" },
+  { name: "Bank Recon", href: "/velqen/bank-recon" },
   // { name: "AI Assistant", href: "/dashboard/ai-assistant" },
   {
     name: "AI Tools",
