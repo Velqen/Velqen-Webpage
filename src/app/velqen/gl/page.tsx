@@ -14,7 +14,14 @@ type Journal = {
   reference_number: string;
 };
 
-function BalanceSheetSection({ node, depth = 0 }: { node: any; depth?: number }) {
+type ReportNode = {
+  name?: string;
+  total?: number;
+  total_label?: string;
+  account_transactions?: ReportNode[];
+};
+
+function BalanceSheetSection({ node, depth = 0 }: { node: ReportNode; depth?: number }) {
   if (!node) return null;
   const indent = depth * 16;
 
@@ -48,7 +55,7 @@ function BalanceSheetSection({ node, depth = 0 }: { node: any; depth?: number })
           <span>RM {Math.abs(node.total || 0).toLocaleString()}</span>
         </div>
       )}
-      {node.account_transactions?.map((child: any, i: number) => (
+      {node.account_transactions?.map((child: ReportNode, i: number) => (
         <BalanceSheetSection key={i} node={child} depth={depth + 1} />
       ))}
     </div>
@@ -58,9 +65,8 @@ function BalanceSheetSection({ node, depth = 0 }: { node: any; depth?: number })
 export default function GLPage() {
   const [activeTab, setActiveTab] = useState("Journal Entries");
   const [journals, setJournals] = useState<Journal[]>([]);
-  const [trialBalance, setTrialBalance] = useState<any>(null);
-  const [pnl, setPnl] = useState<any>(null);
-  const [balanceSheet, setBalanceSheet] = useState<any[]>([]);
+  const [pnl, setPnl] = useState<Record<string, unknown> | null>(null);
+  const [balanceSheet, setBalanceSheet] = useState<ReportNode[]>([]);
   const [loading, setLoading] = useState(false);
   const [fetched, setFetched] = useState<Record<string, boolean>>({});
 
@@ -88,6 +94,7 @@ export default function GLPage() {
     };
 
     fetchMap[activeTab]?.().finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   return (
@@ -171,15 +178,20 @@ export default function GLPage() {
           {/* P&L */}
           {activeTab === "P&L" && (
             <div className="bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden py-4">
-              {!pnl?.profit_and_loss?.length ? (
+              {!(pnl?.profit_and_loss as ReportNode[])?.length ? (
                 <p className="text-center text-gray-500 py-8">No data</p>
               ) : (
                 <>
-                  <div className="flex justify-between px-4 py-2 text-xs text-gray-500 border-b border-white/5 mb-2">
-                    <span>Period: {pnl.page_context?.from_date} → {pnl.page_context?.to_date}</span>
-                    <span>{pnl.page_context?.report_basis}</span>
-                  </div>
-                  {pnl.profit_and_loss.map((section: any, i: number) => (
+                  {(() => {
+                    const ctx = pnl?.page_context as Record<string, string> | undefined;
+                    return (
+                      <div className="flex justify-between px-4 py-2 text-xs text-gray-500 border-b border-white/5 mb-2">
+                        <span>Period: {ctx?.from_date} → {ctx?.to_date}</span>
+                        <span>{ctx?.report_basis}</span>
+                      </div>
+                    );
+                  })()}
+                  {(pnl!.profit_and_loss as ReportNode[]).map((section, i) => (
                     <BalanceSheetSection key={i} node={section} depth={0} />
                   ))}
                 </>
