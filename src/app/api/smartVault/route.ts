@@ -26,11 +26,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const documentType = formData.get("document_type") as string || "bill";
     const backendFormData = new FormData();
     for (const file of files) {
       backendFormData.append("files", file, file.name);
     }
     backendFormData.append("user_email", token.email);
+    backendFormData.append("document_type", documentType);
 
     const response = await fetch(`${backendURL}/smart-vault/`, {
       method: "POST",
