@@ -47,7 +47,6 @@ function FileCard({ file, onConfirm }: { file: FileStatus; onConfirm: (name: str
   const c = file.classified as Record<string, string | number | null | undefined> | undefined;
   const docType = (c?.document_type ?? "unknown") as string;
   const badge = DOC_BADGE[docType] ?? DOC_BADGE.unknown;
-  const confidence = c?.confidence as number | undefined;
   const isIncome = docType === "invoice";
 
   return (
