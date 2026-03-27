@@ -44,8 +44,8 @@ const DOC_BADGE: Record<string, { label: string; cls: string; icon: React.ReactN
 };
 
 function FileCard({ file, onConfirm }: { file: FileStatus; onConfirm: (name: string) => void }) {
-  const c = file.classified;
-  const docType = (c?.document_type as string) ?? "unknown";
+  const c = file.classified as Record<string, string | number | null | undefined> | undefined;
+  const docType = (c?.document_type ?? "unknown") as string;
   const badge = DOC_BADGE[docType] ?? DOC_BADGE.unknown;
   const confidence = c?.confidence as number | undefined;
   const isIncome = docType === "invoice";
