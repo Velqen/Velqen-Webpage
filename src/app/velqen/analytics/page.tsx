@@ -54,38 +54,36 @@ export default function MoneyMoodPage() {
   }
 
   return (
-    <div className="h-[calc(100vh-1px)] flex flex-col items-center justify-center gap-8 px-16">
+    <div className="min-h-screen flex flex-col items-center justify-center gap-8 px-4 sm:px-8 md:px-16 py-10">
 
       {/* Mood headline */}
       <div className="text-center">
-        <p className="text-6xl mb-4">{isUp ? "😊" : "😟"}</p>
-        <h1 className="text-5xl font-semibold text-white tracking-tight">
+        <p className="text-5xl sm:text-6xl mb-4">{isUp ? "😊" : "😟"}</p>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight">
           {isUp ? "Business is good" : "Watch your spending"}
         </h1>
       </div>
 
       {/* AI Summary — hero card */}
       {snapshot?.summary ? (
-        <div className="relative max-w-xl w-full mx-auto">
-          {/* strong glow */}
+        <div className="relative w-full max-w-xl mx-auto">
           <div className="absolute inset-0 rounded-3xl blur-3xl opacity-60 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 -z-10 scale-105" />
-          {/* card with vivid gradient border */}
           <div className="rounded-3xl p-[1.5px] bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500">
-            <div className="rounded-[calc(1.5rem-1.5px)] bg-[#0f0a1a] px-7 py-6">
+            <div className="rounded-[calc(1.5rem-1.5px)] bg-[#0f0a1a] px-5 sm:px-7 py-5 sm:py-6">
               <div className="flex items-center gap-2 mb-3">
                 <Sparkles size={13} className="text-fuchsia-400" />
                 <p className="text-xs uppercase tracking-widest text-fuchsia-400 font-semibold">AI insight</p>
               </div>
-              <p className="text-white text-base leading-relaxed">{snapshot.summary}</p>
+              <p className="text-white text-sm sm:text-base leading-relaxed">{snapshot.summary}</p>
             </div>
           </div>
         </div>
       ) : (
-        <p className="text-sm text-gray-500">No snapshot yet — click Refresh to generate your first insight</p>
+        <p className="text-sm text-gray-500 text-center">No snapshot yet — click Refresh to generate your first insight</p>
       )}
 
       {/* Three simple stats */}
-      <div className="grid grid-cols-3 gap-5 w-full max-w-2xl">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-2xl">
         <Tile
           label={isUp ? "🟢 You made" : "🔴 You lost"}
           value={`RM ${Math.abs(net).toLocaleString()}`}
