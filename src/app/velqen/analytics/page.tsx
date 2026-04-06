@@ -6,10 +6,20 @@ import { Loader2, RefreshCw, Sparkles } from "lucide-react";
 type Invoice = { balance: number; status: string };
 type Bill = { balance: number; status: string };
 
+type Insight = { headline: string; actions: string[] };
+
 type Snapshot = {
   total_in: number; total_out: number; total_owed: number;
   total_owing: number; overdue_count: number; summary: string; updated_at: string;
 };
+
+function parseInsight(summary: string): Insight | null {
+  try {
+    const parsed = JSON.parse(summary);
+    if (parsed.headline && Array.isArray(parsed.actions)) return parsed;
+  } catch {}
+  return null;
+}
 
 export default function MoneyMoodPage() {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
@@ -64,20 +74,43 @@ export default function MoneyMoodPage() {
         </h1>
       </div>
 
-      {/* AI Summary — hero card */}
+      {/* AI Action Plan — hero card */}
       {snapshot?.summary ? (
-        <div className="relative w-full max-w-xl mx-auto">
-          <div className="absolute inset-0 rounded-3xl blur-3xl opacity-60 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 -z-10 scale-105" />
-          <div className="rounded-3xl p-[1.5px] bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500">
-            <div className="rounded-[calc(1.5rem-1.5px)] bg-[#0f0a1a] px-5 sm:px-7 py-5 sm:py-6">
-              <div className="flex items-center gap-2 mb-3">
-                <Sparkles size={13} className="text-fuchsia-400" />
-                <p className="text-xs uppercase tracking-widest text-fuchsia-400 font-semibold">AI insight</p>
+        (() => {
+          const insight = parseInsight(snapshot.summary);
+          return (
+            <div className="relative w-full max-w-2xl mx-auto">
+              <div className="absolute inset-0 rounded-3xl blur-3xl opacity-50 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 -z-10 scale-105" />
+              <div className="rounded-3xl p-[1.5px] bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500">
+                <div className="rounded-[calc(1.5rem-1.5px)] bg-[#0f0a1a] px-5 sm:px-8 py-6 sm:py-7">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Sparkles size={13} className="text-fuchsia-400" />
+                    <p className="text-xs uppercase tracking-widest text-fuchsia-400 font-semibold">CFO Action Plan</p>
+                  </div>
+                  {insight ? (
+                    <>
+                      <p className="text-white text-sm sm:text-base font-semibold leading-snug mb-5">
+                        {insight.headline}
+                      </p>
+                      <ol className="space-y-3">
+                        {insight.actions.map((action, i) => (
+                          <li key={i} className="flex gap-3 items-start">
+                            <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/20 border border-fuchsia-500/40 text-fuchsia-300 text-xs font-bold flex items-center justify-center mt-0.5">
+                              {i + 1}
+                            </span>
+                            <p className="text-gray-200 text-sm sm:text-base leading-relaxed">{action}</p>
+                          </li>
+                        ))}
+                      </ol>
+                    </>
+                  ) : (
+                    <p className="text-white text-sm sm:text-base leading-relaxed">{snapshot.summary}</p>
+                  )}
+                </div>
               </div>
-              <p className="text-white text-sm sm:text-base leading-relaxed">{snapshot.summary}</p>
             </div>
-          </div>
-        </div>
+          );
+        })()
       ) : (
         <p className="text-sm text-gray-500 text-center">No snapshot yet — click Refresh to generate your first insight</p>
       )}
