@@ -55,8 +55,6 @@ export default function MoneyMoodPage() {
 
   const totalIn    = snapshot?.total_in    ?? 0;
   const totalOut   = snapshot?.total_out   ?? 0;
-  const totalOwed  = snapshot?.total_owed  ?? invoices.reduce((s, i) => s + i.balance, 0);
-  const totalOwing = snapshot?.total_owing ?? bills.reduce((s, b) => s + b.balance, 0);
   const net = totalIn - totalOut;
   const isUp = net >= 0;
 
