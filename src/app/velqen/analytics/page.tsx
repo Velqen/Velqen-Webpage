@@ -27,23 +27,17 @@ function parseInsight(summary: string): Insight | null {
 }
 
 export default function MoneyMoodPage() {
-  const [invoices, setInvoices] = useState<Invoice[]>([]);
-  const [bills, setBills] = useState<Bill[]>([]);
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    Promise.all([
-      fetch("/api/zoho/ar").then((r) => r.json()),
-      fetch("/api/zoho/ap").then((r) => r.json()),
-      fetch("/api/insights/latest").then((r) => r.json()),
-    ]).then(([ar, ap, snap]) => {
-      setInvoices(ar.invoices || []);
-      setBills(ap.bills || []);
-      setSnapshot(snap.snapshot || null);
-      setLoading(false);
-    });
+    fetch("/api/insights/latest")
+      .then((r) => r.json())
+      .then((snap) => {
+        setSnapshot(snap.snapshot || null);
+        setLoading(false);
+      });
   }, []);
 
   const handleRefresh = () => {
