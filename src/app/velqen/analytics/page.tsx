@@ -3,9 +3,6 @@
 import { useEffect, useState } from "react";
 import { Loader2, RefreshCw, Sparkles } from "lucide-react";
 
-type Invoice = { balance: number; status: string };
-type Bill = { balance: number; status: string };
-
 type Insight = { headline: string; actions: string[] };
 
 type Debtor = { name: string; amount: number; days_overdue: number };
