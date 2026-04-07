@@ -11,41 +11,9 @@ import Image from "next/image";
 import { DashboardSidebarItems } from "../DashboardSidebarItems/DashboardSidebarItems";
 
 const navItems = [
-  { name: "Assistant", href: "/velqen" },
-  { name: "Money Mood", href: "/velqen/analytics" },
   { name: "Smart Vault", href: "/velqen/smart-vault" },
-  { name: "Overview", href: "/velqen/transaction-overview" },
-  { name: "Transactions", href: "/velqen/transactions" },
-  { name: "Integrations", href: "/velqen/integrations" },
-  { name: "Finance", href: "/velqen/finance" },
-  { name: "General Ledger", href: "/velqen/gl" },
-  { name: "Bank Recon", href: "/velqen/bank-recon" },
-  // { name: "AI Assistant", href: "/dashboard/ai-assistant" },
-  {
-    name: "AI Tools",
-    children: [
-      {
-        name: "Invoice Extractor",
-        href: "/velqen/ai-tools/invoice-extraction",
-      },
-      {
-        name: "Transaction Classifier",
-        href: "/velqen/ai-tools/transaction-classification",
-      },
-      // {
-      //   name: "Record Reconciler",
-      //   href: "/velqen/ai-tools/record-reconciliation",
-      // },
-      {
-        name: "Invoice Generator",
-        href: "/velqen/ai-tools/invoice-generator",
-      },
-      {
-        name: "Smart Vault",
-        href: "/velqen/ai-tools/smart-vault",
-      },
-    ],
-  },
+  { name: "Money Mood", href: "/velqen/analytics" },
+  { name: "Assistant", href: "/velqen" },
 ];
 
 export default function DashboardSidebar() {

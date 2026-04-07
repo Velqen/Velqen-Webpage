@@ -8,9 +8,14 @@ type Bill = { balance: number; status: string };
 
 type Insight = { headline: string; actions: string[] };
 
+type Debtor = { name: string; amount: number; days_overdue: number };
+type Creditor = { name: string; amount: number };
+
 type Snapshot = {
   total_in: number; total_out: number; total_owed: number;
   total_owing: number; overdue_count: number; summary: string; updated_at: string;
+  top_debtors: Debtor[];
+  top_creditors: Creditor[];
 };
 
 function parseInsight(summary: string): Insight | null {
@@ -123,18 +128,34 @@ export default function MoneyMoodPage() {
           sub={isUp ? "after all expenses" : "more than you earned"}
           color={isUp ? "emerald" : "red"}
         />
-        <Tile
-          label="People owe you"
-          value={`RM ${totalOwed.toLocaleString()}`}
-          sub={`${invoices.length} unpaid`}
-          color="yellow"
-        />
-        <Tile
-          label="You owe"
-          value={`RM ${totalOwing.toLocaleString()}`}
-          sub={`${bills.length} unpaid`}
-          color="orange"
-        />
+        {/* Top debtors card */}
+        <div className="rounded-2xl bg-white/5 border border-white/10 p-4 flex flex-col gap-2">
+          <p className="text-xs uppercase tracking-widest text-yellow-400 font-semibold">Owe you</p>
+          {(snapshot?.top_debtors ?? []).length > 0 ? (
+            (snapshot!.top_debtors).map((d, i) => (
+              <div key={i} className="flex items-center justify-between gap-2">
+                <span className="text-white text-sm truncate">{d.name}</span>
+                <span className="text-yellow-300 text-sm font-semibold whitespace-nowrap">RM {d.amount.toLocaleString()}</span>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-400 text-sm">No outstanding debtors</p>
+          )}
+        </div>
+        {/* Top creditors card */}
+        <div className="rounded-2xl bg-white/5 border border-white/10 p-4 flex flex-col gap-2">
+          <p className="text-xs uppercase tracking-widest text-orange-400 font-semibold">You owe</p>
+          {(snapshot?.top_creditors ?? []).length > 0 ? (
+            snapshot!.top_creditors.map((c, i) => (
+              <div key={i} className="flex items-center justify-between gap-2">
+                <span className="text-white text-sm truncate">{c.name}</span>
+                <span className="text-orange-300 text-sm font-semibold whitespace-nowrap">RM {c.amount.toLocaleString()}</span>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-400 text-sm">No outstanding bills</p>
+          )}
+        </div>
       </div>
 
       {/* Refresh */}
