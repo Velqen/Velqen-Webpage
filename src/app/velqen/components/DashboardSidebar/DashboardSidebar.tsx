@@ -13,6 +13,7 @@ import { DashboardSidebarItems } from "../DashboardSidebarItems/DashboardSidebar
 const navItems = [
   { name: "Smart Vault", href: "/velqen/smart-vault" },
   { name: "Money Mood", href: "/velqen/analytics" },
+  { name: "Tax Assistant", href: "/velqen/tax" },
   { name: "Assistant", href: "/velqen" },
 ];
 

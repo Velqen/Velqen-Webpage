@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Loader2, RefreshCw, Sparkles } from "lucide-react";
+import { AgentAvatar } from "@/components/AgentAvatar/AgentAvatar";
 
 type Insight = { headline: string; actions: string[] };
 
@@ -60,13 +61,14 @@ export default function MoneyMoodPage() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-8 px-4 sm:px-8 md:px-16 py-10">
 
-      {/* Mood headline */}
-      <div className="text-center">
-        <p className="text-5xl sm:text-6xl mb-4">{isUp ? "😊" : "😟"}</p>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight">
-          {isUp ? "Business is good" : "Watch your spending"}
-        </h1>
-      </div>
+      <AgentAvatar
+        name="Mona"
+        tagline={isUp ? "Business is looking good." : "Watch your spending."}
+        gradient="from-emerald-700 via-violet-700 to-indigo-800"
+        avatarStyle="adventurer"
+        mouth="variant22"
+        size="lg"
+      />
 
       {/* AI Action Plan — hero card */}
       {snapshot?.summary ? (
