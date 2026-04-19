@@ -6,7 +6,6 @@ export function PageHeader() {
       <AgentAvatar
         name="Vera"
         tagline="I sort your documents so your books stay clean."
-        gradient="from-blue-700 via-indigo-700 to-violet-800"
         avatarStyle="adventurer-feminine"
         seed="Sophia"
         size="lg"

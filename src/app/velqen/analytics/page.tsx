@@ -64,7 +64,6 @@ export default function MoneyMoodPage() {
       <AgentAvatar
         name="Mona"
         tagline={isUp ? "Business is looking good." : "Watch your spending."}
-        gradient="from-emerald-700 via-violet-700 to-indigo-800"
         avatarStyle="adventurer"
         mouth="variant22"
         size="lg"

@@ -50,7 +50,6 @@ export default function TaxPage() {
       <AgentAvatar
         name="Rex"
         tagline="I handle the tax stuff. You run the business."
-        gradient="from-amber-700 via-orange-700 to-rose-800"
         avatarStyle="adventurer-masculine"
         seed="Marcus"
         size="lg"

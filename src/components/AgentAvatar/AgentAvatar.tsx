@@ -1,16 +1,18 @@
+import Image from "next/image";
+
 type AgentAvatarProps = {
   name: string;
   tagline: string;
-  gradient: string;
   avatarStyle?: "lorelei" | "micah" | "adventurer" | "adventurer-feminine" | "adventurer-masculine";
   seed?: string;
   mouth?: string;
   size?: "sm" | "md" | "lg";
 };
 
-export function AgentAvatar({ name, tagline, gradient, avatarStyle = "lorelei", seed, mouth, size = "md" }: AgentAvatarProps) {
+export function AgentAvatar({ name, tagline, avatarStyle = "lorelei", seed, mouth, size = "md" }: AgentAvatarProps) {
   const avatarSeed = seed ?? name;
   const ring  = size === "lg" ? "w-36 h-36" : size === "md" ? "w-24 h-24" : "w-14 h-14";
+  const px    = size === "lg" ? 144 : size === "md" ? 96 : 56;
   const title = size === "lg" ? "text-4xl" : size === "md" ? "text-2xl" : "text-lg";
 
   const avatarUrl =
@@ -27,7 +29,7 @@ export function AgentAvatar({ name, tagline, gradient, avatarStyle = "lorelei", 
   return (
     <div className="flex flex-col items-center gap-3 text-center">
       <div className={`${ring} flex items-center justify-center overflow-hidden`}>
-        <img src={avatarUrl} alt={name} className="w-full h-full" />
+        <Image src={avatarUrl} alt={name} width={px} height={px} unoptimized />
       </div>
       <div>
         <p className={`${title} font-semibold text-white`}>{name}</p>
