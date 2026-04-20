@@ -6,8 +6,9 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils"; // optional utility function
 import { useDeviceSize } from "@/hooks/useDeviceSize";
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowLeft, LogOut } from "lucide-react";
 import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
 import { DashboardSidebarItems } from "../DashboardSidebarItems/DashboardSidebarItems";
 
 const navItems = [
@@ -81,18 +82,7 @@ export default function DashboardSidebar() {
           />
         </div>
 
-        <div>
-          <Link
-            href="/"
-            className={cn(
-              "flex items-center gap-2 px-3 py-2 rounded text-white hover:bg-gray-200 transition hover:text-black",
-              pathname === "/" ? "bg-gray-300 font-medium" : ""
-            )}
-          >
-            <ArrowLeft size={18} />
-            Home
-          </Link>
-        </div>
+        <SidebarFooter pathname={pathname} />
       </aside>
     </>
   ) : (
@@ -118,19 +108,59 @@ export default function DashboardSidebar() {
           onLinkClick={isSmallDevice ? () => setSidebarOpen(false) : undefined}
         />
       </div>
-      <div>
-        {" "}
-        <Link
-          href="/"
-          className={cn(
-            "flex items-center gap-2 px-3 py-2 rounded text-white hover:bg-gray-200 transition hover:text-black",
-            pathname === "/" ? "bg-gray-300 font-medium" : ""
-          )}
-        >
-          <ArrowLeft size={18} />
-          Home
-        </Link>
-      </div>
+      <SidebarFooter pathname={pathname} />
     </aside>
+  );
+}
+
+function SidebarFooter({ pathname }: { pathname: string }) {
+  const { data: session } = useSession();
+  const user = session?.user;
+  const initials = (user?.name ?? user?.email ?? "?").trim().charAt(0).toUpperCase();
+
+  return (
+    <div className="flex flex-col gap-2 border-t border-white/10 pt-3">
+      {user && (
+        <div className="flex items-center gap-3 px-3 py-2 rounded text-white">
+          {user.image ? (
+            <Image
+              src={user.image}
+              alt={user.name ?? "User"}
+              width={32}
+              height={32}
+              className="rounded-full"
+            />
+          ) : (
+            <div className="w-8 h-8 rounded-full bg-fuchsia-500/30 flex items-center justify-center text-sm font-semibold">
+              {initials}
+            </div>
+          )}
+          <div className="min-w-0">
+            <p className="text-sm truncate">{user.name ?? user.email}</p>
+            {user.name && user.email && (
+              <p className="text-xs text-gray-400 truncate">{user.email}</p>
+            )}
+          </div>
+        </div>
+      )}
+      <Link
+        href="/"
+        className={cn(
+          "flex items-center gap-2 px-3 py-2 rounded text-white hover:bg-gray-200 transition hover:text-black",
+          pathname === "/" ? "bg-gray-300 font-medium" : ""
+        )}
+      >
+        <ArrowLeft size={18} />
+        Home
+      </Link>
+      <button
+        type="button"
+        onClick={() => signOut({ callbackUrl: "/" })}
+        className="flex items-center gap-2 px-3 py-2 rounded text-white hover:bg-red-500/20 transition"
+      >
+        <LogOut size={18} />
+        Logout
+      </button>
+    </div>
   );
 }

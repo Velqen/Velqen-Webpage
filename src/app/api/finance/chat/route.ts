@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { parseSSE } from "@/lib/sse";
 
 export const dynamic = "force-dynamic";
 
@@ -27,8 +28,7 @@ export async function POST(req: NextRequest) {
       console.error("finance/chat upstream error", res.status, text);
       return NextResponse.json({ error: "upstream_error", upstream_status: res.status }, { status: 502 });
     }
-    const data = text ? JSON.parse(text) : {};
-    return NextResponse.json({ response: data.response });
+    return NextResponse.json({ response: parseSSE(text) });
   } catch (e) {
     console.error("finance/chat fetch failed", e);
     return NextResponse.json({ error: "upstream_unreachable" }, { status: 502 });
