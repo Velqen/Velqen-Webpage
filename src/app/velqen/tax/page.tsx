@@ -66,7 +66,7 @@ export default function TaxPage() {
       />
 
       {/* Three columns */}
-      <div className={`grid gap-5 w-full max-w-7xl ${chatPushing ? "grid-cols-1" : "grid-cols-1 lg:grid-cols-3"}`}>
+      <div className={`grid gap-5 w-full ${chatPushing ? "grid-cols-1 max-w-2xl" : "grid-cols-1 lg:grid-cols-3 max-w-7xl"}`}>
         {COLUMNS.map((col) => {
           const content = snapshot?.[col.id];
           const active = override?.id === col.id;
