@@ -190,7 +190,7 @@ export default function MoneyMoodPage() {
           {refreshing ? "Updating..." : "Refresh Insights"}
         </button>
         {snapshot?.updated_at && (
-          <p className="text-xs text-gray-600">Last updated {new Date(snapshot.updated_at).toLocaleString()}</p>
+          <p className="text-xs text-violet-300/70">Last updated {new Date(snapshot.updated_at).toLocaleString()}</p>
         )}
       </div>
 
