@@ -1,214 +1,230 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
+import { Loader2, RefreshCw, Sparkles } from "lucide-react";
+import { AgentAvatar } from "@/components/AgentAvatar/AgentAvatar";
+import { useChatScope } from "@/hooks/useChatScope";
 
-type Invoice = {
-  invoice_id: string;
-  invoice_number: string;
-  customer_name: string;
-  total: number;
-  balance: number;
-  due_date: string;
-  status: string;
+type Insight = { headline: string; actions: string[] };
+
+type Debtor = { name: string; amount: number; days_overdue: number };
+type Creditor = { name: string; amount: number };
+
+type Snapshot = {
+  total_in: number; total_out: number; total_owed: number;
+  total_owing: number; overdue_count: number; summary: string; updated_at: string;
+  top_debtors: Debtor[];
+  top_creditors: Creditor[];
 };
 
-type Bill = {
-  bill_id: string;
-  bill_number: string;
-  vendor_name: string;
-  total: number;
-  balance: number;
-  due_date: string;
-  status: string;
-};
+function parseInsight(summary: string): Insight | null {
+  try {
+    const parsed = JSON.parse(summary);
+    if (parsed.headline && Array.isArray(parsed.actions)) return parsed;
+  } catch {}
+  return null;
+}
 
-type Payment = {
-  payment_id: string;
-  party: string;
-  type: "received" | "paid";
-  amount: number;
-  date: string;
-  invoice_numbers: string;
-  bill_numbers: string;
-};
-
-export default function FinancePage() {
-  const [invoices, setInvoices] = useState<Invoice[]>([]);
-  const [bills, setBills] = useState<Bill[]>([]);
-  const [payments, setPayments] = useState<Payment[]>([]);
+export default function MoneyMoodPage() {
+  const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const { override, setOverride } = useChatScope({
+    endpoint: "/api/finance/chat",
+    defaultFocus: { type: "tab", id: "money-mood", label: "Money Mood" },
+    agent: { name: "Mona", avatarStyle: "adventurer", mouth: "variant22" },
+  });
 
   useEffect(() => {
-    Promise.all([
-      fetch("/api/zoho/ar").then((r) => r.json()),
-      fetch("/api/zoho/ap").then((r) => r.json()),
-      fetch("/api/zoho/payments").then((r) => r.json()),
-    ]).then(([ar, ap, pay]) => {
-      setInvoices(ar.invoices || []);
-      setBills(ap.bills || []);
-      setPayments(pay.payments || []);
-      setLoading(false);
-    });
+    fetch("/api/finance/latest")
+      .then((r) => r.json())
+      .then((snap) => {
+        setSnapshot(snap.snapshot || null);
+        setLoading(false);
+      });
   }, []);
 
-  const totalAR = invoices.reduce((sum, i) => sum + i.balance, 0);
-  const totalAP = bills.reduce((sum, b) => sum + b.balance, 0);
+  const handleRefresh = () => {
+    setRefreshing(true);
+    fetch("/api/finance/refresh", { method: "POST" })
+      .then((r) => r.json())
+      .then((d) => { setSnapshot({ ...d, updated_at: new Date().toISOString() }); setRefreshing(false); });
+  };
+
+  const totalIn    = snapshot?.total_in    ?? 0;
+  const totalOut   = snapshot?.total_out   ?? 0;
+  const net = totalIn - totalOut;
+  const isUp = net >= 0;
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-96">
-        <Loader2 className="animate-spin text-gray-400" size={28} />
+      <div className="flex items-center justify-center h-full">
+        <Loader2 className="animate-spin text-gray-500" size={22} />
       </div>
     );
   }
 
   return (
-    <div className="p-6 px-10 space-y-10">
-      <h1 className="text-2xl font-semibold text-white">Finance</h1>
+    <div className="min-h-screen flex flex-col items-center justify-center gap-8 px-4 sm:px-8 md:px-16 py-10 overflow-x-clip">
 
-      {/* Summary Cards */}
-      <div className="grid grid-cols-2 gap-4 max-w-xl">
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-xl p-5">
-          <p className="text-gray-400 text-sm mb-1">Total AR Outstanding</p>
-          <p className="text-2xl font-bold text-white">RM {totalAR.toFixed(2)}</p>
-          <p className="text-xs text-gray-500 mt-1">{invoices.length} invoices</p>
-        </div>
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-xl p-5">
-          <p className="text-gray-400 text-sm mb-1">Total AP Outstanding</p>
-          <p className="text-2xl font-bold text-white">RM {totalAP.toFixed(2)}</p>
-          <p className="text-xs text-gray-500 mt-1">{bills.length} bills</p>
-        </div>
+      <AgentAvatar
+        name="Mona"
+        tagline={isUp ? "Business is looking good." : "Watch your spending."}
+        avatarStyle="adventurer"
+        mouth="variant22"
+        size="lg"
+      />
+
+      {/* AI Action Plan — hero card */}
+      {snapshot?.summary ? (
+        (() => {
+          const insight = parseInsight(snapshot.summary);
+          const insightActive = override?.id === "insight";
+          return (
+            <button
+              type="button"
+              onClick={() => setOverride({ type: "card", id: "insight", label: "CFO Action Plan" })}
+              className={`relative w-full max-w-2xl mx-auto text-left transition rounded-3xl ${
+                insightActive ? "ring-2 ring-fuchsia-400/70 ring-offset-2 ring-offset-[#0a0612]" : "hover:brightness-110"
+              }`}
+            >
+              <div className="absolute inset-0 rounded-3xl blur-2xl sm:blur-3xl opacity-40 sm:opacity-50 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 -z-10 scale-100 sm:scale-105" />
+              <div className="rounded-3xl p-[1.5px] bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500">
+                <div className="rounded-[calc(1.5rem-1.5px)] bg-[#0f0a1a] px-5 sm:px-8 py-6 sm:py-7">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Sparkles size={13} className="text-fuchsia-400" />
+                    <p className="text-xs uppercase tracking-widest text-fuchsia-400 font-semibold">CFO Action Plan</p>
+                  </div>
+                  {insight ? (
+                    <>
+                      <p className="text-white text-sm sm:text-base font-semibold leading-snug mb-5">
+                        {insight.headline}
+                      </p>
+                      <ol className="space-y-3">
+                        {insight.actions.map((action, i) => (
+                          <li key={i} className="flex gap-3 items-start">
+                            <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/20 border border-fuchsia-500/40 text-fuchsia-300 text-xs font-bold flex items-center justify-center mt-0.5">
+                              {i + 1}
+                            </span>
+                            <p className="text-gray-200 text-sm sm:text-base leading-relaxed">{action}</p>
+                          </li>
+                        ))}
+                      </ol>
+                    </>
+                  ) : (
+                    <p className="text-white text-sm sm:text-base leading-relaxed">{snapshot.summary}</p>
+                  )}
+                </div>
+              </div>
+            </button>
+          );
+        })()
+      ) : (
+        <p className="text-sm text-gray-500 text-center">No snapshot yet — click Refresh to generate your first insight</p>
+      )}
+
+      {/* Three simple stats */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-2xl">
+        <Tile
+          label={isUp ? "🟢 You made" : "🔴 You lost"}
+          value={`RM ${Math.abs(net).toLocaleString()}`}
+          sub={isUp ? "after all expenses" : "more than you earned"}
+          color={isUp ? "emerald" : "red"}
+          active={override?.id === "net"}
+          onClick={() => setOverride({ type: "card", id: "net", label: "Profit & Loss" })}
+        />
+        {/* Top debtors card */}
+        <button
+          type="button"
+          onClick={() => setOverride({ type: "card", id: "debtors", label: "Outstanding Debtors" })}
+          className={`rounded-2xl p-4 flex flex-col gap-2 text-left transition border ${
+            override?.id === "debtors"
+              ? "bg-fuchsia-500/10 border-fuchsia-400/40"
+              : "bg-white/5 border-white/10 hover:bg-white/10"
+          }`}
+        >
+          <p className="text-xs uppercase tracking-widest text-yellow-400 font-semibold">Owe you</p>
+          {(snapshot?.top_debtors ?? []).length > 0 ? (
+            (snapshot!.top_debtors).map((d, i) => (
+              <div key={i} className="flex items-center justify-between gap-2">
+                <span className="text-white text-sm truncate">{d.name}</span>
+                <span className="text-yellow-300 text-sm font-semibold whitespace-nowrap">RM {d.amount.toLocaleString()}</span>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-400 text-sm">No outstanding debtors</p>
+          )}
+        </button>
+        {/* Top creditors card */}
+        <button
+          type="button"
+          onClick={() => setOverride({ type: "card", id: "creditors", label: "Outstanding Bills" })}
+          className={`rounded-2xl p-4 flex flex-col gap-2 text-left transition border ${
+            override?.id === "creditors"
+              ? "bg-fuchsia-500/10 border-fuchsia-400/40"
+              : "bg-white/5 border-white/10 hover:bg-white/10"
+          }`}
+        >
+          <p className="text-xs uppercase tracking-widest text-orange-400 font-semibold">You owe</p>
+          {(snapshot?.top_creditors ?? []).length > 0 ? (
+            snapshot!.top_creditors.map((c, i) => (
+              <div key={i} className="flex items-center justify-between gap-2">
+                <span className="text-white text-sm truncate">{c.name}</span>
+                <span className="text-orange-300 text-sm font-semibold whitespace-nowrap">RM {c.amount.toLocaleString()}</span>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-400 text-sm">No outstanding bills</p>
+          )}
+        </button>
       </div>
 
-      {/* AR Table */}
-      <section>
-        <h2 className="text-lg font-semibold text-white mb-3">Accounts Receivable</h2>
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-white/10 text-gray-400">
-                <th className="text-left px-4 py-3">Invoice #</th>
-                <th className="text-left px-4 py-3">Client</th>
-                <th className="text-left px-4 py-3">Due Date</th>
-                <th className="text-right px-4 py-3">Balance</th>
-                <th className="text-left px-4 py-3">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {invoices.length === 0 ? (
-                <tr>
-                  <td colSpan={5} className="text-center text-gray-500 py-6">No outstanding invoices</td>
-                </tr>
-              ) : (
-                invoices.map((inv) => (
-                  <tr key={inv.invoice_id} className="border-b border-white/5 hover:bg-white/[0.02]">
-                    <td className="px-4 py-3 text-white">{inv.invoice_number}</td>
-                    <td className="px-4 py-3 text-gray-300">{inv.customer_name}</td>
-                    <td className="px-4 py-3 text-gray-300">{inv.due_date}</td>
-                    <td className="px-4 py-3 text-right text-white font-medium">RM {inv.balance.toFixed(2)}</td>
-                    <td className="px-4 py-3">
-                      <span className={`text-xs px-2 py-1 rounded-full ${
-                        inv.status === "overdue"
-                          ? "bg-red-900/40 text-red-400"
-                          : "bg-yellow-900/40 text-yellow-400"
-                      }`}>
-                        {inv.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
+      {/* Refresh */}
+      <div className="flex flex-col items-center gap-2">
+        <button
+          onClick={handleRefresh}
+          disabled={refreshing}
+          className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 border border-white/20 text-sm text-white hover:bg-white/20 transition disabled:opacity-40"
+        >
+          <RefreshCw size={13} className={refreshing ? "animate-spin" : ""} />
+          {refreshing ? "Updating..." : "Refresh Insights"}
+        </button>
+        {snapshot?.updated_at && (
+          <p className="text-xs text-gray-600">Last updated {new Date(snapshot.updated_at).toLocaleString()}</p>
+        )}
+      </div>
 
-      {/* AP Table */}
-      <section>
-        <h2 className="text-lg font-semibold text-white mb-3">Accounts Payable</h2>
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-white/10 text-gray-400">
-                <th className="text-left px-4 py-3">Bill #</th>
-                <th className="text-left px-4 py-3">Vendor</th>
-                <th className="text-left px-4 py-3">Due Date</th>
-                <th className="text-right px-4 py-3">Balance</th>
-                <th className="text-left px-4 py-3">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bills.length === 0 ? (
-                <tr>
-                  <td colSpan={5} className="text-center text-gray-500 py-6">No outstanding bills</td>
-                </tr>
-              ) : (
-                bills.map((bill) => (
-                  <tr key={bill.bill_id} className="border-b border-white/5 hover:bg-white/[0.02]">
-                    <td className="px-4 py-3 text-white">{bill.bill_number}</td>
-                    <td className="px-4 py-3 text-gray-300">{bill.vendor_name}</td>
-                    <td className="px-4 py-3 text-gray-300">{bill.due_date}</td>
-                    <td className="px-4 py-3 text-right text-white font-medium">RM {bill.balance.toFixed(2)}</td>
-                    <td className="px-4 py-3">
-                      <span className={`text-xs px-2 py-1 rounded-full ${
-                        bill.status === "overdue"
-                          ? "bg-red-900/40 text-red-400"
-                          : "bg-yellow-900/40 text-yellow-400"
-                      }`}>
-                        {bill.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      {/* Payments Table */}
-      <section>
-        <h2 className="text-lg font-semibold text-white mb-3">Recent Payments</h2>
-        <div className="bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-white/10 text-gray-400">
-                <th className="text-left px-4 py-3">Party</th>
-                <th className="text-left px-4 py-3">Date</th>
-                <th className="text-left px-4 py-3">Reference</th>
-                <th className="text-left px-4 py-3">Type</th>
-                <th className="text-right px-4 py-3">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {payments.length === 0 ? (
-                <tr>
-                  <td colSpan={5} className="text-center text-gray-500 py-6">No payments recorded</td>
-                </tr>
-              ) : (
-                payments.map((p) => (
-                  <tr key={p.payment_id} className="border-b border-white/5 hover:bg-white/[0.02]">
-                    <td className="px-4 py-3 text-gray-300">{p.party}</td>
-                    <td className="px-4 py-3 text-gray-300">{p.date}</td>
-                    <td className="px-4 py-3 text-gray-400">{p.invoice_numbers || p.bill_numbers || "—"}</td>
-                    <td className="px-4 py-3">
-                      <span className={`text-xs px-2 py-1 rounded-full ${p.type === "received" ? "bg-green-900/40 text-green-400" : "bg-red-900/40 text-red-400"}`}>
-                        {p.type === "received" ? "Received" : "Paid out"}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-right font-medium">
-                      <span className={p.type === "received" ? "text-green-400" : "text-red-400"}>
-                        {p.type === "received" ? "+" : "-"}RM {p.amount.toFixed(2)}
-                      </span>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
     </div>
+  );
+}
+
+function Tile({
+  label, value, sub, color, onClick, active,
+}: {
+  label: string; value: string; sub: string; color: string;
+  onClick?: () => void; active?: boolean;
+}) {
+  const bg: Record<string, string> = {
+    emerald: "bg-emerald-400/10 border-emerald-400/20",
+    red:     "bg-red-400/10 border-red-400/20",
+    yellow:  "bg-yellow-400/10 border-yellow-400/20",
+    orange:  "bg-orange-400/10 border-orange-400/20",
+  };
+  const text: Record<string, string> = {
+    emerald: "text-emerald-400", red: "text-red-400", yellow: "text-yellow-400", orange: "text-orange-400",
+  };
+  const activeRing = active ? "ring-2 ring-fuchsia-400/60" : "";
+  const hover = onClick ? "hover:brightness-125 cursor-pointer" : "";
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={!onClick}
+      className={`rounded-2xl border p-6 text-center transition ${bg[color]} ${activeRing} ${hover}`}
+    >
+      <p className="text-xs text-white mb-2">{label}</p>
+      <p className={`text-2xl font-light ${text[color]}`}>{value}</p>
+      <p className="text-xs text-gray-300 mt-1">{sub}</p>
+    </button>
   );
 }

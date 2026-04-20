@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Loader2, Sparkles, Receipt, Calculator, Lightbulb, RefreshCw } from "lucide-react";
 import { MarkdownResult } from "@/components/MarkdownResult/MarkdownResult";
 import { AgentAvatar } from "@/components/AgentAvatar/AgentAvatar";
+import { useChatScope, useChatPanel } from "@/hooks/useChatScope";
+import { useDeviceSize } from "@/hooks/useDeviceSize";
 
 type TaxSnapshot = {
   compilation: string | null;
@@ -24,16 +26,24 @@ export default function TaxPage() {
   const [snapshot, setSnapshot] = useState<TaxSnapshot | null>(null);
   const [loading, setLoading]   = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const { override, setOverride } = useChatScope({
+    endpoint: "/api/tax/chat",
+    defaultFocus: { type: "tab", id: "tax", label: "Tax" },
+    agent: { name: "Rex", avatarStyle: "adventurer-masculine", avatarSeed: "Marcus" },
+  });
+  const { isOpen } = useChatPanel();
+  const { isSmallDevice } = useDeviceSize();
+  const chatPushing = isOpen && !isSmallDevice;
 
   useEffect(() => {
-    fetch("/api/insights/tax/latest")
+    fetch("/api/tax/latest")
       .then((r) => r.json())
       .then((d) => { setSnapshot(d.snapshot || null); setLoading(false); });
   }, []);
 
   const handleRefresh = () => {
     setRefreshing(true);
-    fetch("/api/insights/tax/refresh", { method: "POST" })
+    fetch("/api/tax/refresh", { method: "POST" })
       .then((r) => r.json())
       .then((d) => { setSnapshot({ ...d, updated_at: new Date().toISOString() }); setRefreshing(false); });
   };
@@ -56,11 +66,19 @@ export default function TaxPage() {
       />
 
       {/* Three columns */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 w-full max-w-7xl">
+      <div className={`grid gap-5 w-full max-w-7xl ${chatPushing ? "grid-cols-1" : "grid-cols-1 lg:grid-cols-3"}`}>
         {COLUMNS.map((col) => {
           const content = snapshot?.[col.id];
+          const active = override?.id === col.id;
           return (
-            <div key={col.id} className="relative flex flex-col">
+            <button
+              key={col.id}
+              type="button"
+              onClick={() => setOverride({ type: "card", id: col.id, label: col.title })}
+              className={`relative flex flex-col text-left transition rounded-3xl ${
+                active ? "ring-2 ring-fuchsia-400/70 ring-offset-2 ring-offset-velqen-gray" : "hover:brightness-110"
+              }`}
+            >
               <div className={`absolute inset-0 rounded-3xl blur-3xl opacity-30 ${col.glow} -z-10 scale-105`} />
               <div className={`rounded-3xl p-[1.5px] bg-gradient-to-br ${col.gradient} flex flex-col flex-1`}>
                 <div className="rounded-[calc(1.5rem-1.5px)] bg-[#0f0a1a] px-5 sm:px-6 py-6 flex flex-col gap-4 flex-1">
@@ -89,7 +107,7 @@ export default function TaxPage() {
 
                 </div>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>
