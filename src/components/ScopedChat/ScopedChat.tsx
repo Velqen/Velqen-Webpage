@@ -147,14 +147,14 @@ function ChatSurface({
             <Image
               src={agentAvatarUrl(agent)}
               alt={agent.name}
-              width={28}
-              height={28}
+              width={40}
+              height={40}
               unoptimized
               className="rounded-full bg-fuchsia-500/20 flex-shrink-0"
             />
             <div className="min-w-0">
-              <p className="text-sm text-white font-semibold">{agent.name}</p>
-              <p className="text-xs text-gray-400 truncate">
+              <p className="text-lg text-white font-semibold">{agent.name}</p>
+              <p className="text-base text-gray-400 truncate">
                 {focus.label ?? `${focus.type} ${focus.id}`}
                 {isOverride && (
                   <button
@@ -172,14 +172,14 @@ function ChatSurface({
             className="p-1.5 rounded-full hover:bg-white/10 text-gray-300"
             aria-label="Close chat"
           >
-            <X size={16} />
+            <X size={22} />
           </button>
         </div>
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-0">
           {messages.length === 0 && !isLoading && (
-            <p className="text-xs text-gray-500 text-center pt-8">
+            <p className="text-base text-gray-500 text-center pt-8">
               Ask anything about {focus.label ?? "this page"}.
             </p>
           )}
@@ -189,10 +189,10 @@ function ChatSurface({
               className={`flex ${m.sender === "user" ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`px-3 py-2 rounded-2xl text-sm max-w-[85%] break-words ${
+                className={`px-4 py-3 rounded-2xl text-lg max-w-[85%] break-words ${
                   m.sender === "user"
-                    ? "velqen-gradient-bg text-white"
-                    : "bg-white/10 text-gray-100"
+                    ? "bg-white/20 text-white"
+                    : "bg-white/5 text-gray-300"
                 }`}
               >
                 {m.text}
@@ -200,7 +200,7 @@ function ChatSurface({
             </div>
           ))}
           {isLoading && (
-            <div className="text-xs text-gray-400 animate-pulse">{agent.name} is typing…</div>
+            <div className="text-base text-gray-400 animate-pulse">{agent.name} is typing…</div>
           )}
           <div ref={messagesEndRef} />
         </div>
@@ -215,12 +215,12 @@ function ChatSurface({
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
-            className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-base sm:text-sm text-white placeholder:text-gray-500 outline-none focus:border-fuchsia-400/40"
+            className="flex-1 bg-white/5 border border-white/10 rounded-full px-5 py-3 text-lg text-white placeholder:text-gray-500 outline-none focus:border-fuchsia-400/40"
           />
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="px-4 py-2 velqen-gradient-bg velqen-gradient-bg-hover text-white rounded-full text-sm disabled:opacity-40"
+            className="px-5 py-3 velqen-gradient-bg velqen-gradient-bg-hover text-white rounded-full text-lg disabled:opacity-40"
           >
             {isLoading ? "…" : "Send"}
           </button>

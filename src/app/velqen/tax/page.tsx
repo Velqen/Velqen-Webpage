@@ -12,6 +12,9 @@ type TaxSnapshot = {
   estimation: string | null;
   advisory: string | null;
   updated_at: string;
+  tax_saved: number;
+  tax_payable: number;
+  potential_incentives: number;
 };
 
 type ColId = "compilation" | "estimation" | "advisory";
@@ -64,6 +67,27 @@ export default function TaxPage() {
         seed="Marcus"
         size="lg"
       />
+
+      {/* Stat tiles */}
+      {snapshot && (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl">
+          <div className="rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-6 text-center">
+            <p className="text-xs text-white mb-2">🟢 Tax You Saved</p>
+            <p className="text-2xl font-light text-emerald-400">RM {snapshot.tax_saved.toLocaleString()}</p>
+            <p className="text-xs text-gray-300 mt-1">through deductible expenses</p>
+          </div>
+          <div className="rounded-2xl border border-violet-400/20 bg-violet-400/10 p-6 text-center">
+            <p className="text-xs text-white mb-2">🧾 Tax Payable</p>
+            <p className="text-2xl font-light text-violet-400">RM {snapshot.tax_payable.toLocaleString()}</p>
+            <p className="text-xs text-gray-300 mt-1">at 24% corporate tax rate</p>
+          </div>
+          <div className="rounded-2xl border border-amber-400/20 bg-amber-400/10 p-6 text-center">
+            <p className="text-xs text-white mb-2">💡 Potential Incentives</p>
+            <p className="text-2xl font-light text-amber-400">RM {snapshot.potential_incentives.toLocaleString()}</p>
+            <p className="text-xs text-gray-300 mt-1">govt grants you may qualify for</p>
+          </div>
+        </div>
+      )}
 
       {/* Three columns */}
       <div className={`grid gap-5 w-full ${chatPushing ? "grid-cols-1 max-w-2xl" : "grid-cols-1 lg:grid-cols-3 max-w-7xl"}`}>

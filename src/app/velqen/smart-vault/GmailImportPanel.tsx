@@ -117,18 +117,18 @@ export function GmailImportPanel({ onImported }: Props) {
   };
 
   return (
-    <div className="bg-[#111] border border-white/10 rounded-2xl overflow-hidden">
+    <div className="bg-[#0f0a1a] border border-white/10 rounded-3xl overflow-hidden">
       <button
         onClick={handleOpen}
         className="w-full flex items-center justify-between px-5 py-4 hover:bg-white/5 transition"
       >
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-white/10 flex items-center justify-center">
-            <Mail size={15} className="text-blue-400" />
+          <div className="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+            <Mail size={16} className="text-blue-400" />
           </div>
           <div className="text-left">
             <p className="text-sm font-medium text-white">Import from Gmail</p>
-            <p className="text-xs text-gray-400">Fetch invoice & receipt emails</p>
+            <p className="text-xs text-gray-500">Fetch invoice & receipt attachments</p>
           </div>
         </div>
         {open ? <ChevronUp size={16} className="text-gray-500" /> : <ChevronDown size={16} className="text-gray-500" />}
@@ -189,15 +189,15 @@ function EmailRow({
   const senderName = email.from.replace(/<.*>/, "").trim() || email.from;
 
   return (
-    <div className="bg-gray-900/60 border border-white/5 rounded-xl overflow-hidden">
+    <div className="bg-white/[0.03] border border-white/8 rounded-2xl overflow-hidden">
       <button
         onClick={() => setExpanded((p) => !p)}
         className="w-full flex items-start gap-3 p-3 hover:bg-white/5 transition text-left"
       >
         <Mail size={13} className="text-gray-500 mt-0.5 shrink-0" />
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-medium text-white truncate">{email.subject}</p>
-          <p className="text-xs text-gray-500 truncate">{senderName} · {formatDate(email.date)}</p>
+          <p className="text-sm font-medium text-white truncate">{email.subject}</p>
+          <p className="text-sm text-gray-500 truncate">{senderName} · {formatDate(email.date)}</p>
         </div>
         <div className="flex items-center gap-1 shrink-0">
           <Paperclip size={11} className="text-gray-500" />
@@ -218,27 +218,27 @@ function EmailRow({
             return (
               <div key={att.attachmentId} className="flex items-center gap-2">
                 <Paperclip size={11} className="text-gray-600 shrink-0" />
-                <span className="text-xs text-gray-300 truncate flex-1">{att.filename}</span>
-                <span className="text-xs text-gray-600 shrink-0">{formatSize(att.size)}</span>
+                <span className="text-sm text-gray-300 truncate flex-1">{att.filename}</span>
+                <span className="text-sm text-gray-600 shrink-0">{formatSize(att.size)}</span>
                 {supported ? (
-                  <div className="flex gap-1 shrink-0">
+                  <div className="flex gap-1.5 shrink-0">
                     <button
                       onClick={() => onImport(email, att, "bill")}
                       disabled={isImporting}
-                      className="text-xs px-2 py-1 rounded-md bg-red-500/10 text-red-400 hover:bg-red-500/20 border border-red-500/20 transition disabled:opacity-40"
+                      className="text-sm px-3 py-1 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 border border-red-500/20 transition disabled:opacity-40"
                     >
-                      {isImporting ? <Loader2 size={10} className="animate-spin" /> : "Bill"}
+                      {isImporting ? <Loader2 size={11} className="animate-spin" /> : "Bill"}
                     </button>
                     <button
                       onClick={() => onImport(email, att, "invoice")}
                       disabled={isImporting}
-                      className="text-xs px-2 py-1 rounded-md bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/20 transition disabled:opacity-40"
+                      className="text-sm px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/20 transition disabled:opacity-40"
                     >
-                      {isImporting ? <Loader2 size={10} className="animate-spin" /> : "Invoice"}
+                      {isImporting ? <Loader2 size={11} className="animate-spin" /> : "Invoice"}
                     </button>
                   </div>
                 ) : (
-                  <span className="text-xs text-gray-600 shrink-0">unsupported</span>
+                  <span className="text-sm text-gray-600 shrink-0">unsupported</span>
                 )}
               </div>
             );

@@ -10,11 +10,18 @@ type Insight = { headline: string; actions: string[] };
 type Debtor = { name: string; amount: number; days_overdue: number };
 type Creditor = { name: string; amount: number };
 
+type ExpenseRow = { category: string; last_year: number; this_year: number; change: number };
+type ExpenseInsight = {
+  col_last_year: string; col_this_year: string;
+  table: ExpenseRow[]; s1: string; s2: string; action: string;
+};
+
 type Snapshot = {
   total_in: number; total_out: number; total_owed: number;
   total_owing: number; overdue_count: number; summary: string; updated_at: string;
   top_debtors: Debtor[];
   top_creditors: Creditor[];
+  expense_insight: string;
 };
 
 function parseInsight(summary: string): Insight | null {
@@ -24,6 +31,16 @@ function parseInsight(summary: string): Insight | null {
   } catch {}
   return null;
 }
+
+function parseExpenseInsight(raw: string): ExpenseInsight | null {
+  try {
+    const parsed = JSON.parse(raw);
+    if (parsed.table && parsed.action) return parsed;
+  } catch {}
+  return null;
+}
+
+function fmt(n: number) { return n > 0 ? `RM ${n.toLocaleString()}` : "—"; }
 
 export default function MoneyMoodPage() {
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
@@ -74,54 +91,6 @@ export default function MoneyMoodPage() {
         mouth="variant22"
         size="lg"
       />
-
-      {/* AI Action Plan — hero card */}
-      {snapshot?.summary ? (
-        (() => {
-          const insight = parseInsight(snapshot.summary);
-          const insightActive = override?.id === "insight";
-          return (
-            <button
-              type="button"
-              onClick={() => setOverride({ type: "card", id: "insight", label: "CFO Action Plan" })}
-              className={`relative w-full max-w-2xl mx-auto text-left transition rounded-3xl ${
-                insightActive ? "ring-2 ring-fuchsia-400/70 ring-offset-2 ring-offset-[#0a0612]" : "hover:brightness-110"
-              }`}
-            >
-              <div className="absolute inset-0 rounded-3xl blur-2xl sm:blur-3xl opacity-40 sm:opacity-50 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 -z-10 scale-100 sm:scale-105" />
-              <div className="rounded-3xl p-[1.5px] bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500">
-                <div className="rounded-[calc(1.5rem-1.5px)] bg-[#0f0a1a] px-5 sm:px-8 py-6 sm:py-7">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Sparkles size={13} className="text-fuchsia-400" />
-                    <p className="text-xs uppercase tracking-widest text-fuchsia-400 font-semibold">CFO Action Plan</p>
-                  </div>
-                  {insight ? (
-                    <>
-                      <p className="text-white text-sm sm:text-base font-semibold leading-snug mb-5">
-                        {insight.headline}
-                      </p>
-                      <ol className="space-y-3">
-                        {insight.actions.map((action, i) => (
-                          <li key={i} className="flex gap-3 items-start">
-                            <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/20 border border-fuchsia-500/40 text-fuchsia-300 text-xs font-bold flex items-center justify-center mt-0.5">
-                              {i + 1}
-                            </span>
-                            <p className="text-gray-200 text-sm sm:text-base leading-relaxed">{action}</p>
-                          </li>
-                        ))}
-                      </ol>
-                    </>
-                  ) : (
-                    <p className="text-white text-sm sm:text-base leading-relaxed">{snapshot.summary}</p>
-                  )}
-                </div>
-              </div>
-            </button>
-          );
-        })()
-      ) : (
-        <p className="text-sm text-gray-500 text-center">No snapshot yet — click Refresh to generate your first insight</p>
-      )}
 
       {/* Three simple stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-2xl">
@@ -177,6 +146,114 @@ export default function MoneyMoodPage() {
             <p className="text-gray-400 text-sm">No outstanding bills</p>
           )}
         </button>
+      </div>
+
+      {/* Cashflow Action Plan + Expense Drill side by side */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full max-w-6xl">
+        {/* AI Action Plan */}
+        {snapshot?.summary ? (
+          (() => {
+            const insight = parseInsight(snapshot.summary);
+            const insightActive = override?.id === "insight";
+            return (
+              <button
+                type="button"
+                onClick={() => setOverride({ type: "card", id: "insight", label: "Cashflow Action Plan" })}
+                className={`relative w-full text-left transition rounded-3xl ${
+                  insightActive ? "ring-2 ring-fuchsia-400/70 ring-offset-2 ring-offset-[#0a0612]" : "hover:brightness-110"
+                }`}
+              >
+                <div className="absolute inset-0 rounded-3xl blur-2xl sm:blur-3xl opacity-40 sm:opacity-50 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 -z-10 scale-100 sm:scale-105" />
+                <div className="rounded-3xl p-[1.5px] bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 h-full">
+                  <div className="rounded-[calc(1.5rem-1.5px)] bg-[#0f0a1a] px-5 sm:px-8 py-6 sm:py-7 h-full">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Sparkles size={13} className="text-fuchsia-400" />
+                      <p className="text-xs uppercase tracking-widest text-fuchsia-400 font-semibold">Cashflow Action Plan</p>
+                    </div>
+                    {insight ? (
+                      <>
+                        <p className="text-white text-sm sm:text-base font-semibold leading-snug mb-5">
+                          {insight.headline}
+                        </p>
+                        <ol className="space-y-3">
+                          {insight.actions.map((action, i) => (
+                            <li key={i} className="flex gap-3 items-start">
+                              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-fuchsia-500/20 border border-fuchsia-500/40 text-fuchsia-300 text-xs font-bold flex items-center justify-center mt-0.5">
+                                {i + 1}
+                              </span>
+                              <p className="text-gray-200 text-sm sm:text-base leading-relaxed">{action}</p>
+                            </li>
+                          ))}
+                        </ol>
+                      </>
+                    ) : (
+                      <p className="text-white text-sm sm:text-base leading-relaxed">{snapshot.summary}</p>
+                    )}
+                  </div>
+                </div>
+              </button>
+            );
+          })()
+        ) : (
+          <p className="text-sm text-gray-500 text-center">No snapshot yet — click Refresh to generate your first insight</p>
+        )}
+
+        {/* Expense Insight */}
+        {snapshot?.expense_insight && (() => {
+          const ei = parseExpenseInsight(snapshot.expense_insight);
+          return (
+            <button
+              type="button"
+              onClick={() => setOverride({ type: "card", id: "expense", label: "Expense Action Plan" })}
+              className={`relative w-full text-left transition rounded-3xl ${
+                override?.id === "expense" ? "ring-2 ring-amber-400/70 ring-offset-2 ring-offset-[#0a0612]" : "hover:brightness-110"
+              }`}
+            >
+              <div className="absolute inset-0 rounded-3xl blur-2xl sm:blur-3xl opacity-40 sm:opacity-50 bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-500 -z-10 scale-100 sm:scale-105" />
+              <div className="rounded-3xl p-[1.5px] bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 h-full">
+                <div className="rounded-[calc(1.5rem-1.5px)] bg-[#0f0a1a] px-5 sm:px-8 py-6 sm:py-7 h-full flex flex-col gap-4">
+                  <div className="flex items-center gap-2">
+                    <Sparkles size={13} className="text-amber-400" />
+                    <p className="text-xs uppercase tracking-widest text-amber-400 font-semibold">Expense Action Plan</p>
+                  </div>
+                  {ei ? (
+                    <>
+                      <table className="w-full text-sm sm:text-base">
+                        <thead>
+                          <tr className="border-b border-white/10">
+                            <th className="text-left pb-2 font-normal text-gray-400">Category</th>
+                            <th className="text-right pb-2 font-normal text-gray-500">{ei.col_last_year}</th>
+                            <th className="text-right pb-2 font-normal text-gray-400">{ei.col_this_year}</th>
+                            <th className="text-right pb-2 font-semibold text-red-400">Change</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {ei.table.map((row, i) => (
+                            <tr key={i} className="border-b border-white/5">
+                              <td className="py-2 text-gray-300">{row.category}</td>
+                              <td className="py-2 text-right text-gray-500">{fmt(row.last_year)}</td>
+                              <td className="py-2 text-right text-gray-300">{fmt(row.this_year)}</td>
+                              <td className={`py-2 text-right font-bold ${row.change > 0 ? "text-red-400" : "text-emerald-400"}`}>
+                                {row.change > 0 ? `+RM ${row.change.toLocaleString()}` : `-RM ${Math.abs(row.change).toLocaleString()}`}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      <div className="border-t border-white/10 pt-3 flex flex-col gap-2">
+                        {ei.s1 && <p className="text-gray-300 text-sm sm:text-base leading-relaxed">{ei.s1}</p>}
+                        {ei.s2 && <p className="text-white text-sm sm:text-base font-semibold leading-snug">{ei.s2}</p>}
+                        {ei.action && <p className="text-amber-300 text-sm sm:text-base leading-relaxed">{ei.action}</p>}
+                      </div>
+                    </>
+                  ) : (
+                    <p className="text-gray-200 text-sm sm:text-base leading-relaxed">{snapshot.expense_insight}</p>
+                  )}
+                </div>
+              </div>
+            </button>
+          );
+        })()}
       </div>
 
       {/* Refresh */}

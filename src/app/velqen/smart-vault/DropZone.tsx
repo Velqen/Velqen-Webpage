@@ -1,4 +1,4 @@
-import { Upload } from "lucide-react";
+import { ArrowUpFromLine } from "lucide-react";
 
 type DropZoneProps = {
   mode: "paid" | "received";
@@ -11,24 +11,24 @@ type DropZoneProps = {
 
 const CONFIG = {
   paid: {
-    label: "Money I Paid",
-    sublabel: "Receipts, supplier bills, purchases",
-    examples: "e.g. office supplies, rent, utilities",
-    accent: "border-red-500/40 hover:border-red-500/60",
-    dragAccent: "border-red-500 bg-red-500/5",
-    iconBg: "bg-red-500/10",
+    label: "Money Out",
+    sublabel: "Receipts, bills, purchases",
+    gradient: "from-red-800 via-rose-800 to-orange-900",
+    glow: "bg-red-700",
+    dragBg: "bg-red-500/10",
+    iconBg: "bg-red-500/15",
     iconColor: "text-red-400",
-    btnClass: "bg-red-500 hover:bg-red-600",
+    accent: "text-red-400",
   },
   received: {
-    label: "Money I Received",
-    sublabel: "Invoices you sent to your clients",
-    examples: "e.g. services rendered, product sales",
-    accent: "border-emerald-500/40 hover:border-emerald-500/60",
-    dragAccent: "border-emerald-500 bg-emerald-500/5",
-    iconBg: "bg-emerald-500/10",
+    label: "Money In",
+    sublabel: "Invoices you sent to clients",
+    gradient: "from-emerald-800 via-teal-800 to-cyan-900",
+    glow: "bg-emerald-700",
+    dragBg: "bg-emerald-500/10",
+    iconBg: "bg-emerald-500/15",
     iconColor: "text-emerald-400",
-    btnClass: "bg-emerald-600 hover:bg-emerald-700",
+    accent: "text-emerald-400",
   },
 };
 
@@ -40,25 +40,18 @@ export function DropZone({ mode, isDragging, onDrop, onDragOver, onDragLeave, on
       onDrop={onDrop}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
-      className={`rounded-2xl border-2 border-dashed transition-all duration-200 ${
-        isDragging ? c.dragAccent : `border-gray-700 ${c.accent} bg-[#111]`
-      }`}
+      className="relative"
     >
-      <div className="flex flex-col items-center justify-center py-10 px-6 text-center">
-        <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${c.iconBg}`}>
-          <Upload size={18} className={c.iconColor} />
-        </div>
-
-        <p className="text-white font-semibold text-sm mb-0.5">{c.label}</p>
-        <p className="text-xs text-gray-400 mb-0.5">{c.sublabel}</p>
-        <p className="text-xs text-gray-600 mb-5">{c.examples}</p>
-
-        <label className="cursor-pointer">
+      <div className={`absolute inset-0 rounded-3xl blur-3xl opacity-20 ${c.glow} -z-10 scale-105`} />
+      <div className={`rounded-3xl p-[1.5px] bg-gradient-to-br ${c.gradient}`}>
+        <label className={`cursor-pointer block rounded-[calc(1.5rem-1.5px)] bg-[#0f0a1a] px-4 py-10 text-center transition ${isDragging ? c.dragBg : "hover:bg-white/5"}`}>
           <input type="file" multiple accept=".pdf,.jpg,.jpeg,.png" onChange={onFileInput} className="hidden" />
-          <span className={`inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium rounded-lg text-white transition-colors ${c.btnClass}`}>
-            <Upload size={12} />
-            Upload Files
-          </span>
+          <div className={`w-11 h-11 rounded-2xl flex items-center justify-center mx-auto mb-4 ${c.iconBg}`}>
+            <ArrowUpFromLine size={20} className={c.iconColor} />
+          </div>
+          <p className={`text-3xl font-bold ${c.accent} mb-1`}>{c.label}</p>
+          <p className="text-sm text-gray-400 leading-relaxed">{c.sublabel}</p>
+          <p className="text-sm text-gray-600 mt-3">Drop files or click to upload</p>
         </label>
       </div>
     </div>

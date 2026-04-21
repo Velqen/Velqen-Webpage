@@ -10,14 +10,24 @@ export default function SmartVaultPage() {
   const { isDraggingPaid, isDraggingReceived, files, addFiles, paidHandlers, receivedHandlers, handleConfirm } = useSmartVault();
 
   return (
-    <div className="p-6 px-10 space-y-6">
+    <div className="min-h-screen px-6 sm:px-10 py-8 flex flex-col gap-6">
       <PageHeader />
-      <div className="grid grid-cols-2 gap-4">
-        <DropZone mode="paid" isDragging={isDraggingPaid} {...paidHandlers} />
-        <DropZone mode="received" isDragging={isDraggingReceived} {...receivedHandlers} />
+
+      <div className="flex flex-col lg:flex-row gap-5 items-start">
+        {/* Left — upload methods */}
+        <div className="flex flex-col gap-4 w-full lg:w-1/2">
+          <div className="grid grid-cols-2 gap-4">
+            <DropZone mode="paid"     isDragging={isDraggingPaid}     {...paidHandlers} />
+            <DropZone mode="received" isDragging={isDraggingReceived} {...receivedHandlers} />
+          </div>
+          <GmailImportPanel onImported={addFiles} />
+        </div>
+
+        {/* Right — live activity */}
+        <div className="w-full lg:w-1/2">
+          <RecentFilesPanel files={files} onConfirm={handleConfirm} />
+        </div>
       </div>
-      <GmailImportPanel onImported={addFiles} />
-      <RecentFilesPanel files={files} onConfirm={handleConfirm} />
     </div>
   );
 }

@@ -15,5 +15,7 @@ export function parseSSE(text: string): string {
       chunks.push(payload);
     }
   }
-  return chunks.join("");
+  const joined = chunks.join("");
+  // Normalize multiple spaces that can appear from token boundaries
+  return joined.replace(/  +/g, " ").trim();
 }
