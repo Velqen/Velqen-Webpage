@@ -110,10 +110,28 @@ export function useSmartVault() {
     };
   };
 
+  const addFiles = (incoming: FileStatus[]) => {
+    setFiles((prev) => {
+      // Replace processing placeholders with final results by name
+      const updated = prev.map((existing) => {
+        const match = incoming.find(
+          (f) => f.name === existing.name && existing.status === "processing"
+        );
+        return match ?? existing;
+      });
+      // Add any that aren't replacements (new processing entries)
+      const newEntries = incoming.filter(
+        (f) => !prev.some((e) => e.name === f.name && e.status === "processing")
+      );
+      return [...newEntries, ...updated];
+    });
+  };
+
   return {
     isDraggingPaid,
     isDraggingReceived,
     files,
+    addFiles,
     paidHandlers: makeDragHandlers("paid"),
     receivedHandlers: makeDragHandlers("received"),
     handleConfirm,
