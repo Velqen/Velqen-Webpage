@@ -98,12 +98,6 @@ export default function TaxPage() {
       .then((d) => { setSnapshot({ ...d, updated_at: new Date().toISOString() }); setRefreshing(false); });
   };
 
-  if (loading) return (
-    <div className="flex items-center justify-center h-full">
-      <Loader2 className="animate-spin text-gray-500" size={22} />
-    </div>
-  );
-
   return (
     <div className="min-h-screen flex flex-col items-center gap-8 px-4 sm:px-8 md:px-16 py-10">
 
@@ -114,6 +108,8 @@ export default function TaxPage() {
         seed="Marcus"
         size="lg"
       />
+
+      {loading && <Loader2 className="animate-spin text-gray-500" size={22} />}
 
       {/* Stat tiles */}
       {snapshot && (

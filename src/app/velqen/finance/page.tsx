@@ -73,14 +73,6 @@ export default function MoneyMoodPage() {
   const net = totalIn - totalOut;
   const isUp = net >= 0;
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <Loader2 className="animate-spin text-gray-500" size={22} />
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-8 px-4 sm:px-8 md:px-16 py-10 overflow-x-clip">
 
@@ -91,6 +83,8 @@ export default function MoneyMoodPage() {
         mouth="variant22"
         size="lg"
       />
+
+      {loading && <Loader2 className="animate-spin text-gray-500" size={22} />}
 
       {/* Three simple stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-2xl">
