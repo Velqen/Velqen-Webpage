@@ -17,6 +17,53 @@ type TaxSnapshot = {
   potential_incentives: number;
 };
 
+type CompilationItem = { name: string; total: number; deductible: number; pct: number; tax_saved: number };
+type CompilationData = { items: CompilationItem[]; total_tax_saved: number };
+
+function parseCompilation(raw: string): CompilationData | null {
+  try {
+    const parsed = JSON.parse(raw);
+    if (parsed.items && Array.isArray(parsed.items)) return parsed;
+  } catch {}
+  return null;
+}
+
+function CompilationTable({ data }: { data: CompilationData }) {
+  return (
+    <div className="flex flex-col gap-3">
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="border-b border-white/10">
+            <th className="text-left pb-2 font-normal text-gray-400">Expense</th>
+            <th className="text-right pb-2 font-semibold text-violet-400">Tax Saved</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.items.map((item, i) => (
+            <tr key={i} className="border-b border-white/5">
+              <td className="py-2 text-gray-300">
+                {item.name}
+                <span className="text-gray-600 text-xs ml-1.5">({item.pct}% deductible)</span>
+              </td>
+              <td className={`py-2 text-right font-semibold ${item.tax_saved > 0 ? "text-violet-400" : "text-gray-600"}`}>
+                {item.tax_saved > 0 ? `RM ${item.tax_saved.toLocaleString()}` : "—"}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+        <tfoot>
+          <tr className="border-t border-white/20">
+            <td className="pt-3 text-sm font-semibold text-white">Total</td>
+            <td className="pt-3 text-right text-lg font-bold text-violet-300">
+              RM {data.total_tax_saved.toLocaleString()}
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  );
+}
+
 type ColId = "compilation" | "estimation" | "advisory";
 
 const COLUMNS = [
@@ -123,10 +170,20 @@ export default function TaxPage() {
 
                   {/* Content */}
                   <div className="flex-1">
-                    {content
-                      ? <MarkdownResult content={content} />
-                      : <p className="text-gray-500 text-sm">No data yet — click Refresh to generate</p>
-                    }
+                    {content ? (
+                      col.id === "compilation" ? (
+                        (() => {
+                          const cd = parseCompilation(content);
+                          return cd
+                            ? <CompilationTable data={cd} />
+                            : <MarkdownResult content={content} />;
+                        })()
+                      ) : (
+                        <MarkdownResult content={content} />
+                      )
+                    ) : (
+                      <p className="text-gray-500 text-sm">No data yet — click Refresh to generate</p>
+                    )}
                   </div>
 
                 </div>

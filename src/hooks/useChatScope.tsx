@@ -72,7 +72,6 @@ export function useChatScope({
   const agentKey = `${agent.name}:${agent.avatarSeed ?? ""}:${agent.avatarStyle ?? ""}:${agent.mouth ?? ""}`;
   useEffect(() => {
     ctx.setBase({ endpoint, defaultFocus, agent });
-    return () => ctx.setBase(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endpoint, focusKey, agentKey]);
 
