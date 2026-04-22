@@ -9,18 +9,12 @@ export async function POST(req: NextRequest) {
   if (!token?.email) return NextResponse.json({ error: "Unauthenticated" }, { status: 401 });
 
   try {
-    const body = await req.json();
-    const { user_input, focus } = body;
+    const { user_input, focus } = await req.json();
 
     const res = await fetch(`${process.env.BACKEND_API_URL}/finance/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        user_email: token.email,
-        user_input,
-        focus,
-        scope: "money-mood",
-      }),
+      body: JSON.stringify({ user_email: token.email, user_input, focus, scope: "money-mood" }),
     });
 
     const text = await res.text();
@@ -28,6 +22,7 @@ export async function POST(req: NextRequest) {
       console.error("finance/chat upstream error", res.status, text);
       return NextResponse.json({ error: "upstream_error", upstream_status: res.status }, { status: 502 });
     }
+
     return NextResponse.json({ response: parseSSE(text) });
   } catch (e) {
     console.error("finance/chat fetch failed", e);

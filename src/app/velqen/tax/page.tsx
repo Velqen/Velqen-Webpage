@@ -103,7 +103,7 @@ export default function TaxPage() {
 
       <AgentAvatar
         name="Rex"
-        tagline="I handle the tax stuff. You run the business."
+        tagline="I make sure you never overpay tax."
         avatarStyle="adventurer-masculine"
         seed="Marcus"
         size="lg"
@@ -126,8 +126,8 @@ export default function TaxPage() {
           </div>
           <div className="rounded-2xl border border-amber-400/20 bg-amber-400/10 p-6 text-center">
             <p className="text-xs text-white mb-2">💡 Potential Incentives</p>
-            <p className="text-2xl font-light text-amber-400">RM {snapshot.potential_incentives.toLocaleString()}</p>
-            <p className="text-xs text-gray-300 mt-1">govt grants you may qualify for</p>
+            <p className="text-2xl font-light text-amber-400">up to RM {snapshot.potential_incentives.toLocaleString()}</p>
+            <p className="text-xs text-gray-300 mt-1">est. across qualifying govt grants</p>
           </div>
         </div>
       )}

@@ -10,9 +10,9 @@ type Insight = { headline: string; actions: string[] };
 type Debtor = { name: string; amount: number; days_overdue: number };
 type Creditor = { name: string; amount: number };
 
-type ExpenseRow = { category: string; last_year: number; this_year: number; change: number };
+type ExpenseRow = { category: string; last_year: number; last_month: number; this_year: number };
 type ExpenseInsight = {
-  col_last_year: string; col_this_year: string;
+  col_last_year: string; col_last_month: string; col_this_year: string;
   table: ExpenseRow[]; s1: string; s2: string; action: string;
 };
 
@@ -217,8 +217,8 @@ export default function MoneyMoodPage() {
                           <tr className="border-b border-white/10">
                             <th className="text-left pb-2 font-normal text-gray-400">Category</th>
                             <th className="text-right pb-2 font-normal text-gray-500">{ei.col_last_year}</th>
-                            <th className="text-right pb-2 font-normal text-gray-400">{ei.col_this_year}</th>
-                            <th className="text-right pb-2 font-semibold text-red-400">Change</th>
+                            <th className="text-right pb-2 font-normal text-gray-400">{ei.col_last_month}</th>
+                            <th className="text-right pb-2 font-semibold text-white">{ei.col_this_year}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -226,10 +226,8 @@ export default function MoneyMoodPage() {
                             <tr key={i} className="border-b border-white/5">
                               <td className="py-2 text-gray-300">{row.category}</td>
                               <td className="py-2 text-right text-gray-500">{fmt(row.last_year)}</td>
-                              <td className="py-2 text-right text-gray-300">{fmt(row.this_year)}</td>
-                              <td className={`py-2 text-right font-bold ${row.change > 0 ? "text-red-400" : "text-emerald-400"}`}>
-                                {row.change > 0 ? `+RM ${row.change.toLocaleString()}` : `-RM ${Math.abs(row.change).toLocaleString()}`}
-                              </td>
+                              <td className="py-2 text-right text-gray-400">{fmt(row.last_month)}</td>
+                              <td className="py-2 text-right font-bold text-white">{fmt(row.this_year)}</td>
                             </tr>
                           ))}
                         </tbody>

@@ -3,7 +3,7 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
+  useLayoutEffect,
   useState,
   type ReactNode,
 } from "react";
@@ -70,8 +70,9 @@ export function useChatScope({
 
   const focusKey = `${defaultFocus.type}:${defaultFocus.id}:${defaultFocus.label ?? ""}`;
   const agentKey = `${agent.name}:${agent.avatarSeed ?? ""}:${agent.avatarStyle ?? ""}:${agent.mouth ?? ""}`;
-  useEffect(() => {
+  useLayoutEffect(() => {
     ctx.setBase({ endpoint, defaultFocus, agent });
+    return () => ctx.setBase(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endpoint, focusKey, agentKey]);
 
