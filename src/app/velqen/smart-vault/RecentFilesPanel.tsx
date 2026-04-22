@@ -133,7 +133,7 @@ function FileCard({ file, onConfirm }: { file: FileStatus; onConfirm: (name: str
               >
                 {file.zoho_posting
                   ? <><Loader2 size={10} className="animate-spin" />Posting…</>
-                  : <><Send size={10} />Post to Zoho</>}
+                  : <><Send size={10} /></>}
               </button>
             )}
           </div>
