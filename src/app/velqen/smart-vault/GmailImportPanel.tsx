@@ -43,12 +43,21 @@ export function GmailImportPanel({ onImported }: Props) {
   const [emails, setEmails] = useState<EmailItem[]>([]);
   const [importing, setImporting] = useState<Record<string, boolean>>({});
 
+  const [fetchError, setFetchError] = useState<string | null>(null);
+
   const fetchEmails = async () => {
     setLoading(true);
+    setFetchError(null);
     try {
       const res = await fetch("/api/gmail/fetch-emails");
       const data = await res.json();
-      setEmails(data.emails ?? []);
+      if (!res.ok) {
+        setFetchError(data.error ?? `Error ${res.status}`);
+      } else {
+        setEmails(data.emails ?? []);
+      }
+    } catch {
+      setFetchError("Could not reach Gmail — check your connection.");
     } finally {
       setLoading(false);
     }
@@ -140,15 +149,15 @@ export function GmailImportPanel({ onImported }: Props) {
             <div className="flex items-center justify-center py-8">
               <Loader2 size={18} className="animate-spin text-blue-400" />
             </div>
+          ) : fetchError ? (
+            <div className="text-center py-8">
+              <p className="text-sm text-red-400">{fetchError}</p>
+              <button onClick={fetchEmails} className="mt-3 text-sm text-blue-400 hover:text-blue-300 transition">Try again</button>
+            </div>
           ) : emails.length === 0 ? (
             <div className="text-center py-8">
-              <p className="text-xs text-gray-400">No invoice emails found</p>
-              <button
-                onClick={fetchEmails}
-                className="mt-3 text-xs text-blue-400 hover:text-blue-300 transition"
-              >
-                Try again
-              </button>
+              <p className="text-sm text-gray-400">No invoice emails found</p>
+              <button onClick={fetchEmails} className="mt-3 text-sm text-blue-400 hover:text-blue-300 transition">Try again</button>
             </div>
           ) : (
             <>
